@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutLiga"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/margin_10"
+        android:paddingLeft="@dimen/margin_8"
+        android:paddingRight="@dimen/margin_8"
+        android:paddingTop="@dimen/margin_10">
+
+        <TextView
+            android:id="@+id/posicao"
+            style="@style/Text10MontserratRegular"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="5%" />
+
+        <TextView
+            android:id="@+id/nomeTime"
+            style="@style/Text10MontserratRegular"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/posicao"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="Classificação"
+            app:layout_widthPercent="39%" />
+
+        <TextView
+            android:id="@+id/pontos"
+            style="@style/Text10MontserratRegular"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/nomeTime"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="P"
+            app:layout_widthPercent="8%" />
+
+        <TextView
+            android:id="@+id/jogos"
+            style="@style/Text10MontserratRegular"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/pontos"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="J"
+            app:layout_widthPercent="8%" />
+
+        <TextView
+            android:id="@+id/vitorias"
+            style="@style/Text10MontserratRegular"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/jogos"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="V"
+            app:layout_widthPercent="8%" />
+
+        <TextView
+            android:id="@+id/empates"
+            style="@style/Text10MontserratRegular"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/vitorias"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="E"
+            app:layout_widthPercent="8%" />
+
+        <TextView
+            android:id="@+id/derrotas"
+            style="@style/Text10MontserratRegular"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/empates"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="D"
+            app:layout_widthPercent="8%" />
+
+        <TextView
+            android:id="@+id/golsFeitos"
+            style="@style/Text10MontserratRegular"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/derrotas"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="GF"
+            app:layout_widthPercent="8%" />
+
+        <TextView
+            android:id="@+id/golsSofridos"
+            style="@style/Text10MontserratRegular"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_toRightOf="@+id/golsFeitos"
+            android:gravity="center"
+            android:text="GS"
+            app:layout_widthPercent="8%" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+</LinearLayout>
