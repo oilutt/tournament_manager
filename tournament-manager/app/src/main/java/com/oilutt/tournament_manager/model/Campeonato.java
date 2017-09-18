@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.realm.RealmObject;
+
 /**
  * Created by oilut on 25/08/2017.
  */
@@ -17,7 +19,7 @@ import java.util.Map;
 @IgnoreExtraProperties
 public class Campeonato implements Serializable, Parcelable{
 
-    private int id;
+    private String id;
     private String nome;
     private int quantidadeTimes;
     private Formato formato;
@@ -52,11 +54,11 @@ public class Campeonato implements Serializable, Parcelable{
         return result;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -163,7 +165,7 @@ public class Campeonato implements Serializable, Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
+        dest.writeString(this.id);
         dest.writeString(this.nome);
         dest.writeInt(this.quantidadeTimes);
         dest.writeParcelable(this.formato, flags);
@@ -179,7 +181,7 @@ public class Campeonato implements Serializable, Parcelable{
     }
 
     protected Campeonato(Parcel in) {
-        this.id = in.readInt();
+        this.id = in.readString();
         this.nome = in.readString();
         this.quantidadeTimes = in.readInt();
         this.formato = in.readParcelable(Formato.class.getClassLoader());

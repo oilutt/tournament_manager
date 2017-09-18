@@ -1,6 +1,7 @@
 package com.oilutt.tournament_manager.ui.adapter;
 
 import android.content.Context;
+import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,13 +43,16 @@ public class TabelaAdapter extends RecyclerView.Adapter<TabelaAdapter.TabelaHold
 
         holder.posicao.setText(String.valueOf(position+1));
         holder.nomeTime.setText(time.getNome());
-        holder.pontos.setText(time.getPontos());
-        holder.jogos.setText(time.getJogos());
-        holder.vitorias.setText(time.getVitorias());
-        holder.empates.setText(time.getEmpates());
-        holder.derrotas.setText(time.getDerrotas());
-        holder.golsFeitos.setText(time.getGolsFeitos());
-        holder.golsSofridos.setText(time.getGolsSofridos());
+        holder.pontos.setText(String.valueOf(time.getPontos()));
+        holder.jogos.setText(String.valueOf(time.getJogos()));
+        holder.vitorias.setText(String.valueOf(time.getVitorias()));
+        holder.empates.setText(String.valueOf(time.getEmpates()));
+        holder.derrotas.setText(String.valueOf(time.getDerrotas()));
+        holder.golsFeitos.setText(String.valueOf(time.getGolsFeitos()));
+        holder.golsSofridos.setText(String.valueOf(time.getGolsSofridos()));
+        if(position % 2 == 0){
+            holder.layout.setBackgroundColor(context.getResources().getColor(R.color.pinkish_grey));
+        }
     }
 
     @Override
@@ -81,6 +85,8 @@ public class TabelaAdapter extends RecyclerView.Adapter<TabelaAdapter.TabelaHold
         TextView golsFeitos;
         @BindView(R.id.golsSofridos)
         TextView golsSofridos;
+        @BindView(R.id.layout)
+        PercentRelativeLayout layout;
 
         public TabelaHolder(View view) {
             super(view);

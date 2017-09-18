@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.presentation.MainActivity.MainActivityCallback;
 import com.oilutt.tournament_manager.presentation.MainActivity.MainActivityPresenter;
@@ -31,6 +32,10 @@ public class MainActivity extends BaseActivity implements MainActivityCallback{
 
     @InjectPresenter
     MainActivityPresenter presenter;
+    @ProvidePresenter
+    MainActivityPresenter createPresenter(){
+        return new MainActivityPresenter(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

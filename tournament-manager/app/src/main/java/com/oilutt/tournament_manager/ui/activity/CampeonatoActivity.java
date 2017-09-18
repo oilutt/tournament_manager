@@ -8,11 +8,15 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.oilutt.tournament_manager.R;
+import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.presentation.Campeonato.CampeonatoCallback;
 import com.oilutt.tournament_manager.presentation.Campeonato.CampeonatoPresenter;
 import com.oilutt.tournament_manager.ui.adapter.RodadaAdapter;
 import com.oilutt.tournament_manager.ui.adapter.TabelaAdapter;
+import com.oilutt.tournament_manager.ui.dialog.DialogProgress;
+import com.oilutt.tournament_manager.utils.WrapContentViewPager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,22 +32,29 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.viewPager)
-    ViewPager viewPager;
+    WrapContentViewPager viewPager;
+
+    DialogProgress progress;
 
     @InjectPresenter
     CampeonatoPresenter presenter;
+    @ProvidePresenter
+    CampeonatoPresenter createPresenter(){
+        return new CampeonatoPresenter(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campeonato);
         ButterKnife.bind(this);
+        progress = new DialogProgress(this);
         getBundle();
     }
 
     private void getBundle(){
-        if(getIntent().hasExtra("campeonato")){
-            presenter.getCampeonato(getIntent().getParcelableExtra("campeonato"));
+        if(getIntent().hasExtra("campeonatoId")){
+            presenter.getCampeonatoId(getIntent().getStringExtra("campeonatoId"));
         }
     }
 
@@ -72,5 +83,15 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
     @Override
     public void hideViewPager() {
         viewPager.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showProgress() {
+        progress.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        progress.dismiss();
     }
 }

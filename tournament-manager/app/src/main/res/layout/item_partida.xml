@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
     android:orientation="horizontal"
-    android:layout_marginTop="@dimen/margin_15"
+    android:paddingTop="@dimen/margin_8"
+    android:paddingBottom="@dimen/margin_8"
+    android:paddingRight="@dimen/margin_15"
+    android:paddingLeft="@dimen/margin_15"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 

@@ -86,4 +86,16 @@ public class SignupActivity extends BaseActivity implements SignupCallback {
     public void showSnack(int message) {
         showSnack(getString(message));
     }
+
+    @Override
+    public void openLogin(Class<?> openActivity) {
+        openActivity(openActivity);
+        finish();
+    }
+
+    @Override
+    public void openMain(Class<?> openActivity) {
+        openActivity(openActivity);
+        finish();
+    }
 }

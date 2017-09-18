@@ -27,8 +27,6 @@ public class TeamListActivity extends BaseActivity implements TeamListCallback {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    DialogProgress dialogProgress;
-
     @InjectPresenter
     TeamListPresenter presenter;
     @ProvidePresenter
@@ -42,7 +40,6 @@ public class TeamListActivity extends BaseActivity implements TeamListCallback {
         setContentView(R.layout.activity_team_list);
         ButterKnife.bind(this);
         setUpToolbarText(R.string.team_list_title, true);
-        dialogProgress = new DialogProgress(this);
         getBundle();
     }
 
@@ -71,11 +68,11 @@ public class TeamListActivity extends BaseActivity implements TeamListCallback {
 
     @Override
     public void showLoading() {
-        dialogProgress.show();
+        showProgressDialog(getString(R.string.gerando_camp));
     }
 
     @Override
     public void hideLoading() {
-        dialogProgress.dismiss();
+        dismissProgressDialog();
     }
 }

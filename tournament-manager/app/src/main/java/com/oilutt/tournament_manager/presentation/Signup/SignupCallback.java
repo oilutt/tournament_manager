@@ -12,7 +12,8 @@ public interface SignupCallback extends MvpView {
     void hideProgress();
 
     void showSnack(int message);
-    void openActivity(Class<?> openActivity);
+    void openLogin(Class<?> openActivity);
+    void openMain(Class<?> openActivity);
 
     void onObserverEdts();
 }

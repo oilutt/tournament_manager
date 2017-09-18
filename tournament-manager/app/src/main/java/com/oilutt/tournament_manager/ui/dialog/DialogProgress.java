@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class DialogProgress extends AlertDialog implements Serializable {
 
 
-    private static TextView txtProgress;
+    private TextView txtProgress;
 
     public DialogProgress(Context context) {
         super(context, R.style.ThemeDialogFadeInFadeOut);

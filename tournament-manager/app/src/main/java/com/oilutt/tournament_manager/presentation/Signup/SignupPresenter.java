@@ -37,7 +37,7 @@ public class SignupPresenter extends MvpPresenter<SignupCallback> {
     }
 
     public void clickSignIn() {
-        getViewState().openActivity(LoginActivity.class);
+        getViewState().openLogin(LoginActivity.class);
     }
 
     public void clickSignUp() {
@@ -49,7 +49,7 @@ public class SignupPresenter extends MvpPresenter<SignupCallback> {
                         if (!task.isSuccessful()) {
                             getViewState().showSnack(R.string.erro_generic);
                         } else {
-                            getViewState().openActivity(MainActivity.class);
+                            getViewState().openMain(MainActivity.class);
                         }
                     }).addOnFailureListener((Activity) context, e -> getViewState().hideProgress());
         }

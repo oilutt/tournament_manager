@@ -1,9 +1,12 @@
 package com.oilutt.tournament_manager.presentation.MainActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.oilutt.tournament_manager.app.TournamentManagerApp;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,19 +20,23 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+
 /**
  * Created by oilut on 24/08/2017.
  */
 @InjectViewState
 public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
 
-    private CampAdapter adapter = new CampAdapter();
+    private CampAdapter adapter;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
     private DatabaseReference campEndPoint =  FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid() + "/campeonatos");
     private List<Campeonato> campeonatoList;
+    private Activity activity;
 
-    public MainActivityPresenter(){
+    public MainActivityPresenter(Activity activity){
+        this.activity = activity;
         getCamps();
     }
 
@@ -39,7 +46,9 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 campeonatoList = new ArrayList<>();
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()){
+                    String key = noteSnapshot.getKey();
                     Campeonato note = noteSnapshot.getValue(Campeonato.class);
+                    note.setId(key);
                     campeonatoList.add(note);
                 }
                 setAdapter();
@@ -56,6 +65,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     private void setAdapter(){
         if(campeonatoList.size() > 0) {
             getViewState().hidePlaceHolder();
+            adapter = new CampAdapter(activity);
             adapter.setData(campeonatoList);
             getViewState().setAdapter(adapter);
         } else {

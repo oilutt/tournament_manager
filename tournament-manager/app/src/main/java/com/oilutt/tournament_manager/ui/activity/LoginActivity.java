@@ -53,7 +53,7 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
             case R.id.btn_login:
                 presenter.clickLogin();
                 break;
-            case R.id.sign_up_button:
+            case R.id.btn_signup:
                 presenter.clickSignUp();
                 break;
             case R.id.btn_reset_password:

@@ -724,7 +724,8 @@ public class Utils {
             Date date2 = sdf.parse(d2);
 
             System.out.println("Date1"+sdf.format(date1));
-            System.out.println("Date2"+sdf.format(date2));System.out.println();
+            System.out.println("Date2"+sdf.format(date2));
+            System.out.println();
 
             // Create 2 dates ends
             //1

@@ -20,6 +20,7 @@
         android:roundIcon="@drawable/ic_icon_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:launchMode="singleTask"
         tools:replace="android:theme, android:icon, android:allowBackup">
 
         <activity android:name=".ui.activity.SplashActivity">

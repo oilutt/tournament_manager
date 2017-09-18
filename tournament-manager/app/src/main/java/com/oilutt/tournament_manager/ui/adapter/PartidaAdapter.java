@@ -1,6 +1,7 @@
 package com.oilutt.tournament_manager.ui.adapter;
 
 import android.content.Context;
+import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,9 @@ public class PartidaAdapter extends RecyclerView.Adapter<PartidaAdapter.PartidaH
             holder.golsTimeCasa.setVisibility(View.INVISIBLE);
             holder.golsTimeFora.setVisibility(View.INVISIBLE);
         }
+        if(position % 2 == 1){
+            holder.layout.setBackgroundColor(context.getResources().getColor(R.color.pinkish_grey));
+        }
     }
 
     @Override
@@ -70,6 +74,8 @@ public class PartidaAdapter extends RecyclerView.Adapter<PartidaAdapter.PartidaH
         TextView golsTimeFora;
         @BindView(R.id.nomeTimeFora)
         TextView nomeTimeFora;
+        @BindView(R.id.layout)
+        PercentRelativeLayout layout;
 
         public PartidaHolder(View view) {
             super(view);

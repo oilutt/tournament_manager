@@ -19,4 +19,7 @@ public interface CampeonatoCallback extends MvpView {
 
     void setAdapterViewPager(RodadaAdapter adapter);
     void hideViewPager();
+
+    void showProgress();
+    void hideProgress();
 }

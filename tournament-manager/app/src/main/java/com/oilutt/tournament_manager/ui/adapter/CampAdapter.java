@@ -1,5 +1,6 @@
 package com.oilutt.tournament_manager.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -17,6 +18,7 @@ import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.ui.activity.CampeonatoActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +32,15 @@ import butterknife.ButterKnife;
 public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder>{
 
     private List<Campeonato> list = new ArrayList<>();
-    Context context;
+    Activity activity;
+
+    public CampAdapter(Activity context){
+        this.activity = context;
+    }
 
     @Override
     public CampHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_camp, null);
-        context = view.getContext();
         return new CampHolder(view);
     }
 
@@ -45,21 +50,21 @@ public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder>{
         holder.tvCampNome.setText(camp.getNome());
         holder.tvDescricao.setText(camp.getDescricao() != null ? camp.getDescricao() : "");
         if(camp.getFoto() != null)
-            Glide.with(context).load(Base64.decode(camp.getFoto(), Base64.DEFAULT)).into(holder.imageCamp);
+            Glide.with(activity).load(Base64.decode(camp.getFoto(), Base64.DEFAULT)).into(holder.imageCamp);
         if(camp.getStatus() == 1) {
             holder.tvCampStatus.setText(R.string.aberto);
-            holder.tvCampStatus.setTextColor(context.getResources().getColor(R.color.jungle_green));
+            holder.tvCampStatus.setTextColor(activity.getResources().getColor(R.color.jungle_green));
         }else if(camp.getStatus() == 2) {
             holder.tvCampStatus.setText(R.string.em_andamento);
-            holder.tvCampStatus.setTextColor(context.getResources().getColor(R.color.mango));
+            holder.tvCampStatus.setTextColor(activity.getResources().getColor(R.color.mango));
         }else {
             holder.tvCampStatus.setText(R.string.concluido);
-            holder.tvCampStatus.setTextColor(context.getResources().getColor(R.color.red));
+            holder.tvCampStatus.setTextColor(activity.getResources().getColor(R.color.red));
         }
         holder.layout.setOnClickListener(v -> {
-            Intent intent = new Intent(context, CampeonatoActivity.class);
-            intent.putExtra("campeonato", (Parcelable) camp);
-            context.startActivity(intent);
+            Intent intent = new Intent(activity, CampeonatoActivity.class);
+            intent.putExtra("campeonatoId", camp.getId());
+            activity.startActivity(intent);
         });
     }
 

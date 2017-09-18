@@ -78,9 +78,15 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
                 campeonato.setStatus(1);
             } else if (Utils.compareDates(dataInicio, Utils.getDataFromTimeStamp(Utils.getTimeStamp())).equals("before")) {
                 if (campeonato.getDataFim() != null) {
-                    campeonato.setStatus(2);
-                } else {
                     campeonato.setStatus(3);
+                } else {
+                    campeonato.setStatus(2);
+                }
+            } else {
+                if (campeonato.getDataFim() != null) {
+                    campeonato.setStatus(3);
+                } else {
+                    campeonato.setStatus(2);
                 }
             }
             campeonato.setDono(new User(mFirebaseUser.getDisplayName(), mFirebaseUser.getEmail(), mFirebaseUser.getUid()));
