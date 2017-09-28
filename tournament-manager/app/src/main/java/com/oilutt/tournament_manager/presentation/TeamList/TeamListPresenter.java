@@ -5,6 +5,7 @@ import android.os.Handler;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.app.TournamentManagerApp;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.model.Partida;
@@ -57,34 +58,38 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
 
         if (campeonato != null) {
             campeonato.setTimes(listTimes);
-            campeonato.setrodadas(createSchedule(listTimes));
-
-            String key = campEndPoint.push().getKey();
-
-            Map<String, Object> campeonatoValues = campeonato.toMap();
-            Map<String, Object> childUpdates = new HashMap<>();
-            childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
-            childUpdates.put("/campeonatos/" + mFirebaseUser.getUid() + "/" + key, campeonatoValues);
-            campEndPoint.updateChildren(childUpdates);
-
-            getViewState().openActivityWithoutHist(MainActivity.class);
-        } else {
-            Handler handler = new Handler();
-            handler.postDelayed(() -> {
-                campeonato = TournamentManagerApp.preferencesManager.getCampeonato();
-                campeonato.setTimes(listTimes);
-                campeonato.setrodadas(createSchedule(listTimes));
+            if(campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
+                campeonato.getFormato().setRodadas(createSchedule(listTimes));
 
                 String key = campEndPoint.push().getKey();
 
                 Map<String, Object> campeonatoValues = campeonato.toMap();
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
-                childUpdates.put("/campeonatos/" + mFirebaseUser.getUid() + "/" + key, campeonatoValues);
+                childUpdates.put("/campeonatos/" + key, campeonatoValues);
                 campEndPoint.updateChildren(childUpdates);
 
-                getViewState().hideLoading();
                 getViewState().openActivityWithoutHist(MainActivity.class);
+            }
+        } else {
+            Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                campeonato = TournamentManagerApp.preferencesManager.getCampeonato();
+                campeonato.setTimes(listTimes);
+                if(campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
+                    campeonato.getFormato().setRodadas(createSchedule(listTimes));
+
+                    String key = campEndPoint.push().getKey();
+
+                    Map<String, Object> campeonatoValues = campeonato.toMap();
+                    Map<String, Object> childUpdates = new HashMap<>();
+                    childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
+                    childUpdates.put("/campeonatos/" + key, campeonatoValues);
+                    campEndPoint.updateChildren(childUpdates);
+
+                    getViewState().hideLoading();
+                    getViewState().openActivityWithoutHist(MainActivity.class);
+                }
             }, 2000);
         }
     }

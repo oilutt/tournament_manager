@@ -7,6 +7,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,6 +22,8 @@ public class Formato implements Serializable, Parcelable{
     private int quantidadePartidasChave;
     private int quantidadePartidasFinal;
     private int idaVolta;   // 1 = sim, 0 = nao;
+    private List<Rodada> rodadas;
+    private List<Fase> fases;
 
     public Formato(){
 
@@ -39,6 +42,8 @@ public class Formato implements Serializable, Parcelable{
         result.put("quantidadePartidasChave", quantidadePartidasChave);
         result.put("quantidadePartidasFinal", quantidadePartidasFinal);
         result.put("idaVolta", idaVolta);
+        result.put("rodadas", rodadas);
+        result.put("fases", fases);
 
         return result;
     }
@@ -83,6 +88,15 @@ public class Formato implements Serializable, Parcelable{
         this.idaVolta = idaVolta;
     }
 
+    public List<Rodada> getRodadas() {
+        return rodadas;
+    }
+
+    public void setRodadas(List<Rodada> rodadas) {
+        this.rodadas = rodadas;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -95,6 +109,8 @@ public class Formato implements Serializable, Parcelable{
         dest.writeInt(this.quantidadePartidasChave);
         dest.writeInt(this.quantidadePartidasFinal);
         dest.writeInt(this.idaVolta);
+        dest.writeTypedList(this.rodadas);
+        dest.writeTypedList(this.fases);
     }
 
     protected Formato(Parcel in) {
@@ -103,6 +119,8 @@ public class Formato implements Serializable, Parcelable{
         this.quantidadePartidasChave = in.readInt();
         this.quantidadePartidasFinal = in.readInt();
         this.idaVolta = in.readInt();
+        this.rodadas = in.createTypedArrayList(Rodada.CREATOR);
+        this.fases = in.createTypedArrayList(Fase.CREATOR);
     }
 
     public static final Creator<Formato> CREATOR = new Creator<Formato>() {

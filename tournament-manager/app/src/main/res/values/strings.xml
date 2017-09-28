@@ -93,6 +93,13 @@
     <!-- RodadaAdaper -->
     <string name="rodada_title">Rodada %s</string>
 
+    <!-- MataMataAdaper -->
+    <string name="fase_title">Fase %s</string>
+    <string name="oitavas">Oitavas de final</string>
+    <string name="quartas">Quartas de final</string>
+    <string name="semi">Semi-final</string>
+    <string name="final_title">Final</string>
+
     <!-- Campeonato -->
 
 

@@ -259,7 +259,8 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
         formatoArray = new ArrayList<>(Arrays.asList(context.getString(R.string.liga),
                 context.getString(R.string.torneio),
                 context.getString(R.string.matamata)));
-        timesArray = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16));
+        timesArray = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32));
         chaveArray = new ArrayList<>(Arrays.asList(1, 2, 3, 5, 7));
         finalArray = new ArrayList<>(Arrays.asList(1, 2, 3, 5, 7, 9));
         idaEVoltaArray = new ArrayList<>(Arrays.asList(context.getString(R.string.sim),
