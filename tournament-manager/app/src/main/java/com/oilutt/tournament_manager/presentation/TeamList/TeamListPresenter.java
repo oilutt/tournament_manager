@@ -165,9 +165,8 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
 
     private Rodada createOneRoundVolta(int round, List<Time> teams) {
         int mid = teams.size() / 2;
-        int contador = 0;
         Rodada rodada = new Rodada();
-        rodada.setNumero(round);
+        rodada.setNumero(++contadorRodada);
         // Split list into two
         ArrayList<Time> l1 = new ArrayList<>();
         // Can't use sublist (can't cast it to ArrayList - how stupid is that)??
@@ -192,11 +191,13 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 t1 = l1.get(tId);
                 t2 = l2.get(tId);
             }
-            Partida partida = new Partida();
-            partida.setTime1(t1.getNome());
-            partida.setTime2(t2.getNome());
-            partida.setId(++contador);
-            listPartidas.add(partida);
+            if(!t1.getNome().equals("") && !t2.getNome().equals("")) {
+                Partida partida = new Partida();
+                partida.setTime1(t1.getNome());
+                partida.setTime2(t2.getNome());
+                partida.setId(++contadorPartida);
+                listPartidas.add(partida);
+            }
         }
         rodada.setPartidas(listPartidas);
         return rodada;
