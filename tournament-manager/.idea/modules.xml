@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tournament-maker.iml" filepath="$PROJECT_DIR$/tournament-maker.iml" />
       <module fileurl="file://$PROJECT_DIR$/tournament-manager.iml" filepath="$PROJECT_DIR$/tournament-manager.iml" />
     </modules>
   </component>
