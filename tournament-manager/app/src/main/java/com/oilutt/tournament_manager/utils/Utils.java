@@ -35,17 +35,13 @@ import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.GravityEnum;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.desmond.squarecamera.CameraActivity;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.ui.activity.BaseActivity;
 import com.oilutt.tournament_manager.ui.OnGetContacts;
-import com.oilutt.tournament_manager.ui.dialog.CustomSimpleDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -56,10 +52,8 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.net.ConnectException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -75,7 +69,6 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.adapter.rxjava.HttpException;
 import uk.co.chrisjenx.calligraphy.CalligraphyTypefaceSpan;
 import uk.co.chrisjenx.calligraphy.TypefaceUtils;
 
@@ -141,13 +134,19 @@ public class Utils {
     }
 
     public static void showDialogCameraGallery(final Activity activity) {
-        new MaterialDialog.Builder(activity)
-                .content(R.string.imageResource)
-                .contentGravity(GravityEnum.START)
-                .positiveText(R.string.camera)
-                .negativeText(R.string.gallery)
-                .onPositive((dialog, which) -> launchCamera(activity))
-                .onNegative((dialog, which) -> launchGallery(activity))
+        new SweetAlertDialog(activity)
+                .setTitleText("Adicionar brasão")
+                .setContentText(activity.getString(R.string.imageResource))
+                .setConfirmText(activity.getString(R.string.camera))
+                .setCancelText(activity.getString(R.string.gallery))
+                .setConfirmClickListener(sweetAlertDialog -> {
+                    launchCamera(activity);
+                    sweetAlertDialog.dismiss();
+                })
+                .setCancelClickListener(sweetAlertDialog -> {
+                    launchGallery(activity);
+                    sweetAlertDialog.dismiss();
+                })
                 .show();
     }
 
@@ -321,45 +320,45 @@ public class Utils {
                 .start((Activity) context);
     }
 
-    public static void showSimpleDialog(Context context, int message, final MaterialDialog.SingleButtonCallback listener) {
-        showSimpleDialog(context, context.getString(message), listener);
-    }
-
-    public static void showSimpleDialog(Context context, String message, final MaterialDialog.SingleButtonCallback listener) {
-        new MaterialDialog.Builder(context)
-                .content(message)
-                .onPositive(listener)
-                .positiveText(R.string.ok)
-                .contentColorRes(R.color.black)
-                .cancelable(false)
-                .show();
-    }
-
-    public static MaterialDialog showSimpleSimNaoDialog(Context context, int message, final MaterialDialog.SingleButtonCallback listener) {
-        return new MaterialDialog.Builder(context)
-                .content(message)
-                .titleGravity(GravityEnum.CENTER)
-                .positiveText(R.string.sim)
-                .negativeText(R.string.nao)
-                .onPositive(listener)
-                .cancelable(false)
-                .show();
-    }
-
-    public static MaterialDialog showSimpleDialog(Context context, int tittle, int message, final MaterialDialog.SingleButtonCallback listener) {
-        return new MaterialDialog.Builder(context)
-                .content(message)
-                .onNeutral(listener)
-                .neutralText(R.string.ok)
-                .title(tittle)
-                .titleColorRes(R.color.dark_hot_pink)
-                .contentColorRes(R.color.black)
-                .titleGravity(GravityEnum.CENTER)
-                .contentGravity(GravityEnum.CENTER)
-                .buttonsGravity(GravityEnum.CENTER)
-                .cancelable(false)
-                .show();
-    }
+//    public static void showSimpleDialog(Context context, int message, final MaterialDialog.SingleButtonCallback listener) {
+//        showSimpleDialog(context, context.getString(message), listener);
+//    }
+//
+//    public static void showSimpleDialog(Context context, String message, final MaterialDialog.SingleButtonCallback listener) {
+//        new MaterialDialog.Builder(context)
+//                .content(message)
+//                .onPositive(listener)
+//                .positiveText(R.string.ok)
+//                .contentColorRes(R.color.black)
+//                .cancelable(false)
+//                .show();
+//    }
+//
+//    public static MaterialDialog showSimpleSimNaoDialog(Context context, int message, final MaterialDialog.SingleButtonCallback listener) {
+//        return new MaterialDialog.Builder(context)
+//                .content(message)
+//                .titleGravity(GravityEnum.CENTER)
+//                .positiveText(R.string.sim)
+//                .negativeText(R.string.nao)
+//                .onPositive(listener)
+//                .cancelable(false)
+//                .show();
+//    }
+//
+//    public static MaterialDialog showSimpleDialog(Context context, int tittle, int message, final MaterialDialog.SingleButtonCallback listener) {
+//        return new MaterialDialog.Builder(context)
+//                .content(message)
+//                .onNeutral(listener)
+//                .neutralText(R.string.ok)
+//                .title(tittle)
+//                .titleColorRes(R.color.dark_hot_pink)
+//                .contentColorRes(R.color.black)
+//                .titleGravity(GravityEnum.CENTER)
+//                .contentGravity(GravityEnum.CENTER)
+//                .buttonsGravity(GravityEnum.CENTER)
+//                .cancelable(false)
+//                .show();
+//    }
 
     public static void showSweetDialogSuccess(Context context, String msg) {
         SweetAlertDialog sa = new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE);
@@ -404,36 +403,36 @@ public class Utils {
         sa.show();
     }
 
-    public static void showDialogThrowable(Throwable t, MaterialDialog.SingleButtonCallback callback, Context context) {
-        if (t instanceof HttpException) {
-            HttpException httpException = ((HttpException) t);
-            if (httpException.code() == 401) {  //&& ProConnectApp.getInstance().getUser() != null
-                //logout
-                //abrir login
-            } else if (httpException.code() == 401 || httpException.code() == 422) {
-                try {
-                    JsonObject jsonObject = (JsonObject) Utils.jsonToObject(httpException.response().errorBody().string(), JsonObject.class);
-                    if (jsonObject.has("errors") && jsonObject.get("errors").isJsonArray()) {
-                        CustomSimpleDialog.show(context, context.getString(R.string.atencao), jsonObject.get("errors").getAsJsonArray().get(0).getAsString(), callback);
-                    } else if (jsonObject.has("errors") && jsonObject.get("errors").isJsonObject()) {
-                        CustomSimpleDialog.show(context, context.getString(R.string.atencao), jsonObject.get("errors").getAsJsonObject().getAsString(), callback);
-                    } else {
-                        CustomSimpleDialog.show(context, context.getString(R.string.atencao), jsonObject.get("errors").toString(), callback);
-                    }
-                } catch (IOException e) {
-                    CustomSimpleDialog.show(context, context.getString(R.string.atencao), t.getMessage(), callback);
-                }
-            } else if (httpException.code() == 503) {
-                CustomSimpleDialog.show(context, R.string.atencao, R.string.servico_indisponivel, callback);
-            } else {
-                CustomSimpleDialog.show(context, context.getString(R.string.atencao), t.getMessage(), callback);
-            }
-        } else if (t instanceof ConnectException || t instanceof IOException) {
-            CustomSimpleDialog.show(context, R.string.atencao, R.string.sem_conexao, callback);
-        } else {
-            CustomSimpleDialog.show(context, context.getString(R.string.atencao), t.getMessage(), callback);
-        }
-    }
+//    public static void showDialogThrowable(Throwable t, MaterialDialog.SingleButtonCallback callback, Context context) {
+//        if (t instanceof HttpException) {
+//            HttpException httpException = ((HttpException) t);
+//            if (httpException.code() == 401) {  //&& ProConnectApp.getInstance().getUser() != null
+//                //logout
+//                //abrir login
+//            } else if (httpException.code() == 401 || httpException.code() == 422) {
+//                try {
+//                    JsonObject jsonObject = (JsonObject) Utils.jsonToObject(httpException.response().errorBody().string(), JsonObject.class);
+//                    if (jsonObject.has("errors") && jsonObject.get("errors").isJsonArray()) {
+//                        CustomSimpleDialog.show(context, context.getString(R.string.atencao), jsonObject.get("errors").getAsJsonArray().get(0).getAsString(), callback);
+//                    } else if (jsonObject.has("errors") && jsonObject.get("errors").isJsonObject()) {
+//                        CustomSimpleDialog.show(context, context.getString(R.string.atencao), jsonObject.get("errors").getAsJsonObject().getAsString(), callback);
+//                    } else {
+//                        CustomSimpleDialog.show(context, context.getString(R.string.atencao), jsonObject.get("errors").toString(), callback);
+//                    }
+//                } catch (IOException e) {
+//                    CustomSimpleDialog.show(context, context.getString(R.string.atencao), t.getMessage(), callback);
+//                }
+//            } else if (httpException.code() == 503) {
+//                CustomSimpleDialog.show(context, R.string.atencao, R.string.servico_indisponivel, callback);
+//            } else {
+//                CustomSimpleDialog.show(context, context.getString(R.string.atencao), t.getMessage(), callback);
+//            }
+//        } else if (t instanceof ConnectException || t instanceof IOException) {
+//            CustomSimpleDialog.show(context, R.string.atencao, R.string.sem_conexao, callback);
+//        } else {
+//            CustomSimpleDialog.show(context, context.getString(R.string.atencao), t.getMessage(), callback);
+//        }
+//    }
 
     public static void getContactsWithEmail(Context context, OnGetContacts callback) {
         new AsyncTask<Void, Void, List>() {
@@ -894,7 +893,7 @@ public class Utils {
                         try {
                             context.startActivity(intent);
                         } catch (ActivityNotFoundException ex) {
-                            CustomSimpleDialog.show(context, R.string.atencao, R.string.erro_app_nao_encontrado);
+//                            CustomSimpleDialog.show(context, R.string.atencao, R.string.erro_app_nao_encontrado);
                         }
                     }
 
@@ -925,7 +924,7 @@ public class Utils {
                         try {
                             context.startActivity(intent);
                         } catch (ActivityNotFoundException ex) {
-                            CustomSimpleDialog.show(context, R.string.atencao, R.string.erro_app_nao_encontrado);
+//                            CustomSimpleDialog.show(context, R.string.atencao, R.string.erro_app_nao_encontrado);
                         }
                     }
 
@@ -955,7 +954,7 @@ public class Utils {
                         try {
                             context.startActivity(Intent.createChooser(intent, context.getString(R.string.selecione_aplicativo)));
                         } catch (ActivityNotFoundException ex) {
-                            CustomSimpleDialog.show(context, R.string.atencao, R.string.erro_app_nao_encontrado);
+//                            CustomSimpleDialog.show(context, R.string.atencao, R.string.erro_app_nao_encontrado);
                         }
                     }
 
@@ -986,7 +985,7 @@ public class Utils {
                         try {
                             context.startActivity(Intent.createChooser(intent, context.getString(R.string.selecione_aplicativo)));
                         } catch (ActivityNotFoundException ex) {
-                            CustomSimpleDialog.show(context, R.string.atencao, R.string.erro_app_nao_encontrado);
+//                            CustomSimpleDialog.show(context, R.string.atencao, R.string.erro_app_nao_encontrado);
                         }
                     }
 

@@ -15,6 +15,7 @@ import com.oilutt.tournament_manager.model.Fase;
 import com.oilutt.tournament_manager.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,6 +31,12 @@ public class MataMataAdapter extends PagerAdapter {
         this.context = context;
         if(list != null)
             this.list = list;
+        Collections.reverse(this.list);
+    }
+
+    @Override
+    public int getCount() {
+        return list.size();
     }
 
     @Override
@@ -94,11 +101,6 @@ public class MataMataAdapter extends PagerAdapter {
     }
 
     @Override
-    public int getCount() {
-        return list.size();
-    }
-
-    @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
     }
@@ -106,5 +108,10 @@ public class MataMataAdapter extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup collection, int position, Object view) {
         collection.removeView((View) view);
+    }
+
+    public void setData(List<Fase> fases){
+        list = fases;
+        notifyDataSetChanged();
     }
 }

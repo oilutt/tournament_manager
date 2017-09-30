@@ -25,6 +25,7 @@ public class Campeonato implements Serializable, Parcelable{
     private Formato formato;
     private User dono;
     private List<Time> times;
+    private List<Time> timesClassificados;
     private String dataInicio;
     private String dataFim;
     private String dataAtualizacao;
@@ -43,6 +44,7 @@ public class Campeonato implements Serializable, Parcelable{
         result.put("formato", formato.toMap());
         result.put("dataInicio", dataInicio);
         result.put("times", times);
+        result.put("timesClassificados", timesClassificados);
         result.put("dataFim", dataFim);
         result.put("dataAtualizacao", dataAtualizacao);
         result.put("status", status);
@@ -148,6 +150,14 @@ public class Campeonato implements Serializable, Parcelable{
         this.times = times;
     }
 
+    public List<Time> getTimesClassificados() {
+        return timesClassificados;
+    }
+
+    public void setTimesClassificados(List<Time> timesClassificados) {
+        this.timesClassificados = timesClassificados;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -161,6 +171,7 @@ public class Campeonato implements Serializable, Parcelable{
         dest.writeParcelable(this.formato, flags);
         dest.writeParcelable(this.dono, flags);
         dest.writeTypedList(this.times);
+        dest.writeTypedList(this.timesClassificados);
         dest.writeString(this.dataInicio);
         dest.writeString(this.dataFim);
         dest.writeString(this.dataAtualizacao);
@@ -176,6 +187,7 @@ public class Campeonato implements Serializable, Parcelable{
         this.formato = in.readParcelable(Formato.class.getClassLoader());
         this.dono = in.readParcelable(User.class.getClassLoader());
         this.times = in.createTypedArrayList(Time.CREATOR);
+        this.timesClassificados = in.createTypedArrayList(Time.CREATOR);
         this.dataInicio = in.readString();
         this.dataFim = in.readString();
         this.dataAtualizacao = in.readString();

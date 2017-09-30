@@ -1,6 +1,7 @@
 package com.oilutt.tournament_manager.presentation.Campeonato;
 
 import com.arellomobile.mvp.MvpView;
+import com.oilutt.tournament_manager.ui.adapter.MataMataAdapter;
 import com.oilutt.tournament_manager.ui.adapter.RodadaAdapter;
 import com.oilutt.tournament_manager.ui.adapter.TabelaAdapter;
 
@@ -15,10 +16,12 @@ public interface CampeonatoCallback extends MvpView {
     void hideLayoutLiga();
 
     void setAdapterRecycler(TabelaAdapter adapter);
-    // void setAdapterRecycler(TabelaAdapter adapter);
+//    void setAdapterRecycler(MataMataAdapter adapter);
 
     void setAdapterViewPager(RodadaAdapter adapter);
+    void setAdapterViewPager(MataMataAdapter adapter);
     void hideViewPager();
+    void hideRecycler();
 
     void showProgress();
     void hideProgress();

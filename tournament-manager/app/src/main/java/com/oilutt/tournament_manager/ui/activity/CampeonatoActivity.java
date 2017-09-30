@@ -13,6 +13,7 @@ import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.presentation.Campeonato.CampeonatoCallback;
 import com.oilutt.tournament_manager.presentation.Campeonato.CampeonatoPresenter;
+import com.oilutt.tournament_manager.ui.adapter.MataMataAdapter;
 import com.oilutt.tournament_manager.ui.adapter.RodadaAdapter;
 import com.oilutt.tournament_manager.ui.adapter.TabelaAdapter;
 import com.oilutt.tournament_manager.ui.dialog.DialogProgress;
@@ -81,6 +82,11 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
     }
 
     @Override
+    public void setAdapterViewPager(MataMataAdapter adapter) {
+        viewPager.setAdapter(adapter);
+    }
+
+    @Override
     public void hideViewPager() {
         viewPager.setVisibility(View.GONE);
     }
@@ -93,5 +99,10 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
     @Override
     public void hideProgress() {
         progress.dismiss();
+    }
+
+    @Override
+    public void hideRecycler() {
+        recyclerView.setVisibility(View.GONE);
     }
 }

@@ -96,6 +96,13 @@ public class Formato implements Serializable, Parcelable{
         this.rodadas = rodadas;
     }
 
+    public List<Fase> getFases() {
+        return fases;
+    }
+
+    public void setFases(List<Fase> fases) {
+        this.fases = fases;
+    }
 
     @Override
     public int describeContents() {

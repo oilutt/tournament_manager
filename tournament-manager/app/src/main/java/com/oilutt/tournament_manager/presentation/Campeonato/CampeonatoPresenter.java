@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.Campeonato;
+import com.oilutt.tournament_manager.ui.adapter.MataMataAdapter;
 import com.oilutt.tournament_manager.ui.adapter.RodadaAdapter;
 import com.oilutt.tournament_manager.ui.adapter.TabelaAdapter;
 
@@ -30,6 +31,7 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
     private String campeonatoId;
     private RodadaAdapter adapterRodada;
     private TabelaAdapter adapterTabela;
+    private MataMataAdapter adapterMatamata;
     private Context context;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
@@ -75,7 +77,9 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
             getViewState().setAdapterViewPager(adapterRodada);
         } else if(campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))){
             getViewState().hideLayoutLiga();
-            getViewState().hideViewPager();
+            getViewState().hideRecycler();
+            adapterMatamata = new MataMataAdapter(campeonato.getFormato().getFases(), context);
+            getViewState().setAdapterViewPager(adapterMatamata);
         } else {
 
         }

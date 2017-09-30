@@ -28,7 +28,10 @@ public class PartidaMatamataAdapter extends RecyclerView.Adapter<PartidaMatamata
     Context context;
 
     public PartidaMatamataAdapter(List<BestOf> list){
-        this.list = list;
+        if(list!= null)
+            this.list = list;
+        else
+            this.list = new ArrayList<>();
     }
 
     @Override

@@ -15,6 +15,7 @@ import java.util.List;
 @IgnoreExtraProperties
 public class BestOf implements Serializable, Parcelable {
 
+    private int id;
     private int quantity;
     private List<Partida> partidas;
     private String time1;
@@ -72,6 +73,14 @@ public class BestOf implements Serializable, Parcelable {
         this.valorTime2 = valorTime2;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -80,6 +89,7 @@ public class BestOf implements Serializable, Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.quantity);
+        dest.writeInt(this.id);
         dest.writeTypedList(this.partidas);
         dest.writeString(this.time1);
         dest.writeString(this.time2);
@@ -89,6 +99,7 @@ public class BestOf implements Serializable, Parcelable {
 
     protected BestOf(Parcel in) {
         this.quantity = in.readInt();
+        this.id = in.readInt();
         this.partidas = in.createTypedArrayList(Partida.CREATOR);
         this.time1 = in.readString();
         this.time2 = in.readString();

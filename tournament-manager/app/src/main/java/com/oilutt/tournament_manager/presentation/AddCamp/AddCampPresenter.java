@@ -94,6 +94,7 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
             campeonato.setQuantidadeTimes(quantidadeTimes);
             campeonato.setFoto(imageBase64);
             campeonato.setDescricao(descricao);
+            campeonato.setTimesClassificados(new ArrayList<>());
 
             Handler handler = new Handler();
             handler.post(() -> TournamentManagerApp.preferencesManager.setCampeonato(campeonato));

@@ -7,7 +7,9 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.app.TournamentManagerApp;
+import com.oilutt.tournament_manager.model.BestOf;
 import com.oilutt.tournament_manager.model.Campeonato;
+import com.oilutt.tournament_manager.model.Fase;
 import com.oilutt.tournament_manager.model.Partida;
 import com.oilutt.tournament_manager.model.Rodada;
 import com.oilutt.tournament_manager.model.Time;
@@ -58,9 +60,30 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
 
         if (campeonato != null) {
             campeonato.setTimes(listTimes);
-            if(campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
+            if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
                 campeonato.getFormato().setRodadas(createSchedule(listTimes));
+            } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
+                campeonato.getFormato().setFases(createScheduleFases(campeonato.getTimes()));
+            }
+            String key = campEndPoint.push().getKey();
 
+            Map<String, Object> campeonatoValues = campeonato.toMap();
+            Map<String, Object> childUpdates = new HashMap<>();
+            childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
+            childUpdates.put("/campeonatos/" + key, campeonatoValues);
+            campEndPoint.updateChildren(childUpdates);
+
+            getViewState().openActivityWithoutHist(MainActivity.class);
+        } else {
+            Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                campeonato = TournamentManagerApp.preferencesManager.getCampeonato();
+                campeonato.setTimes(listTimes);
+                if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
+                    campeonato.getFormato().setRodadas(createSchedule(listTimes));
+                } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
+                    campeonato.getFormato().setFases(createScheduleFases(campeonato.getTimes()));
+                }
                 String key = campEndPoint.push().getKey();
 
                 Map<String, Object> campeonatoValues = campeonato.toMap();
@@ -70,28 +93,165 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 campEndPoint.updateChildren(childUpdates);
 
                 getViewState().openActivityWithoutHist(MainActivity.class);
-            }
-        } else {
-            Handler handler = new Handler();
-            handler.postDelayed(() -> {
-                campeonato = TournamentManagerApp.preferencesManager.getCampeonato();
-                campeonato.setTimes(listTimes);
-                if(campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
-                    campeonato.getFormato().setRodadas(createSchedule(listTimes));
-
-                    String key = campEndPoint.push().getKey();
-
-                    Map<String, Object> campeonatoValues = campeonato.toMap();
-                    Map<String, Object> childUpdates = new HashMap<>();
-                    childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
-                    childUpdates.put("/campeonatos/" + key, campeonatoValues);
-                    campEndPoint.updateChildren(childUpdates);
-
-                    getViewState().hideLoading();
-                    getViewState().openActivityWithoutHist(MainActivity.class);
-                }
             }, 2000);
         }
+    }
+
+    private List<Fase> createScheduleFases(List<Time> list) {
+        List<Time> listTime = new ArrayList<>();
+        listTime.addAll(list);
+        List<Fase> result = new ArrayList<>();
+        int fases = 0;
+        if (listTime.size() == 2)
+            fases = 1;
+        else if (listTime.size() > 2 && listTime.size() <= 4)
+            fases = 2;
+        else if (listTime.size() > 4 && listTime.size() <= 8)
+            fases = 3;
+        else if (listTime.size() > 8 && listTime.size() <= 16)
+            fases = 4;
+        else if (listTime.size() > 16 && listTime.size() <= 32)
+            fases = 5;
+        for (int x = 0; x < fases; x++) {
+            Fase fase = new Fase();
+            if (x == fases - 1) {
+                fase.setPartidas(createBestOf(listTime));
+            } else {
+                fase.setPartidas(createBestOf(x));
+            }
+            fase.setNumero(x);
+            result.add(fase);
+        }
+        return result;
+    }
+
+    private List<BestOf> createBestOf(int fase){
+        List<BestOf> result = new ArrayList<>();
+        if(fase == 0){
+            BestOf bestOf = new BestOf();
+            bestOf.setId(0);
+            bestOf.setTime1("Vencedor partida 1");
+            bestOf.setTime2("Vencedor partida 2");
+            bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasFinal());
+            List<Partida> listPartidas = new ArrayList<>();
+            for(int x = 0; x < bestOf.getQuantity(); x++){
+                Partida partida = new Partida();
+                partida.setId(x);
+                listPartidas.add(partida);
+            }
+            result.add(bestOf);
+        } else if (fase == 1){
+            for(int x = 0; x < 2; x++) {
+                BestOf bestOf = new BestOf();
+                bestOf.setId(x);
+                bestOf.setTime1("Vencedor partida " + x*2 + 1);
+                bestOf.setTime2("Vencedor partida " + x*2 + 2);
+                bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas = new ArrayList<>();
+                for (int y = 0; y < bestOf.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas.add(partida);
+                }
+                result.add(bestOf);
+            }
+        } else if (fase == 2){
+            for(int x = 0; x < 4; x++) {
+                BestOf bestOf = new BestOf();
+                bestOf.setId(x);
+                bestOf.setTime1("Vencedor partida " + x*2 + 1);
+                bestOf.setTime2("Vencedor partida " + x*2 + 2);
+                bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas = new ArrayList<>();
+                for (int y = 0; y < bestOf.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas.add(partida);
+                }
+                result.add(bestOf);
+            }
+        } else if (fase == 3){
+            for(int x = 0; x < 8; x++) {
+                BestOf bestOf = new BestOf();
+                bestOf.setId(x);
+                bestOf.setTime1("Vencedor partida " + x*2 + 1);
+                bestOf.setTime2("Vencedor partida " + x*2 + 2);
+                bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas = new ArrayList<>();
+                for (int y = 0; y < bestOf.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas.add(partida);
+                }
+                result.add(bestOf);
+            }
+        }
+        return result;
+    }
+
+    private List<BestOf> createBestOf(List<Time> list) {
+        List<BestOf> listBest = new ArrayList<>();
+        int partidas = 0;
+        if (list.size() == 2)
+            partidas = 1;
+        else if (list.size() > 2 && list.size() <= 4)
+            partidas = 2;
+        else if (list.size() > 4 && list.size() <= 8)
+            partidas = 4;
+        else if (list.size() > 8 && list.size() <= 16)
+            partidas = 8;
+        else if (list.size() > 16 && list.size() <= 32)
+            partidas = 16;
+
+        for (int x = 0; x < partidas; x++) {
+            BestOf best = new BestOf();
+            best.setId(x);
+            best.setTime1(list.size() > x ? list.get(x).getNome() : "");
+            best.setTime2(list.size() > (partidas * 2 - x) - 1 ? list.get((partidas * 2 - x) - 1).getNome() : "");
+            if(best.getTime1().equals("")){
+                if(!best.getTime2().equals("")){
+                    campeonato.getTimesClassificados().add(list.get((list.size() - x) - 1));
+                }
+            } else if(best.getTime2().equals("")){
+                if(!best.getTime1().equals("")){
+                    campeonato.getTimesClassificados().add(list.get(x));
+                }
+            }
+            best.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+            List<Partida> listPartidas = new ArrayList<>();
+            for (int y = 0; y < best.getQuantity(); y++) {
+                Partida partida = new Partida();
+                partida.setId(y);
+                partida.setTime1(best.getTime1());
+                partida.setTime2(best.getTime2());
+                if(best.getTime1().equals("")){
+                    if(!best.getTime2().equals("")){
+                        partida.setValorTime1("0");
+                        partida.setValorTime2("3");
+                    }
+                } else if(best.getTime2().equals("")){
+                    if(!best.getTime1().equals("")){
+                        partida.setValorTime1("3");
+                        partida.setValorTime2("0");
+                    }
+                }
+                listPartidas.add(partida);
+            }
+            best.setPartidas(listPartidas);
+            if(best.getTime1().equals("")){
+                if(!best.getTime2().equals("")){
+                    best.setValorTime2(String.valueOf(best.getQuantity() -1));
+                    best.setValorTime1("0");
+                }
+            } else if(best.getTime2().equals("")){
+                if(!best.getTime1().equals("")){
+                    best.setValorTime1(String.valueOf(best.getQuantity() -1));
+                    best.setValorTime2("0");
+                }
+            }
+            listBest.add(best);
+        }
+        return listBest;
     }
 
     private List<Rodada> createSchedule(List<Time> list) {
@@ -112,7 +272,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
             listTime1.add(1, listTime1.get(listTime1.size() - 1));
             listTime1.remove(listTime1.size() - 1);
         }
-        if(campeonato.getFormato().getIdaVolta() == 1){
+        if (campeonato.getFormato().getIdaVolta() == 1) {
             for (int i = 1; i < list2.size(); i++) {
                 listRodada.add(createOneRoundVolta(i, list2));
                 // Move last item to first
@@ -151,7 +311,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 t1 = l2.get(tId);
                 t2 = l1.get(tId);
             }
-            if(!t1.getNome().equals("") && !t2.getNome().equals("")) {
+            if (!t1.getNome().equals("") && !t2.getNome().equals("")) {
                 Partida partida = new Partida();
                 partida.setTime1(t1.getNome());
                 partida.setTime2(t2.getNome());
@@ -191,7 +351,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 t1 = l1.get(tId);
                 t2 = l2.get(tId);
             }
-            if(!t1.getNome().equals("") && !t2.getNome().equals("")) {
+            if (!t1.getNome().equals("") && !t2.getNome().equals("")) {
                 Partida partida = new Partida();
                 partida.setTime1(t1.getNome());
                 partida.setTime2(t2.getNome());
