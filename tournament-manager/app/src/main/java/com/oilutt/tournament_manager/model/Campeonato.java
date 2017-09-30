@@ -30,7 +30,6 @@ public class Campeonato implements Serializable, Parcelable{
     private String dataAtualizacao;
     private String descricao;
     private String foto;
-    private List<Rodada> rodadas;
     private int status;   // 1:Aberto, 2:Em andamento, 3:Encerrado
 
     public Campeonato(){
@@ -48,7 +47,6 @@ public class Campeonato implements Serializable, Parcelable{
         result.put("dataAtualizacao", dataAtualizacao);
         result.put("status", status);
         result.put("descricao", descricao);
-        result.put("rodadas", rodadas);
         result.put("foto", foto);
 
         return result;
@@ -150,14 +148,6 @@ public class Campeonato implements Serializable, Parcelable{
         this.times = times;
     }
 
-    public List<Rodada> getrodadas() {
-        return rodadas;
-    }
-
-    public void setrodadas(List<Rodada> rodadas) {
-        this.rodadas = rodadas;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -176,7 +166,6 @@ public class Campeonato implements Serializable, Parcelable{
         dest.writeString(this.dataAtualizacao);
         dest.writeString(this.descricao);
         dest.writeString(this.foto);
-        dest.writeTypedList(this.rodadas);
         dest.writeInt(this.status);
     }
 
@@ -192,7 +181,6 @@ public class Campeonato implements Serializable, Parcelable{
         this.dataAtualizacao = in.readString();
         this.descricao = in.readString();
         this.foto = in.readString();
-        this.rodadas = in.createTypedArrayList(Rodada.CREATOR);
         this.status = in.readInt();
     }
 

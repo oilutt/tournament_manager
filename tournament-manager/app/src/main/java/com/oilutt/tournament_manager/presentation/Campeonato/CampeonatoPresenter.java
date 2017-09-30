@@ -71,7 +71,7 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
         if(campeonato.getFormato().getNome().equals(context.getString(R.string.liga))){
             adapterTabela = new TabelaAdapter(campeonato.getTimes());
             getViewState().setAdapterRecycler(adapterTabela);
-            adapterRodada = new RodadaAdapter(campeonato.getrodadas(), context);
+            adapterRodada = new RodadaAdapter(campeonato.getFormato().getRodadas(), context);
             getViewState().setAdapterViewPager(adapterRodada);
         } else if(campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))){
             getViewState().hideLayoutLiga();
