@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <ImageView
+        android:id="@+id/foto_camp"
+        android:layout_width="@dimen/margin_90"
+        android:layout_height="@dimen/margin_90"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/margin_15"
+        android:layout_marginTop="@dimen/margin_15"
+        android:src="@drawable/shield_83973" />
+
+    <TextView
+        android:id="@+id/txt_nome_camp"
+        style="@style/Text18MontserratBold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/margin_15"
+        android:layout_marginLeft="@dimen/margin_40"
+        android:layout_marginRight="@dimen/margin_40"
+        android:text="@string/nome_camp" />
+
+    <TextView
+        android:id="@+id/txt_des_camp"
+        style="@style/Text14MontserratRegular"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/margin_15"
+        android:layout_marginLeft="@dimen/margin_40"
+        android:layout_marginRight="@dimen/margin_40"
+        android:text="@string/descricao_camp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/margin_10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margin_15">
+
+                <TextView
+                    style="@style/Text14MontserratBold"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/formato_camp_det" />
+
+                <TextView
+                    style="@style/Text14MontserratRegular"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:text="@string/formato_camp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/partidas_chave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margin_15">
+
+                <TextView
+                    style="@style/Text14MontserratBold"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/partidas_camp_chave_det" />
+
+                <TextView
+                    style="@style/Text14MontserratRegular"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:text="3" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/partidas_final"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margin_15">
+
+                <TextView
+                    style="@style/Text14MontserratBold"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/partidas_camp_final_det" />
+
+                <TextView
+                    style="@style/Text14MontserratRegular"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:text="3" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ida_e_volta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margin_15">
+
+                <TextView
+                    style="@style/Text14MontserratBold"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/idaevolta_det" />
+
+                <TextView
+                    style="@style/Text14MontserratRegular"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:text="Sim" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margin_15">
+
+                <TextView
+                    style="@style/Text14MontserratBold"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/status_det" />
+
+                <TextView
+                    style="@style/Text14MontserratRegular"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:text="Encerrado" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="@dimen/margin_10"
+            android:paddingLeft="@dimen/margin_10"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margin_15">
+
+                <TextView
+                    style="@style/Text14MontserratBold"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/data_inicio_det" />
+
+                <TextView
+                    style="@style/Text14MontserratRegular"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:text="10/02/2017" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margin_15">
+
+                <TextView
+                    style="@style/Text14MontserratBold"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/times_camp_det" />
+
+                <TextView
+                    style="@style/Text14MontserratRegular"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:text="10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margin_15">
+
+                <TextView
+                    style="@style/Text14MontserratBold"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/dono_det" />
+
+                <TextView
+                    style="@style/Text14MontserratRegular"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:text="Joaozao" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_times"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

@@ -94,7 +94,8 @@ public class MataMataAdapter extends PagerAdapter {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setFocusable(false);
+        recyclerView.requestFocus();
+        recyclerView.requestLayout();
 
         collection.addView(layout);
         return layout;

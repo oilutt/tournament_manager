@@ -100,7 +100,14 @@
     <string name="semi">Semi-final</string>
     <string name="final_title">Final</string>
 
-    <!-- Campeonato -->
-
+    <!-- Campeonato Details-->
+    <string name="formato_camp_det">Formato:</string>
+    <string name="partidas_camp_chave_det">Partidas por disputa:</string>
+    <string name="partidas_camp_final_det">Partidas na final:</string>
+    <string name="idaevolta_det">Ida e volta:</string>
+    <string name="times_camp_det">Número de times:</string>
+    <string name="dono_det">Dono:</string>
+    <string name="status_det">Status:</string>
+    <string name="data_inicio_det">Data de início:</string>
 
 </resources>
