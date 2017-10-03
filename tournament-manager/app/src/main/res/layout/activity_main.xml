@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/pinkish_grey"
+    android:background="@color/backgroundColor"
     android:layout_height="match_parent"
     tools:context="com.oilutt.tournament_manager.ui.activity.MainActivity">
 
@@ -15,7 +15,7 @@
         android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:visibility="invisible"
-        android:background="@color/pinkish_grey"
+        android:background="@color/backgroundColor"
         android:layout_height="match_parent" />
 
     <com.wang.avi.AVLoadingIndicatorView

@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
 
     <ScrollView
+        android:id="@+id/scrollView"
+        android:focusable="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/pinkish_grey">
+        android:background="@color/backgroundColor"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginBottom="@dimen/margin_55"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/descricao_camp"
                     android:imeOptions="actionDone"
-                    android:inputType="textCapSentences"
+                    android:inputType="textCapSentences|textMultiLine"
                     android:backgroundTint="@color/colorPrimaryDark"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -103,12 +110,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20"
                 android:spinnerMode="dropdown"
-                app:ms_arrowColor="@color/colorPrimaryDark"
+                app:ms_arrowColor="@color/colorAccent"
                 app:ms_arrowSize="@dimen/margin_15"
-                app:ms_baseColor="@color/colorPrimaryDark"
+                app:ms_baseColor="@color/colorAccent"
                 app:ms_enableFloatingLabel="true"
                 app:ms_floatingLabelText="@string/formato_camp"
-                app:ms_highlightColor="@color/colorPrimaryDark"
+                app:ms_highlightColor="@color/colorAccent"
                 app:ms_hint="@string/formato_camp"
                 app:ms_hintColor="@color/edt_hint" />
 
@@ -125,12 +132,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
-                    app:ms_arrowColor="@color/colorPrimaryDark"
+                    app:ms_arrowColor="@color/colorAccent"
                     app:ms_arrowSize="@dimen/margin_15"
-                    app:ms_baseColor="@color/colorPrimaryDark"
+                    app:ms_baseColor="@color/colorAccent"
                     app:ms_enableFloatingLabel="true"
                     app:ms_floatingLabelText="@string/times_camp"
-                    app:ms_highlightColor="@color/colorPrimaryDark"
+                    app:ms_highlightColor="@color/colorAccent"
                     app:ms_hint="@string/times_camp"
                     app:ms_hintColor="@color/edt_hint" />
 
@@ -167,12 +174,12 @@
                     android:layout_marginRight="@dimen/margin_5"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
-                    app:ms_arrowColor="@color/colorPrimaryDark"
+                    app:ms_arrowColor="@color/colorAccent"
                     app:ms_arrowSize="@dimen/margin_15"
-                    app:ms_baseColor="@color/colorPrimaryDark"
+                    app:ms_baseColor="@color/colorAccent"
                     app:ms_enableFloatingLabel="true"
                     app:ms_floatingLabelText="@string/partidas_camp_chave"
-                    app:ms_highlightColor="@color/colorPrimaryDark"
+                    app:ms_highlightColor="@color/colorAccent"
                     app:ms_hint="@string/partidas_camp_chave"
                     app:ms_hintColor="@color/edt_hint" />
 
@@ -184,12 +191,12 @@
                     android:layout_marginLeft="@dimen/margin_5"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
-                    app:ms_arrowColor="@color/colorPrimaryDark"
+                    app:ms_arrowColor="@color/colorAccent"
                     app:ms_arrowSize="@dimen/margin_15"
-                    app:ms_baseColor="@color/colorPrimaryDark"
+                    app:ms_baseColor="@color/colorAccent"
                     app:ms_enableFloatingLabel="true"
                     app:ms_floatingLabelText="@string/partidas_camp_final"
-                    app:ms_highlightColor="@color/colorPrimaryDark"
+                    app:ms_highlightColor="@color/colorAccent"
                     app:ms_hint="@string/partidas_camp_final"
                     app:ms_hintColor="@color/edt_hint" />
 
@@ -211,25 +218,26 @@
                     android:layout_marginRight="@dimen/margin_5"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
-                    app:ms_arrowColor="@color/colorPrimaryDark"
+                    app:ms_arrowColor="@color/colorAccent"
                     app:ms_arrowSize="@dimen/margin_15"
-                    app:ms_baseColor="@color/colorPrimaryDark"
+                    app:ms_baseColor="@color/colorAccent"
                     app:ms_enableFloatingLabel="true"
                     app:ms_floatingLabelText="@string/idaevolta"
-                    app:ms_highlightColor="@color/colorPrimaryDark"
+                    app:ms_highlightColor="@color/colorAccent"
                     app:ms_hint="@string/idaevolta"
                     app:ms_hintColor="@color/edt_hint" />
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_continuar"
-                style="@style/BtnSalvar"
-                android:layout_marginTop="@dimen/margin_30"
-                android:text="@string/continuar" />
-
         </LinearLayout>
 
     </ScrollView>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/btn_continuar"
+        style="@style/BtnSalvar"
+        android:layout_margin="@dimen/margin_10"
+        android:layout_alignParentBottom="true"
+        android:text="@string/continuar" />
+
+</RelativeLayout>

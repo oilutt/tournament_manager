@@ -1,9 +1,7 @@
 package com.oilutt.tournament_manager.ui.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -18,7 +16,6 @@ import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.ui.activity.CampeonatoActivity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

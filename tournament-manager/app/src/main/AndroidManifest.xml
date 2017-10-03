@@ -17,12 +17,11 @@
         android:allowBackup="true"
         android:icon="@drawable/trophy"
         android:label="@string/app_name"
+        android:launchMode="singleTask"
         android:roundIcon="@drawable/trophy"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:launchMode="singleTask"
         tools:replace="android:theme, android:icon, android:allowBackup">
-
         <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,27 +39,21 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.activity.AddCampActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.activity.TeamListActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.activity.CampeonatoActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.activity.SignupActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.activity.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
