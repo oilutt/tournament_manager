@@ -1,23 +1,16 @@
 package com.oilutt.tournament_manager.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.oilutt.tournament_manager.R;
-import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.presentation.Campeonato.CampeonatoCallback;
 import com.oilutt.tournament_manager.presentation.Campeonato.CampeonatoPresenter;
-import com.oilutt.tournament_manager.ui.adapter.MataMataAdapter;
-import com.oilutt.tournament_manager.ui.adapter.RodadaAdapter;
-import com.oilutt.tournament_manager.ui.adapter.TabelaAdapter;
 import com.oilutt.tournament_manager.ui.dialog.DialogProgress;
-import com.oilutt.tournament_manager.utils.WrapContentViewPager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,13 +21,10 @@ import butterknife.ButterKnife;
 
 public class CampeonatoActivity extends BaseActivity implements CampeonatoCallback {
 
-    @BindView(R.id.layoutLiga)
-    LinearLayout layoutLiga;
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    @BindView(R.id.viewPager)
-    WrapContentViewPager viewPager;
-
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
     DialogProgress progress;
 
     @InjectPresenter
@@ -59,36 +49,10 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
         }
     }
 
-    private void configRecycler(){
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setFocusable(false);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
     @Override
-    public void hideLayoutLiga() {
-        layoutLiga.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void setAdapterRecycler(TabelaAdapter adapter) {
-        recyclerView.setAdapter(adapter);
-        configRecycler();
-    }
-
-    @Override
-    public void setAdapterViewPager(RodadaAdapter adapter) {
+    public void setAdapterTab(FragmentPagerAdapter adapter) {
         viewPager.setAdapter(adapter);
-    }
-
-    @Override
-    public void setAdapterViewPager(MataMataAdapter adapter) {
-        viewPager.setAdapter(adapter);
-    }
-
-    @Override
-    public void hideViewPager() {
-        viewPager.setVisibility(View.GONE);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -99,10 +63,5 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
     @Override
     public void hideProgress() {
         progress.dismiss();
-    }
-
-    @Override
-    public void hideRecycler() {
-        recyclerView.setVisibility(View.GONE);
     }
 }

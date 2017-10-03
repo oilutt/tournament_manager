@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.oilutt.tournament_manager.R;
@@ -24,10 +25,12 @@ import butterknife.ButterKnife;
 public class PartidaAdapter extends RecyclerView.Adapter<PartidaAdapter.PartidaHolder> {
 
     private List<Partida> list = new ArrayList<>();
-    Context context;
+    private Context context;
+    private int impar;
 
-    public PartidaAdapter(List<Partida> list){
+    public PartidaAdapter(List<Partida> list, int impar){
         this.list = list;
+        this.impar = impar;
     }
 
     @Override
@@ -49,8 +52,14 @@ public class PartidaAdapter extends RecyclerView.Adapter<PartidaAdapter.PartidaH
             holder.golsTimeCasa.setVisibility(View.INVISIBLE);
             holder.golsTimeFora.setVisibility(View.INVISIBLE);
         }
-        if(position % 2 == 1){
-            holder.layout.setBackgroundColor(context.getResources().getColor(R.color.pinkish_grey));
+        if(impar == 0) {
+            if (position % 2 == 1) {
+                holder.layout.setBackgroundColor(context.getResources().getColor(R.color.backgroundColor));
+            }
+        } else {
+            if (position % 2 == 0) {
+                holder.layout.setBackgroundColor(context.getResources().getColor(R.color.backgroundColor));
+            }
         }
     }
 
@@ -75,7 +84,7 @@ public class PartidaAdapter extends RecyclerView.Adapter<PartidaAdapter.PartidaH
         @BindView(R.id.nomeTimeFora)
         TextView nomeTimeFora;
         @BindView(R.id.layout)
-        PercentRelativeLayout layout;
+        LinearLayout layout;
 
         public PartidaHolder(View view) {
             super(view);

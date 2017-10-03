@@ -1,59 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout"
-    android:orientation="horizontal"
-    android:paddingTop="@dimen/margin_8"
-    android:paddingBottom="@dimen/margin_8"
-    android:paddingRight="@dimen/margin_15"
-    android:paddingLeft="@dimen/margin_15"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="32dp"
+    android:id="@+id/layout"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/nomeTimeCasa"
-        style="@style/Text14MontserratRegular"
-        android:text="Time 1"
-        android:gravity="end"
-        android:maxLines="1"
-        android:ellipsize="end"
-        app:layout_widthPercent="35%" />
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/margin_15"
+        android:paddingRight="@dimen/margin_15">
 
-    <TextView
-        android:id="@+id/golsTimeCasa"
-        style="@style/Text14MontserratRegular"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:layout_toRightOf="@+id/nomeTimeCasa"
-        android:text="10"
-        app:layout_widthPercent="13%" />
+        <TextView
+            android:id="@+id/nomeTimeCasa"
+            style="@style/Text14MontserratRegular"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="Time 1"
+            app:layout_widthPercent="35%" />
 
-    <TextView
-        android:id="@+id/x"
-        style="@style/Text14MontserratRegular"
-        android:layout_toRightOf="@+id/golsTimeCasa"
-        android:gravity="center"
-        android:text="X"
-        app:layout_widthPercent="5%" />
+        <TextView
+            android:id="@+id/golsTimeCasa"
+            style="@style/Text14MontserratRegular"
+            android:layout_toRightOf="@+id/nomeTimeCasa"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="10"
+            app:layout_widthPercent="13%" />
 
-    <TextView
-        android:id="@+id/golsTimeFora"
-        style="@style/Text14MontserratRegular"
-        android:layout_toRightOf="@+id/x"
-        android:text="10"
-        android:gravity="center"
-        android:maxLines="1"
-        android:ellipsize="end"
-        app:layout_widthPercent="13%" />
+        <TextView
+            android:id="@+id/x"
+            style="@style/Text14MontserratRegular"
+            android:layout_toRightOf="@+id/golsTimeCasa"
+            android:gravity="center"
+            android:text="X"
+            app:layout_widthPercent="5%" />
 
-    <TextView
-        android:id="@+id/nomeTimeFora"
-        style="@style/Text14MontserratRegular"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:layout_toRightOf="@+id/golsTimeFora"
-        android:text="Time 2"
-        app:layout_widthPercent="35%" />
+        <TextView
+            android:id="@+id/golsTimeFora"
+            style="@style/Text14MontserratRegular"
+            android:layout_toRightOf="@+id/x"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="10"
+            app:layout_widthPercent="13%" />
 
-</android.support.percent.PercentRelativeLayout>
+        <TextView
+            android:id="@+id/nomeTimeFora"
+            style="@style/Text14MontserratRegular"
+            android:layout_toRightOf="@+id/golsTimeFora"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Time 2"
+            app:layout_widthPercent="35%" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+</LinearLayout>

@@ -108,6 +108,14 @@
         <item name="android:textSize">@dimen/font_10</item>
     </style>
 
+    <style name="Text10MontserratBold">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontPath">@string/monstserrat_bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/font_10</item>
+    </style>
+
     <style name="divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1px</item>

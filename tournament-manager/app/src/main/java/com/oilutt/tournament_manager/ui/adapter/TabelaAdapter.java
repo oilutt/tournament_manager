@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.oilutt.tournament_manager.R;
@@ -50,8 +51,8 @@ public class TabelaAdapter extends RecyclerView.Adapter<TabelaAdapter.TabelaHold
         holder.derrotas.setText(String.valueOf(time.getDerrotas()));
         holder.golsFeitos.setText(String.valueOf(time.getGolsFeitos()));
         holder.golsSofridos.setText(String.valueOf(time.getGolsSofridos()));
-        if(position % 2 == 0){
-            holder.layout.setBackgroundColor(context.getResources().getColor(R.color.pinkish_grey));
+        if(position % 2 == 1){
+            holder.layout.setBackgroundColor(context.getResources().getColor(R.color.backgroundColor));
         }
     }
 
@@ -85,8 +86,8 @@ public class TabelaAdapter extends RecyclerView.Adapter<TabelaAdapter.TabelaHold
         TextView golsFeitos;
         @BindView(R.id.golsSofridos)
         TextView golsSofridos;
-        @BindView(R.id.layout)
-        PercentRelativeLayout layout;
+        @BindView(R.id.layoutLiga)
+        LinearLayout layout;
 
         public TabelaHolder(View view) {
             super(view);
