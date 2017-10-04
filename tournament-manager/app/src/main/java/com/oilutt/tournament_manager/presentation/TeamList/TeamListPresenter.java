@@ -10,6 +10,7 @@ import com.oilutt.tournament_manager.app.TournamentManagerApp;
 import com.oilutt.tournament_manager.model.BestOf;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.model.Fase;
+import com.oilutt.tournament_manager.model.Grupo;
 import com.oilutt.tournament_manager.model.Partida;
 import com.oilutt.tournament_manager.model.Rodada;
 import com.oilutt.tournament_manager.model.Time;
@@ -64,6 +65,9 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 campeonato.getFormato().setRodadas(createSchedule(listTimes));
             } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
                 campeonato.getFormato().setFases(createScheduleFases(campeonato.getTimes()));
+            } else {
+                campeonato.getFormato().setGrupos(createScheduleTorneio(listTimes));
+                campeonato.getFormato().setFases(createScheduleFasesTorneio(listTimes));
             }
             String key = campEndPoint.push().getKey();
 
@@ -95,6 +99,47 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 getViewState().openActivityWithoutHist(MainActivity.class);
             }, 2000);
         }
+    }
+
+    private List<Grupo> createScheduleTorneio(List<Time> list){
+        List<Time> listTime = new ArrayList<>();
+        listTime.addAll(list);
+        List<Grupo> result = new ArrayList<>();
+        int grupos;
+        if(listTime.size() == 8)
+            grupos = 2;
+        else if(listTime.size() == 16)
+            grupos = 4;
+        else
+            grupos = 8;
+        for(int x = 0; x < grupos; x++){
+            Grupo grupo = new Grupo();
+            grupo.setNumero(x + 1);
+            grupo.setRodadas(createSchedule(listTime.subList(x*4, x*4+4)));
+            grupo.setTimes(listTime.subList(x*4, x*4+4));
+            result.add(grupo);
+        }
+        return result;
+    }
+
+    private List<Fase> createScheduleFasesTorneio(List<Time> list) {
+        List<Time> listTime = new ArrayList<>();
+        listTime.addAll(list);
+        List<Fase> result = new ArrayList<>();
+        int fases = 0;
+        if (listTime.size() == 8)
+            fases = 2;
+        else if (listTime.size() == 16)
+            fases = 3;
+        else if (listTime.size() == 32)
+            fases = 4;
+        for (int x = 0; x < fases; x++) {
+            Fase fase = new Fase();
+            fase.setPartidas(createBestOf(x));
+            fase.setNumero(x);
+            result.add(fase);
+        }
+        return result;
     }
 
     private List<Fase> createScheduleFases(List<Time> list) {
@@ -144,8 +189,8 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
             for(int x = 0; x < 2; x++) {
                 BestOf bestOf = new BestOf();
                 bestOf.setId(x);
-                bestOf.setTime1("Vencedor partida " + x*2 + 1);
-                bestOf.setTime2("Vencedor partida " + x*2 + 2);
+                bestOf.setTime1("Vencedor partida " + (x*2 + 1));
+                bestOf.setTime2("Vencedor partida " + (x*2 + 2));
                 bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
                 List<Partida> listPartidas = new ArrayList<>();
                 for (int y = 0; y < bestOf.getQuantity(); y++) {
@@ -159,8 +204,8 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
             for(int x = 0; x < 4; x++) {
                 BestOf bestOf = new BestOf();
                 bestOf.setId(x);
-                bestOf.setTime1("Vencedor partida " + x*2 + 1);
-                bestOf.setTime2("Vencedor partida " + x*2 + 2);
+                bestOf.setTime1("Vencedor partida " + (x*2 + 1));
+                bestOf.setTime2("Vencedor partida " + (x*2 + 2));
                 bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
                 List<Partida> listPartidas = new ArrayList<>();
                 for (int y = 0; y < bestOf.getQuantity(); y++) {
@@ -174,8 +219,8 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
             for(int x = 0; x < 8; x++) {
                 BestOf bestOf = new BestOf();
                 bestOf.setId(x);
-                bestOf.setTime1("Vencedor partida " + x*2 + 1);
-                bestOf.setTime2("Vencedor partida " + x*2 + 2);
+                bestOf.setTime1("Vencedor partida " + (x*2 + 1));
+                bestOf.setTime2("Vencedor partida " + (x*2 + 2));
                 bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
                 List<Partida> listPartidas = new ArrayList<>();
                 for (int y = 0; y < bestOf.getQuantity(); y++) {

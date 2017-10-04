@@ -38,7 +38,8 @@
             android:theme="@style/CropTheme" />
         <activity
             android:name=".ui.activity.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2"/>
         <activity
             android:name=".ui.activity.AddCampActivity"
             android:screenOrientation="portrait" />

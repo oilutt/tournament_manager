@@ -5,6 +5,7 @@
     android:layout_height="32dp"
     android:id="@+id/layout"
     android:gravity="center"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <android.support.percent.PercentRelativeLayout

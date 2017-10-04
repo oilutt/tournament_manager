@@ -13,6 +13,7 @@ public class TabelaFragmentPresenter extends MvpPresenter<TabelaFragmentCallback
 
     private Campeonato campeonato;
     private TabelaAdapter adapter;
+    private int grupo;
 
     public TabelaFragmentPresenter(){
         getViewState().init();
@@ -23,8 +24,17 @@ public class TabelaFragmentPresenter extends MvpPresenter<TabelaFragmentCallback
         setAdapter();
     }
 
+    public void setGrupo(int grupo){
+        this.grupo = grupo;
+    }
+
     private void setAdapter(){
-        adapter = new TabelaAdapter(campeonato.getTimes());
-        getViewState().setAdapter(adapter);
+        if (campeonato.getFormato().getNome().equals("Liga")) {
+            adapter = new TabelaAdapter(campeonato.getTimes());
+            getViewState().setAdapter(adapter);
+        } else if (campeonato.getFormato().getNome().equals("Torneio")){
+            adapter = new TabelaAdapter(campeonato.getFormato().getGrupos().get(grupo).getTimes());
+            getViewState().setAdapter(adapter);
+        }
     }
 }

@@ -47,7 +47,7 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
     private AdapterView.OnItemSelectedListener formatoListener, timeListener, chaveListener, finalListener, idaEVoltaListener;
     private ArrayAdapter formatoAdapter, timesAdapter, chaveAdapter, finalAdapter, idaEVoltaAdapter;
     private List<String> formatoArray, idaEVoltaArray;
-    private List<Integer> timesArray, chaveArray, finalArray;
+    private List<Integer> timesArray, chaveArray, finalArray, timesArrayTorneio;
 
     public AddCampPresenter(Context context) {
         this.context = context;
@@ -137,6 +137,15 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
                 getViewState().showSnack(R.string.erro_quantidade_final);
                 return false;
             }
+        } else if (formato.equals(context.getString(R.string.torneio))){
+            if (quantidadePartidasChave < 1) {
+                getViewState().showSnack(R.string.erro_quantidade_chave);
+                return false;
+            }
+            if (quantidadePartidasFinal < 1) {
+                getViewState().showSnack(R.string.erro_quantidade_final);
+                return false;
+            }
         }
         if(quantidadeTimes < 2){
             getViewState().showSnack(R.string.erro_quantidade_times);
@@ -155,12 +164,21 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
                 if (formato != null && formato.equals(context.getString(R.string.matamata))) {
                     getViewState().showMatamata();
                     getViewState().hideLiga();
+                    timesAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, timesArray);
+                    timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    getViewState().setQuantidadeTeamAdapter(timesAdapter);
                 }else if(formato != null && formato.equals(context.getString(R.string.liga))) {
                     getViewState().showLiga();
                     getViewState().hideMatamata();
-                } else {
+                    timesAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, timesArray);
+                    timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    getViewState().setQuantidadeTeamAdapter(timesAdapter);
+                } else if(formato != null && formato.equals(context.getString(R.string.torneio))) {
                     getViewState().hideLiga();
-                    getViewState().hideMatamata();
+                    getViewState().showMatamata();
+                    timesAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, timesArrayTorneio);
+                    timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    getViewState().setQuantidadeTeamAdapter(timesAdapter);
                 }
             }
 
@@ -262,6 +280,7 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
                 context.getString(R.string.matamata)));
         timesArray = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32));
+        timesArrayTorneio = new ArrayList<>(Arrays.asList(8, 16, 32));
         chaveArray = new ArrayList<>(Arrays.asList(1, 2, 3, 5, 7));
         finalArray = new ArrayList<>(Arrays.asList(1, 2, 3, 5, 7, 9));
         idaEVoltaArray = new ArrayList<>(Arrays.asList(context.getString(R.string.sim),

@@ -4,7 +4,7 @@
 
 
     <gradient
-        android:startColor="@android:color/white"
-        android:endColor="@color/white_two" />
+        android:startColor="@color/colorPrimaryLight"
+        android:endColor="@color/colorPrimaryLight2" />
 
 </shape>

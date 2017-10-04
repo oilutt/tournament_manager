@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/colorPrimaryLight">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -24,19 +25,21 @@
 
             <TextView
                 android:id="@+id/time1"
-                style="@style/Text16MontserratRegular"
+                style="@style/Text12MontserratRegular"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
+                android:textColor="@color/white"
                 android:maxLines="1"
                 android:padding="@dimen/margin_10"
                 android:text="time 1" />
 
             <TextView
                 android:id="@+id/golsTime1"
-                style="@style/Text16MontserratRegular"
+                style="@style/Text12MontserratRegular"
                 android:layout_marginRight="@dimen/margin_10"
                 android:layout_marginLeft="@dimen/margin_5"
+                android:textColor="@color/white"
                 android:text="2"
                 android:visibility="invisible"/>
 
@@ -50,9 +53,10 @@
 
             <TextView
                 android:id="@+id/time2"
-                style="@style/Text16MontserratRegular"
+                style="@style/Text12MontserratRegular"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:textColor="@color/white"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="@dimen/margin_10"
@@ -60,9 +64,10 @@
 
             <TextView
                 android:id="@+id/golsTime2"
-                style="@style/Text16MontserratRegular"
+                style="@style/Text12MontserratRegular"
                 android:layout_marginRight="@dimen/margin_10"
                 android:layout_marginLeft="@dimen/margin_5"
+                android:textColor="@color/white"
                 android:text="2"
                 android:visibility="invisible"/>
 
@@ -87,12 +92,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="3px"
                 android:layout_marginBottom="@dimen/margin_85"
-                android:background="@color/backgroundColor" />
+                android:background="@color/white" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3px"
-                android:background="@color/backgroundColor" />
+                android:background="@color/white" />
 
         </LinearLayout>
 
@@ -106,12 +111,12 @@
                 android:layout_width="3px"
                 android:layout_height="@dimen/margin_90"
                 android:layout_marginTop="1px"
-                android:background="@color/backgroundColor" />
+                android:background="@color/white" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3px"
-                android:background="@color/backgroundColor" />
+                android:background="@color/white" />
 
         </LinearLayout>
 

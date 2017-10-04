@@ -24,6 +24,7 @@ public class Formato implements Serializable, Parcelable{
     private int idaVolta;   // 1 = sim, 0 = nao;
     private List<Rodada> rodadas;
     private List<Fase> fases;
+    private List<Grupo> grupos;
 
     public Formato(){
 
@@ -44,6 +45,7 @@ public class Formato implements Serializable, Parcelable{
         result.put("idaVolta", idaVolta);
         result.put("rodadas", rodadas);
         result.put("fases", fases);
+        result.put("grupos", grupos);
 
         return result;
     }
@@ -104,6 +106,14 @@ public class Formato implements Serializable, Parcelable{
         this.fases = fases;
     }
 
+    public List<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -118,6 +128,7 @@ public class Formato implements Serializable, Parcelable{
         dest.writeInt(this.idaVolta);
         dest.writeTypedList(this.rodadas);
         dest.writeTypedList(this.fases);
+        dest.writeTypedList(this.grupos);
     }
 
     protected Formato(Parcel in) {
@@ -128,6 +139,7 @@ public class Formato implements Serializable, Parcelable{
         this.idaVolta = in.readInt();
         this.rodadas = in.createTypedArrayList(Rodada.CREATOR);
         this.fases = in.createTypedArrayList(Fase.CREATOR);
+        this.grupos = in.createTypedArrayList(Grupo.CREATOR);
     }
 
     public static final Creator<Formato> CREATOR = new Creator<Formato>() {

@@ -104,7 +104,30 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
             adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity)context).getSupportFragmentManager(), campeonato);
             getViewState().setAdapterTab(adapter);
         } else {
-
+            List<Fragment> fragmentList = new ArrayList<>();
+            for (int x = 0; x < campeonato.getFormato().getGrupos().size(); x++){
+                TabelaFragment fragment = TabelaFragment.newInstance();
+                extras.putInt("grupo", x);
+                fragment.setArguments(extras);
+                fragmentList.add(fragment);
+                for(int y = 0; y < campeonato.getFormato().getGrupos().get(x).getRodadas().size(); y++) {
+                    Bundle extras2 = new Bundle();
+                    extras2.putParcelable("rodada", campeonato.getFormato().getGrupos().get(x).getRodadas().get(y));
+                    extras2.putInt("impar", y % 2);
+                    RodadaFragment rodadaFragment = RodadaFragment.newInstance();
+                    rodadaFragment.setArguments(extras2);
+                    fragmentList.add(rodadaFragment);
+                }
+            }
+            for(int z = campeonato.getFormato().getFases().size() - 1; z >= 0 ; z--) {
+                Bundle extras2 = new Bundle();
+                extras2.putParcelable("fase", campeonato.getFormato().getFases().get(z));
+                MataMataFragment fragment = MataMataFragment.newInstance();
+                fragment.setArguments(extras2);
+                fragmentList.add(fragment);
+            }
+            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity)context).getSupportFragmentManager(), campeonato);
+            getViewState().setAdapterTab(adapter);
         }
     }
 }
