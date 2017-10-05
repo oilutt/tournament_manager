@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f51b5</color>
-    <color name="colorPrimaryDark">#303f9f</color>
+    <color name="colorPrimary">#222327</color>
+    <color name="colorPrimaryDark">#121315</color>
     <color name="colorAccent">#303f9f</color>
 
-    <color name="colorAccent2">#FDD835</color>
+    <color name="colorPrimaryLight">#1C1C1E</color>
+    <color name="colorPrimaryLight2">#1A1A1A</color>
+    <color name="colorPrimaryLight3">#121315</color>
+    <color name="colorPrimaryLightEdt">#333333</color>
 
-    <color name="colorPrimaryLight">#E8EAF6</color>
-    <color name="colorPrimaryLight2">#c5cae9</color>
-    <color name="colorPrimaryLight3">#9fa8da</color>
+    <color name="colorPrimaryDark80">#c81A1A1A</color>
+    <color name="colorPrimaryDark50">#801A1A1A</color>
+    <color name="colorPrimaryText">#FDFEFF</color>
+    <color name="colorPrimaryText2">#797A7C</color>
 
-    <color name="colorPrimaryDark80">#c8303f9f</color>
-    <color name="colorPrimaryDark50">#80303f9f</color>
-    <color name="colorPrimaryText">#1A237E</color>
-
-    <color name="bg_dialog">#500c0c0c</color>
+    <color name="bg_dialog">#50121315</color>
     <color name="bg_progress">#C2C0B3</color>
     <color name="progress">#9F9C88</color>
     <color name="backgroundColor">#f5f5f5</color>

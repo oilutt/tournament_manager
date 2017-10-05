@@ -6,17 +6,17 @@
     android:layout_marginLeft="@dimen/margin_15"
     android:layout_marginRight="@dimen/margin_15"
     android:layout_marginTop="@dimen/margin_10"
-    android:textColorHint="@color/colorPrimaryDark50">
+    android:textColorHint="@color/colorPrimaryText2">
 
     <EditText
         android:id="@+id/nome_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHighlight="@color/colorPrimaryDark"
-        android:textColorLink="@color/colorPrimaryDark"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:textColorHighlight="@color/colorPrimaryLightEdt"
+        android:textColorLink="@color/colorPrimaryLightEdt"
+        android:backgroundTint="@color/colorPrimaryLightEdt"
         android:textColor="@color/colorPrimaryText"
-        android:textColorHint="@color/colorPrimaryDark50"
+        android:textColorHint="@color/colorPrimaryText2"
         android:imeOptions="actionNext"
         android:inputType="textCapSentences" />
 </android.support.design.widget.TextInputLayout>

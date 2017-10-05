@@ -8,11 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppThemeEdt" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent2</item>
+        <item name="colorAccent">@color/colorPrimaryText2</item>
+        <item name="colorControlNormal">@color/colorPrimaryText2</item>
     </style>
 
     <style name="CropTheme" parent="Theme.AppCompat">
@@ -126,7 +127,7 @@
     <style name="divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1px</item>
-        <item name="android:background">@color/warm_grey</item>
+        <item name="android:background">@color/colorPrimaryText2</item>
         <item name="android:layout_marginRight">@dimen/margin_10</item>
         <item name="android:layout_marginLeft">@dimen/margin_10</item>
     </style>
@@ -141,7 +142,7 @@
     </style>
 
     <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
-        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

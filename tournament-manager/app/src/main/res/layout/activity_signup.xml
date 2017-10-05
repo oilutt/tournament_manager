@@ -27,41 +27,41 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimaryDark50">
+            android:textColorHint="@color/colorPrimaryText2">
 
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
-                android:textColorHighlight="@color/colorPrimaryDark"
-                android:textColorLink="@color/colorPrimaryDark"
-                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorPrimaryLightEdt"
+                android:textColorLink="@color/colorPrimaryLightEdt"
+                android:backgroundTint="@color/colorPrimaryLightEdt"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryText"
-                android:textColorHint="@color/colorPrimaryDark50" />
+                android:textColorHint="@color/colorPrimaryText2" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimaryDark50">
+            android:textColorHint="@color/colorPrimaryText2">
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:textColorHighlight="@color/colorPrimaryDark"
-                android:textColorLink="@color/colorPrimaryDark"
-                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorPrimaryLightEdt"
+                android:textColorLink="@color/colorPrimaryLightEdt"
+                android:backgroundTint="@color/colorPrimaryLightEdt"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:textColor="@color/colorPrimaryText"
-                android:textColorHint="@color/colorPrimaryDark50" />
+                android:textColorHint="@color/colorPrimaryText2" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16"
-            android:background="@color/colorAccent2"
+            android:background="@color/colorAccent"
             android:text="@string/action_sign_in_short"
             android:textColor="@color/colorPrimaryText"
             android:textStyle="bold" />
@@ -86,7 +86,7 @@
             android:background="@null"
             android:text="@string/btn_link_to_login"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimaryText"
             android:textSize="15dp" />
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

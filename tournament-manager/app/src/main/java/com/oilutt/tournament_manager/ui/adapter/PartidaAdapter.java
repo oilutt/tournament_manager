@@ -54,11 +54,11 @@ public class PartidaAdapter extends RecyclerView.Adapter<PartidaAdapter.PartidaH
         }
         if(impar == 0) {
             if (position % 2 == 1) {
-                holder.layout.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryLight));
+                holder.layout.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryLight2));
             }
         } else {
             if (position % 2 == 0) {
-                holder.layout.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryLight));
+                holder.layout.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryLight2));
             }
         }
     }

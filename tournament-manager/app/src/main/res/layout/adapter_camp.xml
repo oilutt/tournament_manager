@@ -22,6 +22,7 @@
                 android:id="@+id/image_camp"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:tint="@color/colorPrimaryText2"
                 android:src="@drawable/shield_83973"/>
 
         </LinearLayout>
@@ -52,7 +53,7 @@
                 android:layout_marginLeft="@dimen/margin_10"
                 android:layout_marginRight="@dimen/margin_10"
                 android:layout_marginTop="-5dp"
-                android:textColor="@color/colorPrimaryDark80"
+                android:textColor="@color/colorPrimaryText2"
                 android:ellipsize="end"
                 android:layout_below="@+id/tv_camp_nome"
                 android:maxLines="2"

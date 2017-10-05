@@ -38,26 +38,30 @@
             android:theme="@style/CropTheme" />
         <activity
             android:name=".ui.activity.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme2"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.AddCampActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeEdt"/>
         <activity
             android:name=".ui.activity.TeamListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeEdt"/>
         <activity
             android:name=".ui.activity.CampeonatoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.SignupActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeEdt"/>
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeEdt"/>
         <activity
             android:name=".ui.activity.ForgotPasswordActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeEdt"/>
     </application>
 
 </manifest>

@@ -52,7 +52,7 @@ public class TabelaAdapter extends RecyclerView.Adapter<TabelaAdapter.TabelaHold
         holder.golsFeitos.setText(String.valueOf(time.getGolsFeitos()));
         holder.golsSofridos.setText(String.valueOf(time.getGolsSofridos()));
         if(position % 2 == 0){
-            holder.layout.setBackgroundColor(context.getResources().getColor(R.color.white));
+            holder.layout.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryLight2));
         }
     }
 

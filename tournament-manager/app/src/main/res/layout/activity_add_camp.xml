@@ -44,12 +44,13 @@
                     android:layout_marginRight="@dimen/margin_15"
                     android:layout_marginTop="@dimen/margin_15"
                     android:layout_marginBottom="@dimen/margin_15"
-                    android:tint="@color/colorPrimaryText"
+                    android:tint="@color/colorPrimaryText2"
                     android:src="@drawable/shield_83973" />
 
                 <TextView
                     android:id="@+id/txt_add_foto"
                     style="@style/Text12MontserratRegular"
+                    android:textColor="@color/colorPrimaryText2"
                     android:layout_marginBottom="@dimen/margin_15"
                     android:text="@string/adicionar_brasao" />
 
@@ -59,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10"
-                android:textColorHint="@color/colorPrimaryDark50">
+                android:textColorHint="@color/colorPrimaryText2">
 
                 <EditText
                     android:id="@+id/nome_camp"
@@ -68,18 +69,18 @@
                     android:hint="@string/nome_camp"
                     android:imeOptions="actionNext"
                     android:inputType="textCapSentences"
-                    android:textColorHighlight="@color/colorPrimaryDark"
-                    android:textColorLink="@color/colorPrimaryDark"
-                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHighlight="@color/colorPrimaryLightEdt"
+                    android:textColorLink="@color/colorPrimaryLightEdt"
+                    android:backgroundTint="@color/colorPrimaryLightEdt"
                     android:textColor="@color/colorPrimaryText"
-                    android:textColorHint="@color/colorPrimaryDark50" />
+                    android:textColorHint="@color/colorPrimaryText2" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10"
-                android:textColorHint="@color/colorPrimaryDark50">
+                android:textColorHint="@color/colorPrimaryText2">
 
                 <EditText
                     android:id="@+id/descricao_camp"
@@ -88,18 +89,18 @@
                     android:hint="@string/descricao_camp"
                     android:imeOptions="actionDone"
                     android:inputType="textCapSentences|textMultiLine"
-                    android:textColorHighlight="@color/colorPrimaryDark"
-                    android:textColorLink="@color/colorPrimaryDark"
-                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHighlight="@color/colorPrimaryLightEdt"
+                    android:textColorLink="@color/colorPrimaryLightEdt"
+                    android:backgroundTint="@color/colorPrimaryLightEdt"
                     android:textColor="@color/colorPrimaryText"
-                    android:textColorHint="@color/colorPrimaryDark50" />
+                    android:textColorHint="@color/colorPrimaryText2" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10"
-                android:textColorHint="@color/colorPrimaryDark50">
+                android:textColorHint="@color/colorPrimaryText2">
 
                 <EditText
                     android:id="@+id/data_inicio_camp"
@@ -108,11 +109,11 @@
                     android:hint="@string/data_inicio_camp"
                     android:imeOptions="actionNext"
                     android:inputType="textCapSentences"
-                    android:textColorHighlight="@color/colorPrimaryDark"
-                    android:textColorLink="@color/colorPrimaryDark"
-                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHighlight="@color/colorPrimaryLightEdt"
+                    android:textColorLink="@color/colorPrimaryLightEdt"
+                    android:backgroundTint="@color/colorPrimaryLightEdt"
                     android:textColor="@color/colorPrimaryText"
-                    android:textColorHint="@color/colorPrimaryDark50" />
+                    android:textColorHint="@color/colorPrimaryText2" />
             </android.support.design.widget.TextInputLayout>
 
             <fr.ganfra.materialspinner.MaterialSpinner
@@ -122,14 +123,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10"
                 android:spinnerMode="dropdown"
-                app:ms_arrowColor="@color/colorPrimaryDark"
+                app:ms_arrowColor="@color/colorPrimaryLightEdt"
                 app:ms_arrowSize="@dimen/margin_15"
-                app:ms_baseColor="@color/colorPrimaryDark"
+                app:ms_baseColor="@color/colorPrimaryLightEdt"
                 app:ms_enableFloatingLabel="true"
                 app:ms_floatingLabelText="@string/formato_camp"
-                app:ms_highlightColor="@color/colorPrimaryDark"
+                app:ms_highlightColor="@color/colorPrimaryLightEdt"
                 app:ms_hint="@string/formato_camp"
-                app:ms_hintColor="@color/colorPrimaryDark50" />
+                app:ms_hintColor="@color/colorPrimaryText2" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -144,14 +145,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
-                    app:ms_arrowColor="@color/colorPrimaryDark"
+                    app:ms_arrowColor="@color/colorPrimaryLightEdt"
                     app:ms_arrowSize="@dimen/margin_15"
-                    app:ms_baseColor="@color/colorPrimaryDark"
+                    app:ms_baseColor="@color/colorPrimaryLightEdt"
                     app:ms_enableFloatingLabel="true"
                     app:ms_floatingLabelText="@string/times_camp"
-                    app:ms_highlightColor="@color/colorPrimaryDark"
+                    app:ms_highlightColor="@color/colorPrimaryLightEdt"
                     app:ms_hint="@string/times_camp"
-                    app:ms_hintColor="@color/colorPrimaryDark50" />
+                    app:ms_hintColor="@color/colorPrimaryText2" />
 
             </LinearLayout>
 
@@ -171,14 +172,14 @@
                     android:layout_marginRight="@dimen/margin_5"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
-                    app:ms_arrowColor="@color/colorPrimaryDark"
+                    app:ms_arrowColor="@color/colorPrimaryLightEdt"
                     app:ms_arrowSize="@dimen/margin_15"
-                    app:ms_baseColor="@color/colorPrimaryDark"
+                    app:ms_baseColor="@color/colorPrimaryLightEdt"
                     app:ms_enableFloatingLabel="true"
                     app:ms_floatingLabelText="@string/partidas_camp_chave"
-                    app:ms_highlightColor="@color/colorPrimaryDark"
+                    app:ms_highlightColor="@color/colorPrimaryLightEdt"
                     app:ms_hint="@string/partidas_camp_chave"
-                    app:ms_hintColor="@color/colorPrimaryDark50" />
+                    app:ms_hintColor="@color/colorPrimaryText2" />
 
                 <fr.ganfra.materialspinner.MaterialSpinner
                     android:id="@+id/quantidade_partidas_final"
@@ -188,14 +189,14 @@
                     android:layout_marginLeft="@dimen/margin_5"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
-                    app:ms_arrowColor="@color/colorPrimaryDark"
+                    app:ms_arrowColor="@color/colorPrimaryLightEdt"
                     app:ms_arrowSize="@dimen/margin_15"
-                    app:ms_baseColor="@color/colorPrimaryDark"
+                    app:ms_baseColor="@color/colorPrimaryLightEdt"
                     app:ms_enableFloatingLabel="true"
                     app:ms_floatingLabelText="@string/partidas_camp_final"
-                    app:ms_highlightColor="@color/colorPrimaryDark"
+                    app:ms_highlightColor="@color/colorPrimaryLightEdt"
                     app:ms_hint="@string/partidas_camp_final"
-                    app:ms_hintColor="@color/colorPrimaryDark50" />
+                    app:ms_hintColor="@color/colorPrimaryText2" />
 
             </LinearLayout>
 
@@ -215,14 +216,14 @@
                     android:layout_marginRight="@dimen/margin_5"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
-                    app:ms_arrowColor="@color/colorPrimaryDark"
+                    app:ms_arrowColor="@color/colorPrimaryLightEdt"
                     app:ms_arrowSize="@dimen/margin_15"
-                    app:ms_baseColor="@color/colorPrimaryDark"
+                    app:ms_baseColor="@color/colorPrimaryLightEdt"
                     app:ms_enableFloatingLabel="true"
                     app:ms_floatingLabelText="@string/idaevolta"
-                    app:ms_highlightColor="@color/colorPrimaryDark"
+                    app:ms_highlightColor="@color/colorPrimaryLightEdt"
                     app:ms_hint="@string/idaevolta"
-                    app:ms_hintColor="@color/colorPrimaryDark50" />
+                    app:ms_hintColor="@color/colorPrimaryText2" />
 
             </LinearLayout>
 
