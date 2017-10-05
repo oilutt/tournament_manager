@@ -48,6 +48,7 @@ public class TabelaFragment extends MvpAppCompatFragment implements TabelaFragme
     @Override
     public void init() {
         presenter.attachView(this);
+        presenter.setGrupo(getArguments().getInt("grupo"));
         presenter.setCampeonato(getArguments().getParcelable("campeonato"));
     }
 

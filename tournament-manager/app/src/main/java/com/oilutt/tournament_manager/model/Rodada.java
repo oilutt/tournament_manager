@@ -17,6 +17,7 @@ public class Rodada implements Serializable, Parcelable {
 
     private int numero;
     private List<Partida> partidas;
+    private boolean completa = false;
 
     public Rodada(){}
 
@@ -36,6 +37,14 @@ public class Rodada implements Serializable, Parcelable {
         this.partidas = partidas;
     }
 
+    public boolean isCompleta() {
+        return completa;
+    }
+
+    public void setCompleta(boolean completa) {
+        this.completa = completa;
+    }
+
 
     @Override
     public int describeContents() {
@@ -46,11 +55,13 @@ public class Rodada implements Serializable, Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.numero);
         dest.writeTypedList(this.partidas);
+        dest.writeByte(this.completa ? (byte) 1 : (byte) 0);
     }
 
     protected Rodada(Parcel in) {
         this.numero = in.readInt();
         this.partidas = in.createTypedArrayList(Partida.CREATOR);
+        this.completa = in.readByte() != 0;
     }
 
     public static final Creator<Rodada> CREATOR = new Creator<Rodada>() {

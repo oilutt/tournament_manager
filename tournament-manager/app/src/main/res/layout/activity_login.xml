@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/backgroundColor"
+        android:background="@color/colorPrimaryLight"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:orientation="vertical"
@@ -26,21 +26,26 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimaryDark50">
 
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
+                android:textColorHighlight="@color/colorPrimaryDark"
+                android:textColorLink="@color/colorPrimaryDark"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:inputType="textEmailAddress"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/colorPrimaryDark50" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimaryDark50">
 
             <EditText
                 android:id="@+id/password"
@@ -48,9 +53,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="@string/hint_password"
+                android:textColorHighlight="@color/colorPrimaryDark"
+                android:textColorLink="@color/colorPrimaryDark"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:inputType="textPassword"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/colorPrimaryDark50" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -58,9 +66,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16"
-            android:background="@color/colorAccent"
+            android:background="@color/colorAccent2"
             android:text="@string/btn_login"
-            android:textColor="@color/white" />
+            android:textColor="@color/colorPrimaryText" />
 
         <Button
             android:id="@+id/btn_reset_password"
@@ -70,7 +78,7 @@
             android:background="@null"
             android:text="@string/btn_forgot_password"
             android:textAllCaps="false"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorPrimaryText" />
 
         <Button
             android:id="@+id/btn_signup"

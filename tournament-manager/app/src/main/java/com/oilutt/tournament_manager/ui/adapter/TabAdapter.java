@@ -79,6 +79,38 @@ public class TabAdapter extends FragmentPagerAdapter {
                 if (position == 0)
                     return context.getString(R.string.final_title);
             }
+        } else {
+            int grupos = camp.getFormato().getGrupos().size();
+            if(position <= grupos*4-1){
+                if(position % 4 == 0){
+                    return "Grupo " + (position / 4 + 1);
+                } else {
+                    return "Rodada " + (position % 4);
+                }
+            } else {
+                if (camp.getFormato().getFases().size() == 4){
+                    if (position == grupos*4)
+                        return context.getString(R.string.oitavas);
+                    else if (position == grupos*4+1)
+                        return context.getString(R.string.quartas);
+                    else if (position == grupos*4+2)
+                        return context.getString(R.string.semi);
+                    else if (position == grupos*4+3)
+                        return context.getString(R.string.final_title);
+                } else if (camp.getFormato().getFases().size() == 3){
+                    if (position == grupos*4)
+                        return context.getString(R.string.quartas);
+                    else if (position == grupos*4+1)
+                        return context.getString(R.string.semi);
+                    else if (position == grupos*4+2)
+                        return context.getString(R.string.final_title);
+                } else if (camp.getFormato().getFases().size() == 2){
+                    if (position == grupos*4)
+                        return context.getString(R.string.semi);
+                    else if (position == grupos*4+1)
+                        return context.getString(R.string.final_title);
+                }
+            }
         }
         return "";
     }

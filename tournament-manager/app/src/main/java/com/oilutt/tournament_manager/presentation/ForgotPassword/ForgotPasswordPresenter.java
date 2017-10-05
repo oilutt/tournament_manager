@@ -30,8 +30,8 @@ public class ForgotPasswordPresenter extends MvpPresenter<ForgotPasswordCallback
     }
 
     public void clickReset(){
-        getViewState().showProgress();
         if(verifyInput()) {
+            getViewState().showProgress();
             auth.sendPasswordResetEmail(email)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -39,7 +39,6 @@ public class ForgotPasswordPresenter extends MvpPresenter<ForgotPasswordCallback
                         } else {
                             getViewState().showSnack(R.string.erro_generic);
                         }
-
                         getViewState().hideProgress();
                     });
         }
