@@ -24,6 +24,7 @@ public class Time implements Serializable, Parcelable {
     private int golsFeitos;
     private int golsSofridos;
     private int posicao;
+    private boolean campeao;
 
     public Time() {
 
@@ -40,6 +41,7 @@ public class Time implements Serializable, Parcelable {
         derrotas = 0;
         golsFeitos = 0;
         golsSofridos = 0;
+        campeao = false;
     }
 
     public int getId() {
@@ -122,6 +124,14 @@ public class Time implements Serializable, Parcelable {
         this.posicao = posicao;
     }
 
+    public boolean isCampeao() {
+        return campeao;
+    }
+
+    public void setCampeao(boolean campeao) {
+        this.campeao = campeao;
+    }
+
 
     @Override
     public int describeContents() {
@@ -130,9 +140,9 @@ public class Time implements Serializable, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
         dest.writeString(this.nome);
         dest.writeInt(this.jogos);
-        dest.writeInt(this.id);
         dest.writeInt(this.pontos);
         dest.writeInt(this.vitorias);
         dest.writeInt(this.empates);
@@ -140,12 +150,13 @@ public class Time implements Serializable, Parcelable {
         dest.writeInt(this.golsFeitos);
         dest.writeInt(this.golsSofridos);
         dest.writeInt(this.posicao);
+        dest.writeByte(this.campeao ? (byte) 1 : (byte) 0);
     }
 
     protected Time(Parcel in) {
+        this.id = in.readInt();
         this.nome = in.readString();
         this.jogos = in.readInt();
-        this.id = in.readInt();
         this.pontos = in.readInt();
         this.vitorias = in.readInt();
         this.empates = in.readInt();
@@ -153,6 +164,7 @@ public class Time implements Serializable, Parcelable {
         this.golsFeitos = in.readInt();
         this.golsSofridos = in.readInt();
         this.posicao = in.readInt();
+        this.campeao = in.readByte() != 0;
     }
 
     public static final Creator<Time> CREATOR = new Creator<Time>() {

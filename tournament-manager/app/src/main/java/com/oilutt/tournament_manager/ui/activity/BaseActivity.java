@@ -83,8 +83,6 @@ public class BaseActivity extends MvpAppCompatActivity {
             if (isBack) {
                 toolbar.setNavigationIcon(R.drawable.ic_back);
                 toolbar.setNavigationOnClickListener(getToolbarOnBackClick());
-            } else {
-                toolbar.setBackgroundColor(getResources().getColor(R.color.backgroundColor));
             }
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }

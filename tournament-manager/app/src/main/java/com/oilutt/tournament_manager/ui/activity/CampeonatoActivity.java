@@ -25,6 +25,7 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
     TabLayout tabLayout;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
+
     DialogProgress progress;
 
     @InjectPresenter

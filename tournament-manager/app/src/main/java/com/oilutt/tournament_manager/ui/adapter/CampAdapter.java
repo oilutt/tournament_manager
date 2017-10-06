@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.ui.activity.CampeonatoActivity;
+import com.oilutt.tournament_manager.ui.activity.CampeonatoDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,7 @@ public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder> {
             holder.tvCampStatus.setTextColor(activity.getResources().getColor(R.color.red));
         }
         holder.layout.setOnClickListener(v -> {
-            Intent intent = new Intent(activity, CampeonatoActivity.class);
+            Intent intent = new Intent(activity, CampeonatoDetailsActivity.class);
             intent.putExtra("campeonatoId", camp.getId());
             activity.startActivity(intent);
         });

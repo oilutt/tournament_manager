@@ -40,6 +40,9 @@
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".ui.activity.CampeonatoDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".ui.activity.AddCampActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeEdt"/>

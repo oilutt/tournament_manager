@@ -3,14 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
+    android:id="@+id/layout"
     android:orientation="horizontal"
     android:padding="@dimen/margin_3">
 
     <TextView
+        android:id="@+id/nome"
         style="@style/Text16MontserratRegular"
         android:text="Time 1" />
 
     <ImageView
+        android:id="@+id/campeao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_10"

@@ -92,12 +92,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="3px"
                 android:layout_marginBottom="@dimen/margin_85"
-                android:background="@color/colorPrimaryLightEdt" />
+                android:background="@color/colorPrimaryLightMataMata" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3px"
-                android:background="@color/colorPrimaryLightEdt" />
+                android:background="@color/colorPrimaryLightMataMata" />
 
         </LinearLayout>
 
@@ -111,12 +111,12 @@
                 android:layout_width="3px"
                 android:layout_height="@dimen/margin_90"
                 android:layout_marginTop="1px"
-                android:background="@color/colorPrimaryLightEdt" />
+                android:background="@color/colorPrimaryLightMataMata" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3px"
-                android:background="@color/colorPrimaryLightEdt" />
+                android:background="@color/colorPrimaryLightMataMata" />
 
         </LinearLayout>
 
