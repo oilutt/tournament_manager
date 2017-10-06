@@ -33,8 +33,9 @@ public class SignupActivity extends BaseActivity implements SignupCallback {
 
     @InjectPresenter
     SignupPresenter presenter;
+
     @ProvidePresenter
-    SignupPresenter createPresenter(){
+    SignupPresenter createPresenter() {
         return new SignupPresenter(this);
     }
 
@@ -55,8 +56,8 @@ public class SignupActivity extends BaseActivity implements SignupCallback {
     }
 
     @OnClick({R.id.sign_in_button, R.id.sign_up_button})
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.sign_in_button:
                 presenter.clickSignIn();
                 break;

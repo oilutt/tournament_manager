@@ -58,7 +58,7 @@ public class BaseActivity extends MvpAppCompatActivity {
         startActivity(intent);
     }
 
-    public void openTeamList(int quantidade){
+    public void openTeamList(int quantidade) {
         Intent intent = new Intent();
         intent.setClass(this, TeamListActivity.class);
         intent.putExtra("quantidade", quantidade);
@@ -112,17 +112,17 @@ public class BaseActivity extends MvpAppCompatActivity {
         }
     }
 
-    public void changeTitleToolbar(String text){
+    public void changeTitleToolbar(String text) {
         if (toolbar != null) getSupportActionBar().setTitle(text);
     }
 
-    public void showBackToolback(){
+    public void showBackToolback() {
         if (toolbar == null) return;
         toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
-    public void hideBackToolbar(){
+    public void hideBackToolbar() {
         if (toolbar == null) return;
         toolbar.setNavigationIcon(null);
     }

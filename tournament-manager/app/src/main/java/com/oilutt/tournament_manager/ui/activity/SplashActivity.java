@@ -18,9 +18,9 @@ public class SplashActivity extends BaseActivity {
         auth = FirebaseAuth.getInstance();
         new Handler().postDelayed(() -> {
             finish();
-            if(auth.getCurrentUser() != null) {
+            if (auth.getCurrentUser() != null) {
                 openActivity(MainActivity.class);
-            }else {
+            } else {
                 openActivity(SignupActivity.class);
             }
         }, Constants.TIME_HANDLER);

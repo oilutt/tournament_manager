@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
  * Created by Tulio on 03/10/2017.
  */
 
-public class TabelaFragment extends MvpAppCompatFragment implements TabelaFragmentCallback{
+public class TabelaFragment extends MvpAppCompatFragment implements TabelaFragmentCallback {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;

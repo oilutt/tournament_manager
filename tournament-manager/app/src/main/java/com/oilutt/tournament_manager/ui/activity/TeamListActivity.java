@@ -29,8 +29,9 @@ public class TeamListActivity extends BaseActivity implements TeamListCallback {
 
     @InjectPresenter
     TeamListPresenter presenter;
+
     @ProvidePresenter
-    TeamListPresenter createPresenter(){
+    TeamListPresenter createPresenter() {
         return new TeamListPresenter(this);
     }
 
@@ -43,11 +44,11 @@ public class TeamListActivity extends BaseActivity implements TeamListCallback {
         getBundle();
     }
 
-    private void getBundle(){
-        if(getIntent().hasExtra("quantidade")){
+    private void getBundle() {
+        if (getIntent().hasExtra("quantidade")) {
             presenter.setQuantidade(getIntent().getIntExtra("quantidade", 0));
         }
-        if(getIntent().hasExtra("listTeams")){
+        if (getIntent().hasExtra("listTeams")) {
             presenter.setList(getIntent().getStringArrayListExtra("listTeams"));
         } else {
             presenter.setList(new ArrayList<>());
@@ -55,7 +56,7 @@ public class TeamListActivity extends BaseActivity implements TeamListCallback {
     }
 
     @OnClick(R.id.btn_continuar)
-    public void clickOnContinuar(){
+    public void clickOnContinuar() {
         presenter.clickSave();
     }
 

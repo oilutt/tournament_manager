@@ -31,21 +31,21 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     private CampAdapter adapter;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
-    private DatabaseReference campEndPoint =  FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid() + "/campeonatos");
+    private DatabaseReference campEndPoint = FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid() + "/campeonatos");
     private List<Campeonato> campeonatoList;
     private Activity activity;
 
-    public MainActivityPresenter(Activity activity){
+    public MainActivityPresenter(Activity activity) {
         this.activity = activity;
         getCamps();
     }
 
-    public void getCamps(){
+    public void getCamps() {
         campEndPoint.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 campeonatoList = new ArrayList<>();
-                for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()){
+                for (DataSnapshot noteSnapshot : dataSnapshot.getChildren()) {
                     String key = noteSnapshot.getKey();
                     Campeonato note = noteSnapshot.getValue(Campeonato.class);
                     note.setId(key);
@@ -62,8 +62,8 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         });
     }
 
-    private void setAdapter(){
-        if(campeonatoList.size() > 0) {
+    private void setAdapter() {
+        if (campeonatoList.size() > 0) {
             getViewState().hidePlaceHolder();
             adapter = new CampAdapter(activity);
             adapter.setData(campeonatoList);

@@ -10,5 +10,6 @@ import com.oilutt.tournament_manager.ui.adapter.PartidaMatamataAdapter;
 public interface MataMataFragmentCallback extends MvpView {
 
     void setAdapter(PartidaMatamataAdapter adapter);
+
     void init();
 }

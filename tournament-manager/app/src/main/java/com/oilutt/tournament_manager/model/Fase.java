@@ -18,7 +18,8 @@ public class Fase implements Serializable, Parcelable {
     private int numero;
     private List<BestOf> partidas;
 
-    public Fase (){}
+    public Fase() {
+    }
 
     public int getNumero() {
         return numero;

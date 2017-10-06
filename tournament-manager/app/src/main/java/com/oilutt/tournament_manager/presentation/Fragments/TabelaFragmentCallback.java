@@ -10,5 +10,6 @@ import com.oilutt.tournament_manager.ui.adapter.TabelaAdapter;
 public interface TabelaFragmentCallback extends MvpView {
 
     void setAdapter(TabelaAdapter adapter);
+
     void init();
 }

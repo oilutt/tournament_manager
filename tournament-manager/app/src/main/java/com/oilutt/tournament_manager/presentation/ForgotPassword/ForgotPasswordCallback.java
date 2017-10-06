@@ -9,6 +9,7 @@ import com.arellomobile.mvp.MvpView;
 public interface ForgotPasswordCallback extends MvpView {
 
     void showProgress();
+
     void hideProgress();
 
     void showSnack(int message);

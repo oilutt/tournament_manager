@@ -15,24 +15,24 @@ public class TabelaFragmentPresenter extends MvpPresenter<TabelaFragmentCallback
     private TabelaAdapter adapter;
     private int grupo;
 
-    public TabelaFragmentPresenter(){
+    public TabelaFragmentPresenter() {
         getViewState().init();
     }
 
-    public void setCampeonato(Campeonato campeonato){
+    public void setCampeonato(Campeonato campeonato) {
         this.campeonato = campeonato;
         setAdapter();
     }
 
-    public void setGrupo(int grupo){
+    public void setGrupo(int grupo) {
         this.grupo = grupo;
     }
 
-    private void setAdapter(){
+    private void setAdapter() {
         if (campeonato.getFormato().getNome().equals("Liga")) {
             adapter = new TabelaAdapter(campeonato.getTimes());
             getViewState().setAdapter(adapter);
-        } else if (campeonato.getFormato().getNome().equals("Torneio")){
+        } else if (campeonato.getFormato().getNome().equals("Torneio")) {
             adapter = new TabelaAdapter(campeonato.getFormato().getGrupos().get(grupo).getTimes());
             getViewState().setAdapter(adapter);
         }

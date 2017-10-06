@@ -13,7 +13,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimaryText2</item>
-        <item name="colorControlNormal">@color/colorPrimaryText2</item>
     </style>
 
     <style name="CropTheme" parent="Theme.AppCompat">
@@ -138,10 +137,15 @@
         <item name="android:background">@drawable/bg_btn_salvar</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
         <item name="android:textSize">@dimen/font_16</item>
+        <item name="fontPath">@string/monstserrat_regular</item>
         <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+    <style name="mySpinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:textColor">@style/mySpinnerItemStyleColor</item>
+    </style>
+
+    <style name="mySpinnerItemStyleColor" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 

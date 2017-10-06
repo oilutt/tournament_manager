@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements MainActivityCallback{
+public class MainActivity extends BaseActivity implements MainActivityCallback {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -32,8 +32,9 @@ public class MainActivity extends BaseActivity implements MainActivityCallback{
 
     @InjectPresenter
     MainActivityPresenter presenter;
+
     @ProvidePresenter
-    MainActivityPresenter createPresenter(){
+    MainActivityPresenter createPresenter() {
         return new MainActivityPresenter(this);
     }
 
@@ -46,12 +47,12 @@ public class MainActivity extends BaseActivity implements MainActivityCallback{
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
     }
 
     @OnClick(R.id.fab)
-    public void onClickFab(){
+    public void onClickFab() {
         openActivity(AddCampActivity.class);
     }
 

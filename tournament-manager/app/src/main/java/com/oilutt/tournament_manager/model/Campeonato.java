@@ -17,7 +17,7 @@ import io.realm.RealmObject;
  */
 
 @IgnoreExtraProperties
-public class Campeonato implements Serializable, Parcelable{
+public class Campeonato implements Serializable, Parcelable {
 
     private String id;
     private String nome;
@@ -33,7 +33,7 @@ public class Campeonato implements Serializable, Parcelable{
     private String foto;
     private int status;   // 1:Aberto, 2:Em andamento, 3:Encerrado
 
-    public Campeonato(){
+    public Campeonato() {
 
     }
 

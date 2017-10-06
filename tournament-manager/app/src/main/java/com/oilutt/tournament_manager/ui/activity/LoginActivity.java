@@ -35,8 +35,9 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
 
     @InjectPresenter
     LoginPresenter presenter;
+
     @ProvidePresenter
-    LoginPresenter createPresenter(){
+    LoginPresenter createPresenter() {
         return new LoginPresenter(this);
     }
 
@@ -48,8 +49,8 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
     }
 
     @OnClick({R.id.btn_login, R.id.btn_signup, R.id.btn_reset_password})
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btn_login:
                 presenter.clickLogin();
                 break;

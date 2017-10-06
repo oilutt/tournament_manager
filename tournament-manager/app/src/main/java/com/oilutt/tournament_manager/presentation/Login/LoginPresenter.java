@@ -21,22 +21,22 @@ public class LoginPresenter extends MvpPresenter<LoginCallback> {
     private Context context;
     private String email, password;
 
-    public LoginPresenter(Context context){
+    public LoginPresenter(Context context) {
         this.context = context;
         auth = FirebaseAuth.getInstance();
         getViewState().onObserverEdts();
     }
 
-    public void getEmail(CharSequence email){
+    public void getEmail(CharSequence email) {
         this.email = email.toString();
     }
 
-    public void getPassword(CharSequence password){
+    public void getPassword(CharSequence password) {
         this.password = password.toString();
     }
 
-    public void clickLogin(){
-        if(verifyInputs()) {
+    public void clickLogin() {
+        if (verifyInputs()) {
             getViewState().showProgress();
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener((Activity) context, task -> {
@@ -54,11 +54,11 @@ public class LoginPresenter extends MvpPresenter<LoginCallback> {
         }
     }
 
-    public void clickSignUp(){
+    public void clickSignUp() {
         getViewState().openSignUp();
     }
 
-    public void clickReset(){
+    public void clickReset() {
         getViewState().openActivity(ForgotPasswordActivity.class);
     }
 

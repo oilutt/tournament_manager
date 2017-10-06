@@ -65,12 +65,12 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
         this.dataInicio = data.toString();
     }
 
-    public void getDescricao(CharSequence descricao){
+    public void getDescricao(CharSequence descricao) {
         this.descricao = descricao.toString();
     }
 
     public void clickSave() {
-        if(verifyFields()) {
+        if (verifyFields()) {
             Campeonato campeonato = new Campeonato();
             campeonato.setNome(nome);
             campeonato.setDataInicio(dataInicio);
@@ -103,32 +103,32 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
         }
     }
 
-    private boolean verifyFields(){
-        if(pathImage == null || pathImage.equals("")){
+    private boolean verifyFields() {
+        if (pathImage == null || pathImage.equals("")) {
             getViewState().showSnack(R.string.erro_foto);
             return false;
         }
-        if(nome == null || nome.equals("")){
+        if (nome == null || nome.equals("")) {
             getViewState().showSnack(R.string.erro_nome);
             return false;
         }
-        if(descricao == null || descricao.equals("")){
+        if (descricao == null || descricao.equals("")) {
             getViewState().showSnack(R.string.erro_descricao);
             return false;
         }
-        if(dataInicio == null || dataInicio.equals("")){
+        if (dataInicio == null || dataInicio.equals("")) {
             getViewState().showSnack(R.string.erro_data);
             return false;
         }
-        if(formato == null || formato.equals("")){
+        if (formato == null || formato.equals("")) {
             getViewState().showSnack(R.string.erro_formato);
             return false;
-        } else if(formato.equals(context.getString(R.string.liga))) {
+        } else if (formato.equals(context.getString(R.string.liga))) {
             if (idaEVolta == 2) {
                 getViewState().showSnack(R.string.erro_quantidade_chave);
                 return false;
             }
-        } else if(formato.equals(context.getString(R.string.matamata))) {
+        } else if (formato.equals(context.getString(R.string.matamata))) {
             if (quantidadePartidasChave < 1) {
                 getViewState().showSnack(R.string.erro_quantidade_chave);
                 return false;
@@ -137,7 +137,7 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
                 getViewState().showSnack(R.string.erro_quantidade_final);
                 return false;
             }
-        } else if (formato.equals(context.getString(R.string.torneio))){
+        } else if (formato.equals(context.getString(R.string.torneio))) {
             if (quantidadePartidasChave < 1) {
                 getViewState().showSnack(R.string.erro_quantidade_chave);
                 return false;
@@ -147,7 +147,7 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
                 return false;
             }
         }
-        if(quantidadeTimes < 2){
+        if (quantidadeTimes < 2) {
             getViewState().showSnack(R.string.erro_quantidade_times);
             return false;
         }
@@ -164,19 +164,19 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
                 if (formato != null && formato.equals(context.getString(R.string.matamata))) {
                     getViewState().showMatamata();
                     getViewState().hideLiga();
-                    timesAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, timesArray);
+                    timesAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, timesArray);
                     timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     getViewState().setQuantidadeTeamAdapter(timesAdapter);
-                }else if(formato != null && formato.equals(context.getString(R.string.liga))) {
+                } else if (formato != null && formato.equals(context.getString(R.string.liga))) {
                     getViewState().showLiga();
                     getViewState().hideMatamata();
-                    timesAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, timesArray);
+                    timesAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, timesArray);
                     timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     getViewState().setQuantidadeTeamAdapter(timesAdapter);
-                } else if(formato != null && formato.equals(context.getString(R.string.torneio))) {
+                } else if (formato != null && formato.equals(context.getString(R.string.torneio))) {
                     getViewState().hideLiga();
                     getViewState().showMatamata();
-                    timesAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, timesArrayTorneio);
+                    timesAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, timesArrayTorneio);
                     timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     getViewState().setQuantidadeTeamAdapter(timesAdapter);
                 }
@@ -231,7 +231,7 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (!parent.getItemAtPosition(position).toString().equals(context.getString(R.string.idaevolta))) {
-                    if(parent.getItemAtPosition(position).toString().equals(context.getString(R.string.sim))) {
+                    if (parent.getItemAtPosition(position).toString().equals(context.getString(R.string.sim))) {
                         idaEVolta = 1;
                     } else {
                         idaEVolta = 0;
@@ -253,23 +253,23 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
     }
 
     private void setAdapters() {
-        formatoAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, formatoArray);
+        formatoAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, formatoArray);
         formatoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         getViewState().setFormatoAdapter(formatoAdapter);
 
-        timesAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, timesArray);
+        timesAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, timesArray);
         timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         getViewState().setQuantidadeTeamAdapter(timesAdapter);
 
-        chaveAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, chaveArray);
+        chaveAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, chaveArray);
         chaveAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         getViewState().setQuantidadePartidasChaveAdapter(chaveAdapter);
 
-        finalAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, finalArray);
+        finalAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, finalArray);
         finalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         getViewState().setQuantidadePartidasFinalAdapter(finalAdapter);
 
-        idaEVoltaAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, idaEVoltaArray);
+        idaEVoltaAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, idaEVoltaArray);
         idaEVoltaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         getViewState().setIdaEVoltaAdapter(idaEVoltaAdapter);
     }
@@ -287,7 +287,7 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
                 context.getString(R.string.nao)));
     }
 
-    public void addPhoto(){
+    public void addPhoto() {
         Utils.showDialogCameraGallery((Activity) context);
     }
 

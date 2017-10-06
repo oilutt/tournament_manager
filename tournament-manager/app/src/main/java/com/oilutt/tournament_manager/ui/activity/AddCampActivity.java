@@ -67,8 +67,9 @@ public class AddCampActivity extends BaseActivity implements AddCampCallback, Da
 
     @InjectPresenter
     AddCampPresenter presenter;
+
     @ProvidePresenter
-    AddCampPresenter createPresenter(){
+    AddCampPresenter createPresenter() {
         return new AddCampPresenter(this);
     }
 
@@ -94,14 +95,14 @@ public class AddCampActivity extends BaseActivity implements AddCampCallback, Da
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        dataInicioCamp.setText((dayOfMonth < 10 ? "0" + dayOfMonth : dayOfMonth)  + "/"
-                + ((month+1) < 10 ? "0" + (month+1) : month) + "/"
+        dataInicioCamp.setText((dayOfMonth < 10 ? "0" + dayOfMonth : dayOfMonth) + "/"
+                + ((month + 1) < 10 ? "0" + (month + 1) : month) + "/"
                 + year);
     }
 
-    public void setDateListener(){
+    public void setDateListener() {
         dataInicioCamp.setOnFocusChangeListener((v, hasFocus) -> {
-            if(hasFocus)
+            if (hasFocus)
                 showDate();
         });
     }
@@ -119,11 +120,11 @@ public class AddCampActivity extends BaseActivity implements AddCampCallback, Da
     }
 
     @OnClick(R.id.btn_continuar)
-    public void clickOnContinuar(){
+    public void clickOnContinuar() {
         presenter.clickSave();
     }
 
-    public void showDate(){
+    public void showDate() {
         datePickerDialog.setOnDismissListener(dialog -> {
             hidenKeyBoard();
             layoutMataMata.requestFocus();
@@ -132,7 +133,7 @@ public class AddCampActivity extends BaseActivity implements AddCampCallback, Da
     }
 
     @OnClick(R.id.add_photo)
-    public void clickAddPhoto(){
+    public void clickAddPhoto() {
         presenter.addPhoto();
     }
 
@@ -212,7 +213,7 @@ public class AddCampActivity extends BaseActivity implements AddCampCallback, Da
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
         finish();
     }

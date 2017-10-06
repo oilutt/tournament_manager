@@ -14,16 +14,16 @@ public class MataMataFragmentPresenter extends MvpPresenter<MataMataFragmentCall
     private PartidaMatamataAdapter adapter;
     private Fase fase;
 
-    public MataMataFragmentPresenter(){
+    public MataMataFragmentPresenter() {
         getViewState().init();
     }
 
-    public void setFase(Fase fase){
+    public void setFase(Fase fase) {
         this.fase = fase;
         setAdapter();
     }
 
-    private void setAdapter(){
+    private void setAdapter() {
         adapter = new PartidaMatamataAdapter(fase.getPartidas());
         getViewState().setAdapter(adapter);
     }

@@ -2,11 +2,12 @@
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
-    android:elevation="2dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:titleTextColor="@color/colorPrimaryText"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:elevation="2dp"
+    app:fontPath="@string/monstserrat_regular"
+    app:titleTextColor="@color/colorPrimaryText">
 
     <ImageView
         android:id="@+id/ic_toolbar_logout"
@@ -15,5 +16,5 @@
         android:layout_gravity="end"
         android:paddingRight="@dimen/margin_19"
         android:paddingTop="@dimen/margin_6"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </android.support.v7.widget.Toolbar>

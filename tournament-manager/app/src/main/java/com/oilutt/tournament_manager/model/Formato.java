@@ -15,7 +15,7 @@ import java.util.Map;
  */
 
 @IgnoreExtraProperties
-public class Formato implements Serializable, Parcelable{
+public class Formato implements Serializable, Parcelable {
 
     private int id;
     private String nome;
@@ -26,11 +26,11 @@ public class Formato implements Serializable, Parcelable{
     private List<Fase> fases;
     private List<Grupo> grupos;
 
-    public Formato(){
+    public Formato() {
 
     }
 
-    public Formato(String nome, int quantidadePartidasChave, int quantidadePartidasFinal, int idaVolta){
+    public Formato(String nome, int quantidadePartidasChave, int quantidadePartidasFinal, int idaVolta) {
         this.nome = nome;
         this.quantidadePartidasChave = quantidadePartidasChave;
         this.quantidadePartidasFinal = quantidadePartidasFinal;

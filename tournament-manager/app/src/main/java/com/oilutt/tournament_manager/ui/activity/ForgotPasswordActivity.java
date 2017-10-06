@@ -28,8 +28,9 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
 
     @InjectPresenter
     ForgotPasswordPresenter presenter;
+
     @ProvidePresenter
-    ForgotPasswordPresenter createPresenter(){
+    ForgotPasswordPresenter createPresenter() {
         return new ForgotPasswordPresenter(this);
     }
 
@@ -42,7 +43,7 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
     }
 
     @OnClick(R.id.btn_reset_password)
-    public void clickReset(){
+    public void clickReset() {
         presenter.clickReset();
     }
 

@@ -19,7 +19,8 @@ public class Rodada implements Serializable, Parcelable {
     private List<Partida> partidas;
     private boolean completa = false;
 
-    public Rodada(){}
+    public Rodada() {
+    }
 
     public int getNumero() {
         return numero;

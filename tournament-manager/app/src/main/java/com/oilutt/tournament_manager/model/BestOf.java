@@ -23,7 +23,8 @@ public class BestOf implements Serializable, Parcelable {
     private String valorTime1;
     private String valorTime2;
 
-    public BestOf(){}
+    public BestOf() {
+    }
 
     public int getQuantity() {
         return quantity;

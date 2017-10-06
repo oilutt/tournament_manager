@@ -9,11 +9,15 @@ import com.arellomobile.mvp.MvpView;
 public interface LoginCallback extends MvpView {
 
     void showProgress();
+
     void hideProgress();
 
     void showSnack(int message);
+
     void openActivity(Class<?> openActivity);
+
     void openSignUp();
+
     void openMain();
 
     void onObserverEdts();

@@ -39,7 +39,7 @@ public class TournamentManagerApp extends Application {
         configFonts();
     }
 
-    private void initFirebase(){
+    private void initFirebase() {
         database = FirebaseDatabase.getInstance().getReference();
     }
 

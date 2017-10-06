@@ -4,9 +4,9 @@
     android:id="@+id/layoutLiga"
     android:layout_width="match_parent"
     android:layout_height="32dp"
+    android:background="@color/colorPrimaryLight"
     android:gravity="center"
-    android:orientation="vertical"
-    android:background="@color/colorPrimaryLight">
+    android:orientation="vertical">
 
     <android.support.percent.PercentRelativeLayout
         android:id="@+id/layout"
@@ -26,8 +26,8 @@
             style="@style/Text10MontserratRegular"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/posicao"
-            android:maxLines="1"
             android:ellipsize="end"
+            android:maxLines="1"
             android:text="Equipe"
             app:layout_widthPercent="39%" />
 
@@ -36,9 +36,9 @@
             style="@style/Text10MontserratBold"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/nomeTime"
-            android:maxLines="1"
             android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             android:text="P"
             app:layout_widthPercent="8%" />
 
@@ -47,9 +47,9 @@
             style="@style/Text10MontserratRegular"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/pontos"
-            android:maxLines="1"
             android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             android:text="J"
             app:layout_widthPercent="8%" />
 
@@ -58,9 +58,9 @@
             style="@style/Text10MontserratRegular"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/jogos"
-            android:maxLines="1"
             android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             android:text="V"
             app:layout_widthPercent="8%" />
 
@@ -69,9 +69,9 @@
             style="@style/Text10MontserratRegular"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/vitorias"
-            android:maxLines="1"
             android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             android:text="E"
             app:layout_widthPercent="8%" />
 
@@ -80,9 +80,9 @@
             style="@style/Text10MontserratRegular"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/empates"
-            android:maxLines="1"
             android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             android:text="D"
             app:layout_widthPercent="8%" />
 
@@ -91,9 +91,9 @@
             style="@style/Text10MontserratRegular"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/derrotas"
-            android:maxLines="1"
             android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             android:text="GF"
             app:layout_widthPercent="8%" />
 
@@ -101,10 +101,10 @@
             android:id="@+id/golsSofridos"
             style="@style/Text10MontserratRegular"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:ellipsize="end"
             android:layout_toRightOf="@+id/golsFeitos"
+            android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             android:text="GS"
             app:layout_widthPercent="8%" />
 

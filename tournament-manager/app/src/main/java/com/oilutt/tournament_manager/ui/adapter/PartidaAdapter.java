@@ -28,7 +28,7 @@ public class PartidaAdapter extends RecyclerView.Adapter<PartidaAdapter.PartidaH
     private Context context;
     private int impar;
 
-    public PartidaAdapter(List<Partida> list, int impar){
+    public PartidaAdapter(List<Partida> list, int impar) {
         this.list = list;
         this.impar = impar;
     }
@@ -45,14 +45,14 @@ public class PartidaAdapter extends RecyclerView.Adapter<PartidaAdapter.PartidaH
         Partida partida = list.get(position);
         holder.nomeTimeCasa.setText(partida.getTime1());
         holder.nomeTimeFora.setText(partida.getTime2());
-        if(partida.getValorTime1()!= null) {
+        if (partida.getValorTime1() != null) {
             holder.golsTimeCasa.setText(partida.getValorTime1());
             holder.golsTimeFora.setText(partida.getValorTime2());
         } else {
             holder.golsTimeCasa.setVisibility(View.INVISIBLE);
             holder.golsTimeFora.setVisibility(View.INVISIBLE);
         }
-        if(impar == 0) {
+        if (impar == 0) {
             if (position % 2 == 1) {
                 holder.layout.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryLight2));
             }
@@ -68,7 +68,7 @@ public class PartidaAdapter extends RecyclerView.Adapter<PartidaAdapter.PartidaH
         return list.size();
     }
 
-    public void setData(List<Partida> list){
+    public void setData(List<Partida> list) {
         this.list = list;
         notifyDataSetChanged();
     }

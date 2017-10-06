@@ -21,7 +21,7 @@ public class Partida implements Serializable, Parcelable {
     private String valorTime2;
     private String dataPartida;
 
-    public Partida(){
+    public Partida() {
 
     }
 

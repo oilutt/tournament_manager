@@ -20,12 +20,12 @@ public class Constants {
 
     public static final String PREFERENCES_KEY = "APP_PREFERENCES";
 
-    public static final class Urls{
+    public static final class Urls {
         public static final String BASE_URL = "http://apihmg.bancodoc.com.br/api/";
         public static final String TOKEN = "authtoken";
     }
 
-    public static final class HEADER{
+    public static final class HEADER {
         public static final String CONTENT_TYPE = "Content-Type";
         public static final String AUTHORIZATION = "Authorization";
         public static final String APPLICATION_JSON = "application/json";

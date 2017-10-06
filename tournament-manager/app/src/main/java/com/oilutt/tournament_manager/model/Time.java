@@ -25,11 +25,11 @@ public class Time implements Serializable, Parcelable {
     private int golsSofridos;
     private int posicao;
 
-    public Time(){
+    public Time() {
 
     }
 
-    public Time(String nome, int id, int posicao){
+    public Time(String nome, int id, int posicao) {
         this.nome = nome;
         this.id = id;
         this.posicao = posicao;

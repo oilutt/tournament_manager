@@ -26,12 +26,12 @@ import butterknife.ButterKnife;
  * Created by oilut on 25/08/2017.
  */
 
-public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder>{
+public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder> {
 
     private List<Campeonato> list = new ArrayList<>();
     Activity activity;
 
-    public CampAdapter(Activity context){
+    public CampAdapter(Activity context) {
         this.activity = context;
     }
 
@@ -46,15 +46,15 @@ public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder>{
         Campeonato camp = list.get(position);
         holder.tvCampNome.setText(camp.getNome());
         holder.tvDescricao.setText(camp.getDescricao() != null ? camp.getDescricao() : "");
-        if(camp.getFoto() != null)
+        if (camp.getFoto() != null)
             Glide.with(activity).load(Base64.decode(camp.getFoto(), Base64.DEFAULT)).into(holder.imageCamp);
-        if(camp.getStatus() == 1) {
+        if (camp.getStatus() == 1) {
             holder.tvCampStatus.setText(R.string.aberto);
             holder.tvCampStatus.setTextColor(activity.getResources().getColor(R.color.jungle_green));
-        }else if(camp.getStatus() == 2) {
+        } else if (camp.getStatus() == 2) {
             holder.tvCampStatus.setText(R.string.em_andamento);
             holder.tvCampStatus.setTextColor(activity.getResources().getColor(R.color.mango));
-        }else {
+        } else {
             holder.tvCampStatus.setText(R.string.concluido);
             holder.tvCampStatus.setTextColor(activity.getResources().getColor(R.color.red));
         }
@@ -70,7 +70,7 @@ public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder>{
         return list.size();
     }
 
-    public void setData(List<Campeonato> list){
+    public void setData(List<Campeonato> list) {
         this.list = list;
         notifyDataSetChanged();
     }

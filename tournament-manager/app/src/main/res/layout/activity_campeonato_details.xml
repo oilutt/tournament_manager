@@ -48,8 +48,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/margin_15">
+                android:layout_marginBottom="@dimen/margin_15"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/Text14MontserratBold"
@@ -68,8 +68,8 @@
                 android:id="@+id/partidas_chave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/margin_15">
+                android:layout_marginBottom="@dimen/margin_15"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/Text14MontserratBold"
@@ -88,8 +88,8 @@
                 android:id="@+id/partidas_final"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/margin_15">
+                android:layout_marginBottom="@dimen/margin_15"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/Text14MontserratBold"
@@ -108,8 +108,8 @@
                 android:id="@+id/ida_e_volta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/margin_15">
+                android:layout_marginBottom="@dimen/margin_15"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/Text14MontserratBold"
@@ -127,8 +127,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/margin_15">
+                android:layout_marginBottom="@dimen/margin_15"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/Text14MontserratBold"
@@ -149,15 +149,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingRight="@dimen/margin_10"
+            android:orientation="vertical"
             android:paddingLeft="@dimen/margin_10"
-            android:orientation="vertical">
+            android:paddingRight="@dimen/margin_10">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/margin_15">
+                android:layout_marginBottom="@dimen/margin_15"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/Text14MontserratBold"
@@ -175,8 +175,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/margin_15">
+                android:layout_marginBottom="@dimen/margin_15"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/Text14MontserratBold"
@@ -194,8 +194,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/margin_15">
+                android:layout_marginBottom="@dimen/margin_15"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/Text14MontserratBold"
@@ -217,6 +217,6 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_times"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

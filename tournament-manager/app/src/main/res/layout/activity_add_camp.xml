@@ -10,22 +10,22 @@
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:focusable="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryLight"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/toolbar"
         android:layout_marginBottom="@dimen/margin_55"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:background="@color/colorPrimaryLight"
+        android:focusable="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:animateLayoutChanges="true"
-            android:focusableInTouchMode="true"
             android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
             android:padding="@dimen/margin_15">
 
             <LinearLayout
@@ -40,19 +40,19 @@
                     android:id="@+id/foto_camp"
                     android:layout_width="@dimen/margin_90"
                     android:layout_height="@dimen/margin_90"
+                    android:layout_marginBottom="@dimen/margin_15"
                     android:layout_marginLeft="@dimen/margin_15"
                     android:layout_marginRight="@dimen/margin_15"
                     android:layout_marginTop="@dimen/margin_15"
-                    android:layout_marginBottom="@dimen/margin_15"
-                    android:tint="@color/colorPrimaryText2"
-                    android:src="@drawable/shield_83973" />
+                    android:src="@drawable/shield_83973"
+                    android:tint="@color/colorPrimaryText2" />
 
                 <TextView
                     android:id="@+id/txt_add_foto"
                     style="@style/Text12MontserratRegular"
-                    android:textColor="@color/colorPrimaryText2"
                     android:layout_marginBottom="@dimen/margin_15"
-                    android:text="@string/adicionar_brasao" />
+                    android:text="@string/adicionar_brasao"
+                    android:textColor="@color/colorPrimaryText2" />
 
             </LinearLayout>
 
@@ -60,60 +60,66 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10"
-                android:textColorHint="@color/colorPrimaryText2">
+                android:textColorHint="@color/colorPrimaryText2"
+                app:fontPath="@string/monstserrat_regular">
 
                 <EditText
                     android:id="@+id/nome_camp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryLightEdt"
                     android:hint="@string/nome_camp"
                     android:imeOptions="actionNext"
                     android:inputType="textCapSentences"
-                    android:textColorHighlight="@color/colorPrimaryLightEdt"
-                    android:textColorLink="@color/colorPrimaryLightEdt"
-                    android:backgroundTint="@color/colorPrimaryLightEdt"
                     android:textColor="@color/colorPrimaryText"
-                    android:textColorHint="@color/colorPrimaryText2" />
+                    android:textColorHighlight="@color/colorPrimaryLightEdt"
+                    android:textColorHint="@color/colorPrimaryText2"
+                    android:textColorLink="@color/colorPrimaryLightEdt"
+                    app:fontPath="@string/monstserrat_regular" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10"
-                android:textColorHint="@color/colorPrimaryText2">
+                android:textColorHint="@color/colorPrimaryText2"
+                app:fontPath="@string/monstserrat_regular">
 
                 <EditText
                     android:id="@+id/descricao_camp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryLightEdt"
                     android:hint="@string/descricao_camp"
                     android:imeOptions="actionDone"
                     android:inputType="textCapSentences|textMultiLine"
-                    android:textColorHighlight="@color/colorPrimaryLightEdt"
-                    android:textColorLink="@color/colorPrimaryLightEdt"
-                    android:backgroundTint="@color/colorPrimaryLightEdt"
                     android:textColor="@color/colorPrimaryText"
-                    android:textColorHint="@color/colorPrimaryText2" />
+                    android:textColorHighlight="@color/colorPrimaryLightEdt"
+                    android:textColorHint="@color/colorPrimaryText2"
+                    android:textColorLink="@color/colorPrimaryLightEdt"
+                    app:fontPath="@string/monstserrat_regular" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10"
-                android:textColorHint="@color/colorPrimaryText2">
+                android:textColorHint="@color/colorPrimaryText2"
+                app:fontPath="@string/monstserrat_regular">
 
                 <EditText
                     android:id="@+id/data_inicio_camp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryLightEdt"
                     android:hint="@string/data_inicio_camp"
                     android:imeOptions="actionNext"
                     android:inputType="textCapSentences"
-                    android:textColorHighlight="@color/colorPrimaryLightEdt"
-                    android:textColorLink="@color/colorPrimaryLightEdt"
-                    android:backgroundTint="@color/colorPrimaryLightEdt"
                     android:textColor="@color/colorPrimaryText"
-                    android:textColorHint="@color/colorPrimaryText2" />
+                    android:textColorHighlight="@color/colorPrimaryLightEdt"
+                    android:textColorHint="@color/colorPrimaryText2"
+                    android:textColorLink="@color/colorPrimaryLightEdt"
+                    app:fontPath="@string/monstserrat_regular" />
             </android.support.design.widget.TextInputLayout>
 
             <fr.ganfra.materialspinner.MaterialSpinner
@@ -123,6 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10"
                 android:spinnerMode="dropdown"
+                app:fontPath="@string/monstserrat_regular"
                 app:ms_arrowColor="@color/colorPrimaryLightEdt"
                 app:ms_arrowSize="@dimen/margin_15"
                 app:ms_baseColor="@color/colorPrimaryLightEdt"
@@ -145,6 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
+                    app:fontPath="@string/monstserrat_regular"
                     app:ms_arrowColor="@color/colorPrimaryLightEdt"
                     app:ms_arrowSize="@dimen/margin_15"
                     app:ms_baseColor="@color/colorPrimaryLightEdt"
@@ -172,6 +180,7 @@
                     android:layout_marginRight="@dimen/margin_5"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
+                    app:fontPath="@string/monstserrat_regular"
                     app:ms_arrowColor="@color/colorPrimaryLightEdt"
                     app:ms_arrowSize="@dimen/margin_15"
                     app:ms_baseColor="@color/colorPrimaryLightEdt"
@@ -189,6 +198,7 @@
                     android:layout_marginLeft="@dimen/margin_5"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
+                    app:fontPath="@string/monstserrat_regular"
                     app:ms_arrowColor="@color/colorPrimaryLightEdt"
                     app:ms_arrowSize="@dimen/margin_15"
                     app:ms_baseColor="@color/colorPrimaryLightEdt"
@@ -213,9 +223,9 @@
                     style="@style/mySpinnerItemStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/margin_5"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
+                    app:fontPath="@string/monstserrat_regular"
                     app:ms_arrowColor="@color/colorPrimaryLightEdt"
                     app:ms_arrowSize="@dimen/margin_15"
                     app:ms_baseColor="@color/colorPrimaryLightEdt"
@@ -234,8 +244,8 @@
     <Button
         android:id="@+id/btn_continuar"
         style="@style/BtnSalvar"
-        android:layout_margin="@dimen/margin_10"
         android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/margin_10"
         android:text="@string/continuar" />
 
 </RelativeLayout>

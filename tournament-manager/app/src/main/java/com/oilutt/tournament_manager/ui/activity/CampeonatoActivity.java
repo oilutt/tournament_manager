@@ -29,8 +29,9 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
 
     @InjectPresenter
     CampeonatoPresenter presenter;
+
     @ProvidePresenter
-    CampeonatoPresenter createPresenter(){
+    CampeonatoPresenter createPresenter() {
         return new CampeonatoPresenter(this);
     }
 
@@ -43,8 +44,8 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
         getBundle();
     }
 
-    private void getBundle(){
-        if(getIntent().hasExtra("campeonatoId")){
+    private void getBundle() {
+        if (getIntent().hasExtra("campeonatoId")) {
             presenter.getCampeonatoId(getIntent().getStringExtra("campeonatoId"));
         }
     }

@@ -30,12 +30,12 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamLi
     private int size;
     Context context;
 
-    public TeamListAdapter(int size, Context context){
+    public TeamListAdapter(int size, Context context) {
         this.context = context;
         this.size = size;
     }
 
-    public TeamListAdapter (List<String> list, int size, Context context){
+    public TeamListAdapter(List<String> list, int size, Context context) {
         this.context = context;
         this.size = size;
         this.list = list;
@@ -50,15 +50,15 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamLi
 
     @Override
     public void onBindViewHolder(TeamListHolder holder, int position) {
-        holder.inputLayout.setHint(Utils.formatString(context.getString(R.string.time_numero), String.valueOf(position+1)));
-        if(list.size() > 0 && list.get(position) != null) {
+        holder.inputLayout.setHint(Utils.formatString(context.getString(R.string.time_numero), String.valueOf(position + 1)));
+        if (list.size() > 0 && list.get(position) != null) {
             holder.nomeTime.setText(list.get(position));
         }
 
         holder.nomeTime.setOnFocusChangeListener((v, hasFocus) -> {
-            if(!hasFocus) {
-                if(!holder.nomeTime.getText().toString().equals("")) {
-                    if(list.size() > 0 && list.get(position) != null){
+            if (!hasFocus) {
+                if (!holder.nomeTime.getText().toString().equals("")) {
+                    if (list.size() > 0 && list.get(position) != null) {
                         list.set(position, holder.nomeTime.getText().toString());
                     } else {
                         list.add(position, holder.nomeTime.getText().toString());
@@ -68,9 +68,9 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamLi
         });
 
         holder.nomeTime.setOnEditorActionListener((v, actionId, event) -> {
-            if(actionId==EditorInfo.IME_ACTION_DONE || actionId==EditorInfo.IME_ACTION_NEXT){
-                if(!holder.nomeTime.getText().toString().equals("")) {
-                    if(list.size() > 0 && list.get(position) != null){
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
+                if (!holder.nomeTime.getText().toString().equals("")) {
+                    if (list.size() > 0 && list.get(position) != null) {
                         list.set(position, holder.nomeTime.getText().toString());
                     } else {
                         list.add(position, holder.nomeTime.getText().toString());
@@ -80,7 +80,7 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamLi
             return false;
         });
 
-        if(position == size -1) {
+        if (position == size - 1) {
             holder.nomeTime.setImeOptions(EditorInfo.IME_ACTION_DONE);
         }
     }
@@ -90,18 +90,18 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamLi
         return size;
     }
 
-    public void setData(List<String> list){
+    public void setData(List<String> list) {
         this.list = list;
         notifyDataSetChanged();
     }
 
-    public List<String> getData(){
-        return  list;
+    public List<String> getData() {
+        return list;
     }
 
-    private void updateList(){
-        for (int x = 0; x <= size; x++){
-            if(list.size() < x ){
+    private void updateList() {
+        for (int x = 0; x <= size; x++) {
+            if (list.size() < x) {
                 list.add("");
             }
         }

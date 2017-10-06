@@ -12,23 +12,23 @@ import java.io.Serializable;
  */
 
 @IgnoreExtraProperties
-public class User implements Serializable, Parcelable{
+public class User implements Serializable, Parcelable {
 
     private String id;
     private String nome;
     private String email;
 
-    public User(){
+    public User() {
 
     }
 
-    public User(String nome, String email, String id){
+    public User(String nome, String email, String id) {
         this.nome = nome;
         this.email = email;
         this.id = id;
     }
 
-    public User(String email){
+    public User(String email) {
         this.email = email;
     }
 

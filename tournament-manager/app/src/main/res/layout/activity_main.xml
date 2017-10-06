@@ -3,46 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorPrimaryLight"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
+    android:orientation="vertical"
     tools:context="com.oilutt.tournament_manager.ui.activity.MainActivity">
 
     <include layout="@layout/toolbar" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
-        android:visibility="invisible"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
         android:background="@color/colorPrimaryLight"
-        android:layout_height="match_parent" />
+        android:visibility="invisible" />
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/progress"
         android:layout_width="@dimen/margin_50"
         android:layout_height="@dimen/margin_50"
         android:layout_centerInParent="true"
-        app:indicatorName="BallSpinFadeLoaderIndicator"
-        app:indicatorColor="@color/colorAccent" />
+        app:fontPath="@string/monstserrat_regular"
+        app:indicatorColor="@color/colorAccent"
+        app:indicatorName="BallSpinFadeLoaderIndicator" />
 
     <TextView
         android:id="@+id/text_no_data"
         style="@style/Text16MontserratRegular"
-        android:padding="@dimen/margin_10"
-        android:lineSpacingExtra="@dimen/margin_5"
         android:layout_centerInParent="true"
-        android:visibility="invisible"
-        android:text="@string/text_no_data"/>
+        android:lineSpacingExtra="@dimen/margin_5"
+        android:padding="@dimen/margin_10"
+        android:text="@string/text_no_data"
+        android:visibility="invisible" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:fabSize="normal"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_blackdp" />
+        android:src="@drawable/ic_add_blackdp"
+        app:fabSize="normal" />
 
 </RelativeLayout>

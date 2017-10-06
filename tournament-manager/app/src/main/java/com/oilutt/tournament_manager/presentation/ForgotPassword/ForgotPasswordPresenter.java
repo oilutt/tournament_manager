@@ -19,7 +19,7 @@ public class ForgotPasswordPresenter extends MvpPresenter<ForgotPasswordCallback
     private String email;
     private FirebaseAuth auth;
 
-    public ForgotPasswordPresenter(Context context){
+    public ForgotPasswordPresenter(Context context) {
         this.context = context;
         auth = FirebaseAuth.getInstance();
         getViewState().onObserverEdts();
@@ -29,8 +29,8 @@ public class ForgotPasswordPresenter extends MvpPresenter<ForgotPasswordCallback
         this.email = email.toString();
     }
 
-    public void clickReset(){
-        if(verifyInput()) {
+    public void clickReset() {
+        if (verifyInput()) {
             getViewState().showProgress();
             auth.sendPasswordResetEmail(email)
                     .addOnCompleteListener(task -> {
@@ -44,7 +44,7 @@ public class ForgotPasswordPresenter extends MvpPresenter<ForgotPasswordCallback
         }
     }
 
-    private boolean verifyInput(){
+    private boolean verifyInput() {
         boolean status = true;
         if (TextUtils.isEmpty(email)) {
             getViewState().showSnack(R.string.erro_email);

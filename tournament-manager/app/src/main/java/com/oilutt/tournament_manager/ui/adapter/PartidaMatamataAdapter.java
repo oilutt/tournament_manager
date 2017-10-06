@@ -27,8 +27,8 @@ public class PartidaMatamataAdapter extends RecyclerView.Adapter<PartidaMatamata
     private List<BestOf> list = new ArrayList<>();
     Context context;
 
-    public PartidaMatamataAdapter(List<BestOf> list){
-        if(list!= null)
+    public PartidaMatamataAdapter(List<BestOf> list) {
+        if (list != null)
             this.list = list;
         else
             this.list = new ArrayList<>();
@@ -46,7 +46,7 @@ public class PartidaMatamataAdapter extends RecyclerView.Adapter<PartidaMatamata
         BestOf partida = list.get(position);
         holder.nomeTimeCasa.setText(partida.getTime1());
         holder.nomeTimeFora.setText(partida.getTime2());
-        if(partida.getValorTime1()!= null) {
+        if (partida.getValorTime1() != null) {
             holder.partidasTime1.setText(partida.getValorTime1());
             holder.partidasTime2.setText(partida.getValorTime2());
         } else {

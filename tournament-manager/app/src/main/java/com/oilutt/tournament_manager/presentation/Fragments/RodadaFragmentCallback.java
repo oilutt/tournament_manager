@@ -10,5 +10,6 @@ import com.oilutt.tournament_manager.ui.adapter.PartidaAdapter;
 public interface RodadaFragmentCallback extends MvpView {
 
     void setAdapter(PartidaAdapter adapter);
+
     void init();
 }

@@ -19,7 +19,7 @@ public class PartidaBO implements Serializable, Parcelable {
     private String valorTime2;
     private String dataPartida;
 
-    public PartidaBO(){
+    public PartidaBO() {
 
     }
 

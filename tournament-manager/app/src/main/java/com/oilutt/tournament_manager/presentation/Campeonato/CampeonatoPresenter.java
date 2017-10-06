@@ -40,19 +40,19 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
     private TabAdapter adapter;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
-    private DatabaseReference campEndPoint =  FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid() + "/campeonatos");
+    private DatabaseReference campEndPoint = FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid() + "/campeonatos");
 
-    public CampeonatoPresenter(Context context){
+    public CampeonatoPresenter(Context context) {
         this.context = context;
         getViewState().showProgress();
     }
 
-    public void getCampeonatoId(String campeonatoId){
+    public void getCampeonatoId(String campeonatoId) {
         this.campeonatoId = campeonatoId;
         getCampeonato();
     }
 
-    private void getCampeonato(){
+    private void getCampeonato() {
         campEndPoint.child(campeonatoId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -70,19 +70,19 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
         });
     }
 
-    private void setTitle(){
+    private void setTitle() {
         getViewState().setUpToolbarText(campeonato.getNome(), true);
     }
 
-    private void setAdapter(){
+    private void setAdapter() {
         Bundle extras = new Bundle();
         extras.putParcelable("campeonato", campeonato);
-        if(campeonato.getFormato().getNome().equals(context.getString(R.string.liga))){
+        if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
             List<Fragment> fragmentList = new ArrayList<>();
             TabelaFragment fragment = TabelaFragment.newInstance();
             fragment.setArguments(extras);
             fragmentList.add(fragment);
-            for(int x = 0; x < campeonato.getFormato().getRodadas().size(); x++) {
+            for (int x = 0; x < campeonato.getFormato().getRodadas().size(); x++) {
                 Bundle extras2 = new Bundle();
                 extras2.putParcelable("rodada", campeonato.getFormato().getRodadas().get(x));
                 extras2.putInt("impar", x % 2);
@@ -90,27 +90,27 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
                 rodadaFragment.setArguments(extras2);
                 fragmentList.add(rodadaFragment);
             }
-            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity)context).getSupportFragmentManager(),campeonato);
+            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato);
             getViewState().setAdapterTab(adapter);
-        } else if(campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))){
+        } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
             List<Fragment> fragmentList = new ArrayList<>();
-            for(int x = campeonato.getFormato().getFases().size() - 1; x >= 0 ; x--) {
+            for (int x = campeonato.getFormato().getFases().size() - 1; x >= 0; x--) {
                 Bundle extras2 = new Bundle();
                 extras2.putParcelable("fase", campeonato.getFormato().getFases().get(x));
                 MataMataFragment fragment = MataMataFragment.newInstance();
                 fragment.setArguments(extras2);
                 fragmentList.add(fragment);
             }
-            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity)context).getSupportFragmentManager(), campeonato);
+            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato);
             getViewState().setAdapterTab(adapter);
         } else {
             List<Fragment> fragmentList = new ArrayList<>();
-            for (int x = 0; x < campeonato.getFormato().getGrupos().size(); x++){
+            for (int x = 0; x < campeonato.getFormato().getGrupos().size(); x++) {
                 TabelaFragment fragment = TabelaFragment.newInstance();
                 extras.putInt("grupo", x);
                 fragment.setArguments(extras);
                 fragmentList.add(fragment);
-                for(int y = 0; y < campeonato.getFormato().getGrupos().get(x).getRodadas().size(); y++) {
+                for (int y = 0; y < campeonato.getFormato().getGrupos().get(x).getRodadas().size(); y++) {
                     Bundle extras2 = new Bundle();
                     extras2.putParcelable("rodada", campeonato.getFormato().getGrupos().get(x).getRodadas().get(y));
                     extras2.putInt("impar", y % 2);
@@ -119,14 +119,14 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
                     fragmentList.add(rodadaFragment);
                 }
             }
-            for(int z = campeonato.getFormato().getFases().size() - 1; z >= 0 ; z--) {
+            for (int z = campeonato.getFormato().getFases().size() - 1; z >= 0; z--) {
                 Bundle extras2 = new Bundle();
                 extras2.putParcelable("fase", campeonato.getFormato().getFases().get(z));
                 MataMataFragment fragment = MataMataFragment.newInstance();
                 fragment.setArguments(extras2);
                 fragmentList.add(fragment);
             }
-            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity)context).getSupportFragmentManager(), campeonato);
+            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato);
             getViewState().setAdapterTab(adapter);
         }
     }

@@ -15,5 +15,6 @@ public interface CampeonatoCallback extends MvpView {
     void setAdapterTab(FragmentPagerAdapter adapter);
 
     void showProgress();
+
     void hideProgress();
 }

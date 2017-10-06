@@ -22,12 +22,12 @@ import butterknife.ButterKnife;
  * Created by Túlio on 17/09/2017.
  */
 
-public class TabelaAdapter extends RecyclerView.Adapter<TabelaAdapter.TabelaHolder>{
+public class TabelaAdapter extends RecyclerView.Adapter<TabelaAdapter.TabelaHolder> {
 
     private List<Time> list = new ArrayList<>();
     Context context;
 
-    public TabelaAdapter(List<Time> list){
+    public TabelaAdapter(List<Time> list) {
         this.list = list;
     }
 
@@ -42,7 +42,7 @@ public class TabelaAdapter extends RecyclerView.Adapter<TabelaAdapter.TabelaHold
     public void onBindViewHolder(TabelaHolder holder, int position) {
         Time time = list.get(position);
 
-        holder.posicao.setText(String.valueOf(position+1));
+        holder.posicao.setText(String.valueOf(position + 1));
         holder.nomeTime.setText(time.getNome());
         holder.pontos.setText(String.valueOf(time.getPontos()));
         holder.jogos.setText(String.valueOf(time.getJogos()));
@@ -51,7 +51,7 @@ public class TabelaAdapter extends RecyclerView.Adapter<TabelaAdapter.TabelaHold
         holder.derrotas.setText(String.valueOf(time.getDerrotas()));
         holder.golsFeitos.setText(String.valueOf(time.getGolsFeitos()));
         holder.golsSofridos.setText(String.valueOf(time.getGolsSofridos()));
-        if(position % 2 == 0){
+        if (position % 2 == 0) {
             holder.layout.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryLight2));
         }
     }
@@ -61,7 +61,7 @@ public class TabelaAdapter extends RecyclerView.Adapter<TabelaAdapter.TabelaHold
         return list.size();
     }
 
-    public void setData(List<Time> list){
+    public void setData(List<Time> list) {
         this.list = list;
         notifyDataSetChanged();
     }

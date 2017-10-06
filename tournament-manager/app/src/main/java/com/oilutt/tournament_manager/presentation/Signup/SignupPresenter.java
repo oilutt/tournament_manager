@@ -44,7 +44,7 @@ public class SignupPresenter extends MvpPresenter<SignupCallback> {
         if (verifyInputs()) {
             getViewState().showProgress();
             auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener((Activity)context, task -> {
+                    .addOnCompleteListener((Activity) context, task -> {
                         getViewState().hideProgress();
                         if (!task.isSuccessful()) {
                             getViewState().showSnack(R.string.erro_generic);

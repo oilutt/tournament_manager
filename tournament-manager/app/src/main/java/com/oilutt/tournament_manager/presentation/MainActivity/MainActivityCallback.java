@@ -10,6 +10,7 @@ import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
 public interface MainActivityCallback extends MvpView {
 
     void showPlaceHolder();
+
     void hidePlaceHolder();
 
     void setAdapter(CampAdapter adapter);

@@ -21,7 +21,7 @@ public class TabAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList;
     private Campeonato camp;
 
-    public TabAdapter(Context context, List<Fragment> fragmentList, FragmentManager fm, Campeonato camp){
+    public TabAdapter(Context context, List<Fragment> fragmentList, FragmentManager fm, Campeonato camp) {
         super(fm);
         this.fragmentList = fragmentList;
         this.context = context;
@@ -35,15 +35,15 @@ public class TabAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if(camp.getFormato().getNome().equals(context.getString(R.string.liga))){
-            switch (position){
+        if (camp.getFormato().getNome().equals(context.getString(R.string.liga))) {
+            switch (position) {
                 case 0:
                     return "Tabela";
                 default:
                     return "Rodada " + position;
             }
-        } else if (camp.getFormato().getNome().equals(context.getString(R.string.matamata))){
-            if(camp.getFormato().getFases().size() == 5) {
+        } else if (camp.getFormato().getNome().equals(context.getString(R.string.matamata))) {
+            if (camp.getFormato().getFases().size() == 5) {
                 if (position == 0)
                     return Utils.formatString(context.getString(R.string.fase_title), String.valueOf(position + 1));
                 else if (position == 1)
@@ -54,7 +54,7 @@ public class TabAdapter extends FragmentPagerAdapter {
                     return context.getString(R.string.semi);
                 else if (position == 4)
                     return context.getString(R.string.final_title);
-            } else if (camp.getFormato().getFases().size() == 4){
+            } else if (camp.getFormato().getFases().size() == 4) {
                 if (position == 0)
                     return context.getString(R.string.oitavas);
                 else if (position == 1)
@@ -63,14 +63,14 @@ public class TabAdapter extends FragmentPagerAdapter {
                     return context.getString(R.string.semi);
                 else if (position == 3)
                     return context.getString(R.string.final_title);
-            } else if (camp.getFormato().getFases().size() == 3){
+            } else if (camp.getFormato().getFases().size() == 3) {
                 if (position == 0)
                     return context.getString(R.string.quartas);
                 else if (position == 1)
                     return context.getString(R.string.semi);
                 else if (position == 2)
                     return context.getString(R.string.final_title);
-            } else if (camp.getFormato().getFases().size() == 2){
+            } else if (camp.getFormato().getFases().size() == 2) {
                 if (position == 0)
                     return context.getString(R.string.semi);
                 else if (position == 1)
@@ -81,33 +81,33 @@ public class TabAdapter extends FragmentPagerAdapter {
             }
         } else {
             int grupos = camp.getFormato().getGrupos().size();
-            if(position <= grupos*4-1){
-                if(position % 4 == 0){
+            if (position <= grupos * 4 - 1) {
+                if (position % 4 == 0) {
                     return "Grupo " + (position / 4 + 1);
                 } else {
                     return "Rodada " + (position % 4);
                 }
             } else {
-                if (camp.getFormato().getFases().size() == 4){
-                    if (position == grupos*4)
+                if (camp.getFormato().getFases().size() == 4) {
+                    if (position == grupos * 4)
                         return context.getString(R.string.oitavas);
-                    else if (position == grupos*4+1)
+                    else if (position == grupos * 4 + 1)
                         return context.getString(R.string.quartas);
-                    else if (position == grupos*4+2)
+                    else if (position == grupos * 4 + 2)
                         return context.getString(R.string.semi);
-                    else if (position == grupos*4+3)
+                    else if (position == grupos * 4 + 3)
                         return context.getString(R.string.final_title);
-                } else if (camp.getFormato().getFases().size() == 3){
-                    if (position == grupos*4)
+                } else if (camp.getFormato().getFases().size() == 3) {
+                    if (position == grupos * 4)
                         return context.getString(R.string.quartas);
-                    else if (position == grupos*4+1)
+                    else if (position == grupos * 4 + 1)
                         return context.getString(R.string.semi);
-                    else if (position == grupos*4+2)
+                    else if (position == grupos * 4 + 2)
                         return context.getString(R.string.final_title);
-                } else if (camp.getFormato().getFases().size() == 2){
-                    if (position == grupos*4)
+                } else if (camp.getFormato().getFases().size() == 2) {
+                    if (position == grupos * 4)
                         return context.getString(R.string.semi);
-                    else if (position == grupos*4+1)
+                    else if (position == grupos * 4 + 1)
                         return context.getString(R.string.final_title);
                 }
             }

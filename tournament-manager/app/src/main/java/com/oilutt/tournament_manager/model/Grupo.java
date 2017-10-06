@@ -18,7 +18,8 @@ public class Grupo implements Serializable, Parcelable {
     private List<Time> times;
     private List<Rodada> rodadas;
 
-    public Grupo(){}
+    public Grupo() {
+    }
 
     public int getNumero() {
         return numero;

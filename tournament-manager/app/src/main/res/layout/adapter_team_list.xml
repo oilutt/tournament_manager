@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/inputLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/margin_15"
     android:layout_marginRight="@dimen/margin_15"
     android:layout_marginTop="@dimen/margin_10"
-    android:textColorHint="@color/colorPrimaryText2">
+    android:textColorHint="@color/colorPrimaryText2"
+    app:fontPath="@string/monstserrat_regular">
 
     <EditText
         android:id="@+id/nome_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHighlight="@color/colorPrimaryLightEdt"
-        android:textColorLink="@color/colorPrimaryLightEdt"
         android:backgroundTint="@color/colorPrimaryLightEdt"
-        android:textColor="@color/colorPrimaryText"
-        android:textColorHint="@color/colorPrimaryText2"
         android:imeOptions="actionNext"
-        android:inputType="textCapSentences" />
+        android:inputType="textCapSentences"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHighlight="@color/colorPrimaryLightEdt"
+        android:textColorHint="@color/colorPrimaryText2"
+        android:textColorLink="@color/colorPrimaryLightEdt"
+        app:fontPath="@string/monstserrat_regular" />
 </android.support.design.widget.TextInputLayout>
