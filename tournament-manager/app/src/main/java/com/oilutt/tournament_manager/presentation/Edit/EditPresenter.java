@@ -184,10 +184,10 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                     time2.setGolsFeitos(time2.getGolsFeitos() + Integer.parseInt(partida.getValorTime2()));
                     time1.setGolsSofridos(time1.getGolsSofridos() + Integer.parseInt(partida.getValorTime2()));
                     time2.setGolsSofridos(time2.getGolsSofridos() + Integer.parseInt(partida.getValorTime1()));
+                    campeonato.getFormato().getRodadas().get(rodada).getPartidas().get(x).setJafoi(true);
                 }
                 campeonato.getTimes().set(y1, time1);
                 campeonato.getTimes().set(y2, time2);
-                campeonato.getFormato().getRodadas().get(rodada).getPartidas().get(x).setJafoi(true);
             }
         }
     }
