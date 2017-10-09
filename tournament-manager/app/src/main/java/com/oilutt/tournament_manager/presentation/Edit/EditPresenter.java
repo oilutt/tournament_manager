@@ -187,9 +187,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                 }
                 campeonato.getTimes().set(y1, time1);
                 campeonato.getTimes().set(y2, time2);
-                for (int z = 0; z < campeonato.getFormato().getRodadas().get(rodada).getPartidas().size(); z++){
-                    campeonato.getFormato().getRodadas().get(rodada).getPartidas().get(z).setJafoi(true);
-                }
+                campeonato.getFormato().getRodadas().get(rodada).getPartidas().get(x).setJafoi(true);
             }
         }
     }
