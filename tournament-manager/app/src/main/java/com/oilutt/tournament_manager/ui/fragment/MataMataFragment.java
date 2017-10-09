@@ -13,6 +13,7 @@ import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.presentation.Fragments.MataMataFragmentCallback;
 import com.oilutt.tournament_manager.presentation.Fragments.MataMataFragmentPresenter;
 import com.oilutt.tournament_manager.ui.adapter.PartidaMatamataAdapter;
+import com.oilutt.tournament_manager.ui.adapter.PartidaMatamataEditAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,11 +47,19 @@ public class MataMataFragment extends MvpAppCompatFragment implements MataMataFr
     @Override
     public void init() {
         presenter.attachView(this);
+        presenter.setEdit(getArguments().getBoolean("edit", false));
         presenter.setFase(getArguments().getParcelable("fase"));
     }
 
     @Override
     public void setAdapter(PartidaMatamataAdapter adapter) {
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+    }
+
+    @Override
+    public void setAdapter(PartidaMatamataEditAdapter adapter) {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);

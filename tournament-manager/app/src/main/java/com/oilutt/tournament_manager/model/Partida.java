@@ -20,6 +20,7 @@ public class Partida implements Serializable, Parcelable {
     private String valorTime1;
     private String valorTime2;
     private String dataPartida;
+    private boolean jafoi = false;
 
     public Partida() {
 
@@ -73,6 +74,13 @@ public class Partida implements Serializable, Parcelable {
         this.dataPartida = dataPartida;
     }
 
+    public boolean isJafoi() {
+        return jafoi;
+    }
+
+    public void setJafoi(boolean jafoi) {
+        this.jafoi = jafoi;
+    }
 
     @Override
     public int describeContents() {
@@ -87,6 +95,7 @@ public class Partida implements Serializable, Parcelable {
         dest.writeString(this.valorTime1);
         dest.writeString(this.valorTime2);
         dest.writeString(this.dataPartida);
+        dest.writeByte(this.jafoi ? (byte) 1 : (byte) 0);
     }
 
     protected Partida(Parcel in) {
@@ -96,6 +105,7 @@ public class Partida implements Serializable, Parcelable {
         this.valorTime1 = in.readString();
         this.valorTime2 = in.readString();
         this.dataPartida = in.readString();
+        this.jafoi = in.readByte() != 0;
     }
 
     public static final Creator<Partida> CREATOR = new Creator<Partida>() {

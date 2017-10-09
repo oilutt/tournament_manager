@@ -20,12 +20,14 @@ public class TabAdapter extends FragmentPagerAdapter {
     private Context context;
     private List<Fragment> fragmentList;
     private Campeonato camp;
+    private boolean edit;
 
-    public TabAdapter(Context context, List<Fragment> fragmentList, FragmentManager fm, Campeonato camp) {
+    public TabAdapter(Context context, List<Fragment> fragmentList, FragmentManager fm, Campeonato camp, boolean edit) {
         super(fm);
         this.fragmentList = fragmentList;
         this.context = context;
         this.camp = camp;
+        this.edit = edit;
     }
 
     @Override
@@ -36,11 +38,18 @@ public class TabAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         if (camp.getFormato().getNome().equals(context.getString(R.string.liga))) {
-            switch (position) {
-                case 0:
-                    return "Tabela";
-                default:
-                    return "Rodada " + position;
+            if (!edit) {
+                switch (position) {
+                    case 0:
+                        return "Tabela";
+                    default:
+                        return "Rodada " + position;
+                }
+            } else {
+                switch (position) {
+                    default:
+                        return "Rodada " + (position + 1);
+                }
             }
         } else if (camp.getFormato().getNome().equals(context.getString(R.string.matamata))) {
             if (camp.getFormato().getFases().size() == 5) {
@@ -81,38 +90,71 @@ public class TabAdapter extends FragmentPagerAdapter {
             }
         } else {
             int grupos = camp.getFormato().getGrupos().size();
-            if (position <= grupos * 4 - 1) {
-                if (position % 4 == 0) {
-                    return "Grupo " + (position / 4 + 1);
+            if(!edit) {
+                if (position <= grupos * 4 - 1) {
+                    if (position % 4 == 0) {
+                        return "Grupo " + (position / 4 + 1);
+                    } else {
+                        return "Rodada " + (position % 4);
+                    }
                 } else {
-                    return "Rodada " + (position % 4);
+                    if (camp.getFormato().getFases().size() == 4) {
+                        if (position == grupos * 4)
+                            return context.getString(R.string.oitavas);
+                        else if (position == grupos * 4 + 1)
+                            return context.getString(R.string.quartas);
+                        else if (position == grupos * 4 + 2)
+                            return context.getString(R.string.semi);
+                        else if (position == grupos * 4 + 3)
+                            return context.getString(R.string.final_title);
+                    } else if (camp.getFormato().getFases().size() == 3) {
+                        if (position == grupos * 4)
+                            return context.getString(R.string.quartas);
+                        else if (position == grupos * 4 + 1)
+                            return context.getString(R.string.semi);
+                        else if (position == grupos * 4 + 2)
+                            return context.getString(R.string.final_title);
+                    } else if (camp.getFormato().getFases().size() == 2) {
+                        if (position == grupos * 4)
+                            return context.getString(R.string.semi);
+                        else if (position == grupos * 4 + 1)
+                            return context.getString(R.string.final_title);
+                    }
                 }
             } else {
-                if (camp.getFormato().getFases().size() == 4) {
-                    if (position == grupos * 4)
-                        return context.getString(R.string.oitavas);
-                    else if (position == grupos * 4 + 1)
-                        return context.getString(R.string.quartas);
-                    else if (position == grupos * 4 + 2)
-                        return context.getString(R.string.semi);
-                    else if (position == grupos * 4 + 3)
-                        return context.getString(R.string.final_title);
-                } else if (camp.getFormato().getFases().size() == 3) {
-                    if (position == grupos * 4)
-                        return context.getString(R.string.quartas);
-                    else if (position == grupos * 4 + 1)
-                        return context.getString(R.string.semi);
-                    else if (position == grupos * 4 + 2)
-                        return context.getString(R.string.final_title);
-                } else if (camp.getFormato().getFases().size() == 2) {
-                    if (position == grupos * 4)
-                        return context.getString(R.string.semi);
-                    else if (position == grupos * 4 + 1)
-                        return context.getString(R.string.final_title);
+                if(position <= grupos * 3 -1) {
+                    return "Rodada " + ((position % 3) +1);
+                } else {
+                    if (camp.getFormato().getFases().size() == 4) {
+                        if (position == grupos * 3)
+                            return context.getString(R.string.oitavas);
+                        else if (position == grupos * 3 + 1)
+                            return context.getString(R.string.quartas);
+                        else if (position == grupos * 3 + 2)
+                            return context.getString(R.string.semi);
+                        else if (position == grupos * 3 + 3)
+                            return context.getString(R.string.final_title);
+                    } else if (camp.getFormato().getFases().size() == 3) {
+                        if (position == grupos * 3)
+                            return context.getString(R.string.quartas);
+                        else if (position == grupos * 3 + 1)
+                            return context.getString(R.string.semi);
+                        else if (position == grupos * 3 + 2)
+                            return context.getString(R.string.final_title);
+                    } else if (camp.getFormato().getFases().size() == 2) {
+                        if (position == grupos * 3)
+                            return context.getString(R.string.semi);
+                        else if (position == grupos * 3 + 1)
+                            return context.getString(R.string.final_title);
+                    }
                 }
             }
         }
         return "";
+    }
+
+    public List<Fragment> getFragmentList(){
+        return fragmentList;
     }
 
     @Override

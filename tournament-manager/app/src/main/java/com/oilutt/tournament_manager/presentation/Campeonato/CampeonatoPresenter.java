@@ -2,10 +2,12 @@ package com.oilutt.tournament_manager.presentation.Campeonato;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -17,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.oilutt.tournament_manager.R;
+import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.ui.adapter.TabAdapter;
 import com.oilutt.tournament_manager.ui.fragment.MataMataFragment;
@@ -35,9 +38,10 @@ import java.util.List;
 public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
 
     private Campeonato campeonato;
-    private String campeonatoId;
+    public String campeonatoId;
     private Context context;
     private TabAdapter adapter;
+    private Menu menu;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
     private DatabaseReference campEndPoint = FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid() + "/campeonatos");
@@ -70,6 +74,23 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
         });
     }
 
+    private void updateCamp() {
+        campEndPoint.child(campeonatoId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                getViewState().hideProgress();
+                campeonato = dataSnapshot.getValue(Campeonato.class);
+                setAdapter();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("getCAMPS", "Failed to read value.", error.toException());
+            }
+        });
+    }
+
     private void setTitle() {
         getViewState().setUpToolbarText(campeonato.getNome(), true);
     }
@@ -90,7 +111,7 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
                 rodadaFragment.setArguments(extras2);
                 fragmentList.add(rodadaFragment);
             }
-            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato);
+            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato, false);
             getViewState().setAdapterTab(adapter);
         } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
             List<Fragment> fragmentList = new ArrayList<>();
@@ -101,7 +122,7 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
                 fragment.setArguments(extras2);
                 fragmentList.add(fragment);
             }
-            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato);
+            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato, false);
             getViewState().setAdapterTab(adapter);
         } else {
             List<Fragment> fragmentList = new ArrayList<>();
@@ -126,8 +147,22 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
                 fragment.setArguments(extras2);
                 fragmentList.add(fragment);
             }
-            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato);
+            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato, false);
             getViewState().setAdapterTab(adapter);
+        }
+    }
+
+    public void onCreateOptionsMenu(Menu menu){
+        if(mFirebaseUser.getUid().equals(campeonato.getDono().getId())){
+            getViewState().manageMenuOptions(menu);
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == Constants.EDIT_CAMP) {
+            if (resultCode == Activity.RESULT_OK) {
+                updateCamp();
+            }
         }
     }
 }

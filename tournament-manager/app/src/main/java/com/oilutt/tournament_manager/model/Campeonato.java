@@ -50,6 +50,7 @@ public class Campeonato implements Serializable, Parcelable {
         result.put("status", status);
         result.put("descricao", descricao);
         result.put("foto", foto);
+        result.put("dono", dono.toMap());
 
         return result;
     }

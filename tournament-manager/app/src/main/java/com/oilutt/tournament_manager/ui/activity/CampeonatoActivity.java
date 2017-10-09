@@ -1,13 +1,18 @@
 package com.oilutt.tournament_manager.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.oilutt.tournament_manager.R;
+import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.presentation.Campeonato.CampeonatoCallback;
 import com.oilutt.tournament_manager.presentation.Campeonato.CampeonatoPresenter;
 import com.oilutt.tournament_manager.ui.dialog.DialogProgress;
@@ -49,6 +54,37 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
         if (getIntent().hasExtra("campeonatoId")) {
             presenter.getCampeonatoId(getIntent().getStringExtra("campeonatoId"));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        presenter.onCreateOptionsMenu(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.edit:
+                Intent intent = new Intent(this, EditActivity.class);
+                intent.putExtra("campeonatoId", presenter.campeonatoId);
+                startActivityForResult(intent, Constants.EDIT_CAMP);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        presenter.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void manageMenuOptions(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_camp, menu);
     }
 
     @Override

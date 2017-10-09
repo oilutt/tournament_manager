@@ -10,9 +10,13 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.oilutt.tournament_manager.R;
+import com.oilutt.tournament_manager.model.Partida;
 import com.oilutt.tournament_manager.presentation.Fragments.RodadaFragmentCallback;
 import com.oilutt.tournament_manager.presentation.Fragments.RodadaFragmentPresenter;
 import com.oilutt.tournament_manager.ui.adapter.PartidaAdapter;
+import com.oilutt.tournament_manager.ui.adapter.PartidaEditAdapter;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +52,7 @@ public class RodadaFragment extends MvpAppCompatFragment implements RodadaFragme
         presenter.attachView(this);
         presenter.setImpar(getArguments().getInt("impar"));
         presenter.setRodada(getArguments().getParcelable("rodada"));
+        presenter.setEdit(getArguments().getBoolean("edit", false));
     }
 
     @Override
@@ -55,5 +60,20 @@ public class RodadaFragment extends MvpAppCompatFragment implements RodadaFragme
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
+    }
+
+    @Override
+    public void setAdapter(PartidaEditAdapter adapter) {
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+    }
+
+    public List<Partida> getList(){
+        if(presenter != null && presenter.adapterEdit != null) {
+            return presenter.adapterEdit.getData();
+        } else {
+            return null;
+        }
     }
 }

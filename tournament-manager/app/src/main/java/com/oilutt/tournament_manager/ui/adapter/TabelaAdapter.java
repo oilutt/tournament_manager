@@ -13,6 +13,8 @@ import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.Time;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,7 +30,30 @@ public class TabelaAdapter extends RecyclerView.Adapter<TabelaAdapter.TabelaHold
     Context context;
 
     public TabelaAdapter(List<Time> list) {
-        this.list = list;
+        if(list != null)
+            this.list.addAll(list);
+        Collections.sort(this.list, (o1, o2) -> {
+            if(o1.getPontos() < o2.getPontos()){
+                return 1;
+            } else if (o1.getPontos() > o2.getPontos()){
+                return -1;
+            } else {
+                if(o1.getVitorias() < o2.getVitorias()){
+                    return 1;
+                } else if (o1.getVitorias() > o2.getVitorias()){
+                    return -1;
+                } else {
+                    if ((o1.getGolsFeitos() - o1.getGolsSofridos()) < (o2.getGolsFeitos() - o2.getGolsSofridos())){
+                        return 1;
+                    } else if ((o1.getGolsFeitos() - o1.getGolsSofridos()) > (o2.getGolsFeitos() - o2.getGolsSofridos())){
+                        return -1;
+                    }
+                    else{
+                        return o1.getNome().compareTo(o2.getNome());
+                    }
+                }
+            }
+        });
     }
 
     @Override

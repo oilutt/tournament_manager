@@ -2,6 +2,7 @@ package com.oilutt.tournament_manager.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
@@ -23,17 +24,15 @@ public class Time implements Serializable, Parcelable {
     private int derrotas;
     private int golsFeitos;
     private int golsSofridos;
-    private int posicao;
     private boolean campeao;
 
     public Time() {
 
     }
 
-    public Time(String nome, int id, int posicao) {
+    public Time(String nome, int id) {
         this.nome = nome;
         this.id = id;
-        this.posicao = posicao;
         jogos = 0;
         pontos = 0;
         vitorias = 0;
@@ -116,14 +115,6 @@ public class Time implements Serializable, Parcelable {
         this.golsSofridos = golsSofridos;
     }
 
-    public int getPosicao() {
-        return posicao;
-    }
-
-    public void setPosicao(int posicao) {
-        this.posicao = posicao;
-    }
-
     public boolean isCampeao() {
         return campeao;
     }
@@ -149,7 +140,6 @@ public class Time implements Serializable, Parcelable {
         dest.writeInt(this.derrotas);
         dest.writeInt(this.golsFeitos);
         dest.writeInt(this.golsSofridos);
-        dest.writeInt(this.posicao);
         dest.writeByte(this.campeao ? (byte) 1 : (byte) 0);
     }
 
@@ -163,7 +153,6 @@ public class Time implements Serializable, Parcelable {
         this.derrotas = in.readInt();
         this.golsFeitos = in.readInt();
         this.golsSofridos = in.readInt();
-        this.posicao = in.readInt();
         this.campeao = in.readByte() != 0;
     }
 

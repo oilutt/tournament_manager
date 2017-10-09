@@ -55,7 +55,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
         List<String> listNomes = adapter.getData();
         List<Time> listTimes = new ArrayList<>();
         for (int x = 0; x < listNomes.size(); x++) {
-            Time time = new Time(listNomes.get(x), x, x);
+            Time time = new Time(listNomes.get(x), x);
             listTimes.add(time);
         }
 
@@ -87,6 +87,9 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                     campeonato.getFormato().setRodadas(createSchedule(listTimes));
                 } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
                     campeonato.getFormato().setFases(createScheduleFases(campeonato.getTimes()));
+                } else {
+                    campeonato.getFormato().setGrupos(createScheduleTorneio(listTimes));
+                    campeonato.getFormato().setFases(createScheduleFasesTorneio(listTimes));
                 }
                 String key = campEndPoint.push().getKey();
 
@@ -135,7 +138,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
             fases = 4;
         for (int x = 0; x < fases; x++) {
             Fase fase = new Fase();
-            fase.setPartidas(createBestOf(x));
+            fase.setPartidas(createBestOfTorneio(x, fases));
             fase.setNumero(x);
             result.add(fase);
         }
@@ -170,6 +173,277 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
         return result;
     }
 
+    private List<BestOf> createBestOfTorneio(int fase, int fases) {
+        List<BestOf> result = new ArrayList<>();
+        String aux = "Vencedor partida";
+        if (fase == 0) {
+            BestOf bestOf = new BestOf();
+            bestOf.setId(0);
+            bestOf.setTime1("Vencedor partida 1");
+            bestOf.setTime2("Vencedor partida 2");
+            bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasFinal());
+            List<Partida> listPartidas = new ArrayList<>();
+            for (int x = 0; x < bestOf.getQuantity(); x++) {
+                Partida partida = new Partida();
+                partida.setId(x);
+                listPartidas.add(partida);
+            }
+            bestOf.setPartidas(listPartidas);
+            result.add(bestOf);
+        } else if (fase == 1) {
+            if(fase == fases -1){
+                BestOf bestOf = new BestOf();
+                bestOf.setId(0);
+                bestOf.setTime1("1º Grupo 1");
+                bestOf.setTime2("2º Grupo 2");
+                bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas = new ArrayList<>();
+                for (int y = 0; y < bestOf.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas.add(partida);
+                }
+                bestOf.setPartidas(listPartidas);
+                result.add(bestOf);
+
+                BestOf bestOf1 = new BestOf();
+                bestOf1.setId(1);
+                bestOf1.setTime1("1º Grupo 2");
+                bestOf1.setTime2("2º Grupo 1");
+                bestOf1.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas1 = new ArrayList<>();
+                for (int y = 0; y < bestOf1.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas1.add(partida);
+                }
+                bestOf1.setPartidas(listPartidas1);
+                result.add(bestOf1);
+            } else {
+                for (int x = 0; x < 2; x++) {
+                    BestOf bestOf = new BestOf();
+                    bestOf.setId(x);
+                    bestOf.setTime1("Vencedor partida " + (x * 2 + 1));
+                    bestOf.setTime2("Vencedor partida " + (x * 2 + 2));
+                    bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                    List<Partida> listPartidas = new ArrayList<>();
+                    for (int y = 0; y < bestOf.getQuantity(); y++) {
+                        Partida partida = new Partida();
+                        partida.setId(y);
+                        listPartidas.add(partida);
+                    }
+                    bestOf.setPartidas(listPartidas);
+                    result.add(bestOf);
+                }
+            }
+        } else if (fase == 2) {
+            if (fase == fases - 1) {
+                BestOf bestOf = new BestOf();
+                bestOf.setId(0);
+                bestOf.setTime1("1º Grupo 1");
+                bestOf.setTime2("2º Grupo 2");
+                bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas = new ArrayList<>();
+                for (int y = 0; y < bestOf.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas.add(partida);
+                }
+                bestOf.setPartidas(listPartidas);
+                result.add(bestOf);
+
+                BestOf bestOf1 = new BestOf();
+                bestOf1.setId(1);
+                bestOf1.setTime1("1º Grupo 3");
+                bestOf1.setTime2("2º Grupo 4");
+                bestOf1.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas1 = new ArrayList<>();
+                for (int y = 0; y < bestOf1.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas1.add(partida);
+                }
+                bestOf1.setPartidas(listPartidas1);
+                result.add(bestOf1);
+
+                BestOf bestOf2 = new BestOf();
+                bestOf2.setId(2);
+                bestOf2.setTime1("1º Grupo 2");
+                bestOf2.setTime2("2º Grupo 1");
+                bestOf2.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas2 = new ArrayList<>();
+                for (int y = 0; y < bestOf2.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas2.add(partida);
+                }
+                bestOf2.setPartidas(listPartidas2);
+                result.add(bestOf2);
+
+                BestOf bestOf3 = new BestOf();
+                bestOf3.setId(3);
+                bestOf3.setTime1("1º Grupo 4");
+                bestOf3.setTime2("2º Grupo 3");
+                bestOf3.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas3 = new ArrayList<>();
+                for (int y = 0; y < bestOf3.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas3.add(partida);
+                }
+                bestOf3.setPartidas(listPartidas3);
+                result.add(bestOf3);
+            } else {
+                for (int x = 0; x < 4; x++) {
+                    BestOf bestOf = new BestOf();
+                    bestOf.setId(x);
+                    bestOf.setTime1("Vencedor partida " + (x * 2 + 1));
+                    bestOf.setTime2("Vencedor partida " + (x * 2 + 2));
+                    bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                    List<Partida> listPartidas = new ArrayList<>();
+                    for (int y = 0; y < bestOf.getQuantity(); y++) {
+                        Partida partida = new Partida();
+                        partida.setId(y);
+                        listPartidas.add(partida);
+                    }
+                    bestOf.setPartidas(listPartidas);
+                    result.add(bestOf);
+                }
+            }
+        } else if (fase == 3) {
+            if (fase == fases - 1) {
+                BestOf bestOf = new BestOf();
+                bestOf.setId(0);
+                bestOf.setTime1("1º Grupo 1");
+                bestOf.setTime2("2º Grupo 2");
+                bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas = new ArrayList<>();
+                for (int y = 0; y < bestOf.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas.add(partida);
+                }
+                bestOf.setPartidas(listPartidas);
+                result.add(bestOf);
+
+                BestOf bestOf1 = new BestOf();
+                bestOf1.setId(1);
+                bestOf1.setTime1("1º Grupo 5");
+                bestOf1.setTime2("2º Grupo 6");
+                bestOf1.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas1 = new ArrayList<>();
+                for (int y = 0; y < bestOf1.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas1.add(partida);
+                }
+                bestOf1.setPartidas(listPartidas1);
+                result.add(bestOf1);
+
+                BestOf bestOf2 = new BestOf();
+                bestOf2.setId(2);
+                bestOf2.setTime1("1º Grupo 3");
+                bestOf2.setTime2("2º Grupo 4");
+                bestOf2.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas2 = new ArrayList<>();
+                for (int y = 0; y < bestOf2.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas2.add(partida);
+                }
+                bestOf2.setPartidas(listPartidas2);
+                result.add(bestOf2);
+
+                BestOf bestOf3 = new BestOf();
+                bestOf3.setId(3);
+                bestOf3.setTime1("1º Grupo 7");
+                bestOf3.setTime2("2º Grupo 8");
+                bestOf3.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas3 = new ArrayList<>();
+                for (int y = 0; y < bestOf3.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas3.add(partida);
+                }
+                bestOf3.setPartidas(listPartidas3);
+                result.add(bestOf3);
+
+                BestOf bestOf4 = new BestOf();
+                bestOf4.setId(4);
+                bestOf4.setTime1("1º Grupo 2");
+                bestOf4.setTime2("2º Grupo 1");
+                bestOf4.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas4 = new ArrayList<>();
+                for (int y = 0; y < bestOf4.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas4.add(partida);
+                }
+                bestOf4.setPartidas(listPartidas4);
+                result.add(bestOf4);
+
+                BestOf bestOf5 = new BestOf();
+                bestOf5.setId(5);
+                bestOf5.setTime1("1º Grupo 6");
+                bestOf5.setTime2("2º Grupo 5");
+                bestOf5.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas5 = new ArrayList<>();
+                for (int y = 0; y < bestOf5.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas5.add(partida);
+                }
+                bestOf5.setPartidas(listPartidas5);
+                result.add(bestOf5);
+
+                BestOf bestOf6 = new BestOf();
+                bestOf6.setId(6);
+                bestOf6.setTime1("1º Grupo 4");
+                bestOf6.setTime2("2º Grupo 3");
+                bestOf6.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas6 = new ArrayList<>();
+                for (int y = 0; y < bestOf6.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas6.add(partida);
+                }
+                bestOf6.setPartidas(listPartidas6);
+                result.add(bestOf6);
+
+                BestOf bestOf7 = new BestOf();
+                bestOf7.setId(7);
+                bestOf7.setTime1("1º Grupo 8");
+                bestOf7.setTime2("2º Grupo 7");
+                bestOf7.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                List<Partida> listPartidas7 = new ArrayList<>();
+                for (int y = 0; y < bestOf7.getQuantity(); y++) {
+                    Partida partida = new Partida();
+                    partida.setId(y);
+                    listPartidas7.add(partida);
+                }
+                bestOf7.setPartidas(listPartidas7);
+                result.add(bestOf7);
+            } else {
+                for (int x = 0; x < 8; x++) {
+                    BestOf bestOf = new BestOf();
+                    bestOf.setId(x);
+                    bestOf.setTime1("Vencedor partida " + (x * 2 + 1));
+                    bestOf.setTime2("Vencedor partida " + (x * 2 + 2));
+                    bestOf.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
+                    List<Partida> listPartidas = new ArrayList<>();
+                    for (int y = 0; y < bestOf.getQuantity(); y++) {
+                        Partida partida = new Partida();
+                        partida.setId(y);
+                        listPartidas.add(partida);
+                    }
+                    bestOf.setPartidas(listPartidas);
+                    result.add(bestOf);
+                }
+            }
+        }
+        return result;
+    }
+
     private List<BestOf> createBestOf(int fase) {
         List<BestOf> result = new ArrayList<>();
         if (fase == 0) {
@@ -184,6 +458,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 partida.setId(x);
                 listPartidas.add(partida);
             }
+            bestOf.setPartidas(listPartidas);
             result.add(bestOf);
         } else if (fase == 1) {
             for (int x = 0; x < 2; x++) {
@@ -198,6 +473,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                     partida.setId(y);
                     listPartidas.add(partida);
                 }
+                bestOf.setPartidas(listPartidas);
                 result.add(bestOf);
             }
         } else if (fase == 2) {
@@ -213,6 +489,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                     partida.setId(y);
                     listPartidas.add(partida);
                 }
+                bestOf.setPartidas(listPartidas);
                 result.add(bestOf);
             }
         } else if (fase == 3) {
@@ -228,6 +505,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                     partida.setId(y);
                     listPartidas.add(partida);
                 }
+                bestOf.setPartidas(listPartidas);
                 result.add(bestOf);
             }
         }
@@ -305,7 +583,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
         listTime1.addAll(list);
         list2.addAll(list);
         if (list.size() % 2 == 1) {
-            Time e = new Time("", -1, -1);
+            Time e = new Time("", -1);
             list2.add(e);
             listTime1.add(e);
         }

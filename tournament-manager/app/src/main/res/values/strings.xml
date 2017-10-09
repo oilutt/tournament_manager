@@ -110,4 +110,8 @@
     <string name="status_det">Status:</string>
     <string name="data_inicio_det">Início:</string>
 
+    <!-- Edit -->
+    <string name="edit_title">Publicar Resultados</string>
+    <string name="salvar">Salvar</string>
+
 </resources>

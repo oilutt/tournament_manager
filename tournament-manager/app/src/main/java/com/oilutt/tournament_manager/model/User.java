@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by oilut on 25/08/2017.
@@ -26,6 +28,14 @@ public class User implements Serializable, Parcelable {
         this.nome = nome;
         this.email = email;
         this.id = id;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("nome", nome);
+        result.put("email", email);
+        result.put("id", id);
+        return result;
     }
 
     public User(String email) {

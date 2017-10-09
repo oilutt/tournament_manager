@@ -1,6 +1,7 @@
 package com.oilutt.tournament_manager.presentation.Campeonato;
 
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.Menu;
 
 import com.arellomobile.mvp.MvpView;
 
@@ -17,4 +18,6 @@ public interface CampeonatoCallback extends MvpView {
     void showProgress();
 
     void hideProgress();
+
+    void manageMenuOptions(Menu menu);
 }

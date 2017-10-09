@@ -96,6 +96,6 @@
             android:textAllCaps="false"
             android:textAppearance="@string/monstserrat_regular"
             android:textColor="@color/colorPrimaryText"
-            android:textSize="15dp" />
+            android:textSize="@dimen/font_15" />
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout"
     android:layout_width="match_parent"
-    android:layout_height="32dp"
+    android:layout_height="40dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -23,15 +25,16 @@
             android:text="Time 1"
             app:layout_widthPercent="35%" />
 
-        <TextView
+        <EditText
             android:id="@+id/golsTimeCasa"
             style="@style/Text14MontserratRegular"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/nomeTimeCasa"
             android:ellipsize="end"
             android:gravity="center"
+            android:imeOptions="actionNext"
+            android:inputType="number"
             android:maxLines="1"
-            android:text="10"
             app:layout_widthPercent="13%" />
 
         <TextView
@@ -43,15 +46,16 @@
             android:text="X"
             app:layout_widthPercent="5%" />
 
-        <TextView
+        <EditText
             android:id="@+id/golsTimeFora"
             style="@style/Text14MontserratRegular"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/x"
             android:ellipsize="end"
             android:gravity="center"
+            android:imeOptions="actionNext"
+            android:inputType="number"
             android:maxLines="1"
-            android:text="10"
             app:layout_widthPercent="13%" />
 
         <TextView
