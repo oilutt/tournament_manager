@@ -15,6 +15,7 @@ import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.presentation.Campeonato.CampeonatoCallback;
 import com.oilutt.tournament_manager.presentation.Campeonato.CampeonatoPresenter;
+import com.oilutt.tournament_manager.ui.adapter.TabAdapter;
 import com.oilutt.tournament_manager.ui.dialog.DialogProgress;
 
 import butterknife.BindView;
@@ -64,22 +65,22 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.edit:
                 Intent intent = new Intent(this, EditActivity.class);
                 intent.putExtra("campeonatoId", presenter.campeonatoId);
-                startActivityForResult(intent, Constants.EDIT_CAMP);
+                startActivity(intent);
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        presenter.onActivityResult(requestCode, resultCode, data);
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        presenter.onActivityResult(requestCode, resultCode, data);
+//    }
 
     @Override
     public void manageMenuOptions(Menu menu) {
@@ -88,7 +89,7 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
     }
 
     @Override
-    public void setAdapterTab(FragmentPagerAdapter adapter) {
+    public void setAdapterTab(TabAdapter adapter) {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }

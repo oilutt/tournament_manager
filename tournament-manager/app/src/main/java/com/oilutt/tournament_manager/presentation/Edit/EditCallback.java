@@ -15,5 +15,5 @@ public interface EditCallback extends MvpView {
 
     void setAdapterTab(TabAdapter adapterTab);
 
-    void onBackPressed();
+    void startCampeonato(String campeonatoId);
 }

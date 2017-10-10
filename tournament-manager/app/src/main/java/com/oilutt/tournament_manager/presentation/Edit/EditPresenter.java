@@ -145,7 +145,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
         childUpdates.put("/campeonatos/" + campeonatoId, campeonatoValues);
         campEndPointUpdate.updateChildren(childUpdates);
 
-        getViewState().onBackPressed();
+        getViewState().startCampeonato(campeonatoId);
     }
 
     private void updatePositions(List<Partida> partidaList, int rodada){

@@ -98,6 +98,7 @@ public class AddCampActivity extends BaseActivity implements AddCampCallback, Da
         dataInicioCamp.setText((dayOfMonth < 10 ? "0" + dayOfMonth : dayOfMonth) + "/"
                 + ((month + 1) < 10 ? "0" + (month + 1) : month) + "/"
                 + year);
+        dataInicioCamp.clearFocus();
     }
 
     public void setDateListener() {
@@ -140,6 +141,7 @@ public class AddCampActivity extends BaseActivity implements AddCampCallback, Da
     @Override
     public void showMatamata() {
         layoutMataMata.setVisibility(View.VISIBLE);
+        layoutMataMata.requestFocus();
     }
 
     @Override
@@ -150,6 +152,7 @@ public class AddCampActivity extends BaseActivity implements AddCampCallback, Da
     @Override
     public void showLiga() {
         layoutLiga.setVisibility(View.VISIBLE);
+        layoutLiga.requestFocus();
     }
 
     @Override

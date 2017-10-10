@@ -57,7 +57,7 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
     }
 
     private void getCampeonato() {
-        campEndPoint.child(campeonatoId).addListenerForSingleValueEvent(new ValueEventListener() {
+        campEndPoint.child(campeonatoId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 getViewState().hideProgress();
@@ -111,8 +111,12 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
                 rodadaFragment.setArguments(extras2);
                 fragmentList.add(rodadaFragment);
             }
-            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato, false);
-            getViewState().setAdapterTab(adapter);
+            if(adapter != null){
+                adapter.setData(fragmentList);
+            }else {
+                adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato, false);
+                getViewState().setAdapterTab(adapter);
+            }
         } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
             List<Fragment> fragmentList = new ArrayList<>();
             for (int x = campeonato.getFormato().getFases().size() - 1; x >= 0; x--) {
@@ -122,8 +126,12 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
                 fragment.setArguments(extras2);
                 fragmentList.add(fragment);
             }
-            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato, false);
-            getViewState().setAdapterTab(adapter);
+            if(adapter != null){
+                adapter.setData(fragmentList);
+            }else {
+                adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato, false);
+                getViewState().setAdapterTab(adapter);
+            }
         } else {
             List<Fragment> fragmentList = new ArrayList<>();
             for (int x = 0; x < campeonato.getFormato().getGrupos().size(); x++) {
@@ -147,8 +155,12 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
                 fragment.setArguments(extras2);
                 fragmentList.add(fragment);
             }
-            adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato, false);
-            getViewState().setAdapterTab(adapter);
+            if(adapter != null){
+                adapter.setData(fragmentList);
+            }else {
+                adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato, false);
+                getViewState().setAdapterTab(adapter);
+            }
         }
     }
 
@@ -158,11 +170,11 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
         }
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == Constants.EDIT_CAMP) {
-            if (resultCode == Activity.RESULT_OK) {
-                updateCamp();
-            }
-        }
-    }
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if(requestCode == Constants.EDIT_CAMP) {
+//            if (resultCode == Activity.RESULT_OK) {
+//                updateCamp();
+//            }
+//        }
+//    }
 }

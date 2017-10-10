@@ -55,8 +55,13 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
         List<String> listNomes = adapter.getData();
         List<Time> listTimes = new ArrayList<>();
         for (int x = 0; x < listNomes.size(); x++) {
-            Time time = new Time(listNomes.get(x), x);
-            listTimes.add(time);
+            if(!listNomes.get(x).equals("")) {
+                Time time = new Time(listNomes.get(x), x);
+                listTimes.add(time);
+            } else {
+                getViewState().hideLoading();
+                return;
+            }
         }
 
         if (campeonato != null) {

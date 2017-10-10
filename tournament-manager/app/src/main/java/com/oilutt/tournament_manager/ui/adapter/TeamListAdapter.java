@@ -3,6 +3,8 @@ package com.oilutt.tournament_manager.ui.adapter;
 import android.content.Context;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,13 +58,11 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamLi
         }
 
         holder.nomeTime.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                if (!holder.nomeTime.getText().toString().equals("")) {
-                    if (list.size() > 0 && list.get(position) != null) {
-                        list.set(position, holder.nomeTime.getText().toString());
-                    } else {
-                        list.add(position, holder.nomeTime.getText().toString());
-                    }
+            if (!holder.nomeTime.getText().toString().equals("")) {
+                if (list.size() > 0 && list.get(position) != null) {
+                    list.set(position, holder.nomeTime.getText().toString());
+                } else {
+                    list.add(position, holder.nomeTime.getText().toString());
                 }
             }
         });
@@ -81,6 +81,26 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamLi
         });
 
         if (position == size - 1) {
+            holder.nomeTime.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (list.size() > 0 && list.get(position) != null) {
+                        list.set(position, s.toString());
+                    } else {
+                        list.add(position, s.toString());
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
             holder.nomeTime.setImeOptions(EditorInfo.IME_ACTION_DONE);
         }
     }

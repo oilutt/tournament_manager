@@ -157,6 +157,11 @@ public class TabAdapter extends FragmentPagerAdapter {
         return fragmentList;
     }
 
+    public void setData(List<Fragment> fragmentList){
+        this.fragmentList = fragmentList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return fragmentList.size();
