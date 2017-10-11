@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.ui.adapter.TeamsAdapter;
 
@@ -59,13 +60,16 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
         getViewState().setInicio(campeonato.getDataInicio());
         getViewState().setQuantidadeTimes(String.valueOf(campeonato.getQuantidadeTimes()));
         if (campeonato.getStatus() == 3)
-            getViewState().setStatus("Encerrado");
+            getViewState().setStatus("Concluído");
         else if (campeonato.getStatus() == 2)
             getViewState().setStatus("Em andamento");
         else if (campeonato.getStatus() == 1)
             getViewState().setStatus("Aberto");
         if (campeonato.getFormato().getNome().equals("Liga")) {
-            getViewState().setIdaEVolta(String.valueOf(campeonato.getFormato().getIdaVolta()));
+            if(campeonato.getFormato().getIdaVolta() == 1)
+                getViewState().setIdaEVolta(R.string.sim);
+            else
+                getViewState().setIdaEVolta(R.string.nao);
             getViewState().hidePartidasChave();
             getViewState().hidePartidasFinal();
         } else {

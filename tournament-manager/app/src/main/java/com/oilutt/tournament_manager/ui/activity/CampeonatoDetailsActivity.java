@@ -140,8 +140,8 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     }
 
     @Override
-    public void setIdaEVolta(String idaEVolta) {
-        txtIdaEVolta.setText(idaEVolta);
+    public void setIdaEVolta(int idaEVolta) {
+        txtIdaEVolta.setText(getString(idaEVolta));
     }
 
     @Override

@@ -281,8 +281,8 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
         timesArray = new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32));
         timesArrayTorneio = new ArrayList<>(Arrays.asList(8, 16, 32));
-        chaveArray = new ArrayList<>(Arrays.asList(1, 2, 3, 5, 7));
-        finalArray = new ArrayList<>(Arrays.asList(1, 2, 3, 5, 7, 9));
+        chaveArray = new ArrayList<>(Arrays.asList(1, 3, 5, 7));
+        finalArray = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 9));
         idaEVoltaArray = new ArrayList<>(Arrays.asList(context.getString(R.string.sim),
                 context.getString(R.string.nao)));
     }

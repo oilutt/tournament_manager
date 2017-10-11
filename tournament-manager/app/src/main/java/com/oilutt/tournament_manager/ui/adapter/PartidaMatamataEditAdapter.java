@@ -1,5 +1,6 @@
 package com.oilutt.tournament_manager.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.SnackbarManager;
+import com.nispok.snackbar.enums.SnackbarType;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.BestOf;
 import com.oilutt.tournament_manager.model.Partida;
@@ -50,43 +54,62 @@ public class PartidaMatamataEditAdapter extends RecyclerView.Adapter<PartidaMata
         BestOf partida = list.get(position);
         holder.nomeTimeCasa.setText(partida.getTime1());
         holder.nomeTimeFora.setText(partida.getTime2());
-        TextWatcher watcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        if(partida.getValorTime1() != null) {
+            holder.partidasTime1.setText(partida.getValorTime1());
+            holder.partidasTime2.setText(partida.getValorTime2());
+            holder.partidasTime1.setFocusable(false);
+            holder.partidasTime2.setFocusable(false);
+        } else {
+            TextWatcher watcher = new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+                }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(Integer.parseInt(s.toString()) < Math.round(partida.getQuantity()/2))
-                partida.setValorTime1(s.toString());
-            }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (Integer.parseInt(s.toString()) < Math.round(partida.getQuantity()))
+                        partida.setValorTime1(s.toString());
+                    else
+                        SnackbarManager.show(Snackbar.with(context)
+                                .type(SnackbarType.MULTI_LINE)
+                                .text(context.getString(R.string.valor_invalido))
+                                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), (Activity) context);
+                }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                @Override
+                public void afterTextChanged(Editable s) {
 
-            }
-        };
-        TextWatcher watcher2 = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+            };
+            TextWatcher watcher2 = new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+                }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(Integer.parseInt(s.toString()) < Math.round(partida.getQuantity()/2))
-                partida.setValorTime2(s.toString());
-            }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (Integer.parseInt(s.toString()) < Math.round(partida.getQuantity()))
+                        partida.setValorTime2(s.toString());
+                    else
+                        SnackbarManager.show(Snackbar.with(context)
+                                .type(SnackbarType.MULTI_LINE)
+                                .text(context.getString(R.string.valor_invalido))
+                                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), (Activity) context);
+                }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                @Override
+                public void afterTextChanged(Editable s) {
 
-            }
-        };
-        holder.partidasTime1.addTextChangedListener(watcher);
-        holder.partidasTime2.addTextChangedListener(watcher2);
-        if(position == list.size() -1){
+                }
+            };
+            holder.partidasTime1.addTextChangedListener(watcher);
+            holder.partidasTime2.addTextChangedListener(watcher2);
+        }
+        if (position == list.size() - 1)
+
+        {
             holder.partidasTime2.setImeOptions(EditorInfo.IME_ACTION_DONE);
         }
     }
@@ -96,7 +119,7 @@ public class PartidaMatamataEditAdapter extends RecyclerView.Adapter<PartidaMata
         return list.size();
     }
 
-    public List<BestOf> getData(){
+    public List<BestOf> getData() {
         return list;
     }
 

@@ -49,6 +49,8 @@ public class PartidaMatamataAdapter extends RecyclerView.Adapter<PartidaMatamata
         if (partida.getValorTime1() != null) {
             holder.partidasTime1.setText(partida.getValorTime1());
             holder.partidasTime2.setText(partida.getValorTime2());
+            holder.partidasTime1.setVisibility(View.VISIBLE);
+            holder.partidasTime2.setVisibility(View.VISIBLE);
         } else {
             holder.partidasTime1.setVisibility(View.INVISIBLE);
             holder.partidasTime2.setVisibility(View.INVISIBLE);

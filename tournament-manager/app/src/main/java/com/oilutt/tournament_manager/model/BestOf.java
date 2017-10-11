@@ -22,6 +22,7 @@ public class BestOf implements Serializable, Parcelable {
     private String time2;
     private String valorTime1;
     private String valorTime2;
+    private boolean jaFoi;
 
     public BestOf() {
     }
@@ -82,6 +83,15 @@ public class BestOf implements Serializable, Parcelable {
         this.id = id;
     }
 
+    public boolean isJaFoi() {
+        return jaFoi;
+    }
+
+    public void setJaFoi(boolean jaFoi) {
+        this.jaFoi = jaFoi;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -89,23 +99,25 @@ public class BestOf implements Serializable, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.quantity);
         dest.writeInt(this.id);
+        dest.writeInt(this.quantity);
         dest.writeTypedList(this.partidas);
         dest.writeString(this.time1);
         dest.writeString(this.time2);
         dest.writeString(this.valorTime1);
         dest.writeString(this.valorTime2);
+        dest.writeByte(this.jaFoi ? (byte) 1 : (byte) 0);
     }
 
     protected BestOf(Parcel in) {
-        this.quantity = in.readInt();
         this.id = in.readInt();
+        this.quantity = in.readInt();
         this.partidas = in.createTypedArrayList(Partida.CREATOR);
         this.time1 = in.readString();
         this.time2 = in.readString();
         this.valorTime1 = in.readString();
         this.valorTime2 = in.readString();
+        this.jaFoi = in.readByte() != 0;
     }
 
     public static final Creator<BestOf> CREATOR = new Creator<BestOf>() {

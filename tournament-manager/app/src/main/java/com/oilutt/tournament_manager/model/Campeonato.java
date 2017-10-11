@@ -32,6 +32,7 @@ public class Campeonato implements Serializable, Parcelable {
     private String descricao;
     private String foto;
     private int status;   // 1:Aberto, 2:Em andamento, 3:Encerrado
+    private String campeao;
 
     public Campeonato() {
 
@@ -51,6 +52,7 @@ public class Campeonato implements Serializable, Parcelable {
         result.put("descricao", descricao);
         result.put("foto", foto);
         result.put("dono", dono.toMap());
+        result.put("campeao", campeao);
 
         return result;
     }
@@ -159,6 +161,14 @@ public class Campeonato implements Serializable, Parcelable {
         this.timesClassificados = timesClassificados;
     }
 
+    public String getCampeao() {
+        return campeao;
+    }
+
+    public void setCampeao(String campeao) {
+        this.campeao = campeao;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -178,6 +188,7 @@ public class Campeonato implements Serializable, Parcelable {
         dest.writeString(this.dataAtualizacao);
         dest.writeString(this.descricao);
         dest.writeString(this.foto);
+        dest.writeString(this.campeao);
         dest.writeInt(this.status);
     }
 
@@ -193,6 +204,7 @@ public class Campeonato implements Serializable, Parcelable {
         this.dataFim = in.readString();
         this.dataAtualizacao = in.readString();
         this.descricao = in.readString();
+        this.campeao = in.readString();
         this.foto = in.readString();
         this.status = in.readInt();
     }

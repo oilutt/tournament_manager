@@ -1,5 +1,6 @@
 package com.oilutt.tournament_manager.presentation.Edit;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +17,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.SnackbarManager;
+import com.nispok.snackbar.enums.SnackbarType;
 import com.oilutt.tournament_manager.R;
+import com.oilutt.tournament_manager.model.BestOf;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.model.Partida;
 import com.oilutt.tournament_manager.model.Time;
@@ -37,7 +42,7 @@ import java.util.Map;
 public class EditPresenter extends MvpPresenter<EditCallback> {
 
     private Campeonato campeonato;
-    private String campeonatoId;
+    public String campeonatoId;
     private Context context;
     private TabAdapter adapter;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
@@ -127,6 +132,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
 
     public void clickSalvar(){
         List<Fragment> fragmentList = adapter.getFragmentList();
+        boolean pode = true;
         if(campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
             for (int x = 0; x < fragmentList.size(); x++) {
                 if(((RodadaFragment)fragmentList.get(x)).getList() != null) {
@@ -134,8 +140,16 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                     updatePositions(((RodadaFragment) fragmentList.get(x)).getList(), x);
                 }
             }
+        } else if(campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
+            for (int x = 0,  y = fragmentList.size()-1; x < fragmentList.size(); x++, y--) {
+                if(((MataMataFragment)fragmentList.get(x)).getList() != null) {
+                    campeonato.getFormato().getFases().get(x).setPartidas(((MataMataFragment) fragmentList.get(x)).getList());
+                    pode = updateFases(((MataMataFragment) fragmentList.get(x)).getList(), y);
+                }
+            }
         }
-        updateCampeonato();
+        if(pode)
+            updateCampeonato();
     }
 
     private void updateCampeonato(){
@@ -190,5 +204,159 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                 campeonato.getTimes().set(y2, time2);
             }
         }
+    }
+
+    private void showSnack(){
+        SnackbarManager.show(Snackbar.with(context)
+                .type(SnackbarType.MULTI_LINE)
+                .text(context.getString(R.string.algum_valor_invalido))
+                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), (Activity) context);
+    }
+
+    private boolean updateFases(List<BestOf> listBestOf, int fase){
+        for(int x = 0; x < listBestOf.size(); x++){
+            if (listBestOf.get(x).getValorTime1() != null && listBestOf.get(x).getValorTime2() != null) {
+                if (fase != 0) {
+                    if (Integer.parseInt(listBestOf.get(x).getValorTime1()) + Integer.parseInt(listBestOf.get(x).getValorTime2())
+                            > campeonato.getFormato().getQuantidadePartidasChave()) {
+                        showSnack();
+                        return false;
+                    }
+                    if (listBestOf.get(x).getTime1().toLowerCase().contains("vencedor partida")
+                            || listBestOf.get(x).getTime2().toLowerCase().contains("vencedor partida")) {
+                        SnackbarManager.show(Snackbar.with(context)
+                                .type(SnackbarType.MULTI_LINE)
+                                .text(context.getString(R.string.partida_inexistente))
+                                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), (Activity) context);
+                        return false;
+                    }
+                    if (Integer.parseInt(listBestOf.get(x).getValorTime1()) == Integer.parseInt(listBestOf.get(x).getValorTime2())) {
+                        showSnack();
+                        return false;
+                    }
+                    if (Integer.parseInt(listBestOf.get(x).getValorTime1()) < (int) (campeonato.getFormato().getQuantidadePartidasChave() / 2)
+                            && Integer.parseInt(listBestOf.get(x).getValorTime2()) < (int) (campeonato.getFormato().getQuantidadePartidasChave() / 2)) {
+                        showSnack();
+                        return false;
+                    }
+                } else {
+                    if (Integer.parseInt(listBestOf.get(x).getValorTime1()) + Integer.parseInt(listBestOf.get(x).getValorTime2())
+                            > campeonato.getFormato().getQuantidadePartidasFinal()) {
+                        showSnack();
+                        return false;
+                    }
+                    if (listBestOf.get(x).getTime1().toLowerCase().contains("vencedor partida")
+                            || listBestOf.get(x).getTime2().toLowerCase().contains("vencedor partida")) {
+                        SnackbarManager.show(Snackbar.with(context)
+                                .type(SnackbarType.MULTI_LINE)
+                                .text(context.getString(R.string.partida_inexistente))
+                                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), (Activity) context);
+                        return false;
+                    }
+                    if (Integer.parseInt(listBestOf.get(x).getValorTime1()) == Integer.parseInt(listBestOf.get(x).getValorTime2())) {
+                        showSnack();
+                        return false;
+                    }
+                    if (Integer.parseInt(listBestOf.get(x).getValorTime1()) < (int) (campeonato.getFormato().getQuantidadePartidasFinal() / 2)
+                            && Integer.parseInt(listBestOf.get(x).getValorTime2()) < (int) (campeonato.getFormato().getQuantidadePartidasFinal() / 2)) {
+                        showSnack();
+                        return false;
+                    }
+                }
+            }
+        }
+        for (int x = 0; x < listBestOf.size(); x++){
+            BestOf partida = listBestOf.get(x);
+            if(!partida.isJaFoi()) {
+                Time time1 = new Time(), time2 = new Time();
+                int y1 = 0, y2 = 0;
+                for (int y = 0; y < campeonato.getTimes().size(); y++) {
+                    if (partida.getTime1().equals(campeonato.getTimes().get(y).getNome())) {
+                        time1 = campeonato.getTimes().get(y);
+                        y1 = y;
+                    } else if (partida.getTime2().equals(campeonato.getTimes().get(y).getNome())) {
+                        time2 = campeonato.getTimes().get(y);
+                        y2 = y;
+                    }
+                }
+                if (partida.getValorTime1() != null && partida.getValorTime2() != null) {
+                    if (Integer.parseInt(partida.getValorTime1()) > Integer.parseInt(partida.getValorTime2())) {
+                        List<BestOf> bestOfs = new ArrayList<>();
+                        if(fase > 1) {
+                            bestOfs.addAll(campeonato.getFormato().getFases().get(fase-1).getPartidas());
+                            for(int y = 0; y < campeonato.getFormato().getQuantidadePartidasChave(); y++) {
+                                BestOf bestOf = new BestOf();
+                                if(campeonato.getFormato().getFases().get(fase-1).getPartidas().get(x/2).getValorTime1() != null
+                                        && !campeonato.getFormato().getFases().get(fase-1).getPartidas().get(x/2).getValorTime1().equals("")) {
+                                    bestOf.setTime1(campeonato.getFormato().getFases().get(fase-1).getPartidas().get(x/2).getValorTime1());
+                                    bestOf.setTime2(time1.getNome());
+                                } else {
+                                    bestOf.setTime1(time1.getNome());
+                                }
+                                bestOfs.set(x/2, bestOf);
+                            }
+                            campeonato.getFormato().getFases().get(fase-1).setPartidas(bestOfs);
+                        } else if (fase == 1){
+                            bestOfs.addAll(campeonato.getFormato().getFases().get(fase-1).getPartidas());
+                            for(int y = 0; y < campeonato.getFormato().getQuantidadePartidasFinal(); y++) {
+                                BestOf bestOf = new BestOf();
+                                if(campeonato.getFormato().getFases().get(fase-1).getPartidas().get(x/2).getValorTime1() != null
+                                        && !campeonato.getFormato().getFases().get(fase-1).getPartidas().get(x/2).getValorTime1().equals("")) {
+                                    bestOf.setTime1(campeonato.getFormato().getFases().get(fase-1).getPartidas().get(x/2).getValorTime1());
+                                    bestOf.setTime2(time1.getNome());
+                                } else {
+                                    bestOf.setTime1(time1.getNome());
+                                }
+                                bestOfs.set(x/2, bestOf);
+                            }
+                            campeonato.getFormato().getFases().get(fase-1).setPartidas(bestOfs);
+                        } else {
+                            campeonato.setCampeao(time1.getNome());
+                            time1.setCampeao(true);
+                            campeonato.setStatus(3);
+                        }
+                    } else {
+                        List<BestOf> bestOfs = new ArrayList<>();
+                        if(fase > 1) {
+                            bestOfs.addAll(campeonato.getFormato().getFases().get(fase-1).getPartidas());
+                            for(int y = 0; y < campeonato.getFormato().getQuantidadePartidasChave(); y++) {
+                                BestOf bestOf = new BestOf();
+                                if(campeonato.getFormato().getFases().get(fase-1).getPartidas().get(x/2).getValorTime1() != null
+                                        && !campeonato.getFormato().getFases().get(fase-1).getPartidas().get(x/2).getValorTime1().equals("")) {
+                                    bestOf.setTime1(campeonato.getFormato().getFases().get(fase-1).getPartidas().get(x/2).getValorTime1());
+                                    bestOf.setTime2(time2.getNome());
+                                } else {
+                                    bestOf.setTime1(time2.getNome());
+                                }
+                                bestOfs.set(x/2, bestOf);
+                            }
+                            campeonato.getFormato().getFases().get(fase-1).setPartidas(bestOfs);
+                        } else if (fase == 1){
+                            bestOfs.addAll(campeonato.getFormato().getFases().get(fase-1).getPartidas());
+                            for(int y = 0; y < campeonato.getFormato().getQuantidadePartidasFinal(); y++) {
+                                BestOf bestOf = new BestOf();
+                                if(campeonato.getFormato().getFases().get(fase-1).getPartidas().get(x/2).getValorTime1() != null
+                                        && !campeonato.getFormato().getFases().get(fase-1).getPartidas().get(x/2).getValorTime1().equals("")) {
+                                    bestOf.setTime1(campeonato.getFormato().getFases().get(fase-1).getPartidas().get(x/2).getValorTime1());
+                                    bestOf.setTime2(time2.getNome());
+                                } else {
+                                    bestOf.setTime1(time2.getNome());
+                                }
+                                bestOfs.set(x/2, bestOf);
+                            }
+                            campeonato.getFormato().getFases().get(fase-1).setPartidas(bestOfs);
+                        } else {
+                            campeonato.setCampeao(time2.getNome());
+                            time2.setCampeao(true);
+                            campeonato.setStatus(3);
+                        }
+                    }
+                    campeonato.getFormato().getFases().get(fase).getPartidas().get(x).setJaFoi(true);
+                }
+                campeonato.getTimes().set(y1, time1);
+                campeonato.getTimes().set(y2, time2);
+            }
+        }
+        return true;
     }
 }

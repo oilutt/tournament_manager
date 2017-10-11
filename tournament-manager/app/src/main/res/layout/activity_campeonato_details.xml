@@ -284,6 +284,7 @@
                 android:id="@+id/recycler_times"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10"
                 android:overScrollMode="never" />
 
         </LinearLayout>

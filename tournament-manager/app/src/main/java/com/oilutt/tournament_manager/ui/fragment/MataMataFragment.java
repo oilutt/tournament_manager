@@ -10,10 +10,13 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.oilutt.tournament_manager.R;
+import com.oilutt.tournament_manager.model.BestOf;
 import com.oilutt.tournament_manager.presentation.Fragments.MataMataFragmentCallback;
 import com.oilutt.tournament_manager.presentation.Fragments.MataMataFragmentPresenter;
 import com.oilutt.tournament_manager.ui.adapter.PartidaMatamataAdapter;
 import com.oilutt.tournament_manager.ui.adapter.PartidaMatamataEditAdapter;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,5 +66,13 @@ public class MataMataFragment extends MvpAppCompatFragment implements MataMataFr
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
+    }
+
+    public List<BestOf> getList(){
+        if(presenter != null && presenter.adapterEdit != null) {
+            return presenter.adapterEdit.getData();
+        } else {
+            return null;
+        }
     }
 }

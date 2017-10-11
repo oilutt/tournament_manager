@@ -74,23 +74,6 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
         });
     }
 
-    private void updateCamp() {
-        campEndPoint.child(campeonatoId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                getViewState().hideProgress();
-                campeonato = dataSnapshot.getValue(Campeonato.class);
-                setAdapter();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("getCAMPS", "Failed to read value.", error.toException());
-            }
-        });
-    }
-
     private void setTitle() {
         getViewState().setUpToolbarText(campeonato.getNome(), true);
     }

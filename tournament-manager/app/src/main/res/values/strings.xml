@@ -99,6 +99,11 @@
     <string name="quartas">Quartas de final</string>
     <string name="semi">Semi-final</string>
     <string name="final_title">Final</string>
+    <string name="valor_invalido">O valor não pode ser maior que a quantidade necessária para ganhar a disputa.</string>
+    <string name="partida_inexistente">Não é possível lançar resultados para partidas que ainda não possuem times.</string>
+    <string name="nome_igual">Não são permitidos nomes de times iguais.</string>
+    <string name="time_empty">Não são permitidos nomes em branco.</string>
+    <string name="algum_valor_invalido">Algum resultado lançado não corresponde com o formato do campeonato. Favor verificar.</string>
 
     <!-- Campeonato Details-->
     <string name="formato_camp_det">Formato:</string>

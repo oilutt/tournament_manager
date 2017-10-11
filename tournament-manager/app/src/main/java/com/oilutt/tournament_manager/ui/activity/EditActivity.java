@@ -83,4 +83,12 @@ public class EditActivity extends BaseActivity implements EditCallback {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, CampeonatoActivity.class);
+        intent.putExtra("campeonatoId", presenter.campeonatoId);
+        startActivity(intent);
+        finish();
+    }
 }

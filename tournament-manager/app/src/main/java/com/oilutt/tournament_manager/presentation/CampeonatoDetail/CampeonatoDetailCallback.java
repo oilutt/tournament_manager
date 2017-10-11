@@ -27,7 +27,7 @@ public interface CampeonatoDetailCallback extends MvpView {
 
     void hideIdaEVolta();
 
-    void setIdaEVolta(String idaEVolta);
+    void setIdaEVolta(int idaEVolta);
 
     void setStatus(String status);
 

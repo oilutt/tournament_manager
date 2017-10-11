@@ -13,7 +13,7 @@ import com.oilutt.tournament_manager.ui.adapter.PartidaMatamataEditAdapter;
 public class MataMataFragmentPresenter extends MvpPresenter<MataMataFragmentCallback> {
 
     private PartidaMatamataAdapter adapter;
-    private PartidaMatamataEditAdapter adapterEdit;
+    public PartidaMatamataEditAdapter adapterEdit;
     private Fase fase;
     private boolean edit;
 

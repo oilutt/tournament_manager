@@ -50,42 +50,47 @@ public class PartidaEditAdapter extends RecyclerView.Adapter<PartidaEditAdapter.
         Partida partida = list.get(position);
         holder.nomeTimeCasa.setText(partida.getTime1());
         holder.nomeTimeFora.setText(partida.getTime2());
-        holder.golsTimeCasa.setText(partida.getValorTime1() != null ? partida.getValorTime1() : "");
-        holder.golsTimeFora.setText(partida.getValorTime2() != null ? partida.getValorTime2() : "");
-        TextWatcher watcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        if(partida.getValorTime1() != null) {
+            holder.golsTimeCasa.setText(partida.getValorTime1());
+            holder.golsTimeFora.setText(partida.getValorTime2());
+            holder.golsTimeCasa.setFocusable(false);
+            holder.golsTimeFora.setFocusable(false);
+        } else {
+            TextWatcher watcher = new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+                }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                partida.setValorTime1(s.toString());
-            }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    partida.setValorTime1(s.toString());
+                }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                @Override
+                public void afterTextChanged(Editable s) {
 
-            }
-        };
-        TextWatcher watcher2 = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+            };
+            TextWatcher watcher2 = new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+                }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                partida.setValorTime2(s.toString());
-            }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    partida.setValorTime2(s.toString());
+                }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                @Override
+                public void afterTextChanged(Editable s) {
 
-            }
-        };
-        holder.golsTimeCasa.addTextChangedListener(watcher);
-        holder.golsTimeFora.addTextChangedListener(watcher2);
+                }
+            };
+            holder.golsTimeCasa.addTextChangedListener(watcher);
+            holder.golsTimeFora.addTextChangedListener(watcher2);
+        }
         if (impar == 0) {
             if (position % 2 == 1) {
                 holder.layout.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryLight2));
