@@ -55,14 +55,18 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
         getViewState().setBrasao(campeonato.getFoto());
         getViewState().setNome(campeonato.getNome());
         getViewState().setDescricao(campeonato.getDescricao());
-//        getViewState().setDono(campeonato.getDono().getNome());
+        getViewState().setDono(campeonato.getDono().getEmail().substring(0,campeonato.getDono().getEmail().indexOf('@')));
         getViewState().setFormato(campeonato.getFormato().getNome());
         getViewState().setInicio(campeonato.getDataInicio());
+        if(campeonato.getDataFim() != null)
+            getViewState().setFim(campeonato.getDataFim());
+        else
+            getViewState().hideFim();
         getViewState().setQuantidadeTimes(String.valueOf(campeonato.getQuantidadeTimes()));
         if (campeonato.getStatus() == 3)
             getViewState().setStatus("Concluído");
         else if (campeonato.getStatus() == 2)
-            getViewState().setStatus("Em andamento");
+            getViewState().setStatus("Ocorrendo");
         else if (campeonato.getStatus() == 1)
             getViewState().setStatus("Aberto");
         if (campeonato.getFormato().getNome().equals("Liga")) {

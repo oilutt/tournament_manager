@@ -33,6 +33,10 @@ public interface CampeonatoDetailCallback extends MvpView {
 
     void setInicio(String inicio);
 
+    void setFim(String fim);
+
+    void hideFim();
+
     void setQuantidadeTimes(String quantidade);
 
     void setDono(String dono);

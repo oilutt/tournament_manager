@@ -41,6 +41,7 @@ public class TournamentManagerApp extends Application {
 
     private void initFirebase() {
         database = FirebaseDatabase.getInstance().getReference();
+        database.goOnline();
     }
 
     private void initPreferences() {

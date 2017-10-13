@@ -123,7 +123,7 @@ public class TabAdapter extends FragmentPagerAdapter {
                 }
             } else {
                 if(position <= grupos * 3 -1) {
-                    return "Rodada " + ((position % 3) +1);
+                    return "Rodada " + ((position % 3) +1 + "\nGrupo " + ((position/3)+1));
                 } else {
                     if (camp.getFormato().getFases().size() == 4) {
                         if (position == grupos * 3)

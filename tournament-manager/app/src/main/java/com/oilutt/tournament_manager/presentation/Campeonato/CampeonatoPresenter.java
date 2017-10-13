@@ -118,9 +118,11 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
         } else {
             List<Fragment> fragmentList = new ArrayList<>();
             for (int x = 0; x < campeonato.getFormato().getGrupos().size(); x++) {
+                Bundle extras3 = new Bundle();
+                extras3.putParcelable("campeonato", campeonato);
                 TabelaFragment fragment = TabelaFragment.newInstance();
-                extras.putInt("grupo", x);
-                fragment.setArguments(extras);
+                extras3.putInt("grupo", x);
+                fragment.setArguments(extras3);
                 fragmentList.add(fragment);
                 for (int y = 0; y < campeonato.getFormato().getGrupos().get(x).getRodadas().size(); y++) {
                     Bundle extras2 = new Bundle();

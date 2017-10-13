@@ -103,4 +103,12 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
     public void hideProgress() {
         progress.dismiss();
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, CampeonatoDetailsActivity.class);
+        intent.putExtra("campeonatoId", presenter.campeonatoId);
+        startActivity(intent);
+        finish();
+    }
 }

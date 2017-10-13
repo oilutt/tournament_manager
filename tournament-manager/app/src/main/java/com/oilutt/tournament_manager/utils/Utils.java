@@ -618,6 +618,11 @@ public class Utils {
         }
     }
 
+    public static String getDateFromTimeStamp(long startDate){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return simpleDateFormat.format(startDate).toUpperCase();
+    }
+
     public static String getDataFormatNotificacao(String startDate) {
         if (!TextUtils.isEmpty(startDate)) {
             SimpleDateFormat simpleDateFormatString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

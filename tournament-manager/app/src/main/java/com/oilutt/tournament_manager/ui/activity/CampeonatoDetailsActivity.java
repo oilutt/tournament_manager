@@ -59,6 +59,10 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     TextView status;
     @BindView(R.id.inicio)
     TextView inicio;
+    @BindView(R.id.fim)
+    TextView fim;
+    @BindView(R.id.layout_fim)
+    LinearLayout layoutFim;
     @BindView(R.id.quantidade_times)
     TextView quantidadeTimes;
     @BindView(R.id.dono)
@@ -155,6 +159,16 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     }
 
     @Override
+    public void setFim(String fim) {
+        this.fim.setText(fim);
+    }
+
+    @Override
+    public void hideFim() {
+        layoutFim.setVisibility(View.GONE);
+    }
+
+    @Override
     public void setQuantidadeTimes(String quantidade) {
         quantidadeTimes.setText(quantidade);
     }
@@ -187,5 +201,6 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
         Intent intent = new Intent(this, CampeonatoActivity.class);
         intent.putExtra("campeonatoId", campeonatoId);
         startActivity(intent);
+        finish();
     }
 }

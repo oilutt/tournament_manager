@@ -90,6 +90,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 campeonato.getFormato().setRodadas(createSchedule(listTimes));
             } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
                 campeonato.getFormato().setFases(createScheduleFases(campeonato.getTimes()));
+                verifyFreeWin();
             } else {
                 campeonato.getFormato().setGrupos(createScheduleTorneio(listTimes));
                 campeonato.getFormato().setFases(createScheduleFasesTorneio(listTimes));
@@ -99,7 +100,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
             Map<String, Object> campeonatoValues = campeonato.toMap();
             Map<String, Object> childUpdates = new HashMap<>();
             childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
-            childUpdates.put("/campeonatos/" + key, campeonatoValues);
+//            childUpdates.put("/campeonatos/" + key, campeonatoValues);
             campEndPoint.updateChildren(childUpdates);
 
             getViewState().openActivityWithoutHist(MainActivity.class);
@@ -112,6 +113,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                     campeonato.getFormato().setRodadas(createSchedule(listTimes));
                 } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
                     campeonato.getFormato().setFases(createScheduleFases(campeonato.getTimes()));
+                    verifyFreeWin();
                 } else {
                     campeonato.getFormato().setGrupos(createScheduleTorneio(listTimes));
                     campeonato.getFormato().setFases(createScheduleFasesTorneio(listTimes));
@@ -121,11 +123,62 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 Map<String, Object> campeonatoValues = campeonato.toMap();
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
-                childUpdates.put("/campeonatos/" + key, campeonatoValues);
+//                childUpdates.put("/campeonatos/" + key, campeonatoValues);
                 campEndPoint.updateChildren(childUpdates);
 
                 getViewState().openActivityWithoutHist(MainActivity.class);
             }, 2000);
+        }
+    }
+
+    private void verifyFreeWin(){
+        for (int x = 0;
+             x < campeonato.getFormato().getFases().get(campeonato.getFormato().getFases().size()-1).getPartidas().size();
+                x++){
+            if(campeonato.getFormato().getFases().get(campeonato.getFormato()
+                    .getFases().size()-1).getPartidas().get(x).getTime2().equals("") ||
+                    campeonato.getFormato().getFases().get(campeonato.getFormato()
+                            .getFases().size()-1).getPartidas().get(x).getTime2() == null){
+
+                if(campeonato.getFormato().getFases().get(campeonato.getFormato()
+                        .getFases().size()-2).getPartidas().get(x/2).getTime1().toLowerCase().contains("vencedor partida")) {
+
+                    campeonato.getFormato().getFases().get(campeonato.getFormato()
+                            .getFases().size() - 2).getPartidas().get(x / 2).setTime1(
+                            campeonato.getFormato().getFases().get(campeonato.getFormato()
+                                    .getFases().size() - 1).getPartidas().get(x).getTime1());
+
+                } else if (campeonato.getFormato().getFases().get(campeonato.getFormato()
+                        .getFases().size()-2).getPartidas().get(x/2).getTime2().toLowerCase().contains("vencedor partida")){
+
+                    campeonato.getFormato().getFases().get(campeonato.getFormato()
+                            .getFases().size() - 2).getPartidas().get(x / 2).setTime2(
+                            campeonato.getFormato().getFases().get(campeonato.getFormato()
+                                    .getFases().size() - 1).getPartidas().get(x).getTime1());
+                }
+
+            } else if(campeonato.getFormato().getFases().get(campeonato.getFormato()
+                    .getFases().size()-1).getPartidas().get(x).getTime1().equals("") ||
+                    campeonato.getFormato().getFases().get(campeonato.getFormato()
+                            .getFases().size()-1).getPartidas().get(x).getTime1() == null){
+
+                if(campeonato.getFormato().getFases().get(campeonato.getFormato()
+                        .getFases().size()-2).getPartidas().get(x/2).getTime1().toLowerCase().contains("vencedor partida")) {
+
+                    campeonato.getFormato().getFases().get(campeonato.getFormato()
+                            .getFases().size() - 2).getPartidas().get(x / 2).setTime1(
+                            campeonato.getFormato().getFases().get(campeonato.getFormato()
+                                    .getFases().size() - 1).getPartidas().get(x).getTime2());
+
+                } else if (campeonato.getFormato().getFases().get(campeonato.getFormato()
+                        .getFases().size()-2).getPartidas().get(x/2).getTime2().toLowerCase().contains("vencedor partida")){
+
+                    campeonato.getFormato().getFases().get(campeonato.getFormato()
+                            .getFases().size() - 2).getPartidas().get(x / 2).setTime2(
+                            campeonato.getFormato().getFases().get(campeonato.getFormato()
+                                    .getFases().size() - 1).getPartidas().get(x).getTime2());
+                }
+            }
         }
     }
 
@@ -556,15 +609,6 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
             best.setId(x);
             best.setTime1(list.size() > x ? list.get(x).getNome() : "");
             best.setTime2(list.size() > (partidas * 2 - x) - 1 ? list.get((partidas * 2 - x) - 1).getNome() : "");
-            if (best.getTime1().equals("")) {
-                if (!best.getTime2().equals("")) {
-                    campeonato.getTimesClassificados().add(list.get((list.size() - x) - 1));
-                }
-            } else if (best.getTime2().equals("")) {
-                if (!best.getTime1().equals("")) {
-                    campeonato.getTimesClassificados().add(list.get(x));
-                }
-            }
             best.setQuantity(campeonato.getFormato().getQuantidadePartidasChave());
             List<Partida> listPartidas = new ArrayList<>();
             for (int y = 0; y < best.getQuantity(); y++) {
@@ -586,17 +630,6 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 listPartidas.add(partida);
             }
             best.setPartidas(listPartidas);
-            if (best.getTime1().equals("")) {
-                if (!best.getTime2().equals("")) {
-                    best.setValorTime2(String.valueOf(best.getQuantity() - 1));
-                    best.setValorTime1("0");
-                }
-            } else if (best.getTime2().equals("")) {
-                if (!best.getTime1().equals("")) {
-                    best.setValorTime1(String.valueOf(best.getQuantity() - 1));
-                    best.setValorTime2("0");
-                }
-            }
             listBest.add(best);
         }
         return listBest;

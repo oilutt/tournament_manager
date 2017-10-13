@@ -32,7 +32,7 @@
     <string name="monstserrat_medium">Montserrat-Medium.ttf</string>
 
     <!-- Campeonato -->
-    <string name="em_andamento">Em andamento</string>
+    <string name="em_andamento">Ocorrendo</string>
     <string name="concluido">Concluído</string>
     <string name="aberto">Aberto</string>
 
@@ -114,6 +114,7 @@
     <string name="dono_det">Dono:</string>
     <string name="status_det">Status:</string>
     <string name="data_inicio_det">Início:</string>
+    <string name="data_fim_det">Fim:</string>
 
     <!-- Edit -->
     <string name="edit_title">Publicar Resultados</string>

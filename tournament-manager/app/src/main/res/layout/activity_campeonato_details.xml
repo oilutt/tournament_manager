@@ -9,6 +9,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        app:fontPath="@string/monstserrat_regular"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -16,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:fontPath="@string/monstserrat_regular">
 
             <ImageView
                 android:id="@+id/brasao"
@@ -34,7 +36,7 @@
                 android:navigationIcon="@drawable/shield_83973"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:title="CAMPEONATO">
+                app:fontPath="@string/monstserrat_regular">
 
             </android.support.v7.widget.Toolbar>
 
@@ -224,6 +226,29 @@
 
                         <TextView
                             android:id="@+id/inicio"
+                            style="@style/Text14MontserratRegular"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="@dimen/margin_5"
+                            android:text="10/02/2017"
+                            android:textColor="@color/colorPrimaryText2" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_fim"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/margin_15"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Text14MontserratBold"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/data_fim_det" />
+
+                        <TextView
+                            android:id="@+id/fim"
                             style="@style/Text14MontserratRegular"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="@dimen/margin_5"
