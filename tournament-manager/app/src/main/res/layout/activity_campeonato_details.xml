@@ -312,6 +312,12 @@
                 android:layout_marginBottom="@dimen/margin_10"
                 android:overScrollMode="never" />
 
+            <Button
+                android:id="@+id/btn_invite"
+                style="@style/BtnSalvar"
+                android:layout_margin="@dimen/margin_10"
+                android:text="@string/invite"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

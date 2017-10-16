@@ -7,6 +7,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,6 +20,7 @@ public class User implements Serializable, Parcelable {
     private String id;
     private String nome;
     private String email;
+    private List<Campeonato> inviteChamps;
 
     public User() {
 
@@ -35,6 +37,15 @@ public class User implements Serializable, Parcelable {
         result.put("nome", nome);
         result.put("email", email);
         result.put("id", id);
+        return result;
+    }
+
+    public Map<String, Object> toMap2() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("nome", nome);
+        result.put("email", email);
+        result.put("id", id);
+        result.put("invites", inviteChamps);
         return result;
     }
 
@@ -66,6 +77,14 @@ public class User implements Serializable, Parcelable {
         this.email = email;
     }
 
+    public List<Campeonato> getInviteChamps() {
+        return inviteChamps;
+    }
+
+    public void setInviteChamps(List<Campeonato> inviteChamps) {
+        this.inviteChamps = inviteChamps;
+    }
+
 
     @Override
     public int describeContents() {
@@ -77,12 +96,14 @@ public class User implements Serializable, Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.nome);
         dest.writeString(this.email);
+        dest.writeTypedList(this.inviteChamps);
     }
 
     protected User(Parcel in) {
         this.id = in.readString();
         this.nome = in.readString();
         this.email = in.readString();
+        this.inviteChamps = in.createTypedArrayList(Campeonato.CREATOR);
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

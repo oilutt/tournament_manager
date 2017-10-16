@@ -2,10 +2,21 @@ package com.oilutt.tournament_manager.presentation.MainActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.google.android.gms.appinvite.AppInvite;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.appinvite.FirebaseAppInvite;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.oilutt.tournament_manager.app.TournamentManagerApp;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
@@ -37,6 +48,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
 
     public MainActivityPresenter(Activity activity) {
         this.activity = activity;
+        invites();
         getCamps();
     }
 
@@ -71,5 +83,30 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         } else {
             getViewState().showPlaceHolder();
         }
+    }
+
+    private void invites(){
+        FirebaseDynamicLinks.getInstance().getDynamicLink(activity.getIntent())
+                .addOnSuccessListener(activity, data -> {
+                    if (data == null) {
+                            Log.e("INVITE", "getInvitation: no data");
+                        return;
+                    }
+
+                    // Get the deep link
+                    Uri deepLink = data.getLink();
+
+                    // Extract invite
+                    FirebaseAppInvite invite = FirebaseAppInvite.getInvitation(data);
+                    if (invite != null) {
+                        String invitationId = invite.getInvitationId();
+                    }
+
+                    // Handle the deep link
+                    // ...
+                })
+                .addOnFailureListener(activity, e -> {
+                        Log.e("INVITE", "getDynamicLink:onFailure", e);
+                });
     }
 }

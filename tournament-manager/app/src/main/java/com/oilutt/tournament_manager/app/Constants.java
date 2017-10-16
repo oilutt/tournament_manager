@@ -16,6 +16,7 @@ public class Constants {
     public static final int MAX_LEGHT_FILE = 10 * 1024;
     public static final int MAX_LEGHT_FILE_VIDEO = 40 * 1024;
     public static final int EDIT_CAMP = 1234;
+    public static final int REQUEST_INVITE = 1235;
 
     public static final int TIME_HANDLER = 2000;
 

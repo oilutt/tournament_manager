@@ -1,21 +1,31 @@
 package com.oilutt.tournament_manager.ui.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.appinvite.AppInvite;
+import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.oilutt.tournament_manager.R;
+import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.presentation.CampeonatoDetail.CampeonatoDetailCallback;
 import com.oilutt.tournament_manager.presentation.CampeonatoDetail.CampeonatoDetailPresenter;
 import com.oilutt.tournament_manager.ui.adapter.TeamsAdapter;
@@ -69,11 +79,17 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     TextView dono;
     @BindView(R.id.recycler_times)
     RecyclerView recyclerView;
+    @BindView(R.id.btn_invite)
+    Button invite;
 
     DialogProgress progress;
 
     @InjectPresenter
     CampeonatoDetailPresenter presenter;
+    @ProvidePresenter
+    CampeonatoDetailPresenter createPresenter(){
+        return new CampeonatoDetailPresenter(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,5 +218,23 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
         intent.putExtra("campeonatoId", campeonatoId);
         startActivity(intent);
         finish();
+    }
+
+    @OnClick(R.id.btn_invite)
+    public void clickInvite(){
+        presenter.clickInvite();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+//        Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
+
+        if (requestCode == Constants.REQUEST_INVITE) {
+            if (resultCode == RESULT_OK) {
+                // Get the invitation IDs of all sent messages
+                AppInviteInvitation.getInvitationIds(resultCode, data);
+            }
+        }
     }
 }

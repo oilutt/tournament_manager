@@ -71,6 +71,7 @@
     <string name="idaevolta">Jogar ida e volta</string>
     <string name="adicionar_brasao">Adicionar brasão</string>
     <string name="continuar">Continuar</string>
+    <string name="invite">Convidar usuários</string>
     <string name="matamata">Mata-mata</string>
     <string name="torneio">Torneio</string>
     <string name="liga">Liga</string>
@@ -119,5 +120,11 @@
     <!-- Edit -->
     <string name="edit_title">Publicar Resultados</string>
     <string name="salvar">Salvar</string>
+
+    <!-- Invitation -->
+    <string name="invitation_title">Convidar usuários</string>
+    <string name="invitation_message">Venha acompanhar o campeonato %s</string>
+    <string name="invitation_deep_link">https://fw9p6.app.goo.gl/rniX</string>
+    <string name="invitation_cta">campeonato</string>
 
 </resources>

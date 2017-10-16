@@ -151,7 +151,8 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
 
     public void onCreateOptionsMenu(Menu menu){
         if(mFirebaseUser.getUid().equals(campeonato.getDono().getId())){
-            getViewState().manageMenuOptions(menu);
+            if(campeonato.getDataFim() != null)
+                getViewState().manageMenuOptions(menu);
         }
     }
 

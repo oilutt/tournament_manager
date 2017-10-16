@@ -1,9 +1,14 @@
 package com.oilutt.tournament_manager.presentation.CampeonatoDetail;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -12,8 +17,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.oilutt.tournament_manager.R;
+import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.ui.adapter.TeamsAdapter;
+import com.oilutt.tournament_manager.utils.Utils;
 
 /**
  * Created by Tulio on 03/10/2017.
@@ -27,6 +34,11 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
     private String campeonatoId;
     private Campeonato campeonato;
     private TeamsAdapter adapter;
+    private Context context;
+
+    public CampeonatoDetailPresenter(Context context){
+        this.context = context;
+    }
 
     public void setCampeonatoId(String campeonatoId) {
         getViewState().showProgress();
@@ -87,5 +99,15 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
 
     public void clickFab() {
         getViewState().startCampeonato(campeonatoId);
+    }
+
+    public void clickInvite() {
+        Intent intent = new AppInviteInvitation.IntentBuilder(context.getString(R.string.invitation_title))
+                .setMessage(Utils.formatString(context.getString(R.string.invitation_message), campeonato.getNome()))
+                .setDeepLink(Uri.parse(context.getString(R.string.invitation_deep_link)))
+//                .setCustomImage(Uri.parse(getString(R.string.invitation_custom_image)))
+                .setCallToActionText(context.getString(R.string.invitation_cta))
+                .build();
+        ((Activity)context).startActivityForResult(intent, Constants.REQUEST_INVITE);
     }
 }
