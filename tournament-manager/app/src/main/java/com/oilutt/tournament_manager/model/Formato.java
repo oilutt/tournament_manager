@@ -10,14 +10,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.realm.RealmModel;
+import io.realm.annotations.RealmClass;
+
 /**
  * Created by oilut on 25/08/2017.
  */
-
 @IgnoreExtraProperties
 public class Formato implements Serializable, Parcelable {
 
-    private int id;
     private String nome;
     private int quantidadePartidasChave;
     private int quantidadePartidasFinal;
@@ -48,14 +49,6 @@ public class Formato implements Serializable, Parcelable {
         result.put("grupos", grupos);
 
         return result;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -121,7 +114,6 @@ public class Formato implements Serializable, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
         dest.writeString(this.nome);
         dest.writeInt(this.quantidadePartidasChave);
         dest.writeInt(this.quantidadePartidasFinal);
@@ -132,7 +124,6 @@ public class Formato implements Serializable, Parcelable {
     }
 
     protected Formato(Parcel in) {
-        this.id = in.readInt();
         this.nome = in.readString();
         this.quantidadePartidasChave = in.readInt();
         this.quantidadePartidasFinal = in.readInt();

@@ -11,7 +11,21 @@ public interface MainActivityCallback extends MvpView {
 
     void showPlaceHolder();
 
+    void showPlaceHolderInvite();
+
     void hidePlaceHolder();
 
+    void hidePlaceHolderInvite();
+
     void setAdapter(CampAdapter adapter);
+
+    void setFoto(String foto);
+
+    void setNome(String nome);
+
+    void setEmail(String email);
+
+    void openLogin();
+
+    void openCodigo();
 }

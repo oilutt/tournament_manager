@@ -67,7 +67,7 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
         getViewState().setBrasao(campeonato.getFoto());
         getViewState().setNome(campeonato.getNome());
         getViewState().setDescricao(campeonato.getDescricao());
-        getViewState().setDono(campeonato.getDono().getEmail().substring(0,campeonato.getDono().getEmail().indexOf('@')));
+        getViewState().setDono(campeonato.getDono().getNome());
         getViewState().setFormato(campeonato.getFormato().getNome());
         getViewState().setInicio(campeonato.getDataInicio());
         if(campeonato.getDataFim() != null)
@@ -102,12 +102,6 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
     }
 
     public void clickInvite() {
-        Intent intent = new AppInviteInvitation.IntentBuilder(context.getString(R.string.invitation_title))
-                .setMessage(Utils.formatString(context.getString(R.string.invitation_message), campeonato.getNome()))
-                .setDeepLink(Uri.parse(context.getString(R.string.invitation_deep_link)))
-//                .setCustomImage(Uri.parse(getString(R.string.invitation_custom_image)))
-                .setCallToActionText(context.getString(R.string.invitation_cta))
-                .build();
-        ((Activity)context).startActivityForResult(intent, Constants.REQUEST_INVITE);
+        getViewState().share(campeonato.getNome(), campeonatoId);
     }
 }

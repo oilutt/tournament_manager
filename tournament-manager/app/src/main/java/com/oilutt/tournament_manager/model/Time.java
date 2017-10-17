@@ -8,12 +8,17 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
 
+import io.realm.RealmModel;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
+
 /**
  * Created by Túlio on 17/09/2017.
  */
 
 @IgnoreExtraProperties
-public class Time implements Serializable, Parcelable {
+public class Time  implements Serializable, Parcelable {
 
     private int id;
     private String nome;

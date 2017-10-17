@@ -24,6 +24,8 @@ public class SignupActivity extends BaseActivity implements SignupCallback {
 
     @BindView(R.id.email)
     public EditText inputEmail;
+    @BindView(R.id.nome)
+    public EditText inputNome;
     @BindView(R.id.password)
     public EditText inputPassword;
     @BindView(R.id.sign_in_button)
@@ -53,6 +55,9 @@ public class SignupActivity extends BaseActivity implements SignupCallback {
 
         RxTextView.textChanges(inputPassword)
                 .subscribe(presenter::getPassword);
+
+        RxTextView.textChanges(inputNome)
+                .subscribe(presenter::getNome);
     }
 
     @OnClick({R.id.sign_in_button, R.id.sign_up_button})

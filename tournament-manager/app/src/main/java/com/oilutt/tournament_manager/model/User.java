@@ -10,6 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.realm.RealmModel;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
+
 /**
  * Created by oilut on 25/08/2017.
  */
@@ -20,37 +25,44 @@ public class User implements Serializable, Parcelable {
     private String id;
     private String nome;
     private String email;
+    private String foto;
     private List<Campeonato> inviteChamps;
 
     public User() {
 
     }
 
-    public User(String nome, String email, String id) {
+    public User(String nome, String email, String id, String foto) {
         this.nome = nome;
         this.email = email;
         this.id = id;
+        this.foto = foto;
     }
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("id", id);
         result.put("nome", nome);
         result.put("email", email);
-        result.put("id", id);
+        result.put("foto", foto);
         return result;
     }
 
     public Map<String, Object> toMap2() {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("id", id);
         result.put("nome", nome);
         result.put("email", email);
-        result.put("id", id);
+        result.put("foto", foto);
         result.put("invites", inviteChamps);
         return result;
     }
 
-    public User(String email) {
-        this.email = email;
+    public User(UserRealm userRealm) {
+        this.nome = userRealm.getNome();
+        this.email = userRealm.getEmail();
+        this.id = userRealm.getId();
+        this.foto = userRealm.getFoto();
     }
 
     public String getId() {
@@ -77,6 +89,14 @@ public class User implements Serializable, Parcelable {
         this.email = email;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     public List<Campeonato> getInviteChamps() {
         return inviteChamps;
     }
@@ -96,6 +116,7 @@ public class User implements Serializable, Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.nome);
         dest.writeString(this.email);
+        dest.writeString(this.foto);
         dest.writeTypedList(this.inviteChamps);
     }
 
@@ -103,6 +124,7 @@ public class User implements Serializable, Parcelable {
         this.id = in.readString();
         this.nome = in.readString();
         this.email = in.readString();
+        this.foto = in.readString();
         this.inviteChamps = in.createTypedArrayList(Campeonato.CREATOR);
     }
 

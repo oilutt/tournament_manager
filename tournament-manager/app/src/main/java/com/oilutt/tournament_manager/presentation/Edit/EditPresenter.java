@@ -171,7 +171,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
         Map<String, Object> campeonatoValues = campeonato.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + campeonatoId, campeonatoValues);
-//        childUpdates.put("/campeonatos/" + campeonatoId, campeonatoValues);
+        childUpdates.put("/campeonatos/" + campeonatoId, campeonatoValues);
         campEndPointUpdate.updateChildren(childUpdates);
 
         getViewState().startCampeonato(campeonatoId);

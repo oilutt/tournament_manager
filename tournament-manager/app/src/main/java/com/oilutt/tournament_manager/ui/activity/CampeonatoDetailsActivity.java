@@ -30,6 +30,7 @@ import com.oilutt.tournament_manager.presentation.CampeonatoDetail.CampeonatoDet
 import com.oilutt.tournament_manager.presentation.CampeonatoDetail.CampeonatoDetailPresenter;
 import com.oilutt.tournament_manager.ui.adapter.TeamsAdapter;
 import com.oilutt.tournament_manager.ui.dialog.DialogProgress;
+import com.oilutt.tournament_manager.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -226,15 +227,10 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-//        Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
-
-        if (requestCode == Constants.REQUEST_INVITE) {
-            if (resultCode == RESULT_OK) {
-                // Get the invitation IDs of all sent messages
-                AppInviteInvitation.getInvitationIds(resultCode, data);
-            }
-        }
+    public void share(String nome, String codigo){
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT, Utils.formatString(getString(R.string.share_camp), nome) + " " + codigo + getString(R.string.share_camp2));
+        startActivity(Intent.createChooser(share, "Convidar por"));
     }
 }

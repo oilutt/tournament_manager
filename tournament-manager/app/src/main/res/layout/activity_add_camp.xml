@@ -6,18 +6,18 @@
     android:background="@color/colorPrimaryLight"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/toolbar"
+        android:id="@+id/include" />
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/toolbar"
-        android:layout_marginBottom="@dimen/margin_55"
         android:background="@color/colorPrimaryLight"
-        android:focusable="false">
+        android:layout_marginBottom="@dimen/margin_55"
+        android:focusable="false"
+        android:layout_below="@+id/include"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,6 +30,7 @@
 
             <LinearLayout
                 android:id="@+id/add_photo"
+                android:background="?selectableItemBackground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -243,8 +244,11 @@
     <Button
         android:id="@+id/btn_continuar"
         style="@style/BtnSalvar"
+        android:text="@string/continuar"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_10"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/margin_10"
-        android:text="@string/continuar" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

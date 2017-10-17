@@ -72,7 +72,10 @@ public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder> {
     }
 
     public void setData(List<Campeonato> list) {
-        this.list = list;
+        if(list != null)
+            this.list = list;
+        else
+            this.list = new ArrayList<>();
         notifyDataSetChanged();
     }
 

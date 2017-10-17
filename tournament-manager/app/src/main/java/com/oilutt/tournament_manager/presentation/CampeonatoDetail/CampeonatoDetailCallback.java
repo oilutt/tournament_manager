@@ -48,4 +48,6 @@ public interface CampeonatoDetailCallback extends MvpView {
     void hideProgress();
 
     void startCampeonato(String campeonatoId);
+
+    void share(String nome, String codigo);
 }

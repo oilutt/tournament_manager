@@ -7,6 +7,9 @@
 
     <!-- MainActivity -->
     <string name="text_no_data">Você ainda não possui nenhum campeonato.\nVocê pode começar um novo clicando no botão abaixo.</string>
+    <string name="text_no_data_invite">Você ainda não foi convidado para nenhum campeonato.</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-- Genericos -->
     <string name="cancelar">Cancelar</string>
@@ -38,6 +41,7 @@
 
     <!-- SignUp -->
     <string name="email">E-mail</string>
+    <string name="nome">Nome</string>
     <string name="hint_password">Senha</string>
     <string name="btn_forgot_password">Esqueceu sua senha?</string>
     <string name="btn_reset_password">Trocar senha</string>
@@ -46,6 +50,7 @@
     <string name="erro_senha">O campo senha não pode ser vazio.</string>
     <string name="erro_min_senha">A senha deve conter no mínimo 6 caracteres.</string>
     <string name="erro_email">O campo e-mail não pode ser vazio.</string>
+    <string name="erro_nome_user">O campo nome não pode ser vazio.</string>
     <string name="invalid_email">O e-mail é inválido.</string>
 
     <!-- Login -->
@@ -116,6 +121,8 @@
     <string name="status_det">Status:</string>
     <string name="data_inicio_det">Início:</string>
     <string name="data_fim_det">Fim:</string>
+    <string name="share_camp">Você foi convidado para acompanhar o andamento do campeonato %s através do app Tounament Manager. Para tal use o código: </string>
+    <string name="share_camp2">.\nSe você ainda não possui o aplicativo Tournament Manager, baixe-o através do link: </string>
 
     <!-- Edit -->
     <string name="edit_title">Publicar Resultados</string>
@@ -126,5 +133,13 @@
     <string name="invitation_message">Venha acompanhar o campeonato %s</string>
     <string name="invitation_deep_link">https://fw9p6.app.goo.gl/rniX</string>
     <string name="invitation_cta">campeonato</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <!-- Codigo -->
+    <string name="codigo_hint">Insira o código</string>
+    <string name="codigo_title">Espectar Campeonato</string>
+    <string name="inserir">Inserir</string>
+    <string name="erro_camp">Código de campeonato não encontrado</string>
+    <string name="codigo_sucesso">Campeonato adicionado com sucesso</string>
 
 </resources>

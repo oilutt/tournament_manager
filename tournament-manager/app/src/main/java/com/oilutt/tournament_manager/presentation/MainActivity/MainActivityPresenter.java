@@ -2,6 +2,7 @@ package com.oilutt.tournament_manager.presentation.MainActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
@@ -17,8 +18,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.appinvite.FirebaseAppInvite;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
+import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.app.TournamentManagerApp;
 import com.oilutt.tournament_manager.model.Campeonato;
+import com.oilutt.tournament_manager.model.User;
+import com.oilutt.tournament_manager.model.UserRealm;
 import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,17 +46,20 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     private CampAdapter adapter;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+    private DatabaseReference userEndPoint = FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid());
     private DatabaseReference campEndPoint = FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid() + "/campeonatos");
     private List<Campeonato> campeonatoList;
     private Activity activity;
+    private User user;
+    private boolean meusCamps = false;
 
     public MainActivityPresenter(Activity activity) {
         this.activity = activity;
-        invites();
+        getUser();
         getCamps();
     }
 
-    public void getCamps() {
+    private void getCamps() {
         campEndPoint.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -62,6 +69,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
                     Campeonato note = noteSnapshot.getValue(Campeonato.class);
                     note.setId(key);
                     campeonatoList.add(note);
+                    meusCamps = true;
                 }
                 setAdapter();
             }
@@ -72,6 +80,29 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
                 Log.w("getCAMPS", "Failed to read value.", error.toException());
             }
         });
+    }
+
+    private void getUser(){
+        userEndPoint.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user = dataSnapshot.getValue(User.class);
+                saveUserRealm();
+                setFields();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void saveUserRealm(){
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(new UserRealm(user));
+        realm.commitTransaction();
     }
 
     private void setAdapter() {
@@ -85,28 +116,70 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         }
     }
 
-    private void invites(){
-        FirebaseDynamicLinks.getInstance().getDynamicLink(activity.getIntent())
-                .addOnSuccessListener(activity, data -> {
-                    if (data == null) {
-                            Log.e("INVITE", "getInvitation: no data");
-                        return;
-                    }
+    private void setFields(){
+        getViewState().setFoto(user.getFoto() != null && !user.getFoto().equals("") ? user.getFoto() : "");
+        getViewState().setEmail(user.getEmail());
+        getViewState().setNome(user.getNome());
+    }
 
-                    // Get the deep link
-                    Uri deepLink = data.getLink();
+    public void logout(){
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        realm.delete(UserRealm.class);
+        realm.commitTransaction();
+        mFirebaseAuth.signOut();
+        getViewState().openLogin();
+    }
 
-                    // Extract invite
-                    FirebaseAppInvite invite = FirebaseAppInvite.getInvitation(data);
-                    if (invite != null) {
-                        String invitationId = invite.getInvitationId();
-                    }
+    public void insertCodigo(){
+        getViewState().openCodigo();
+    }
 
-                    // Handle the deep link
-                    // ...
-                })
-                .addOnFailureListener(activity, e -> {
-                        Log.e("INVITE", "getDynamicLink:onFailure", e);
-                });
+    public void clickHeader(){
+
+    }
+
+    public void clickMeusCamps(){
+        if(!meusCamps){
+            getCamps();
+        }
+    }
+
+    public void clickInviteCamp(){
+        if(meusCamps){
+            getUserCamp();
+        }
+    }
+
+    private void getUserCamp(){
+        userEndPoint.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user = dataSnapshot.getValue(User.class);
+                saveUserRealm();
+                adapter = new CampAdapter(activity);
+                adapter.setData(user.getInviteChamps());
+                getViewState().setAdapter(adapter);
+                if(user.getInviteChamps() != null && user.getInviteChamps().size() > 0){
+                    getViewState().hidePlaceHolderInvite();
+                } else {
+                    getViewState().showPlaceHolderInvite();
+                }
+                meusCamps = false;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode == Constants.CODIGO) {
+            if (resultCode == Activity.RESULT_OK) {
+                clickInviteCamp();
+            }
+        }
     }
 }

@@ -1,49 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight"
-    android:orientation="vertical"
-    tools:context="com.oilutt.tournament_manager.ui.activity.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <include layout="@layout/toolbar" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
         android:background="@color/colorPrimaryLight"
-        android:visibility="invisible" />
+        android:orientation="vertical"
+        tools:context="com.oilutt.tournament_manager.ui.activity.MainActivity">
 
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/progress"
-        android:layout_width="@dimen/margin_50"
-        android:layout_height="@dimen/margin_50"
-        android:layout_centerInParent="true"
-        app:fontPath="@string/monstserrat_regular"
-        app:indicatorColor="@color/colorAccent"
-        app:indicatorName="BallSpinFadeLoaderIndicator" />
+        <include layout="@layout/toolbar" />
 
-    <TextView
-        android:id="@+id/text_no_data"
-        style="@style/Text16MontserratRegular"
-        android:layout_centerInParent="true"
-        android:lineSpacingExtra="@dimen/margin_5"
-        android:padding="@dimen/margin_10"
-        android:text="@string/text_no_data"
-        android:visibility="invisible" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:background="@color/colorPrimaryLight"
+            android:visibility="invisible" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/progress"
+            android:layout_width="@dimen/margin_50"
+            android:layout_height="@dimen/margin_50"
+            android:layout_centerInParent="true"
+            app:fontPath="@string/monstserrat_regular"
+            app:indicatorColor="@color/colorAccent"
+            app:indicatorName="BallSpinFadeLoaderIndicator" />
+
+        <TextView
+            android:id="@+id/text_no_data"
+            style="@style/Text16MontserratRegular"
+            android:layout_centerInParent="true"
+            android:lineSpacingExtra="@dimen/margin_5"
+            android:padding="@dimen/margin_10"
+            android:text="@string/text_no_data"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/text_no_data_invite"
+            style="@style/Text16MontserratRegular"
+            android:layout_centerInParent="true"
+            android:lineSpacingExtra="@dimen/margin_5"
+            android:padding="@dimen/margin_10"
+            android:text="@string/text_no_data_invite"
+            android:visibility="invisible" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/fab_margin"
+            android:background="?selectableItemBackground"
+            android:src="@drawable/ic_add_blackdp"
+            app:fabSize="normal" />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_blackdp"
-        app:fabSize="normal" />
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/colorPrimaryLight"
+        android:fitsSystemWindows="true"
+        app:itemTextColor="@color/colorPrimaryText"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/drawer"
+        app:itemTextAppearance="@style/NavigationDrawerStyle"/>
 
-</RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

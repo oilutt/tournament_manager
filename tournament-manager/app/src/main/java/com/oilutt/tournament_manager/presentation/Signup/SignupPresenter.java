@@ -6,11 +6,16 @@ import android.text.TextUtils;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.ui.activity.LoginActivity;
 import com.oilutt.tournament_manager.ui.activity.MainActivity;
 import com.oilutt.tournament_manager.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by oilut on 25/08/2017.
@@ -19,8 +24,9 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignupPresenter extends MvpPresenter<SignupCallback> {
 
     private FirebaseAuth auth;
-    private String email, password;
+    private String email, password, nome;
     private Context context;
+    private DatabaseReference userEndPoint = FirebaseDatabase.getInstance().getReference("users/");
 
     public SignupPresenter(Context context) {
         this.context = context;
@@ -36,6 +42,10 @@ public class SignupPresenter extends MvpPresenter<SignupCallback> {
         this.password = password.toString();
     }
 
+    public void getNome(CharSequence nome) {
+        this.nome = nome.toString();
+    }
+
     public void clickSignIn() {
         getViewState().openLogin(LoginActivity.class);
     }
@@ -49,6 +59,15 @@ public class SignupPresenter extends MvpPresenter<SignupCallback> {
                         if (!task.isSuccessful()) {
                             getViewState().showSnack(R.string.erro_generic);
                         } else {
+                            Map<String, Object> childUpdates = new HashMap<>();
+                            Map<String, Object> userValues = new HashMap<>();
+                            userValues.put("id", auth.getCurrentUser().getUid());
+                            userValues.put("nome", nome);
+                            userValues.put("email", email);
+                            userValues.put("foto", "");
+                            userValues.put("campeonatos", "");
+                            childUpdates.put(auth.getCurrentUser().getUid(), userValues);
+                            userEndPoint.updateChildren(childUpdates);
                             getViewState().openMain(MainActivity.class);
                         }
                     }).addOnFailureListener((Activity) context, e -> getViewState().hideProgress());
@@ -57,6 +76,11 @@ public class SignupPresenter extends MvpPresenter<SignupCallback> {
 
     private boolean verifyInputs() {
         boolean status = true;
+        if (TextUtils.isEmpty(nome)) {
+            getViewState().showSnack(R.string.erro_nome_user);
+            status = false;
+        }
+
         if (TextUtils.isEmpty(email)) {
             getViewState().showSnack(R.string.erro_email);
             status = false;

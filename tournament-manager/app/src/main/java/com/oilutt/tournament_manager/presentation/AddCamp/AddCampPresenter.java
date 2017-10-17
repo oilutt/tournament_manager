@@ -20,6 +20,7 @@ import com.oilutt.tournament_manager.app.TournamentManagerApp;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.model.Formato;
 import com.oilutt.tournament_manager.model.User;
+import com.oilutt.tournament_manager.model.UserRealm;
 import com.oilutt.tournament_manager.ui.activity.TeamListActivity;
 import com.oilutt.tournament_manager.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +31,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import io.realm.Realm;
 
 /**
  * Created by oilut on 25/08/2017.
@@ -89,7 +92,8 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
                     campeonato.setStatus(2);
                 }
             }
-            campeonato.setDono(new User(mFirebaseUser.getDisplayName(), mFirebaseUser.getEmail(), mFirebaseUser.getUid()));
+            User user = new User(Realm.getDefaultInstance().where(UserRealm.class).equalTo("id", mFirebaseUser.getUid()).findFirst());
+            campeonato.setDono(new User(user.getNome(), user.getEmail(), user.getId(), user.getFoto()));
             campeonato.setFormato(new Formato(formato, quantidadePartidasChave, quantidadePartidasFinal, idaEVolta));
             campeonato.setQuantidadeTimes(quantidadeTimes);
             campeonato.setFoto(imageBase64);

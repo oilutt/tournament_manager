@@ -161,6 +161,10 @@ public class BaseActivity extends MvpAppCompatActivity {
         }
     }
 
+    public void showSnack(int msg) {
+        showSnack(getString(msg));
+    }
+
     public void showSnack(String msg) {
         if (!TextUtils.isEmpty(msg)) {
             msg = msg.replace("\\n", " ");

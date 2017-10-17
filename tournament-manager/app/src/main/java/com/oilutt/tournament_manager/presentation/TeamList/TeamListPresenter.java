@@ -100,7 +100,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
             Map<String, Object> campeonatoValues = campeonato.toMap();
             Map<String, Object> childUpdates = new HashMap<>();
             childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
-//            childUpdates.put("/campeonatos/" + key, campeonatoValues);
+            childUpdates.put("/campeonatos/" + key, campeonatoValues);
             campEndPoint.updateChildren(childUpdates);
 
             getViewState().openActivityWithoutHist(MainActivity.class);
@@ -123,7 +123,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 Map<String, Object> campeonatoValues = campeonato.toMap();
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
-//                childUpdates.put("/campeonatos/" + key, campeonatoValues);
+                childUpdates.put("/campeonatos/" + key, campeonatoValues);
                 campEndPoint.updateChildren(childUpdates);
 
                 getViewState().openActivityWithoutHist(MainActivity.class);
