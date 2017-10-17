@@ -35,6 +35,7 @@ public class CodigoActivity extends BaseActivity implements CodigoCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_codigo);
         ButterKnife.bind(this);
+        setUpToolbarText(R.string.codigo_title, true);
         progress = new DialogProgress(this);
     }
 

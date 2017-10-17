@@ -12,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:padding="@dimen/margin_15">
 
         <android.support.design.widget.TextInputLayout
@@ -39,7 +41,7 @@
         <Button
             android:id="@+id/btn_inserir"
             style="@style/BtnSalvar"
-            android:layout_marginTop="@dimen/margin_40"
+            android:layout_marginTop="@dimen/margin_60"
             android:text="@string/inserir"/>
 
     </LinearLayout>

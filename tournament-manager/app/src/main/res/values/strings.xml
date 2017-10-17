@@ -138,7 +138,7 @@
     <!-- Codigo -->
     <string name="codigo_hint">Insira o código</string>
     <string name="codigo_title">Espectar Campeonato</string>
-    <string name="inserir">Inserir</string>
+    <string name="inserir">Confirmar</string>
     <string name="erro_camp">Código de campeonato não encontrado</string>
     <string name="codigo_sucesso">Campeonato adicionado com sucesso</string>
 
