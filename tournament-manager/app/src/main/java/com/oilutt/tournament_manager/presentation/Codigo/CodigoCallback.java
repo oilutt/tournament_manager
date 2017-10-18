@@ -17,4 +17,6 @@ public interface CodigoCallback extends MvpView {
     void showSnack(int msg);
 
     void onBackPressed();
+
+    void finishIntent();
 }

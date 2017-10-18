@@ -84,7 +84,7 @@ public class CodigoPresenter extends MvpPresenter<CodigoCallback> {
             childUpdates.put(user.getId(), userUpdates);
             userEndPoint.child(mFirebaseUser.getUid()).updateChildren(childUpdates);
             getViewState().showSnack(R.string.codigo_sucesso);
-            getViewState().onBackPressed();
+            getViewState().finishIntent();
         } else {
             getViewState().showSnack(R.string.erro_camp);
         }

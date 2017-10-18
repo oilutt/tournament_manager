@@ -62,6 +62,11 @@ public class CodigoActivity extends BaseActivity implements CodigoCallback {
 
     @Override
     public void onBackPressed(){
+        super.onBackPressed();
+    }
+
+    @Override
+    public void finishIntent(){
         Intent i = new Intent();
 
         setResult(Activity.RESULT_OK, i);
