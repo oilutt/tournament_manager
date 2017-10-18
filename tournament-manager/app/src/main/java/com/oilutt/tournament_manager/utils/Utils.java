@@ -133,9 +133,9 @@ public class Utils {
         }
     }
 
-    public static void showDialogCameraGallery(final Activity activity) {
+    public static void showDialogCameraGallery(final Activity activity, String text) {
         new SweetAlertDialog(activity)
-                .setTitleText("Adicionar brasão")
+                .setTitleText(text)
                 .setContentText(activity.getString(R.string.imageResource))
                 .setConfirmText(activity.getString(R.string.camera))
                 .setCancelText(activity.getString(R.string.gallery))

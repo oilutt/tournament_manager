@@ -1,5 +1,7 @@
 package com.oilutt.tournament_manager.presentation.MainActivity;
 
+import android.net.Uri;
+
 import com.arellomobile.mvp.MvpView;
 import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
 
@@ -21,6 +23,8 @@ public interface MainActivityCallback extends MvpView {
 
     void setFoto(String foto);
 
+    void setFotoPath(String path);
+
     void setNome(String nome);
 
     void setEmail(String email);
@@ -28,4 +32,6 @@ public interface MainActivityCallback extends MvpView {
     void openLogin();
 
     void openCodigo();
+
+    void launchCrop(Uri uri);
 }

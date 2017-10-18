@@ -291,7 +291,7 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
     }
 
     public void addPhoto() {
-        Utils.showDialogCameraGallery((Activity) context);
+        Utils.showDialogCameraGallery((Activity) context, "Adicionar brasão");
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

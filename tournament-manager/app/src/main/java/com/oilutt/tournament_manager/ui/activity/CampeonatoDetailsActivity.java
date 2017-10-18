@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -229,8 +230,10 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     @Override
     public void share(String nome, String codigo){
         Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("text/plain");
-        share.putExtra(Intent.EXTRA_TEXT, Utils.formatString(getString(R.string.share_camp), nome) + " " + codigo + getString(R.string.share_camp2));
+
+        String text = Utils.formatString(getString(R.string.share_camp), nome) + " " + codigo + getString(R.string.share_camp2);
+        share.setType("text/text");
+        share.putExtra(Intent.EXTRA_TEXT, text);
         startActivity(Intent.createChooser(share, "Convidar por"));
     }
 }

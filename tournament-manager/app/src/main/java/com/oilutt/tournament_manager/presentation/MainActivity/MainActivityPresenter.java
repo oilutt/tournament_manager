@@ -3,9 +3,13 @@ package com.oilutt.tournament_manager.presentation.MainActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -31,9 +35,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.oilutt.tournament_manager.utils.Utils;
+import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.realm.Realm;
 
@@ -52,6 +61,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     private Activity activity;
     private User user;
     private boolean meusCamps = false;
+    private String pathImage, imageBase64;
 
     public MainActivityPresenter(Activity activity) {
         this.activity = activity;
@@ -136,7 +146,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     }
 
     public void clickHeader(){
-
+        Utils.showDialogCameraGallery(activity, "Alterar foto de perfil");
     }
 
     public void clickMeusCamps(){
@@ -181,5 +191,26 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
                 clickInviteCamp();
             }
         }
+        else if ((requestCode == Constants.REQUEST_CAMERA || requestCode == Constants.PICK_PHOTO_CODE) && resultCode == AppCompatActivity.RESULT_OK) {
+            getViewState().launchCrop(data.getData());
+        } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (result != null) {
+                pathImage = result.getUri().getPath();
+                getViewState().setFotoPath(pathImage);
+                Bitmap bm = BitmapFactory.decodeFile(pathImage);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] b = baos.toByteArray();
+                imageBase64 = Base64.encodeToString(b, Base64.DEFAULT);
+                updateUser();
+            }
+        }
+    }
+
+    private void updateUser(){
+        user.setFoto(imageBase64);
+        Map<String, Object> userUpdates = user.toMap2();
+        userEndPoint.updateChildren(userUpdates);
     }
 }

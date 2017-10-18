@@ -5,6 +5,11 @@
     <string name="erro_app_nao_encontrado">Não encontramos nenhum aplicativo que possa abrir este arquivo.</string>
     <string name="selecione_aplicativo">Selecione um aplicativo válido:</string>
 
+    <!-- Sweet Dialog -->
+    <color name="blue_btn_bg_color">@color/colorAccent</color>
+    <color name="blue_btn_bg_pressed_color">#AA303f9f</color>
+    <color name="gray_btn_bg_color">#444549</color>
+
     <!-- MainActivity -->
     <string name="text_no_data">Você ainda não possui nenhum campeonato.\nVocê pode começar um novo clicando no botão abaixo.</string>
     <string name="text_no_data_invite">Você ainda não foi convidado para nenhum campeonato.</string>

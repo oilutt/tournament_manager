@@ -1,6 +1,7 @@
 package com.oilutt.tournament_manager.ui.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.oilutt.tournament_manager.presentation.MainActivity.MainActivityCallb
 import com.oilutt.tournament_manager.presentation.MainActivity.MainActivityPresenter;
 import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
 import com.oilutt.tournament_manager.utils.FontsOverride;
+import com.oilutt.tournament_manager.utils.Utils;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;
@@ -141,6 +143,12 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     }
 
     @Override
+    public void setFotoPath(String path) {
+        ImageView fotoView = (ImageView) header.findViewById(R.id.foto);
+        Glide.with(this).load(path).placeholder(R.drawable.ic_person_black_24dp).into(fotoView);
+    }
+
+    @Override
     public void setNome(String nome) {
         TextView nomeTxt = (TextView) header.findViewById(R.id.name);
         nomeTxt.setText(nome);
@@ -194,5 +202,10 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         presenter.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void launchCrop(Uri uri) {
+        Utils.launchCrop(uri, this);
     }
 }
