@@ -3,25 +3,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryLight"
-    android:orientation="vertical"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btn_continuar"
-        android:layout_below="@+id/toolbar"
-        android:padding="@dimen/margin_15" />
+        android:layout_below="@id/toolbar"
+        android:fillViewport="true">
 
-    <Button
-        android:id="@+id/btn_continuar"
-        style="@style/BtnSalvar"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/margin_15"
-        android:text="@string/criar" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/btn_continuar"
+                android:overScrollMode="never"
+                android:padding="@dimen/margin_15" />
+
+            <Button
+                android:id="@+id/btn_continuar"
+                style="@style/BtnSalvar"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/margin_15"
+                android:text="@string/criar" />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

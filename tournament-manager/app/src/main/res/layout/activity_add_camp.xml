@@ -2,253 +2,255 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/include" />
+    <include layout="@layout/toolbar" />
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar"
         android:background="@color/colorPrimaryLight"
-        android:layout_marginBottom="@dimen/margin_55"
-        android:focusable="false"
-        android:layout_below="@+id/include"
-        android:layout_alignParentStart="true">
+        android:focusable="false">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical"
-            android:padding="@dimen/margin_15">
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/add_photo"
-                android:background="?selectableItemBackground"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/foto_camp"
-                    android:layout_width="@dimen/margin_90"
-                    android:layout_height="@dimen/margin_90"
-                    android:layout_marginBottom="@dimen/margin_15"
-                    android:layout_marginLeft="@dimen/margin_15"
-                    android:layout_marginRight="@dimen/margin_15"
-                    android:layout_marginTop="@dimen/margin_15"
-                    android:src="@drawable/shield_83973"
-                    android:tint="@color/colorPrimaryText2" />
-
-                <TextView
-                    android:id="@+id/txt_add_foto"
-                    style="@style/Text12MontserratRegular"
-                    android:layout_marginBottom="@dimen/margin_15"
-                    android:text="@string/adicionar_brasao"
-                    android:textColor="@color/colorPrimaryText2" />
-
-            </LinearLayout>
-
-            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10"
-                android:textColorHint="@color/colorPrimaryText2"
-                app:fontPath="@string/monstserrat_regular">
+                android:layout_below="@+id/toolbar"
+                android:animateLayoutChanges="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_15">
 
-                <EditText
-                    android:id="@+id/nome_camp"
+                <LinearLayout
+                    android:id="@+id/add_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/foto_camp"
+                        android:layout_width="@dimen/margin_90"
+                        android:layout_height="@dimen/margin_90"
+                        android:layout_marginBottom="@dimen/margin_15"
+                        android:layout_marginLeft="@dimen/margin_15"
+                        android:layout_marginRight="@dimen/margin_15"
+                        android:layout_marginTop="@dimen/margin_15"
+                        android:src="@drawable/shield_83973"
+                        android:tint="@color/colorPrimaryText2" />
+
+                    <TextView
+                        android:id="@+id/txt_add_foto"
+                        style="@style/Text12MontserratRegular"
+                        android:layout_marginBottom="@dimen/margin_15"
+                        android:text="@string/adicionar_brasao"
+                        android:textColor="@color/colorPrimaryText2" />
+
+                </LinearLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorPrimaryLightEdt"
-                    android:hint="@string/nome_camp"
-                    android:imeOptions="actionNext"
-                    android:inputType="textCapSentences"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textColorHighlight="@color/colorPrimaryLightEdt"
+                    android:layout_marginTop="@dimen/margin_10"
                     android:textColorHint="@color/colorPrimaryText2"
-                    android:textColorLink="@color/colorPrimaryLightEdt"
-                    app:fontPath="@string/monstserrat_regular" />
-            </android.support.design.widget.TextInputLayout>
+                    app:fontPath="@string/monstserrat_regular">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10"
-                android:textColorHint="@color/colorPrimaryText2"
-                app:fontPath="@string/monstserrat_regular">
+                    <EditText
+                        android:id="@+id/nome_camp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimaryLightEdt"
+                        android:hint="@string/nome_camp"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapSentences"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textColorHighlight="@color/colorPrimaryLightEdt"
+                        android:textColorHint="@color/colorPrimaryText2"
+                        android:textColorLink="@color/colorPrimaryLightEdt"
+                        app:fontPath="@string/monstserrat_regular" />
+                </android.support.design.widget.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/descricao_camp"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorPrimaryLightEdt"
-                    android:hint="@string/descricao_camp"
-                    android:imeOptions="actionDone"
-                    android:inputType="textCapSentences|textMultiLine"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textColorHighlight="@color/colorPrimaryLightEdt"
+                    android:layout_marginTop="@dimen/margin_10"
                     android:textColorHint="@color/colorPrimaryText2"
-                    android:textColorLink="@color/colorPrimaryLightEdt"
-                    app:fontPath="@string/monstserrat_regular" />
-            </android.support.design.widget.TextInputLayout>
+                    app:fontPath="@string/monstserrat_regular">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10"
-                android:textColorHint="@color/colorPrimaryText2"
-                app:fontPath="@string/monstserrat_regular">
+                    <EditText
+                        android:id="@+id/descricao_camp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimaryLightEdt"
+                        android:hint="@string/descricao_camp"
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapSentences|textMultiLine"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textColorHighlight="@color/colorPrimaryLightEdt"
+                        android:textColorHint="@color/colorPrimaryText2"
+                        android:textColorLink="@color/colorPrimaryLightEdt"
+                        app:fontPath="@string/monstserrat_regular" />
+                </android.support.design.widget.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/data_inicio_camp"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorPrimaryLightEdt"
-                    android:hint="@string/data_inicio_camp"
-                    android:editable="false"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textColorHighlight="@color/colorPrimaryLightEdt"
+                    android:layout_marginTop="@dimen/margin_10"
                     android:textColorHint="@color/colorPrimaryText2"
-                    android:textColorLink="@color/colorPrimaryLightEdt"
-                    app:fontPath="@string/monstserrat_regular" />
-            </android.support.design.widget.TextInputLayout>
+                    app:fontPath="@string/monstserrat_regular">
 
-            <fr.ganfra.materialspinner.MaterialSpinner
-                android:id="@+id/formato_spinner"
-                style="@style/mySpinnerItemStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10"
-                android:spinnerMode="dropdown"
-                app:fontPath="@string/monstserrat_regular"
-                app:ms_arrowColor="@color/colorPrimaryLightEdt"
-                app:ms_arrowSize="@dimen/margin_15"
-                app:ms_baseColor="@color/colorPrimaryLightEdt"
-                app:ms_enableFloatingLabel="true"
-                app:ms_floatingLabelText="@string/formato_camp"
-                app:ms_highlightColor="@color/colorPrimaryLightEdt"
-                app:ms_hint="@string/formato_camp"
-                app:ms_hintColor="@color/colorPrimaryText2" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10"
-                android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/data_inicio_camp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimaryLightEdt"
+                        android:editable="false"
+                        android:hint="@string/data_inicio_camp"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textColorHighlight="@color/colorPrimaryLightEdt"
+                        android:textColorHint="@color/colorPrimaryText2"
+                        android:textColorLink="@color/colorPrimaryLightEdt"
+                        app:fontPath="@string/monstserrat_regular" />
+                </android.support.design.widget.TextInputLayout>
 
                 <fr.ganfra.materialspinner.MaterialSpinner
-                    android:id="@+id/quantidade_times"
+                    android:id="@+id/formato_spinner"
                     style="@style/mySpinnerItemStyle"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/margin_10"
                     android:spinnerMode="dropdown"
                     app:fontPath="@string/monstserrat_regular"
                     app:ms_arrowColor="@color/colorPrimaryLightEdt"
                     app:ms_arrowSize="@dimen/margin_15"
                     app:ms_baseColor="@color/colorPrimaryLightEdt"
                     app:ms_enableFloatingLabel="true"
-                    app:ms_floatingLabelText="@string/times_camp"
+                    app:ms_floatingLabelText="@string/formato_camp"
                     app:ms_highlightColor="@color/colorPrimaryLightEdt"
-                    app:ms_hint="@string/times_camp"
+                    app:ms_hint="@string/formato_camp"
                     app:ms_hintColor="@color/colorPrimaryText2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:orientation="horizontal">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/quantidade_times"
+                        style="@style/mySpinnerItemStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:spinnerMode="dropdown"
+                        app:fontPath="@string/monstserrat_regular"
+                        app:ms_arrowColor="@color/colorPrimaryLightEdt"
+                        app:ms_arrowSize="@dimen/margin_15"
+                        app:ms_baseColor="@color/colorPrimaryLightEdt"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_floatingLabelText="@string/times_camp"
+                        app:ms_highlightColor="@color/colorPrimaryLightEdt"
+                        app:ms_hint="@string/times_camp"
+                        app:ms_hintColor="@color/colorPrimaryText2" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_matamata"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/quantidade_partidas_chave"
+                        style="@style/mySpinnerItemStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:spinnerMode="dropdown"
+                        app:fontPath="@string/monstserrat_regular"
+                        app:ms_arrowColor="@color/colorPrimaryLightEdt"
+                        app:ms_arrowSize="@dimen/margin_15"
+                        app:ms_baseColor="@color/colorPrimaryLightEdt"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_floatingLabelText="@string/partidas_camp_chave"
+                        app:ms_highlightColor="@color/colorPrimaryLightEdt"
+                        app:ms_hint="@string/partidas_camp_chave"
+                        app:ms_hintColor="@color/colorPrimaryText2" />
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/quantidade_partidas_final"
+                        style="@style/mySpinnerItemStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:spinnerMode="dropdown"
+                        app:fontPath="@string/monstserrat_regular"
+                        app:ms_arrowColor="@color/colorPrimaryLightEdt"
+                        app:ms_arrowSize="@dimen/margin_15"
+                        app:ms_baseColor="@color/colorPrimaryLightEdt"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_floatingLabelText="@string/partidas_camp_final"
+                        app:ms_highlightColor="@color/colorPrimaryLightEdt"
+                        app:ms_hint="@string/partidas_camp_final"
+                        app:ms_hintColor="@color/colorPrimaryText2" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_liga"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/jogar_idaevolta"
+                        style="@style/mySpinnerItemStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:spinnerMode="dropdown"
+                        app:fontPath="@string/monstserrat_regular"
+                        app:ms_arrowColor="@color/colorPrimaryLightEdt"
+                        app:ms_arrowSize="@dimen/margin_15"
+                        app:ms_baseColor="@color/colorPrimaryLightEdt"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_floatingLabelText="@string/idaevolta"
+                        app:ms_highlightColor="@color/colorPrimaryLightEdt"
+                        app:ms_hint="@string/idaevolta"
+                        app:ms_hintColor="@color/colorPrimaryText2" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_continuar"
+                    style="@style/BtnSalvar"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:text="@string/continuar" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/layout_matamata"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <fr.ganfra.materialspinner.MaterialSpinner
-                    android:id="@+id/quantidade_partidas_chave"
-                    style="@style/mySpinnerItemStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/margin_5"
-                    android:layout_weight="1"
-                    android:spinnerMode="dropdown"
-                    app:fontPath="@string/monstserrat_regular"
-                    app:ms_arrowColor="@color/colorPrimaryLightEdt"
-                    app:ms_arrowSize="@dimen/margin_15"
-                    app:ms_baseColor="@color/colorPrimaryLightEdt"
-                    app:ms_enableFloatingLabel="true"
-                    app:ms_floatingLabelText="@string/partidas_camp_chave"
-                    app:ms_highlightColor="@color/colorPrimaryLightEdt"
-                    app:ms_hint="@string/partidas_camp_chave"
-                    app:ms_hintColor="@color/colorPrimaryText2" />
-
-                <fr.ganfra.materialspinner.MaterialSpinner
-                    android:id="@+id/quantidade_partidas_final"
-                    style="@style/mySpinnerItemStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_5"
-                    android:layout_weight="1"
-                    android:spinnerMode="dropdown"
-                    app:fontPath="@string/monstserrat_regular"
-                    app:ms_arrowColor="@color/colorPrimaryLightEdt"
-                    app:ms_arrowSize="@dimen/margin_15"
-                    app:ms_baseColor="@color/colorPrimaryLightEdt"
-                    app:ms_enableFloatingLabel="true"
-                    app:ms_floatingLabelText="@string/partidas_camp_final"
-                    app:ms_highlightColor="@color/colorPrimaryLightEdt"
-                    app:ms_hint="@string/partidas_camp_final"
-                    app:ms_hintColor="@color/colorPrimaryText2" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_liga"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <fr.ganfra.materialspinner.MaterialSpinner
-                    android:id="@+id/jogar_idaevolta"
-                    style="@style/mySpinnerItemStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:spinnerMode="dropdown"
-                    app:fontPath="@string/monstserrat_regular"
-                    app:ms_arrowColor="@color/colorPrimaryLightEdt"
-                    app:ms_arrowSize="@dimen/margin_15"
-                    app:ms_baseColor="@color/colorPrimaryLightEdt"
-                    app:ms_enableFloatingLabel="true"
-                    app:ms_floatingLabelText="@string/idaevolta"
-                    app:ms_highlightColor="@color/colorPrimaryLightEdt"
-                    app:ms_hint="@string/idaevolta"
-                    app:ms_hintColor="@color/colorPrimaryText2" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </RelativeLayout>
 
     </ScrollView>
-
-    <Button
-        android:id="@+id/btn_continuar"
-        style="@style/BtnSalvar"
-        android:text="@string/continuar"
-        android:layout_marginLeft="@dimen/margin_10"
-        android:layout_marginRight="@dimen/margin_10"
-        android:layout_marginBottom="@dimen/margin_10"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

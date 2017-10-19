@@ -8,42 +8,48 @@
 
     <include layout="@layout/toolbar" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:padding="@dimen/margin_15">
+        android:fillViewport="true">
 
-        <android.support.design.widget.TextInputLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10"
-            android:textColorHint="@color/colorPrimaryText2"
-            app:fontPath="@string/monstserrat_regular">
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="@dimen/margin_15">
 
-            <EditText
-                android:id="@+id/codigo_camp"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimaryLightEdt"
-                android:hint="@string/codigo_hint"
-                android:imeOptions="actionNext"
-                android:inputType="textCapSentences"
-                android:textColor="@color/colorPrimaryText"
-                android:textColorHighlight="@color/colorPrimaryLightEdt"
+                android:layout_marginTop="@dimen/margin_10"
                 android:textColorHint="@color/colorPrimaryText2"
-                android:textColorLink="@color/colorPrimaryLightEdt"
-                app:fontPath="@string/monstserrat_regular" />
-        </android.support.design.widget.TextInputLayout>
+                app:fontPath="@string/monstserrat_regular">
 
-        <Button
-            android:id="@+id/btn_inserir"
-            style="@style/BtnSalvar"
-            android:layout_marginTop="@dimen/margin_60"
-            android:text="@string/inserir"/>
+                <EditText
+                    android:id="@+id/codigo_camp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryLightEdt"
+                    android:hint="@string/codigo_hint"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textColorHighlight="@color/colorPrimaryLightEdt"
+                    android:textColorHint="@color/colorPrimaryText2"
+                    android:textColorLink="@color/colorPrimaryLightEdt"
+                    app:fontPath="@string/monstserrat_regular" />
+            </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_inserir"
+                style="@style/BtnSalvar"
+                android:layout_alignParentBottom="true"
+                android:text="@string/inserir" />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </LinearLayout>

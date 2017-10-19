@@ -179,24 +179,6 @@ public class BaseActivity extends MvpAppCompatActivity {
         showProgressDialog(false, null);
     }
 
-    protected void setupToolbarWithRightLogoutIcon(boolean isBack) {
-        setupToolbar(isBack);
-        setupRightIcon();
-    }
-
-    private void setupRightIcon() {
-        if (toolbar != null) {
-            rightIcon = (ImageView) findViewById(R.id.ic_toolbar_logout);
-            rightIcon.setVisibility(View.VISIBLE);
-            rightIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-        }
-    }
-
     public View.OnClickListener getToolbarOnBackClick() {
         return new View.OnClickListener() {
             @Override

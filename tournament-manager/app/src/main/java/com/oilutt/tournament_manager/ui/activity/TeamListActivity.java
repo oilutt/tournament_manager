@@ -76,4 +76,10 @@ public class TeamListActivity extends BaseActivity implements TeamListCallback {
     public void hideLoading() {
         dismissProgressDialog();
     }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        hidenKeyBoard();
+    }
 }
