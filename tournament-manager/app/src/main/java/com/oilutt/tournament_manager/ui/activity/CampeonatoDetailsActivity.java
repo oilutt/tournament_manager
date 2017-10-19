@@ -86,6 +86,8 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
 
     DialogProgress progress;
 
+    boolean invited;
+
     @InjectPresenter
     CampeonatoDetailPresenter presenter;
     @ProvidePresenter
@@ -107,7 +109,9 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
         if(getIntent().hasExtra("campeonatoId")){
             presenter.setCampeonatoId(getIntent().getStringExtra("campeonatoId"));
         } else {
-            finish();
+            Intent intent = getIntent();
+            String action = intent.getAction();
+            Uri data = intent.getData();
         }
     }
 

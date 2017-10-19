@@ -102,6 +102,6 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
     }
 
     public void clickInvite() {
-        getViewState().share(campeonato.getNome(), campeonatoId);
+        getViewState().share(campeonato.getNome(), "http://tournamentmanager.com/invite/" + campeonatoId);
     }
 }
