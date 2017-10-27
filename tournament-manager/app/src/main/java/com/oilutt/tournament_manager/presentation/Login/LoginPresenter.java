@@ -19,7 +19,7 @@ public class LoginPresenter extends MvpPresenter<LoginCallback> {
 
     private FirebaseAuth auth;
     private Context context;
-    private String email, password;
+    private String email, password, invite;
 
     public LoginPresenter(Context context) {
         this.context = context;
@@ -35,6 +35,10 @@ public class LoginPresenter extends MvpPresenter<LoginCallback> {
         this.password = password.toString();
     }
 
+    public void getInvite(String invite){
+        this.invite = invite;
+    }
+
     public void clickLogin() {
         if (verifyInputs()) {
             getViewState().showProgress();
@@ -48,14 +52,14 @@ public class LoginPresenter extends MvpPresenter<LoginCallback> {
                             // there was an error
                             getViewState().showSnack(R.string.erro_login);
                         } else {
-                            getViewState().openMain();
+                            getViewState().openMain(invite);
                         }
                     }).addOnFailureListener((Activity) context, e -> getViewState().hideProgress());
         }
     }
 
     public void clickSignUp() {
-        getViewState().openSignUp();
+        getViewState().openSignUp(invite);
     }
 
     public void clickReset() {
@@ -80,5 +84,13 @@ public class LoginPresenter extends MvpPresenter<LoginCallback> {
             status = false;
         }
         return status;
+    }
+
+    public void onBackPressed(){
+        if(invite.equals("")){
+            getViewState().onBackPressed2();
+        } else {
+            getViewState().openDetails(invite);
+        }
     }
 }

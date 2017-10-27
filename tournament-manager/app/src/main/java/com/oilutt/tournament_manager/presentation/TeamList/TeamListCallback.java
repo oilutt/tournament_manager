@@ -16,4 +16,6 @@ public interface TeamListCallback extends MvpView {
     void showLoading();
 
     void hideLoading();
+
+    void showSnack(int msg);
 }

@@ -16,9 +16,13 @@ public interface LoginCallback extends MvpView {
 
     void openActivity(Class<?> openActivity);
 
-    void openSignUp();
+    void openSignUp(String invite);
 
-    void openMain();
+    void openMain(String invite);
+
+    void openDetails(String invite);
 
     void onObserverEdts();
+
+    void onBackPressed2();
 }

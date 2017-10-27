@@ -19,7 +19,7 @@ public class Constants {
     public static final int REQUEST_INVITE = 1235;
     public static final int CODIGO = 1236;
 
-    public static final int TIME_HANDLER = 2000;
+    public static final int TIME_HANDLER = 2500;
 
     public static final String PREFERENCES_KEY = "APP_PREFERENCES";
 

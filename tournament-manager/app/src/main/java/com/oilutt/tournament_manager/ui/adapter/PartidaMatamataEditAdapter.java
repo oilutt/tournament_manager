@@ -2,6 +2,7 @@ package com.oilutt.tournament_manager.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -12,10 +13,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.SnackbarManager;
-import com.nispok.snackbar.enums.SnackbarType;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.BestOf;
 import com.oilutt.tournament_manager.model.Partida;
@@ -71,10 +68,7 @@ public class PartidaMatamataEditAdapter extends RecyclerView.Adapter<PartidaMata
                     if (Integer.parseInt(s.toString()) < Math.round(partida.getQuantity()))
                         partida.setValorTime1(s.toString());
                     else
-                        SnackbarManager.show(Snackbar.with(context)
-                                .type(SnackbarType.MULTI_LINE)
-                                .text(context.getString(R.string.valor_invalido))
-                                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), (Activity) context);
+                        Snackbar.make(holder.itemView, R.string.valor_invalido, Snackbar.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -93,10 +87,7 @@ public class PartidaMatamataEditAdapter extends RecyclerView.Adapter<PartidaMata
                     if (Integer.parseInt(s.toString()) < Math.round(partida.getQuantity()))
                         partida.setValorTime2(s.toString());
                     else
-                        SnackbarManager.show(Snackbar.with(context)
-                                .type(SnackbarType.MULTI_LINE)
-                                .text(context.getString(R.string.valor_invalido))
-                                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), (Activity) context);
+                        Snackbar.make(holder.itemView, R.string.valor_invalido, Snackbar.LENGTH_SHORT).show();
                 }
 
                 @Override

@@ -24,7 +24,7 @@ import java.util.Map;
 public class SignupPresenter extends MvpPresenter<SignupCallback> {
 
     private FirebaseAuth auth;
-    private String email, password, nome;
+    private String email, password, nome, invite;
     private Context context;
     private DatabaseReference userEndPoint = FirebaseDatabase.getInstance().getReference("users/");
 
@@ -38,6 +38,10 @@ public class SignupPresenter extends MvpPresenter<SignupCallback> {
         this.email = email.toString();
     }
 
+    public void getInvite(String invite){
+        this.invite = invite;
+    }
+
     public void getPassword(CharSequence password) {
         this.password = password.toString();
     }
@@ -47,7 +51,7 @@ public class SignupPresenter extends MvpPresenter<SignupCallback> {
     }
 
     public void clickSignIn() {
-        getViewState().openLogin(LoginActivity.class);
+        getViewState().openLogin(LoginActivity.class, invite);
     }
 
     public void clickSignUp() {
@@ -68,7 +72,7 @@ public class SignupPresenter extends MvpPresenter<SignupCallback> {
                             userValues.put("campeonatos", "");
                             childUpdates.put(auth.getCurrentUser().getUid(), userValues);
                             userEndPoint.updateChildren(childUpdates);
-                            getViewState().openMain(MainActivity.class);
+                            getViewState().openMain(MainActivity.class, invite);
                         }
                     }).addOnFailureListener((Activity) context, e -> getViewState().hideProgress());
         }

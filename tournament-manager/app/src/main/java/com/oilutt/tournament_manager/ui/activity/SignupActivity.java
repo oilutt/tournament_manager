@@ -1,5 +1,6 @@
 package com.oilutt.tournament_manager.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,13 @@ public class SignupActivity extends BaseActivity implements SignupCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
+        getBundle();
+    }
+
+    private void getBundle(){
+        if(getIntent().hasExtra("invite")){
+            presenter.getInvite(getIntent().getStringExtra("invite"));
+        }
     }
 
     @Override
@@ -94,14 +102,18 @@ public class SignupActivity extends BaseActivity implements SignupCallback {
     }
 
     @Override
-    public void openLogin(Class<?> openActivity) {
-        openActivity(openActivity);
+    public void openLogin(Class<?> openActivity, String invite) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("invite", invite);
+        startActivity(intent);
         finish();
     }
 
     @Override
-    public void openMain(Class<?> openActivity) {
-        openActivity(openActivity);
-        finish();
+    public void openMain(Class<?> openActivity, String invite) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("invite", invite);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coordinatorLayout"
+    android:background="@color/colorPrimaryLight"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -60,7 +61,7 @@
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -68,7 +69,7 @@
             <TextView
                 android:id="@+id/txt_des_camp"
                 style="@style/Text14MontserratRegular"
-                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_30"
                 android:layout_marginBottom="@dimen/margin_25"
                 android:layout_marginLeft="@dimen/margin_40"
@@ -77,8 +78,10 @@
                 android:textColor="@color/colorPrimaryText2" />
 
             <LinearLayout
+                android:id="@+id/layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_des_camp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -308,17 +311,20 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_times"
                 android:layout_width="match_parent"
+                android:layout_below="@+id/layout"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_10"
                 android:overScrollMode="never" />
 
             <Button
                 android:id="@+id/btn_invite"
+                android:visibility="gone"
+                android:layout_alignParentBottom="true"
                 style="@style/BtnSalvar"
                 android:layout_margin="@dimen/margin_10"
                 android:text="@string/invite"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

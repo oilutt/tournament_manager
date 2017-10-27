@@ -78,6 +78,13 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         FontsOverride.setDefaultFont(this, "MONOSPACE", getString(R.string.monstserrat_regular));
         toggle.syncState();
         setHeaderClick();
+        getBundle();
+    }
+
+    private void getBundle(){
+        if(getIntent().hasExtra("invite")){
+            presenter.getInvite(getIntent().getStringExtra("invite"));
+        }
     }
 
     private void setHeaderClick(){
@@ -207,5 +214,12 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     @Override
     public void launchCrop(Uri uri) {
         Utils.launchCrop(uri, this);
+    }
+
+    @Override
+    public void openDetails(String invite) {
+        Intent intent = new Intent(this, CampeonatoDetailsActivity.class);
+        intent.putExtra("invite", invite);
+        startActivity(intent);
     }
 }

@@ -61,12 +61,17 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     private Activity activity;
     private User user;
     private boolean meusCamps = false;
-    private String pathImage, imageBase64;
+    private String pathImage, imageBase64, invite;
 
     public MainActivityPresenter(Activity activity) {
         this.activity = activity;
         getUser();
         getCamps();
+    }
+
+    public void getInvite(String invite){
+        this.invite = invite;
+        getViewState().openDetails(invite);
     }
 
     private void getCamps() {
@@ -79,8 +84,8 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
                     Campeonato note = noteSnapshot.getValue(Campeonato.class);
                     note.setId(key);
                     campeonatoList.add(note);
-                    meusCamps = true;
                 }
+                meusCamps = true;
                 setAdapter();
             }
 

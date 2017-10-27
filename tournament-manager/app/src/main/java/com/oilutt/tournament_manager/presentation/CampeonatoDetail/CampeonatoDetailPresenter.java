@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.View;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -19,8 +21,21 @@ import com.google.firebase.database.ValueEventListener;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.model.Campeonato;
+import com.oilutt.tournament_manager.model.User;
+import com.oilutt.tournament_manager.model.UserRealm;
+import com.oilutt.tournament_manager.ui.activity.LoginActivity;
+import com.oilutt.tournament_manager.ui.activity.MainActivity;
+import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
 import com.oilutt.tournament_manager.ui.adapter.TeamsAdapter;
 import com.oilutt.tournament_manager.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by Tulio on 03/10/2017.
@@ -30,29 +45,78 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
-    private DatabaseReference campEndPoint = FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid() + "/campeonatos");
+    private DatabaseReference userEndPoint = FirebaseDatabase.getInstance().getReference("users/");
+    private DatabaseReference campEndPoint = FirebaseDatabase.getInstance().getReference();
     private String campeonatoId;
     private Campeonato campeonato;
     private TeamsAdapter adapter;
     private Context context;
+    private boolean invite;
 
-    public CampeonatoDetailPresenter(Context context){
+    public CampeonatoDetailPresenter(Context context) {
         this.context = context;
     }
 
-    public void setCampeonatoId(String campeonatoId) {
+    public void setCampeonatoId(String campeonatoId, boolean invite) {
+        this.invite = invite;
         getViewState().showProgress();
         this.campeonatoId = campeonatoId;
         getCampeonato();
     }
 
+    private void showButton() {
+        if (mFirebaseUser != null && mFirebaseUser.getUid().equals(campeonato.getDono().getId())) {
+            getViewState().showButton();
+        }
+        if (invite) {
+            snackSaveChamp();
+        }
+    }
+
+    public void snackSaveChamp(){
+        if (mFirebaseUser != null) {
+            if (!mFirebaseUser.getUid().equals(campeonato.getDono().getId())) {
+                View.OnClickListener clickListener = v -> saveChamp();
+                getViewState().showSnack(Utils.formatString(context.getString(R.string.invite_camp), campeonato.getNome()),
+                        R.string.sim, clickListener);
+            }
+        } else {
+            View.OnClickListener clickListener = v -> saveChampWithoutLogin();
+            getViewState().showSnack(Utils.formatString(context.getString(R.string.invite_camp), campeonato.getNome()),
+                    R.string.sim, clickListener);
+        }
+    }
+
+    private void saveChamp() {
+        userEndPoint.child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, Object> childUpdates = new HashMap<>();
+                Map<String, Object> userValues = new HashMap<>();
+                userValues.put(campeonatoId, campeonato);
+                childUpdates.put("inviteChamps", userValues);
+                userEndPoint.child(mFirebaseUser.getUid()).updateChildren(childUpdates);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void saveChampWithoutLogin(){
+        getViewState().openLogin(campeonatoId);
+    }
+
     private void getCampeonato() {
-        campEndPoint.child(campeonatoId).addListenerForSingleValueEvent(new ValueEventListener() {
+        campEndPoint.child("campeonatos/" + campeonatoId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 getViewState().hideProgress();
                 campeonato = dataSnapshot.getValue(Campeonato.class);
                 setFields();
+                showButton();
             }
 
             @Override
@@ -70,7 +134,7 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
         getViewState().setDono(campeonato.getDono().getNome());
         getViewState().setFormato(campeonato.getFormato().getNome());
         getViewState().setInicio(campeonato.getDataInicio());
-        if(campeonato.getDataFim() != null)
+        if (campeonato.getDataFim() != null)
             getViewState().setFim(campeonato.getDataFim());
         else
             getViewState().hideFim();
@@ -82,7 +146,7 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
         else if (campeonato.getStatus() == 1)
             getViewState().setStatus("Aberto");
         if (campeonato.getFormato().getNome().equals("Liga")) {
-            if(campeonato.getFormato().getIdaVolta() == 1)
+            if (campeonato.getFormato().getIdaVolta() == 1)
                 getViewState().setIdaEVolta(R.string.sim);
             else
                 getViewState().setIdaEVolta(R.string.nao);
@@ -103,5 +167,14 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
 
     public void clickInvite() {
         getViewState().share(campeonato.getNome(), "http://tournamentmanager.com/invite/" + campeonatoId);
+    }
+
+    public void onBackPressed() {
+        if (mFirebaseUser == null) {
+            getViewState().openActivityWithoutHist(LoginActivity.class);
+            getViewState().showSnack(R.string.text_no_login);
+        } else {
+            getViewState().onBackPressed2();
+        }
     }
 }

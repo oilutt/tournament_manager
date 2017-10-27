@@ -3,6 +3,7 @@ package com.oilutt.tournament_manager.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,9 +13,6 @@ import android.widget.ImageView;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.ui.dialog.DialogProgress;
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.SnackbarManager;
-import com.nispok.snackbar.enums.SnackbarType;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -168,10 +166,16 @@ public class BaseActivity extends MvpAppCompatActivity {
     public void showSnack(String msg) {
         if (!TextUtils.isEmpty(msg)) {
             msg = msg.replace("\\n", " ");
-            SnackbarManager.show(Snackbar.with(getApplicationContext())
-                    .type(SnackbarType.MULTI_LINE)
-                    .text(msg)
-                    .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), this);
+            Snackbar.make(toolbar, msg, Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    public void showSnackWithAction(String msg, String button, View.OnClickListener clickListener){
+        if (!TextUtils.isEmpty(msg) && !TextUtils.isEmpty(button)) {
+            msg = msg.replace("\\n", " ");
+            Snackbar.make(toolbar, msg, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(button, clickListener)
+                    .show();
         }
     }
 

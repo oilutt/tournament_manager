@@ -87,6 +87,7 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     DialogProgress progress;
 
     boolean invited;
+    static String inviteS = "";
 
     @InjectPresenter
     CampeonatoDetailPresenter presenter;
@@ -105,14 +106,30 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
         getBundle();
     }
 
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressed();
+    }
+
     private void getBundle(){
         if(getIntent().hasExtra("campeonatoId")){
-            presenter.setCampeonatoId(getIntent().getStringExtra("campeonatoId"));
-        } else {
+            presenter.setCampeonatoId(getIntent().getStringExtra("campeonatoId"), false);
+        } else if(getIntent().hasExtra("invite")){
+            inviteS = getIntent().getStringExtra("invite");
+            presenter.setCampeonatoId(getIntent().getStringExtra("invite"), true);
+        }else {
             Intent intent = getIntent();
-            String action = intent.getAction();
             Uri data = intent.getData();
+            presenter.setCampeonatoId(data.toString().substring(data.toString().indexOf('-')), true);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        if(!inviteS.equals("")){
+//            presenter.snackSaveChamp();
+//        }
     }
 
     @OnClick(R.id.fab)
@@ -223,7 +240,6 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
         Intent intent = new Intent(this, CampeonatoActivity.class);
         intent.putExtra("campeonatoId", campeonatoId);
         startActivity(intent);
-        finish();
     }
 
     @OnClick(R.id.btn_invite)
@@ -232,12 +248,33 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     }
 
     @Override
+    public void showButton() {
+        invite.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void share(String nome, String codigo){
         Intent share = new Intent(Intent.ACTION_SEND);
-
         String text = Utils.formatString(getString(R.string.share_camp), nome) + " " + codigo + getString(R.string.share_camp2);
         share.setType("text/text");
         share.putExtra(Intent.EXTRA_TEXT, text);
         startActivity(Intent.createChooser(share, "Convidar por"));
+    }
+
+    @Override
+    public void onBackPressed2() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public void showSnack(String msg, int button, View.OnClickListener clickListener) {
+        showSnackWithAction(msg, getString(button), clickListener);
+    }
+
+    @Override
+    public void openLogin(String invite) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("invite", invite);
+        startActivity(intent);
     }
 }

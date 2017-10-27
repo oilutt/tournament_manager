@@ -21,4 +21,6 @@ public interface CampeonatoCallback extends MvpView {
     void hideProgress();
 
     void manageMenuOptions(Menu menu);
+
+    void showMenuIcon();
 }

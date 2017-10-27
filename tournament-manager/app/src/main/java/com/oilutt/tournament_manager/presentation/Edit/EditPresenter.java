@@ -17,9 +17,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.SnackbarManager;
-import com.nispok.snackbar.enums.SnackbarType;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.BestOf;
 import com.oilutt.tournament_manager.model.Campeonato;
@@ -787,10 +784,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
     }
 
     private void showSnack() {
-        SnackbarManager.show(Snackbar.with(context)
-                .type(SnackbarType.MULTI_LINE)
-                .text(context.getString(R.string.algum_valor_invalido))
-                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), (Activity) context);
+        getViewState().showSnack(R.string.algum_valor_invalido);
     }
 
     private boolean updateFases(List<BestOf> listBestOf, int fase) {
@@ -808,10 +802,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                             || listBestOf.get(x).getTime2().toLowerCase().contains("1º grupo") ||
                     listBestOf.get(x).getTime1().toLowerCase().contains("2º grupo")
                             || listBestOf.get(x).getTime2().toLowerCase().contains("2º grupo")) {
-                        SnackbarManager.show(Snackbar.with(context)
-                                .type(SnackbarType.MULTI_LINE)
-                                .text(context.getString(R.string.partida_inexistente))
-                                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), (Activity) context);
+                        getViewState().showSnack(R.string.partida_inexistente);
                         return false;
                     }
                     if (Integer.parseInt(listBestOf.get(x).getValorTime1()) == Integer.parseInt(listBestOf.get(x).getValorTime2())) {
@@ -835,10 +826,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                             || listBestOf.get(x).getTime2().toLowerCase().contains("1º grupo") ||
                             listBestOf.get(x).getTime1().toLowerCase().contains("2º grupo")
                             || listBestOf.get(x).getTime2().toLowerCase().contains("2º grupo")) {
-                        SnackbarManager.show(Snackbar.with(context)
-                                .type(SnackbarType.MULTI_LINE)
-                                .text(context.getString(R.string.partida_inexistente))
-                                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), (Activity) context);
+                        getViewState().showSnack(R.string.partida_inexistente);
                         return false;
                     }
                     if (Integer.parseInt(listBestOf.get(x).getValorTime1()) == Integer.parseInt(listBestOf.get(x).getValorTime2())) {

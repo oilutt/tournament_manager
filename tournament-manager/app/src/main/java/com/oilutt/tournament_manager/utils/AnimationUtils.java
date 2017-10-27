@@ -48,7 +48,7 @@ public class AnimationUtils {
         if (view != null) {
             if (view.getVisibility() == View.VISIBLE) return;
             YoYo.with(Techniques.FadeIn)
-                    .duration(400)
+                    .duration(1000)
                     .playOn(view);
             view.setVisibility(View.VISIBLE);
         }

@@ -6,9 +6,6 @@ import android.os.Handler;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.SnackbarManager;
-import com.nispok.snackbar.enums.SnackbarType;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.app.TournamentManagerApp;
 import com.oilutt.tournament_manager.model.BestOf;
@@ -64,20 +61,14 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 listTimes.add(time);
             } else {
                 getViewState().hideLoading();
-                SnackbarManager.show(Snackbar.with(context)
-                        .type(SnackbarType.MULTI_LINE)
-                        .text(context.getString(R.string.time_empty))
-                        .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), (Activity) context);
+                getViewState().showSnack(R.string.time_empty);
                 return;
             }
             for (int y = 0; y < listNomes.size(); y++){
                 if(x != y) {
                     if (listNomes.get(x).equals(listNomes.get(y))) {
                         getViewState().hideLoading();
-                        SnackbarManager.show(Snackbar.with(context)
-                                .type(SnackbarType.MULTI_LINE)
-                                .text(context.getString(R.string.nome_igual))
-                                .duration(Snackbar.SnackbarDuration.LENGTH_SHORT), (Activity) context);
+                        getViewState().showSnack(R.string.nome_igual);
                         return;
                     }
                 }

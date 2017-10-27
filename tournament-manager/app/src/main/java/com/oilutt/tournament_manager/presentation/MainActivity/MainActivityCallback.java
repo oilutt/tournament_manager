@@ -34,4 +34,6 @@ public interface MainActivityCallback extends MvpView {
     void openCodigo();
 
     void launchCrop(Uri uri);
+
+    void openDetails(String invite);
 }

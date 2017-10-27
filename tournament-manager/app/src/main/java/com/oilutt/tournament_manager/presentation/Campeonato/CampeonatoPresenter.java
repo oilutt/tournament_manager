@@ -44,7 +44,7 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
     private Menu menu;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
-    private DatabaseReference campEndPoint = FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid() + "/campeonatos");
+    private DatabaseReference campEndPoint = FirebaseDatabase.getInstance().getReference();
 
     public CampeonatoPresenter(Context context) {
         this.context = context;
@@ -56,14 +56,22 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
         getCampeonato();
     }
 
+    private void verifyMenu(){
+        if(mFirebaseUser != null && mFirebaseUser.getUid().equals(campeonato.getDono().getId())){
+            if(campeonato.getDataFim() == null)
+                getViewState().showMenuIcon();
+        }
+    }
+
     private void getCampeonato() {
-        campEndPoint.child(campeonatoId).addValueEventListener(new ValueEventListener() {
+        campEndPoint.child("campeonatos/" + campeonatoId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 getViewState().hideProgress();
                 campeonato = dataSnapshot.getValue(Campeonato.class);
                 setTitle();
                 setAdapter();
+                verifyMenu();
             }
 
             @Override
@@ -150,10 +158,7 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
     }
 
     public void onCreateOptionsMenu(Menu menu){
-        if(mFirebaseUser.getUid().equals(campeonato.getDono().getId())){
-            if(campeonato.getDataFim() == null)
-                getViewState().manageMenuOptions(menu);
-        }
+        getViewState().manageMenuOptions(menu);
     }
 
 //    public void onActivityResult(int requestCode, int resultCode, Intent data) {

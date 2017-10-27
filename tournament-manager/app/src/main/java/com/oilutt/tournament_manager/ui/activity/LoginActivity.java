@@ -1,5 +1,6 @@
 package com.oilutt.tournament_manager.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,13 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        getBundle();
+    }
+
+    private void getBundle(){
+        if(getIntent().hasExtra("invite")){
+            presenter.getInvite(getIntent().getStringExtra("invite"));
+        }
     }
 
     @OnClick({R.id.btn_login, R.id.btn_signup, R.id.btn_reset_password})
@@ -94,14 +102,35 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
     }
 
     @Override
-    public void openSignUp() {
-        openActivity(SignupActivity.class);
-        finish();
+    public void openSignUp(String invite) {
+        Intent intent = new Intent(this, SignupActivity.class);
+        intent.putExtra("invite", invite);
+        startActivity(intent);
     }
 
     @Override
-    public void openMain() {
-        openActivity(MainActivity.class);
-        finish();
+    public void openMain(String invite) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("invite", invite);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    @Override
+    public void openDetails(String invite) {
+        Intent intent = new Intent(this, CampeonatoDetailsActivity.class);
+        intent.putExtra("invite", invite);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed2() {
+        super.onBackPressed();
     }
 }

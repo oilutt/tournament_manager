@@ -1,5 +1,7 @@
 package com.oilutt.tournament_manager.presentation.CampeonatoDetail;
 
+import android.view.View;
+
 import com.arellomobile.mvp.MvpView;
 import com.oilutt.tournament_manager.ui.adapter.TeamsAdapter;
 
@@ -50,4 +52,16 @@ public interface CampeonatoDetailCallback extends MvpView {
     void startCampeonato(String campeonatoId);
 
     void share(String nome, String codigo);
+
+    void showButton();
+
+    void openActivityWithoutHist(Class<?> openActivity);
+
+    void onBackPressed2();
+
+    void showSnack(int msg);
+
+    void showSnack(String msg, int button, View.OnClickListener clickListener);
+
+    void openLogin(String campeonato);
 }
