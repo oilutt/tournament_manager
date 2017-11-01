@@ -31,7 +31,7 @@ public interface MainActivityCallback extends MvpView {
 
     void openLogin();
 
-    void openCodigo();
+    void openSorteio();
 
     void launchCrop(Uri uri);
 

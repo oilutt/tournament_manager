@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/meus_camps"
-        android:title="Meus Campeonatos" />
-    <item
-        android:id="@+id/invite_camp"
-        android:title="Compartilhados Comigo" />
-    <item
-        android:id="@+id/codigo_camp"
-        android:title="Inserir Código" />
+    <item android:title="Campeonatos">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/meus_camps"
+                    android:title="Meus campeonatos" />
+                <item
+                    android:id="@+id/invite_camp"
+                    android:title="Compartilhados comigo" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="Extras">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/sorteio_fifa"
+                    android:title="Sorteio FIFA" />
+            </group>
+        </menu>
+    </item>
     <item
         android:id="@+id/logout"
         android:title="Sair" />

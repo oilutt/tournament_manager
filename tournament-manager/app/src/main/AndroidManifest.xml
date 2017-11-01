@@ -40,6 +40,9 @@
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.activity.SorteioFIFAActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.CampeonatoDetailsActivity"
             android:screenOrientation="portrait">
         <intent-filter>
@@ -84,11 +87,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/AppThemeEdt" />
-        <activity
-            android:name=".ui.activity.CodigoActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AppThemeEdt"/>
     </application>
 
 </manifest>

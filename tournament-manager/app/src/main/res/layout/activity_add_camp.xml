@@ -46,7 +46,7 @@
                         android:layout_marginLeft="@dimen/margin_15"
                         android:layout_marginRight="@dimen/margin_15"
                         android:layout_marginTop="@dimen/margin_15"
-                        android:src="@drawable/shield_83973"
+                        android:src="@drawable/shield_unknown"
                         android:tint="@color/colorPrimaryText2" />
 
                     <TextView

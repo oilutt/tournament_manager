@@ -140,7 +140,6 @@
     <string name="invitation_message">Venha acompanhar o campeonato %s</string>
     <string name="invitation_deep_link">https://fw9p6.app.goo.gl/rniX</string>
     <string name="invitation_cta">campeonato</string>
-    <string name="title_activity_main2">Main2Activity</string>
 
     <!-- Codigo -->
     <string name="codigo_hint">Insira o código</string>
@@ -148,5 +147,8 @@
     <string name="inserir">Confirmar</string>
     <string name="erro_camp">Código de campeonato não encontrado</string>
     <string name="codigo_sucesso">Campeonato adicionado com sucesso</string>
+
+    <!-- Sorteio -->
+    <string name="sorteio_title">Sorteio</string>
 
 </resources>

@@ -17,7 +17,15 @@
 
     <style name="NavigationDrawerStyle">
         <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textColorSecondary">@color/colorPrimaryText2</item>
         <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="NavigationDrawerTheme">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textColorSecondary">@color/colorPrimaryText2</item>
+        <item name="android:listDivider">@color/colorPrimaryLightMataMata</item>
     </style>
 
     <style name="AppThemeEdt" parent="Theme.AppCompat.Light.NoActionBar">

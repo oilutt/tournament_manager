@@ -104,14 +104,16 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
     @Override
     public void openSignUp(String invite) {
         Intent intent = new Intent(this, SignupActivity.class);
-        intent.putExtra("invite", invite);
+        if(invite != null && !invite.equals(""))
+            intent.putExtra("invite", invite);
         startActivity(intent);
     }
 
     @Override
     public void openMain(String invite) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("invite", invite);
+        if(invite != null && !invite.equals(""))
+            intent.putExtra("invite", invite);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

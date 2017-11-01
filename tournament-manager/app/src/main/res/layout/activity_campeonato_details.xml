@@ -25,7 +25,6 @@
                 android:id="@+id/brasao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/shield_83973"
                 app:layout_collapseMode="pin"
                 app:layout_collapseParallaxMultiplier="0.7"/>
 

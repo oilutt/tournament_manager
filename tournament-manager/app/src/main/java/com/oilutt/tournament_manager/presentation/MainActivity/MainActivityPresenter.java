@@ -61,7 +61,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     private Activity activity;
     private User user;
     private boolean meusCamps = false;
-    private String pathImage, imageBase64, invite;
+    private String pathImage, imageBase64;
 
     public MainActivityPresenter(Activity activity) {
         this.activity = activity;
@@ -70,7 +70,6 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     }
 
     public void getInvite(String invite){
-        this.invite = invite;
         getViewState().openDetails(invite);
     }
 
@@ -146,10 +145,6 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         getViewState().openLogin();
     }
 
-    public void insertCodigo(){
-        getViewState().openCodigo();
-    }
-
     public void clickHeader(){
         Utils.showDialogCameraGallery(activity, "Alterar foto de perfil");
     }
@@ -160,6 +155,10 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         }
     }
 
+    public void sorteio(){
+        getViewState().openSorteio();
+    }
+
     public void clickInviteCamp(){
         if(meusCamps){
             getUserCamp();
@@ -167,20 +166,18 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     }
 
     private void getUserCamp(){
-        userEndPoint.addListenerForSingleValueEvent(new ValueEventListener() {
+        userEndPoint.child("inviteChamps").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                user = dataSnapshot.getValue(User.class);
-                saveUserRealm();
-                adapter = new CampAdapter(activity);
-                adapter.setData(user.getInviteChamps());
-                getViewState().setAdapter(adapter);
-                if(user.getInviteChamps() != null && user.getInviteChamps().size() > 0){
-                    getViewState().hidePlaceHolderInvite();
-                } else {
-                    getViewState().showPlaceHolderInvite();
+                campeonatoList = new ArrayList<>();
+                for (DataSnapshot noteSnapshot : dataSnapshot.getChildren()) {
+                    String key = noteSnapshot.getKey();
+                    Campeonato note = noteSnapshot.getValue(Campeonato.class);
+                    note.setId(key);
+                    campeonatoList.add(note);
                 }
                 meusCamps = false;
+                setAdapter();
             }
 
             @Override

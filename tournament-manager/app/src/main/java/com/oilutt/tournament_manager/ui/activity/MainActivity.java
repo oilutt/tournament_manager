@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,8 +21,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
 import com.oilutt.tournament_manager.R;
-import com.oilutt.tournament_manager.app.Constants;
-import com.oilutt.tournament_manager.model.User;
 import com.oilutt.tournament_manager.presentation.MainActivity.MainActivityCallback;
 import com.oilutt.tournament_manager.presentation.MainActivity.MainActivityPresenter;
 import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
@@ -34,7 +31,6 @@ import com.wang.avi.AVLoadingIndicatorView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.realm.Realm;
 
 public class MainActivity extends BaseActivity implements MainActivityCallback,
         NavigationView.OnNavigationItemSelectedListener{
@@ -82,7 +78,7 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     }
 
     private void getBundle(){
-        if(getIntent().hasExtra("invite")){
+        if(getIntent().hasExtra("invite") && !getIntent().getStringExtra("invite").equals("")){
             presenter.getInvite(getIntent().getStringExtra("invite"));
         }
     }
@@ -184,8 +180,8 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
             presenter.clickMeusCamps();
         } else if (id == R.id.invite_camp) {
             presenter.clickInviteCamp();
-        } else if (id == R.id.codigo_camp) {
-            presenter.insertCodigo();
+        } else if (id == R.id.sorteio_fifa) {
+            presenter.sorteio();
         } else if (id == R.id.logout) {
             presenter.logout();
         }
@@ -201,9 +197,8 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     }
 
     @Override
-    public void openCodigo() {
-        Intent intent = new Intent(this, CodigoActivity.class);
-        startActivityForResult(intent, Constants.CODIGO);
+    public void openSorteio() {
+        openActivity(SorteioFIFAActivity.class);
     }
 
     @Override
