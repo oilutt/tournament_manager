@@ -46,8 +46,7 @@
                         android:layout_marginLeft="@dimen/margin_15"
                         android:layout_marginRight="@dimen/margin_15"
                         android:layout_marginTop="@dimen/margin_15"
-                        android:src="@drawable/shield_unknown"
-                        android:tint="@color/colorPrimaryText2" />
+                        android:src="@drawable/shield_unknown" />
 
                     <TextView
                         android:id="@+id/txt_add_foto"
