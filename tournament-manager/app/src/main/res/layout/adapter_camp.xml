@@ -22,8 +22,7 @@
                 android:id="@+id/image_camp"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/shield_83973"
-                android:tint="@color/colorPrimaryText2" />
+                android:src="@drawable/shield_unknown" />
 
         </LinearLayout>
 
