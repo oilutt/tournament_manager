@@ -116,6 +116,7 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
             intent.putExtra("invite", invite);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -124,6 +125,7 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
         intent.putExtra("invite", invite);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
     }
 
     @Override
