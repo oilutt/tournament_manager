@@ -25,4 +25,6 @@ public interface LoginCallback extends MvpView {
     void onObserverEdts();
 
     void onBackPressed2();
+
+    void hidenKeyBoard();
 }

@@ -19,4 +19,6 @@ public interface SignupCallback extends MvpView {
     void openMain(Class<?> openActivity, String invite);
 
     void onObserverEdts();
+
+    void hidenKeyBoard();
 }

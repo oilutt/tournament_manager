@@ -7,4 +7,12 @@ import com.arellomobile.mvp.MvpView;
  */
 
 public interface SorteioCallback extends MvpView {
+
+    void setNomeTime1(String nome);
+
+    void setNomeTime2(String nome);
+
+    void setLogoTime2(int drawable);
+
+    void setLogoTime1(int drawable);
 }

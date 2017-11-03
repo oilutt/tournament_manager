@@ -41,6 +41,7 @@ public class LoginPresenter extends MvpPresenter<LoginCallback> {
 
     public void clickLogin() {
         if (verifyInputs()) {
+            getViewState().hidenKeyBoard();
             getViewState().showProgress();
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener((Activity) context, task -> {

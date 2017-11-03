@@ -57,6 +57,7 @@ public class SignupPresenter extends MvpPresenter<SignupCallback> {
     public void clickSignUp() {
         if (verifyInputs()) {
             getViewState().showProgress();
+            getViewState().hidenKeyBoard();
             auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener((Activity) context, task -> {
                         getViewState().hideProgress();
