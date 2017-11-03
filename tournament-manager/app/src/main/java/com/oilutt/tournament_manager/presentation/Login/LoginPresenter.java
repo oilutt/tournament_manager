@@ -88,10 +88,10 @@ public class LoginPresenter extends MvpPresenter<LoginCallback> {
     }
 
     public void onBackPressed(){
-        if(invite.equals("")){
-            getViewState().onBackPressed2();
-        } else {
+        if(invite != null && !invite.equals("")){
             getViewState().openDetails(invite);
+        } else {
+            getViewState().onBackPressed2();
         }
     }
 }

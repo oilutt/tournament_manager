@@ -31,7 +31,7 @@ public class SplashActivity extends BaseActivity {
             if (auth.getCurrentUser() != null) {
                 openActivity(MainActivity.class);
             } else {
-                openActivity(SignupActivity.class);
+                openActivity(LoginActivity.class);
             }
         }, Constants.TIME_HANDLER);
     }
