@@ -268,7 +268,7 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
 
     @Override
     public void showSnack(String msg, int button, View.OnClickListener clickListener) {
-        showSnackWithAction(msg, getString(button), clickListener);
+        showSnackWithAction(msg, getString(button), recyclerView, clickListener);
     }
 
     @Override
@@ -276,5 +276,10 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
         Intent intent = new Intent(this, LoginActivity.class);
         intent.putExtra("invite", invite);
         startActivity(intent);
+    }
+
+    @Override
+    public void showSnack(int msg) {
+        showSnack(msg, recyclerView);
     }
 }
