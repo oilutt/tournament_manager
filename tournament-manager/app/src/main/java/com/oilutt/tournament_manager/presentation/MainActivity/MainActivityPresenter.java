@@ -291,7 +291,11 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
                 buscaAdapter.setData(buscaList);
                 new Handler().postDelayed(() -> {
                     getViewState().setBuscaAdapter(buscaAdapter);
-                    getViewState().hidePlaceHolderBusca();
+                    if(buscaList.size() > 0) {
+                        getViewState().hidePlaceHolderBusca();
+                    } else {
+                        getViewState().showPlaceHolderBusca();
+                    }
                 }, 2000);
             }
 
