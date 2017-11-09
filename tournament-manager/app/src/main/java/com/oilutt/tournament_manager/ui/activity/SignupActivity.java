@@ -98,7 +98,7 @@ public class SignupActivity extends BaseActivity implements SignupCallback {
 
     @Override
     public void showSnack(int message) {
-        showSnack(getString(message));
+        showSnack(getString(message), inputEmail);
     }
 
     @Override

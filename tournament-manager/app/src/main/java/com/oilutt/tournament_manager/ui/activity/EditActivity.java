@@ -89,4 +89,9 @@ public class EditActivity extends BaseActivity implements EditCallback {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void showSnack(int msg) {
+        showSnack(msg, viewPager);
+    }
 }

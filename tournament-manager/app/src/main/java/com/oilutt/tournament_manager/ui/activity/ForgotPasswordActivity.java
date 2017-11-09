@@ -65,7 +65,7 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
 
     @Override
     public void showSnack(int message) {
-        showSnack(getString(message));
+        showSnack(getString(message), inputEmail);
     }
 
     @Override

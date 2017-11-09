@@ -245,7 +245,7 @@ public class AddCampActivity extends BaseActivity implements AddCampCallback, Da
 
     @Override
     public void showSnack(int message) {
-        showSnack(getString(message));
+        showSnack(getString(message), continuar);
     }
 
 }

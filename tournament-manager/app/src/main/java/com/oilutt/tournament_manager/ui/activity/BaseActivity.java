@@ -159,21 +159,21 @@ public class BaseActivity extends MvpAppCompatActivity {
         }
     }
 
-    public void showSnack(int msg) {
-        showSnack(getString(msg));
+    public void showSnack(int msg, View view) {
+        showSnack(getString(msg), view);
     }
 
-    public void showSnack(String msg) {
+    public void showSnack(String msg, View view) {
         if (!TextUtils.isEmpty(msg)) {
             msg = msg.replace("\\n", " ");
-            Snackbar.make(toolbar, msg, Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
         }
     }
 
-    public void showSnackWithAction(String msg, String button, View.OnClickListener clickListener){
+    public void showSnackWithAction(String msg, String button, View view, View.OnClickListener clickListener){
         if (!TextUtils.isEmpty(msg) && !TextUtils.isEmpty(button)) {
             msg = msg.replace("\\n", " ");
-            Snackbar.make(toolbar, msg, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(view, msg, Snackbar.LENGTH_INDEFINITE)
                     .setAction(button, clickListener)
                     .show();
         }

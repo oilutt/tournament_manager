@@ -89,7 +89,7 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
 
     @Override
     public void showSnack(int message) {
-        showSnack(getString(message));
+        showSnack(getString(message), inputEmail);
     }
 
     @Override

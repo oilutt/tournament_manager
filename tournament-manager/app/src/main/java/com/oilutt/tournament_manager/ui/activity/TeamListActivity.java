@@ -81,4 +81,9 @@ public class TeamListActivity extends BaseActivity implements TeamListCallback {
         super.onBackPressed();
         hidenKeyBoard();
     }
+
+    @Override
+    public void showSnack(int msg) {
+        showSnack(msg, recyclerView);
+    }
 }
