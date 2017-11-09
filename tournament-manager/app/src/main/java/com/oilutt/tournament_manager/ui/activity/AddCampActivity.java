@@ -6,22 +6,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
+import com.jakewharton.rxbinding.widget.RxTextView;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.presentation.AddCamp.AddCampCallback;
 import com.oilutt.tournament_manager.presentation.AddCamp.AddCampPresenter;
 import com.oilutt.tournament_manager.utils.Utils;
-import com.jakewharton.rxbinding.widget.RxTextView;
 
 import java.util.Calendar;
 
@@ -46,6 +46,8 @@ public class AddCampActivity extends BaseActivity implements AddCampCallback, Da
     EditText descricaoCamp;
     @BindView(R.id.data_inicio_camp)
     EditText dataInicioCamp;
+    @BindView(R.id.privado_spinner)
+    MaterialSpinner privadoSpinner;
     @BindView(R.id.formato_spinner)
     MaterialSpinner formatoSpinner;
     @BindView(R.id.quantidade_times)
@@ -213,6 +215,16 @@ public class AddCampActivity extends BaseActivity implements AddCampCallback, Da
     @Override
     public void setIdaEVoltaListener(AdapterView.OnItemSelectedListener listener) {
         idaEVolta.setOnItemSelectedListener(listener);
+    }
+
+    @Override
+    public void setPrivadoAdapter(ArrayAdapter adapter) {
+        privadoSpinner.setAdapter(adapter);
+    }
+
+    @Override
+    public void setPrivadoListener(AdapterView.OnItemSelectedListener listener) {
+        privadoSpinner.setOnItemSelectedListener(listener);
     }
 
     @Override

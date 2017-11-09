@@ -9,7 +9,10 @@
                     android:title="Meus campeonatos" />
                 <item
                     android:id="@+id/invite_camp"
-                    android:title="Compartilhados comigo" />
+                    android:title="Seguindo" />
+                <item
+                    android:id="@+id/busca_camp"
+                    android:title="Buscar" />
             </group>
         </menu>
     </item>

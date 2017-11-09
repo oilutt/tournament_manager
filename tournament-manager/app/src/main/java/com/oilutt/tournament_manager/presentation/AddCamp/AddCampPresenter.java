@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.app.TournamentManagerApp;
@@ -21,10 +23,7 @@ import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.model.Formato;
 import com.oilutt.tournament_manager.model.User;
 import com.oilutt.tournament_manager.model.UserRealm;
-import com.oilutt.tournament_manager.ui.activity.TeamListActivity;
 import com.oilutt.tournament_manager.utils.Utils;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.ByteArrayOutputStream;
@@ -44,12 +43,13 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
     private FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
     private String nome, formato, dataInicio, pathImage, imageBase64, descricao;
     private int quantidadeTimes, quantidadePartidasChave, quantidadePartidasFinal, idaEVolta = 2;
+    private int privado;
 
     private Context context;
 
-    private AdapterView.OnItemSelectedListener formatoListener, timeListener, chaveListener, finalListener, idaEVoltaListener;
-    private ArrayAdapter formatoAdapter, timesAdapter, chaveAdapter, finalAdapter, idaEVoltaAdapter;
-    private List<String> formatoArray, idaEVoltaArray;
+    private AdapterView.OnItemSelectedListener privadoListener, formatoListener, timeListener, chaveListener, finalListener, idaEVoltaListener;
+    private ArrayAdapter privadoAdapter, formatoAdapter, timesAdapter, chaveAdapter, finalAdapter, idaEVoltaAdapter;
+    private List<String> formatoArray, simNaoArray;
     private List<Integer> timesArray, chaveArray, finalArray, timesArrayTorneio;
 
     public AddCampPresenter(Context context) {
@@ -95,6 +95,7 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
             User user = new User(Realm.getDefaultInstance().where(UserRealm.class).equalTo("id", mFirebaseUser.getUid()).findFirst());
             campeonato.setDono(new User(user.getNome(), user.getEmail(), user.getId(), user.getFoto()));
             campeonato.setFormato(new Formato(formato, quantidadePartidasChave, quantidadePartidasFinal, idaEVolta));
+            campeonato.setPrivado(privado);
             campeonato.setQuantidadeTimes(quantidadeTimes);
             campeonato.setFoto(imageBase64);
             campeonato.setDescricao(descricao);
@@ -159,6 +160,23 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
     }
 
     private void setListeners() {
+        privadoListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (!parent.getItemAtPosition(position).toString().equals(context.getString(R.string.privado_camp)))
+                    if (parent.getItemAtPosition(position).toString().equals(context.getString(R.string.sim))) {
+                        privado = 1;
+                    } else {
+                        privado = 0;
+                    }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        };
+
         formatoListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -248,6 +266,7 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
             }
         };
 
+        getViewState().setPrivadoListener(privadoListener);
         getViewState().setFormatoListener(formatoListener);
         getViewState().setQuantidadeTeamListener(timeListener);
         getViewState().setQuantidadePartidasChaveListener(chaveListener);
@@ -272,7 +291,11 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
         finalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         getViewState().setQuantidadePartidasFinalAdapter(finalAdapter);
 
-        idaEVoltaAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, idaEVoltaArray);
+        privadoAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, simNaoArray);
+        privadoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        getViewState().setIdaEVoltaAdapter(privadoAdapter);
+
+        idaEVoltaAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, simNaoArray);
         idaEVoltaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         getViewState().setIdaEVoltaAdapter(idaEVoltaAdapter);
     }
@@ -286,7 +309,7 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
         timesArrayTorneio = new ArrayList<>(Arrays.asList(8, 16, 32));
         chaveArray = new ArrayList<>(Arrays.asList(1, 3, 5, 7));
         finalArray = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 9));
-        idaEVoltaArray = new ArrayList<>(Arrays.asList(context.getString(R.string.sim),
+        simNaoArray = new ArrayList<>(Arrays.asList(context.getString(R.string.sim),
                 context.getString(R.string.nao)));
     }
 

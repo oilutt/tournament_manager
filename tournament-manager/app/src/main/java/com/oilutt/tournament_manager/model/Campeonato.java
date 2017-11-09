@@ -10,11 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.realm.RealmModel;
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.RealmClass;
-
 /**
  * Created by oilut on 25/08/2017.
  */
@@ -32,6 +27,7 @@ public class Campeonato implements Serializable, Parcelable {
     private String dataFim;
     private String dataAtualizacao;
     private String descricao;
+    private int privado;
     private String foto;
     private int status;   // 1:Aberto, 2:Em andamento, 3:Encerrado
     private String campeao;
@@ -54,6 +50,7 @@ public class Campeonato implements Serializable, Parcelable {
         result.put("foto", foto);
         result.put("dono", dono.toMap());
         result.put("campeao", campeao);
+        result.put("privado", privado);
 
         return result;
     }
@@ -162,6 +159,15 @@ public class Campeonato implements Serializable, Parcelable {
         this.campeao = campeao;
     }
 
+    public int getPrivado() {
+        return privado;
+    }
+
+    public void setPrivado(int privado) {
+        this.privado = privado;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -179,9 +185,10 @@ public class Campeonato implements Serializable, Parcelable {
         dest.writeString(this.dataFim);
         dest.writeString(this.dataAtualizacao);
         dest.writeString(this.descricao);
+        dest.writeInt(this.privado);
         dest.writeString(this.foto);
-        dest.writeString(this.campeao);
         dest.writeInt(this.status);
+        dest.writeString(this.campeao);
     }
 
     protected Campeonato(Parcel in) {
@@ -195,9 +202,10 @@ public class Campeonato implements Serializable, Parcelable {
         this.dataFim = in.readString();
         this.dataAtualizacao = in.readString();
         this.descricao = in.readString();
-        this.campeao = in.readString();
+        this.privado = in.readInt();
         this.foto = in.readString();
         this.status = in.readInt();
+        this.campeao = in.readString();
     }
 
     public static final Creator<Campeonato> CREATOR = new Creator<Campeonato>() {

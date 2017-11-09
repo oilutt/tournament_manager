@@ -72,7 +72,6 @@
                 android:layout_marginBottom="@dimen/margin_25"
                 android:layout_marginLeft="@dimen/margin_40"
                 android:layout_marginRight="@dimen/margin_40"
-                android:text="@string/descricao_camp"
                 android:textColor="@color/colorPrimaryText2" />
 
             <LinearLayout
@@ -106,7 +105,6 @@
                             style="@style/Text14MontserratRegular"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="@dimen/margin_5"
-                            android:text="@string/formato_camp"
                             android:textColor="@color/colorPrimaryText2" />
 
                     </LinearLayout>
@@ -129,7 +127,6 @@
                             style="@style/Text14MontserratRegular"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="@dimen/margin_5"
-                            android:text="3"
                             android:textColor="@color/colorPrimaryText2" />
 
                     </LinearLayout>
@@ -152,7 +149,6 @@
                             style="@style/Text14MontserratRegular"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="@dimen/margin_5"
-                            android:text="3"
                             android:textColor="@color/colorPrimaryText2" />
 
                     </LinearLayout>
@@ -176,7 +172,6 @@
                             android:gravity="center_vertical"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="@dimen/margin_5"
-                            android:text="Sim"
                             android:textColor="@color/colorPrimaryText2" />
 
                     </LinearLayout>
@@ -198,7 +193,6 @@
                             style="@style/Text14MontserratRegular"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="@dimen/margin_5"
-                            android:text="Encerrado"
                             android:textColor="@color/colorPrimaryText2" />
 
                     </LinearLayout>
@@ -230,7 +224,6 @@
                             style="@style/Text14MontserratRegular"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="@dimen/margin_5"
-                            android:text="10/02/2017"
                             android:textColor="@color/colorPrimaryText2" />
 
                     </LinearLayout>
@@ -253,7 +246,6 @@
                             style="@style/Text14MontserratRegular"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="@dimen/margin_5"
-                            android:text="10/02/2017"
                             android:textColor="@color/colorPrimaryText2" />
 
                     </LinearLayout>
@@ -275,7 +267,6 @@
                             style="@style/Text14MontserratRegular"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="@dimen/margin_5"
-                            android:text="10"
                             android:textColor="@color/colorPrimaryText2" />
 
                     </LinearLayout>
@@ -297,7 +288,6 @@
                             style="@style/Text14MontserratRegular"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="@dimen/margin_5"
-                            android:text="Joaozao"
                             android:textColor="@color/colorPrimaryText2" />
 
                     </LinearLayout>

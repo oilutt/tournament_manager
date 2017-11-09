@@ -5,21 +5,17 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -36,10 +32,6 @@ import android.webkit.CookieSyncManager;
 import android.widget.TextView;
 
 import com.desmond.squarecamera.CameraActivity;
-import com.oilutt.tournament_manager.R;
-import com.oilutt.tournament_manager.app.Constants;
-import com.oilutt.tournament_manager.ui.activity.BaseActivity;
-import com.oilutt.tournament_manager.ui.OnGetContacts;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.karumi.dexter.Dexter;
@@ -48,6 +40,9 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.oilutt.tournament_manager.R;
+import com.oilutt.tournament_manager.app.Constants;
+import com.oilutt.tournament_manager.ui.activity.BaseActivity;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -58,7 +53,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -434,39 +428,39 @@ public class Utils {
 //        }
 //    }
 
-    public static void getContactsWithEmail(Context context, OnGetContacts callback) {
-        new AsyncTask<Void, Void, List>() {
-            @Override
-            protected List doInBackground(Void... params) {
-                ArrayList<String> listEmails = new ArrayList<String>();
-                ContentResolver cr = context.getContentResolver();
-                Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-                if (cur.getCount() > 0) {
-                    while (cur.moveToNext()) {
-                        String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
-                        Cursor cur1 = cr.query(
-                                ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,
-                                ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?",
-                                new String[]{id}, null);
-                        while (cur1.moveToNext()) {
-                            String email = cur1.getString(cur1.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-                            if (!TextUtils.isEmpty(email)) {
-                                listEmails.add(email.trim().replace(" ", ""));
-                            }
-                        }
-                        cur1.close();
-                    }
-                }
-                return listEmails;
-            }
-
-            @Override
-            protected void onPostExecute(List list) {
-                super.onPostExecute(list);
-                if (callback != null) callback.onSuccess(list);
-            }
-        }.execute();
-    }
+//    public static void getContactsWithEmail(Context context, OnGetContacts callback) {
+//        new AsyncTask<Void, Void, List>() {
+//            @Override
+//            protected List doInBackground(Void... params) {
+//                ArrayList<String> listEmails = new ArrayList<String>();
+//                ContentResolver cr = context.getContentResolver();
+//                Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+//                if (cur.getCount() > 0) {
+//                    while (cur.moveToNext()) {
+//                        String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
+//                        Cursor cur1 = cr.query(
+//                                ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,
+//                                ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?",
+//                                new String[]{id}, null);
+//                        while (cur1.moveToNext()) {
+//                            String email = cur1.getString(cur1.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+//                            if (!TextUtils.isEmpty(email)) {
+//                                listEmails.add(email.trim().replace(" ", ""));
+//                            }
+//                        }
+//                        cur1.close();
+//                    }
+//                }
+//                return listEmails;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(List list) {
+//                super.onPostExecute(list);
+//                if (callback != null) callback.onSuccess(list);
+//            }
+//        }.execute();
+//    }
 
     @NonNull
     public static RequestBody createPartFromString(String descriptionString) {

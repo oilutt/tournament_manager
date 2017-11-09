@@ -10,7 +10,6 @@ import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.presentation.TeamList.TeamListCallback;
 import com.oilutt.tournament_manager.presentation.TeamList.TeamListPresenter;
 import com.oilutt.tournament_manager.ui.adapter.TeamListAdapter;
-import com.oilutt.tournament_manager.ui.dialog.DialogProgress;
 
 import java.util.ArrayList;
 

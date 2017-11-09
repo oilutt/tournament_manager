@@ -1,6 +1,7 @@
 package com.oilutt.tournament_manager.presentation.MainActivity;
 
 import android.net.Uri;
+import android.text.TextWatcher;
 
 import com.arellomobile.mvp.MvpView;
 import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
@@ -32,6 +33,16 @@ public interface MainActivityCallback extends MvpView {
     void openLogin();
 
     void openSorteio();
+
+    void showBusca();
+
+    void showPlaceHolderBusca();
+
+    void hidePlaceHolderBusca();
+
+    void setBuscaWatcher(TextWatcher watcher);
+
+    void setBuscaAdapter(CampAdapter adapter);
 
     void launchCrop(Uri uri);
 

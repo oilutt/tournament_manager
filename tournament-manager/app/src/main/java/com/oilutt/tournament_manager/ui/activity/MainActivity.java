@@ -2,19 +2,22 @@ package com.oilutt.tournament_manager.ui.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -37,6 +40,16 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.recyclerViewBusca)
+    RecyclerView recyclerViewBusca;
+    @BindView(R.id.layout_busca)
+    RelativeLayout layoutBusca;
+    @BindView(R.id.edt_busca)
+    EditText edtBusca;
+    @BindView(R.id.placeholder_busca)
+    TextView placeholderBusca;
+    @BindView(R.id.text_busca)
+    TextView textBusca;
     @BindView(R.id.fab)
     FloatingActionButton fab;
     @BindView(R.id.text_no_data)
@@ -106,6 +119,7 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         recyclerView.setVisibility(View.INVISIBLE);
         textNoData.setVisibility(View.VISIBLE);
         textNoDataInvite.setVisibility(View.INVISIBLE);
+        layoutBusca.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -114,6 +128,7 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         recyclerView.setVisibility(View.VISIBLE);
         textNoData.setVisibility(View.INVISIBLE);
         textNoDataInvite.setVisibility(View.INVISIBLE);
+        layoutBusca.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -122,6 +137,7 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         recyclerView.setVisibility(View.INVISIBLE);
         textNoData.setVisibility(View.INVISIBLE);
         textNoDataInvite.setVisibility(View.VISIBLE);
+        layoutBusca.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -130,6 +146,55 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         recyclerView.setVisibility(View.VISIBLE);
         textNoData.setVisibility(View.INVISIBLE);
         textNoDataInvite.setVisibility(View.INVISIBLE);
+        layoutBusca.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showBusca() {
+        progress.setVisibility(View.GONE);
+        layoutBusca.setVisibility(View.VISIBLE);
+        recyclerViewBusca.setVisibility(View.INVISIBLE);
+        placeholderBusca.setVisibility(View.INVISIBLE);
+        textBusca.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+        textNoData.setVisibility(View.INVISIBLE);
+        textNoDataInvite.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showPlaceHolderBusca() {
+        progress.setVisibility(View.GONE);
+        layoutBusca.setVisibility(View.VISIBLE);
+        recyclerViewBusca.setVisibility(View.INVISIBLE);
+        placeholderBusca.setVisibility(View.VISIBLE);
+        textBusca.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+        textNoData.setVisibility(View.INVISIBLE);
+        textNoDataInvite.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void hidePlaceHolderBusca() {
+        progress.setVisibility(View.GONE);
+        layoutBusca.setVisibility(View.VISIBLE);
+        recyclerViewBusca.setVisibility(View.VISIBLE);
+        placeholderBusca.setVisibility(View.INVISIBLE);
+        textBusca.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+        textNoData.setVisibility(View.INVISIBLE);
+        textNoDataInvite.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void setBuscaWatcher(TextWatcher watcher) {
+        edtBusca.addTextChangedListener(watcher);
+    }
+
+    @Override
+    public void setBuscaAdapter(CampAdapter adapter) {
+        recyclerViewBusca.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewBusca.setHasFixedSize(true);
+        recyclerViewBusca.setAdapter(adapter);
     }
 
     @Override
@@ -180,6 +245,8 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
             presenter.clickMeusCamps();
         } else if (id == R.id.invite_camp) {
             presenter.clickInviteCamp();
+        } else if (id == R.id.busca_camp) {
+            presenter.clickBuscaCamp();
         } else if (id == R.id.sorteio_fifa) {
             presenter.sorteio();
         } else if (id == R.id.logout) {

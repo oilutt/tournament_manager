@@ -2,10 +2,10 @@ package com.oilutt.tournament_manager.app;
 
 import android.app.Application;
 
-import com.oilutt.tournament_manager.R;
-import com.oilutt.tournament_manager.utils.PreferencesManager;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.oilutt.tournament_manager.R;
+import com.oilutt.tournament_manager.utils.PreferencesManager;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

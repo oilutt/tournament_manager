@@ -1,9 +1,7 @@
 package com.oilutt.tournament_manager.ui.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
-import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,9 +11,9 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.BestOf;
-import com.oilutt.tournament_manager.model.Partida;
 
 import java.util.ArrayList;
 import java.util.List;

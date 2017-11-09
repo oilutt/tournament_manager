@@ -8,10 +8,10 @@ import android.widget.EditText;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.jakewharton.rxbinding.widget.RxTextView;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.presentation.Signup.SignupCallback;
 import com.oilutt.tournament_manager.presentation.Signup.SignupPresenter;
-import com.jakewharton.rxbinding.widget.RxTextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

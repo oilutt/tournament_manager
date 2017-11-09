@@ -6,9 +6,6 @@ import android.os.Parcelable;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

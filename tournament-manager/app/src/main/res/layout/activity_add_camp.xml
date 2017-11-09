@@ -123,6 +123,23 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/privado_spinner"
+                    style="@style/mySpinnerItemStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:spinnerMode="dropdown"
+                    app:fontPath="@string/monstserrat_regular"
+                    app:ms_arrowColor="@color/colorPrimaryLightEdt"
+                    app:ms_arrowSize="@dimen/margin_15"
+                    app:ms_baseColor="@color/colorPrimaryLightEdt"
+                    app:ms_enableFloatingLabel="true"
+                    app:ms_floatingLabelText="@string/privado_camp"
+                    app:ms_highlightColor="@color/colorPrimaryLightEdt"
+                    app:ms_hint="@string/privado_camp"
+                    app:ms_hintColor="@color/colorPrimaryText2" />
+
+                <fr.ganfra.materialspinner.MaterialSpinner
                     android:id="@+id/formato_spinner"
                     style="@style/mySpinnerItemStyle"
                     android:layout_width="match_parent"

@@ -1,8 +1,6 @@
 package com.oilutt.tournament_manager.presentation.Campeonato;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +17,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.oilutt.tournament_manager.R;
-import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.ui.adapter.TabAdapter;
 import com.oilutt.tournament_manager.ui.fragment.MataMataFragment;
@@ -27,7 +24,6 @@ import com.oilutt.tournament_manager.ui.fragment.RodadaFragment;
 import com.oilutt.tournament_manager.ui.fragment.TabelaFragment;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

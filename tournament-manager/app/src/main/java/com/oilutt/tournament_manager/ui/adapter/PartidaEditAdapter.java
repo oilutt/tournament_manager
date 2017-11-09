@@ -1,7 +1,6 @@
 package com.oilutt.tournament_manager.ui.adapter;
 
 import android.content.Context;
-import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;

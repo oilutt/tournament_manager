@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.Campeonato;
-import com.oilutt.tournament_manager.ui.activity.CampeonatoActivity;
 import com.oilutt.tournament_manager.ui.activity.CampeonatoDetailsActivity;
 
 import java.util.ArrayList;
@@ -31,8 +30,10 @@ public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder> {
 
     private List<Campeonato> list = new ArrayList<>();
     Activity activity;
+    private boolean busca;
 
-    public CampAdapter(Activity context) {
+    public CampAdapter(Activity context, boolean busca) {
+        this.busca = busca;
         this.activity = context;
     }
 
@@ -62,6 +63,8 @@ public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder> {
         holder.layout.setOnClickListener(v -> {
             Intent intent = new Intent(activity, CampeonatoDetailsActivity.class);
             intent.putExtra("campeonatoId", camp.getId());
+            if(busca)
+                intent.putExtra("busca", true);
             activity.startActivity(intent);
         });
     }

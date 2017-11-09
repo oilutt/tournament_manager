@@ -24,6 +24,8 @@ public interface AddCampCallback extends MvpView {
 
     void setFoto(String path);
 
+    void setPrivadoAdapter(ArrayAdapter adapter);
+
     void setFormatoAdapter(ArrayAdapter adapter);
 
     void setQuantidadeTeamAdapter(ArrayAdapter adapter);
@@ -33,6 +35,8 @@ public interface AddCampCallback extends MvpView {
     void setQuantidadePartidasFinalAdapter(ArrayAdapter adapter);
 
     void setIdaEVoltaAdapter(ArrayAdapter adapter);
+
+    void setPrivadoListener(AdapterView.OnItemSelectedListener listener);
 
     void setFormatoListener(AdapterView.OnItemSelectedListener listener);
 

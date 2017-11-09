@@ -1,7 +1,6 @@
 package com.oilutt.tournament_manager.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.oilutt.tournament_manager.R;
-import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.presentation.Fragments.TabelaFragmentCallback;
 import com.oilutt.tournament_manager.presentation.Fragments.TabelaFragmentPresenter;
 import com.oilutt.tournament_manager.ui.adapter.TabelaAdapter;

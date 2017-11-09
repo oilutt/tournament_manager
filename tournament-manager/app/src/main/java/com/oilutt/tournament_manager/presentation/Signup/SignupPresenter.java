@@ -6,13 +6,13 @@ import android.text.TextUtils;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.ui.activity.LoginActivity;
 import com.oilutt.tournament_manager.ui.activity.MainActivity;
 import com.oilutt.tournament_manager.utils.Utils;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
 import java.util.Map;

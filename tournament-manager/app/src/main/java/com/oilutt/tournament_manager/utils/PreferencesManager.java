@@ -3,9 +3,9 @@ package com.oilutt.tournament_manager.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
 import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.model.Campeonato;
-import com.google.gson.Gson;
 
 /**
  * Created by oilut on 21/08/2017.

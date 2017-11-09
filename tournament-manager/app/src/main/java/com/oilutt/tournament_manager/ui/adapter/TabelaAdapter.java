@@ -1,7 +1,6 @@
 package com.oilutt.tournament_manager.ui.adapter;
 
 import android.content.Context;
-import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import com.oilutt.tournament_manager.model.Time;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;

@@ -1,11 +1,14 @@
 package com.oilutt.tournament_manager.presentation.TeamList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.app.TournamentManagerApp;
 import com.oilutt.tournament_manager.model.BestOf;
@@ -17,15 +20,9 @@ import com.oilutt.tournament_manager.model.Rodada;
 import com.oilutt.tournament_manager.model.Time;
 import com.oilutt.tournament_manager.ui.activity.MainActivity;
 import com.oilutt.tournament_manager.ui.adapter.TeamListAdapter;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 

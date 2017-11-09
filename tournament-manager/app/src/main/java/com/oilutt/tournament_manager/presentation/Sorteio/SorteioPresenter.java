@@ -4,7 +4,6 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.oilutt.tournament_manager.R;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

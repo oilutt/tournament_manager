@@ -3,15 +3,12 @@ package com.oilutt.tournament_manager.ui.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,12 +18,7 @@ import android.widget.TextView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.appinvite.AppInvite;
-import com.google.android.gms.appinvite.AppInviteInvitation;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.oilutt.tournament_manager.R;
-import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.presentation.CampeonatoDetail.CampeonatoDetailCallback;
 import com.oilutt.tournament_manager.presentation.CampeonatoDetail.CampeonatoDetailPresenter;
 import com.oilutt.tournament_manager.ui.adapter.TeamsAdapter;
@@ -114,6 +106,8 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     private void getBundle(){
         if(getIntent().hasExtra("campeonatoId")){
             presenter.setCampeonatoId(getIntent().getStringExtra("campeonatoId"), false);
+            if(getIntent().hasExtra("busca") && getIntent().getBooleanExtra("busca", false))
+                presenter.showSnack();
         } else if(getIntent().hasExtra("invite")){
             inviteS = getIntent().getStringExtra("invite");
             presenter.setCampeonatoId(getIntent().getStringExtra("invite"), true);

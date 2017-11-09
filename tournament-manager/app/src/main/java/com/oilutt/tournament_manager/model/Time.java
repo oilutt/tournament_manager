@@ -2,16 +2,10 @@ package com.oilutt.tournament_manager.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
-
-import io.realm.RealmModel;
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.RealmClass;
 
 /**
  * Created by Túlio on 17/09/2017.

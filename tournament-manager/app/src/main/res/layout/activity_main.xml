@@ -17,6 +17,58 @@
 
         <include layout="@layout/toolbar" />
 
+        <RelativeLayout
+            android:id="@+id/layout_busca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:visibility="invisible">
+
+            <EditText
+                android:id="@+id/edt_busca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:drawableRight="@drawable/ic_search_black_24dp"
+                android:backgroundTint="@color/colorPrimaryLightEdt"
+                android:hint="@string/hint_password"
+                android:inputType="text"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHighlight="@color/colorPrimaryLightEdt"
+                android:textColorHint="@color/colorPrimaryText2"
+                android:textColorLink="@color/colorPrimaryLightEdt"
+                app:fontPath="@string/monstserrat_regular"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewBusca"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/edt_busca"
+                android:background="@color/colorPrimaryLight"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/text_busca"
+                style="@style/Text16MontserratRegular"
+                android:layout_centerInParent="true"
+                android:lineSpacingExtra="@dimen/margin_5"
+                android:padding="@dimen/margin_20"
+                android:visibility="visible"
+                android:text="@string/text_busca"/>
+
+            <TextView
+                android:id="@+id/placeholder_busca"
+                style="@style/Text16MontserratRegular"
+                android:layout_centerInParent="true"
+                android:lineSpacingExtra="@dimen/margin_5"
+                android:padding="@dimen/margin_20"
+                android:visibility="visible"
+                android:text="@string/place_holder_busca"/>
+
+        </RelativeLayout>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
@@ -72,10 +124,10 @@
         android:layout_gravity="start"
         android:background="@color/colorPrimaryLight"
         android:fitsSystemWindows="true"
-        app:itemTextColor="@color/colorPrimaryText"
-        app:headerLayout="@layout/header"
-        app:menu="@menu/drawer"
         android:theme="@style/NavigationDrawerTheme"
-        app:itemTextAppearance="@style/NavigationDrawerStyle"/>
+        app:headerLayout="@layout/header"
+        app:itemTextAppearance="@style/NavigationDrawerStyle"
+        app:itemTextColor="@color/colorPrimaryText"
+        app:menu="@menu/drawer" />
 
 </android.support.v4.widget.DrawerLayout>

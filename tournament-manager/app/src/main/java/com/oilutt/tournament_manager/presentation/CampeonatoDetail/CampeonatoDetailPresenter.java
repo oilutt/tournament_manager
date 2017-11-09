@@ -1,16 +1,11 @@
 package com.oilutt.tournament_manager.presentation.CampeonatoDetail;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,23 +14,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.oilutt.tournament_manager.R;
-import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.model.Campeonato;
-import com.oilutt.tournament_manager.model.User;
-import com.oilutt.tournament_manager.model.UserRealm;
 import com.oilutt.tournament_manager.ui.activity.LoginActivity;
-import com.oilutt.tournament_manager.ui.activity.MainActivity;
-import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
 import com.oilutt.tournament_manager.ui.adapter.TeamsAdapter;
 import com.oilutt.tournament_manager.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import io.realm.Realm;
-import io.realm.RealmResults;
 
 /**
  * Created by Tulio on 03/10/2017.
@@ -64,25 +49,29 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
         getCampeonato();
     }
 
+    public void showSnack(){
+        snackSaveChamp(R.string.saveChamp);
+    }
+
     private void showButton() {
         if (mFirebaseUser != null && mFirebaseUser.getUid().equals(campeonato.getDono().getId())) {
             getViewState().showButton();
         }
         if (invite) {
-            snackSaveChamp();
+            snackSaveChamp(R.string.invite_camp);
         }
     }
 
-    public void snackSaveChamp(){
+    private void snackSaveChamp(int msg){
         if (mFirebaseUser != null) {
             if (!mFirebaseUser.getUid().equals(campeonato.getDono().getId())) {
                 View.OnClickListener clickListener = v -> saveChamp();
-                getViewState().showSnack(Utils.formatString(context.getString(R.string.invite_camp), campeonato.getNome()),
+                getViewState().showSnack(Utils.formatString(context.getString(msg), campeonato.getNome()),
                         R.string.sim, clickListener);
             }
         } else {
             View.OnClickListener clickListener = v -> saveChampWithoutLogin();
-            getViewState().showSnack(Utils.formatString(context.getString(R.string.invite_camp), campeonato.getNome()),
+            getViewState().showSnack(Utils.formatString(context.getString(msg), campeonato.getNome()),
                     R.string.sim, clickListener);
         }
     }

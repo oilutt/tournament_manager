@@ -11,6 +11,8 @@
     <color name="gray_btn_bg_color">#444549</color>
 
     <!-- MainActivity -->
+    <string name="text_busca">Busque por campeonatos públicos e comece a acompanhá-los</string>
+    <string name="place_holder_busca">Nenhum campeonato com o nome inserido foi encontrado.</string>
     <string name="text_no_data">Você ainda não possui nenhum campeonato.\nVocê pode começar um novo clicando no botão abaixo.</string>
     <string name="text_no_data_invite">Você ainda não foi convidado para nenhum campeonato.</string>
     <string name="text_no_login">Para poder usar normalmente o aplicativo é necessário o login.</string>
@@ -75,6 +77,7 @@
     <string name="descricao_camp">Descrição</string>
     <string name="data_inicio_camp">Data do início</string>
     <string name="formato_camp">Formato</string>
+    <string name="privado_camp">Privado</string>
     <string name="times_camp">Número de times</string>
     <string name="partidas_camp">Número de partidas</string>
     <string name="partidas_camp_chave">Partidas por disputa</string>
@@ -128,6 +131,7 @@
     <string name="data_inicio_det">Início:</string>
     <string name="data_fim_det">Fim:</string>
     <string name="invite_camp">Deseja aceitar o convite para acompanhar o campeonato %s?</string>
+    <string name="saveChamp">Deseja adicionar esse campeonato aos seus campeonatos salvos?</string>
     <string name="share_camp">Você foi convidado para acompanhar o andamento do campeonato %s através do app Tounament Manager. Para tal use o link: </string>
     <string name="share_camp2">.\nSe você ainda não possui o aplicativo Tournament Manager, baixe-o através do link: </string>
 

@@ -8,9 +8,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import java.io.Serializable;
 import java.util.List;
 
-import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.RealmClass;
 
 /**
  * Created by Túlio on 03/10/2017.
