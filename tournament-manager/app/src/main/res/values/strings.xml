@@ -14,7 +14,7 @@
     <string name="text_busca">Busque por campeonatos públicos e comece a acompanhá-los</string>
     <string name="place_holder_busca">Nenhum campeonato com o nome inserido foi encontrado.</string>
     <string name="text_no_data">Você ainda não possui nenhum campeonato.\nVocê pode começar um novo clicando no botão abaixo.</string>
-    <string name="text_no_data_invite">Você ainda não foi convidado para nenhum campeonato.</string>
+    <string name="text_no_data_invite">Você ainda não adicionou nenhum campeonato a sua lista.</string>
     <string name="text_no_login">Para poder usar normalmente o aplicativo é necessário o login.</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

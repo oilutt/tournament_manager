@@ -16,6 +16,20 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    signingConfigs {
+        debug {
+            storeFile file("ioasys.keystore")
+            storePassword "xf5y2wz9"
+            keyAlias "ioasys"
+            keyPassword "xf5y2wz9"
+        }
+        release {
+            storeFile file("ioasys.keystore")
+            storePassword "xf5y2wz9"
+            keyAlias "ioasys"
+            keyPassword "xf5y2wz9"
+        }
+    }
     productFlavors {
         dev {
             applicationId "com.oilutt.tournament_manager"

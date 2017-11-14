@@ -293,8 +293,6 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
                     getViewState().setBuscaAdapter(buscaAdapter);
                     if(buscaList.size() > 0) {
                         getViewState().hidePlaceHolderBusca();
-                    } else {
-                        getViewState().showPlaceHolderBusca();
                     }
                 }, 2000);
             }
