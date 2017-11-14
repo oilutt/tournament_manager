@@ -18,16 +18,16 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file("ioasys.keystore")
-            storePassword "xf5y2wz9"
-            keyAlias "ioasys"
-            keyPassword "xf5y2wz9"
+            storeFile file("tournamentManager.jks")
+            storePassword "henquere8"
+            keyAlias "tournament"
+            keyPassword "henquere8"
         }
         release {
-            storeFile file("ioasys.keystore")
-            storePassword "xf5y2wz9"
-            keyAlias "ioasys"
-            keyPassword "xf5y2wz9"
+            storeFile file("tournamentManager.jks")
+            storePassword "henquere8"
+            keyAlias "tournament"
+            keyPassword "henquere8"
         }
     }
     productFlavors {
