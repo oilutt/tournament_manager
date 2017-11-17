@@ -37,7 +37,6 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
     public String campeonatoId;
     private Context context;
     private TabAdapter adapter;
-    private Menu menu;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
     private DatabaseReference campEndPoint = FirebaseDatabase.getInstance().getReference();
@@ -52,11 +51,12 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
         getCampeonato();
     }
 
-    private void verifyMenu(){
+    public boolean verifyMenu(){
         if(mFirebaseUser != null && mFirebaseUser.getUid().equals(campeonato.getDono().getId())){
             if(campeonato.getDataFim() == null)
-                getViewState().showMenuIcon();
+                return true;
         }
+        return false;
     }
 
     private void getCampeonato() {
@@ -67,7 +67,6 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
                 campeonato = dataSnapshot.getValue(Campeonato.class);
                 setTitle();
                 setAdapter();
-                verifyMenu();
             }
 
             @Override

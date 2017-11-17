@@ -293,7 +293,7 @@ public class AddCampPresenter extends MvpPresenter<AddCampCallback> {
 
         privadoAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, simNaoArray);
         privadoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewState().setIdaEVoltaAdapter(privadoAdapter);
+        getViewState().setPrivadoAdapter(privadoAdapter);
 
         idaEVoltaAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, simNaoArray);
         idaEVoltaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

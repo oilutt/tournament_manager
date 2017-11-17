@@ -31,7 +31,6 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
     ViewPager viewPager;
 
     DialogProgress progress;
-    Menu menu;
 
     @InjectPresenter
     CampeonatoPresenter presenter;
@@ -59,15 +58,7 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         presenter.onCreateOptionsMenu(menu);
-        this.menu = menu;
-        menu.getItem(0).setVisible(false);
         return true;
-    }
-
-    @Override
-    public void showMenuIcon() {
-        if (menu != null)
-            menu.findItem(R.id.edit).setVisible(true);
     }
 
     @Override
@@ -93,6 +84,11 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
     public void manageMenuOptions(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_camp, menu);
+        if(presenter.verifyMenu()){
+            menu.findItem(R.id.edit).setVisible(true);
+        } else {
+            menu.findItem(R.id.edit).setVisible(false);
+        }
     }
 
     @Override
