@@ -107,7 +107,7 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
         if(getIntent().hasExtra("campeonatoId")){
             presenter.setCampeonatoId(getIntent().getStringExtra("campeonatoId"), false);
             if(getIntent().hasExtra("busca") && getIntent().getBooleanExtra("busca", false))
-                presenter.showSnack();
+                presenter.setCanFollow();
         } else if(getIntent().hasExtra("invite")){
             inviteS = getIntent().getStringExtra("invite");
             presenter.setCampeonatoId(getIntent().getStringExtra("invite"), true);

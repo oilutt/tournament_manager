@@ -37,6 +37,7 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
     private TeamsAdapter adapter;
     private Context context;
     private boolean invite;
+    private boolean canFollow = false;
 
     public CampeonatoDetailPresenter(Context context) {
         this.context = context;
@@ -47,6 +48,10 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
         getViewState().showProgress();
         this.campeonatoId = campeonatoId;
         getCampeonato();
+    }
+
+    public void setCanFollow(){
+        canFollow = true;
     }
 
     public void showSnack(){
@@ -60,6 +65,8 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
         if (invite) {
             snackSaveChamp(R.string.invite_camp);
         }
+        if(canFollow)
+            showSnack();
     }
 
     private void snackSaveChamp(int msg){

@@ -253,6 +253,8 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
             presenter.logout();
         }
 
+        hidenKeyBoard();
+
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }

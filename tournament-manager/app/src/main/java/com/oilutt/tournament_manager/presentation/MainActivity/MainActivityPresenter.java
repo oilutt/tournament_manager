@@ -249,7 +249,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler = new Handler();
-                handler.postDelayed(() -> searchCamps(s.toString()), 1200);
+                handler.postDelayed(() -> searchCamps(s.toString()), 800);
             }
 
             @Override
@@ -262,7 +262,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     private void searchCamps(String s){
         buscaFiltered = new ArrayList<>();
         for (Campeonato camp: buscaList) {
-            if(camp.getNome().toLowerCase().startsWith(s))
+            if(camp.getNome().toLowerCase().startsWith(s.toLowerCase()))
                 buscaFiltered.add(camp);
         }
         if(buscaFiltered.size() > 0){
@@ -294,7 +294,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
                     if(buscaList.size() > 0) {
                         getViewState().hidePlaceHolderBusca();
                     }
-                }, 2000);
+                }, 1500);
             }
 
             @Override

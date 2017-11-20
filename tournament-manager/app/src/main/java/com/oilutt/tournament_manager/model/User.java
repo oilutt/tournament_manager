@@ -21,7 +21,7 @@ public class User implements Serializable, Parcelable {
     private String nome;
     private String email;
     private String foto;
-    private List<Campeonato> inviteChamps;
+    private Map<String, Campeonato> inviteChamps;
 
     public User() {
 
@@ -92,11 +92,11 @@ public class User implements Serializable, Parcelable {
         this.foto = foto;
     }
 
-    public List<Campeonato> getInviteChamps() {
+    public Map<String, Campeonato> getInviteChamps() {
         return inviteChamps;
     }
 
-    public void setInviteChamps(List<Campeonato> inviteChamps) {
+    public void setInviteChamps(Map<String, Campeonato> inviteChamps) {
         this.inviteChamps = inviteChamps;
     }
 
@@ -112,7 +112,11 @@ public class User implements Serializable, Parcelable {
         dest.writeString(this.nome);
         dest.writeString(this.email);
         dest.writeString(this.foto);
-        dest.writeTypedList(this.inviteChamps);
+        dest.writeInt(this.inviteChamps.size());
+        for (Map.Entry<String, Campeonato> entry : this.inviteChamps.entrySet()) {
+            dest.writeString(entry.getKey());
+            dest.writeParcelable(entry.getValue(), flags);
+        }
     }
 
     protected User(Parcel in) {
@@ -120,7 +124,13 @@ public class User implements Serializable, Parcelable {
         this.nome = in.readString();
         this.email = in.readString();
         this.foto = in.readString();
-        this.inviteChamps = in.createTypedArrayList(Campeonato.CREATOR);
+        int inviteChampsSize = in.readInt();
+        this.inviteChamps = new HashMap<String, Campeonato>(inviteChampsSize);
+        for (int i = 0; i < inviteChampsSize; i++) {
+            String key = in.readString();
+            Campeonato value = in.readParcelable(Campeonato.class.getClassLoader());
+            this.inviteChamps.put(key, value);
+        }
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
