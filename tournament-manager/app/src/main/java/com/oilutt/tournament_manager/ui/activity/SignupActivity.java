@@ -115,7 +115,7 @@ public class SignupActivity extends BaseActivity implements SignupCallback {
         Intent intent = new Intent(this, openActivity);
         if(invite != null && !invite.equals(""))
             intent.putExtra("invite", invite);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }

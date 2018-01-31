@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Tournament Manager</string>
-    <string name="squarecamera__app_name">@string/app_name</string>
+    <string name="app_name" translatable="false">Tournament Manager</string>
+    <string name="squarecamera__app_name" translatable="false">@string/app_name</string>
     <string name="facebook_app_id">2109998175887866</string>
     <string name="fb_login_protocol_scheme">fb2109998175887866</string>
     <string name="erro_generic">Oops! Algo deu errado, tente novamente mais tarde.</string>
@@ -20,8 +20,8 @@
     <string name="text_no_data_invite">Você ainda não adicionou nenhum campeonato a sua lista.</string>
     <string name="text_no_login">Para poder usar normalmente o aplicativo é necessário o login.</string>
     <string name="hint_edt">Nome do campeonato</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
     <!-- Genericos -->
     <string name="cancelar">Cancelar</string>
@@ -38,13 +38,13 @@
     <string name="nao">Não</string>
 
     <!-- Fonts -->
-    <string name="rubik_light">Rubik-Light.ttf</string>
-    <string name="rubik_regular">Rubik-Regular.ttf</string>
-    <string name="rubik_bold">Rubik-Bold.ttf</string>
-    <string name="rubik_medium">Rubik-Medium.ttf</string>
-    <string name="monstserrat_bold">Montserrat-Bold.ttf</string>
-    <string name="monstserrat_regular">Montserrat-Regular.ttf</string>
-    <string name="monstserrat_medium">Montserrat-Medium.ttf</string>
+    <string name="rubik_light" translatable="false">Rubik-Light.ttf</string>
+    <string name="rubik_regular" translatable="false">Rubik-Regular.ttf</string>
+    <string name="rubik_bold" translatable="false">Rubik-Bold.ttf</string>
+    <string name="rubik_medium" translatable="false">Rubik-Medium.ttf</string>
+    <string name="monstserrat_bold" translatable="false">Montserrat-Bold.ttf</string>
+    <string name="monstserrat_regular" translatable="false">Montserrat-Regular.ttf</string>
+    <string name="monstserrat_medium" translatable="false">Montserrat-Medium.ttf</string>
 
     <!-- Campeonato -->
     <string name="em_andamento">Ocorrendo</string>
@@ -137,7 +137,7 @@
     <string name="invite_camp">Deseja aceitar o convite para acompanhar o campeonato %s?</string>
     <string name="saveChamp">Deseja adicionar esse campeonato aos seus campeonatos salvos?</string>
     <string name="share_camp">Você foi convidado para acompanhar o andamento do campeonato %s através do app Tounament Manager. Para tal use o link: </string>
-    <string name="share_camp2">.\nSe você ainda não possui o aplicativo Tournament Manager, baixe-o através do link: </string>
+    <string name="share_camp2">.\nSe você ainda não possui o aplicativo Tournament Manager, baixe-o através do link: https://play.google.com/store/apps/details?id=com.oilutt.tournament_manager</string>
 
     <!-- Edit -->
     <string name="edit_title">Publicar Resultados</string>

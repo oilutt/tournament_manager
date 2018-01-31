@@ -38,7 +38,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements MainActivityCallback,
-        NavigationView.OnNavigationItemSelectedListener{
+        NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -96,13 +96,13 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         getBundle();
     }
 
-    private void getBundle(){
-        if(getIntent().hasExtra("invite") && !getIntent().getStringExtra("invite").equals("")){
+    private void getBundle() {
+        if (getIntent().hasExtra("invite") && !getIntent().getStringExtra("invite").equals("")) {
             presenter.getInvite(getIntent().getStringExtra("invite"));
         }
     }
 
-    private void setHeaderClick(){
+    private void setHeaderClick() {
         header.setOnClickListener(v -> {
             presenter.clickHeader();
             drawerLayout.closeDrawer(GravityCompat.START);
@@ -213,7 +213,10 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     @Override
     public void setFoto(String foto) {
         ImageView fotoView = (ImageView) header.findViewById(R.id.foto);
-        Glide.with(this).load(Base64.decode(foto, Base64.DEFAULT)).placeholder(R.drawable.ic_person_black_24dp).into(fotoView);
+        if (foto.startsWith("https:/"))
+            Glide.with(this).load(foto).placeholder(R.drawable.ic_person_black_24dp).into(fotoView);
+        else
+            Glide.with(this).load(Base64.decode(foto, Base64.DEFAULT)).placeholder(R.drawable.ic_person_black_24dp).into(fotoView);
     }
 
     @Override

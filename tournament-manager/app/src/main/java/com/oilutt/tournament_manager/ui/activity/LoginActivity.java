@@ -123,7 +123,7 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
         Intent intent = new Intent(this, MainActivity.class);
         if(invite != null && !invite.equals(""))
             intent.putExtra("invite", invite);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
@@ -132,7 +132,7 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
     public void openDetails(String invite) {
         Intent intent = new Intent(this, CampeonatoDetailsActivity.class);
         intent.putExtra("invite", invite);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }

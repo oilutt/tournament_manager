@@ -71,7 +71,7 @@
         <item name="android:textSize">@dimen/font_20</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_marginTop">20dp</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="fontPath">@string/monstserrat_regular</item>
     </style>
 
