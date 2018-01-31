@@ -7,7 +7,7 @@
     android:fillViewport="true"
     android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -21,6 +21,7 @@
             android:background="@color/colorPrimaryLight3"
             app:fontPath="@string/monstserrat_regular"
             app:tabIndicatorColor="@color/colorAccent"
+            android:layout_below="@+id/toolbar"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/colorPrimaryText"
             app:tabTextColor="@color/colorPrimaryText2" />
@@ -29,8 +30,21 @@
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/tab_layout"
+            android:layout_above="@+id/adView"
             android:background="@color/colorPrimaryLight" />
 
-    </LinearLayout>
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-4206223940234250/4654787857">
+        </com.google.android.gms.ads.AdView>
+
+    </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>

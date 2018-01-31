@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.presentation.Campeonato.CampeonatoCallback;
 import com.oilutt.tournament_manager.presentation.Campeonato.CampeonatoPresenter;
@@ -29,6 +31,8 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
     TabLayout tabLayout;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
+    @BindView(R.id.adView)
+    AdView mAdView;
 
     DialogProgress progress;
 
@@ -45,6 +49,8 @@ public class CampeonatoActivity extends BaseActivity implements CampeonatoCallba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campeonato);
         ButterKnife.bind(this);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         progress = new DialogProgress(this);
         getBundle();
     }

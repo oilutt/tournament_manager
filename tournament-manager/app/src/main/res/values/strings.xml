@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Tournament Manager</string>
     <string name="squarecamera__app_name">@string/app_name</string>
+    <string name="facebook_app_id">2109998175887866</string>
+    <string name="fb_login_protocol_scheme">fb2109998175887866</string>
     <string name="erro_generic">Oops! Algo deu errado, tente novamente mais tarde.</string>
+    <string name="login_fb_exists">Já existe um cadastro com o mesmo e-mail.</string>
     <string name="erro_app_nao_encontrado">Não encontramos nenhum aplicativo que possa abrir este arquivo.</string>
     <string name="selecione_aplicativo">Selecione um aplicativo válido:</string>
 
@@ -16,6 +19,7 @@
     <string name="text_no_data">Você ainda não possui nenhum campeonato.\nVocê pode começar um novo clicando no botão abaixo.</string>
     <string name="text_no_data_invite">Você ainda não adicionou nenhum campeonato a sua lista.</string>
     <string name="text_no_login">Para poder usar normalmente o aplicativo é necessário o login.</string>
+    <string name="hint_edt">Nome do campeonato</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

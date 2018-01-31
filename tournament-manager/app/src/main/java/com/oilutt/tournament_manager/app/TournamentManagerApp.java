@@ -2,6 +2,8 @@ package com.oilutt.tournament_manager.app;
 
 import android.app.Application;
 
+import com.facebook.FacebookSdk;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.oilutt.tournament_manager.R;
@@ -37,6 +39,8 @@ public class TournamentManagerApp extends Application {
         initFirebase();
         configRealm();
         configFonts();
+        MobileAds.initialize(this, "ca-app-pub-4206223940234250~5656044182");
+        FacebookSdk.sdkInitialize(getApplicationContext());
     }
 
     private void initFirebase() {

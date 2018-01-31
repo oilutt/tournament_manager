@@ -64,4 +64,6 @@ public interface CampeonatoDetailCallback extends MvpView {
     void showSnack(String msg, int button, View.OnClickListener clickListener);
 
     void openLogin(String campeonato);
+
+    void showAdd();
 }

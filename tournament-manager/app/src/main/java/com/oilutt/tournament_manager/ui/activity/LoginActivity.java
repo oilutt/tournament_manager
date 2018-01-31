@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.facebook.CallbackManager;
+import com.facebook.login.widget.LoginButton;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.presentation.Login.LoginCallback;
@@ -33,6 +35,8 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
     public Button btnSignUp;
     @BindView(R.id.btn_reset_password)
     public Button btnResetPassword;
+    @BindView(R.id.login_button)
+    public LoginButton loginButton;
 
     @InjectPresenter
     LoginPresenter presenter;
@@ -88,6 +92,11 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        presenter.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void showSnack(int message) {
         showSnack(getString(message), inputEmail);
     }
@@ -136,5 +145,10 @@ public class LoginActivity extends BaseActivity implements LoginCallback {
     @Override
     public void onBackPressed2() {
         super.onBackPressed();
+    }
+
+    @OnClick(R.id.login_button)
+    public void clickFb(){
+        presenter.clickFb();
     }
 }

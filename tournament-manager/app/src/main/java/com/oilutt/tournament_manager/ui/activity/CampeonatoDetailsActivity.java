@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.presentation.CampeonatoDetail.CampeonatoDetailCallback;
 import com.oilutt.tournament_manager.presentation.CampeonatoDetail.CampeonatoDetailPresenter;
@@ -75,6 +77,8 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     RecyclerView recyclerView;
     @BindView(R.id.btn_invite)
     Button invite;
+    @BindView(R.id.adView)
+    AdView mAdView;
 
     DialogProgress progress;
 
@@ -93,6 +97,8 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campeonato_details);
         ButterKnife.bind(this);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         setupToolbar(true);
         progress = new DialogProgress(this);
         getBundle();
@@ -244,6 +250,7 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     @Override
     public void showButton() {
         invite.setVisibility(View.VISIBLE);
+        mAdView.setVisibility(View.GONE);
     }
 
     @Override
@@ -262,6 +269,7 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
 
     @Override
     public void showSnack(String msg, int button, View.OnClickListener clickListener) {
+        mAdView.setVisibility(View.GONE);
         showSnackWithAction(msg, getString(button), recyclerView, clickListener);
     }
 
@@ -275,5 +283,10 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     @Override
     public void showSnack(int msg) {
         showSnack(msg, recyclerView);
+    }
+
+    @Override
+    public void showAdd() {
+        mAdView.setVisibility(View.VISIBLE);
     }
 }

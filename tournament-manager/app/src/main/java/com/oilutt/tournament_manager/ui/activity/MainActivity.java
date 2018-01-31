@@ -23,6 +23,8 @@ import android.widget.TextView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.presentation.MainActivity.MainActivityCallback;
 import com.oilutt.tournament_manager.presentation.MainActivity.MainActivityPresenter;
@@ -62,6 +64,8 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     DrawerLayout drawerLayout;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+    @BindView(R.id.adView)
+    AdView mAdView;
 
     View header;
 
@@ -78,6 +82,8 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         setUpToolbarText(R.string.app_name, false);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

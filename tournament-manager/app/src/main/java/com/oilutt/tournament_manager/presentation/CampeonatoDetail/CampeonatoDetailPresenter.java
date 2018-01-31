@@ -19,7 +19,9 @@ import com.oilutt.tournament_manager.ui.activity.LoginActivity;
 import com.oilutt.tournament_manager.ui.adapter.TeamsAdapter;
 import com.oilutt.tournament_manager.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -55,7 +57,32 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
     }
 
     public void showSnack(){
-        snackSaveChamp(R.string.saveChamp);
+        userEndPoint.child(mFirebaseUser.getUid()).child("inviteChamps").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean jaSave = false;
+                List<Campeonato> campeonatoList = new ArrayList<>();
+                for (DataSnapshot noteSnapshot : dataSnapshot.getChildren()) {
+                    String key = noteSnapshot.getKey();
+                    Campeonato note = noteSnapshot.getValue(Campeonato.class);
+                    note.setId(key);
+                    campeonatoList.add(note);
+                }
+                for (Campeonato c:campeonatoList) {
+                    if(campeonatoId.equals(c.getId())){
+                        jaSave = true;
+                    }
+                }
+                if(!jaSave){
+                    snackSaveChamp(R.string.saveChamp);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void showButton() {
@@ -72,7 +99,10 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
     private void snackSaveChamp(int msg){
         if (mFirebaseUser != null) {
             if (!mFirebaseUser.getUid().equals(campeonato.getDono().getId())) {
-                View.OnClickListener clickListener = v -> saveChamp();
+                View.OnClickListener clickListener = v -> {
+                    saveChamp();
+                    getViewState().showAdd();
+                };
                 getViewState().showSnack(Utils.formatString(context.getString(msg), campeonato.getNome()),
                         R.string.sim, clickListener);
             }
