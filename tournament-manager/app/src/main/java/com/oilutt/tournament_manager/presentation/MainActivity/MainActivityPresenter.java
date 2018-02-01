@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -150,6 +151,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         realm.delete(UserRealm.class);
         realm.commitTransaction();
         mFirebaseAuth.signOut();
+        LoginManager.getInstance().logOut();
         getViewState().openLogin();
     }
 

@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.utils.AnimationUtils;
+import com.oilutt.tournament_manager.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
