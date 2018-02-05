@@ -31,7 +31,6 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="@dimen/margin_10"
-                android:text="time 1"
                 android:textColor="@color/white" />
 
             <EditText
@@ -60,7 +59,6 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="@dimen/margin_10"
-                android:text="time 2"
                 android:textColor="@color/white" />
 
             <EditText

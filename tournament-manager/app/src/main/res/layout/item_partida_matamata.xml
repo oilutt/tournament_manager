@@ -31,7 +31,6 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="@dimen/margin_10"
-                android:text="time 1"
                 android:textColor="@color/white" />
 
             <TextView
@@ -39,7 +38,6 @@
                 style="@style/Text12MontserratRegular"
                 android:layout_marginLeft="@dimen/margin_5"
                 android:layout_marginRight="@dimen/margin_10"
-                android:text="2"
                 android:textColor="@color/white"
                 android:visibility="invisible" />
 
@@ -59,7 +57,6 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="@dimen/margin_10"
-                android:text="time 2"
                 android:textColor="@color/white" />
 
             <TextView
@@ -67,7 +64,6 @@
                 style="@style/Text12MontserratRegular"
                 android:layout_marginLeft="@dimen/margin_5"
                 android:layout_marginRight="@dimen/margin_10"
-                android:text="2"
                 android:textColor="@color/white"
                 android:visibility="invisible" />
 

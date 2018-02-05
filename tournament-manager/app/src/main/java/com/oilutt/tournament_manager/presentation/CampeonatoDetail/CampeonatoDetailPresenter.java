@@ -166,12 +166,12 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
             getViewState().hideFim();
         getViewState().setQuantidadeTimes(String.valueOf(campeonato.getQuantidadeTimes()));
         if (campeonato.getStatus() == 3)
-            getViewState().setStatus("Concluído");
+            getViewState().setStatus(context.getString(R.string.concluido));
         else if (campeonato.getStatus() == 2)
-            getViewState().setStatus("Ocorrendo");
+            getViewState().setStatus(context.getString(R.string.em_andamento));
         else if (campeonato.getStatus() == 1)
-            getViewState().setStatus("Aberto");
-        if (campeonato.getFormato().getNome().equals("Liga")) {
+            getViewState().setStatus(context.getString(R.string.aberto));
+        if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
             if (campeonato.getFormato().getIdaVolta() == 1)
                 getViewState().setIdaEVolta(R.string.sim);
             else

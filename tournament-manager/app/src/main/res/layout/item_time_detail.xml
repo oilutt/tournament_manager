@@ -9,8 +9,7 @@
 
     <TextView
         android:id="@+id/nome"
-        style="@style/Text16MontserratRegular"
-        android:text="Time 1" />
+        style="@style/Text16MontserratRegular" />
 
     <ImageView
         android:id="@+id/campeao"

@@ -28,7 +28,6 @@
             android:layout_toRightOf="@+id/posicao"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Equipe"
             app:layout_widthPercent="39%" />
 
         <TextView
@@ -39,7 +38,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="P"
+            android:text="@string/points"
             app:layout_widthPercent="8%" />
 
         <TextView
@@ -50,7 +49,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="J"
+            android:text="@string/games"
             app:layout_widthPercent="8%" />
 
         <TextView
@@ -61,7 +60,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="V"
+            android:text="@string/wins"
             app:layout_widthPercent="8%" />
 
         <TextView
@@ -72,7 +71,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="E"
+            android:text="@string/draws"
             app:layout_widthPercent="8%" />
 
         <TextView
@@ -83,7 +82,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="D"
+            android:text="@string/loses"
             app:layout_widthPercent="8%" />
 
         <TextView
@@ -94,7 +93,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="GF"
+            android:text="@string/gols_feitos"
             app:layout_widthPercent="8%" />
 
         <TextView
@@ -105,7 +104,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="GS"
+            android:text="@string/gols_sofridos"
             app:layout_widthPercent="8%" />
 
     </android.support.percent.PercentRelativeLayout>

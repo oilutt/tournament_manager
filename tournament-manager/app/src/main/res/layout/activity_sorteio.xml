@@ -65,7 +65,7 @@
                 <Button
                     android:id="@+id/btn_sortear"
                     style="@style/BtnSalvar"
-                    android:text="Sortear" />
+                    android:text="@string/button_sorteio" />
 
             </LinearLayout>
 

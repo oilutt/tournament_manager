@@ -1,0 +1,172 @@
+<resources>
+    <string name="erro_generic">Oops! Algo deu errado, tente novamente mais tarde.</string>
+    <string name="login_fb_exists">Já existe um cadastro com o mesmo e-mail.</string>
+    <string name="erro_app_nao_encontrado">Não encontramos nenhum aplicativo que possa abrir este arquivo.</string>
+    <string name="selecione_aplicativo">Selecione um aplicativo válido:</string>
+
+    <!-- Sweet Dialog -->
+    <color name="blue_btn_bg_color">@color/colorAccent</color>
+    <color name="blue_btn_bg_pressed_color">#AA303f9f</color>
+    <color name="gray_btn_bg_color">#444549</color>
+
+    <!-- MainActivity -->
+    <string name="text_busca">Busque por campeonatos públicos e comece a acompanhá-los</string>
+    <string name="place_holder_busca">Nenhum campeonato com o nome inserido foi encontrado.</string>
+    <string name="text_no_data">Você ainda não possui nenhum campeonato.\nVocê pode começar um novo clicando no botão abaixo.</string>
+    <string name="text_no_data_invite">Você ainda não adicionou nenhum campeonato a sua lista.</string>
+    <string name="text_no_login">Para poder usar normalmente o aplicativo é necessário o login.</string>
+    <string name="hint_edt">Nome do campeonato</string>
+
+    <!-- Genericos -->
+    <string name="cancelar">Cancelar</string>
+    <string name="enviar">Enviar</string>
+    <string name="deseja_sair">Deseja realmente realizar logout?</string>
+    <string name="atencao">Atenção</string>
+    <string name="sem_conexao">Você parece estar sem conexão. Verifique sua rede e tente novamente.</string>
+    <string name="servico_indisponivel">Serviço temporariamente indisponível</string>
+    <string name="imageResource">Escolher imagem da:</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Galeria</string>
+    <string name="ok">OK</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+
+    <!-- Campeonato -->
+    <string name="em_andamento">Ocorrendo</string>
+    <string name="concluido">Concluído</string>
+    <string name="aberto">Aberto</string>
+
+    <!-- SignUp -->
+    <string name="email">E-mail</string>
+    <string name="nome">Nome</string>
+    <string name="hint_password">Senha</string>
+    <string name="btn_forgot_password">Esqueceu sua senha?</string>
+    <string name="btn_reset_password">Trocar senha</string>
+    <string name="btn_link_to_login">Já sou registrado!</string>
+    <string name="action_sign_in_short">Registrar</string>
+    <string name="erro_senha">O campo senha não pode ser vazio.</string>
+    <string name="erro_min_senha">A senha deve conter no mínimo 6 caracteres.</string>
+    <string name="erro_email">O campo e-mail não pode ser vazio.</string>
+    <string name="erro_nome_user">O campo nome não pode ser vazio.</string>
+    <string name="invalid_email">O e-mail é inválido.</string>
+
+    <!-- Login -->
+    <string name="btn_login">Login</string>
+    <string name="btn_link_to_register">Não é cadastrado? Se registre agora.</string>
+    <string name="erro_login">Usuário ou senha inválidos.</string>
+
+    <!-- Forget Password -->
+    <string name="lbl_forgot_password">Esqueceu sua senha?</string>
+    <string name="success">Um e-mail com as instruções foi enviado para o e-mail informado.</string>
+    <string name="forgot_password_msg">Nós só precisamos do seu e-mail registrado para enviar as instruções para se resetar a senha.</string>
+
+    <!-- AddCamp -->
+    <string name="criar_camp">Criar Campeonato</string>
+    <string name="nome_camp">Nome</string>
+    <string name="descricao_camp">Descrição</string>
+    <string name="data_inicio_camp">Data do início</string>
+    <string name="formato_camp">Formato</string>
+    <string name="privado_camp">Privado</string>
+    <string name="times_camp">Número de times</string>
+    <string name="partidas_camp">Número de partidas</string>
+    <string name="partidas_camp_chave">Partidas por disputa</string>
+    <string name="partidas_camp_final">Partidas na final</string>
+    <string name="idaevolta">Jogar ida e volta</string>
+    <string name="adicionar_brasao">Adicionar brasão</string>
+    <string name="continuar">Continuar</string>
+    <string name="invite">Convidar usuários</string>
+    <string name="matamata">Mata-mata</string>
+    <string name="torneio">Torneio</string>
+    <string name="liga">Liga</string>
+    <string name="erro_nome">O campeonato precisa de um nome.</string>
+    <string name="erro_foto">O campeonato precisa de uma foto.</string>
+    <string name="erro_data">O campeonato precisa de uma data de início.</string>
+    <string name="erro_descricao">O campeonato precisa de uma descrição.</string>
+    <string name="erro_formato">É necessário escolher o formato.</string>
+    <string name="erro_quantidade_times">É necessário escolher a quantidade de times.</string>
+    <string name="erro_quantidade_chave">É necessário escolher a quantidade de partidas por chave.</string>
+    <string name="erro_quantidade_final">É necessário escolher a quantidade de partidas na final.</string>
+    <string name="erro_ida_e_volta">É necessário escolher se o campeonato terá ida e volta.</string>
+
+    <!-- TeamList -->
+    <string name="time_numero">Time %s</string>
+    <string name="team_list_title">Lista dos times</string>
+    <string name="criar">Criar</string>
+    <string name="gerando_camp">Gerando campeonato...</string>
+
+    <!-- RodadaAdaper -->
+    <string name="rodada_title">Rodada %s</string>
+
+    <!-- MataMataAdaper -->
+    <string name="fase_title">Fase %s</string>
+    <string name="oitavas">Oitavas de final</string>
+    <string name="quartas">Quartas de final</string>
+    <string name="semi">Semi-final</string>
+    <string name="final_title">Final</string>
+    <string name="valor_invalido">O valor não pode ser maior que a quantidade necessária para ganhar a disputa.</string>
+    <string name="partida_inexistente">Não é possível lançar resultados para partidas que ainda não possuem times.</string>
+    <string name="nome_igual">Não são permitidos nomes de times iguais.</string>
+    <string name="time_empty">Não são permitidos nomes em branco.</string>
+    <string name="algum_valor_invalido">Algum resultado lançado não corresponde com o formato do campeonato. Favor verificar.</string>
+
+    <!-- Campeonato Details-->
+    <string name="formato_camp_det">Formato:</string>
+    <string name="partidas_camp_chave_det">Partidas por chave:</string>
+    <string name="partidas_camp_final_det">Partidas na final:</string>
+    <string name="idaevolta_det">Ida e volta:</string>
+    <string name="times_camp_det">Número de times:</string>
+    <string name="dono_det">Dono:</string>
+    <string name="status_det">Status:</string>
+    <string name="data_inicio_det">Início:</string>
+    <string name="data_fim_det">Fim:</string>
+    <string name="invite_camp">Deseja aceitar o convite para acompanhar o campeonato %s?</string>
+    <string name="saveChamp">Deseja adicionar esse campeonato aos seus campeonatos salvos?</string>
+    <string name="share_camp">Você foi convidado para acompanhar o andamento do campeonato %s através do app Tounament Manager. Para tal use o link: </string>
+    <string name="share_camp2">.\nSe você ainda não possui o aplicativo Tournament Manager, baixe-o através do link: https://play.google.com/store/apps/details?id=com.oilutt.tournament_manager</string>
+
+    <!-- Edit -->
+    <string name="edit_title">Publicar Resultados</string>
+    <string name="salvar">Salvar</string>
+
+    <!-- Invitation -->
+    <string name="invitation_title">Convidar usuários</string>
+    <string name="invitation_message">Venha acompanhar o campeonato %s</string>
+    <string name="invitation_deep_link">https://fw9p6.app.goo.gl/rniX</string>
+    <string name="invitation_cta">campeonato</string>
+
+    <!-- Codigo -->
+    <string name="codigo_hint">Insira o código</string>
+    <string name="codigo_title">Espectar Campeonato</string>
+    <string name="inserir">Confirmar</string>
+    <string name="erro_camp">Código de campeonato não encontrado</string>
+    <string name="codigo_sucesso">Campeonato adicionado com sucesso</string>
+
+    <!-- Sorteio -->
+    <string name="sorteio_title">Sorteio</string>
+    <string name="button_sorteio">Sortear </string>
+
+    <!-- Tabela -->
+    <string name="points">P</string>
+    <string name="games">J</string>
+    <string name="wins">V</string>
+    <string name="draws">E</string>
+    <string name="loses">D</string>
+    <string name="gols_feitos">GF</string>
+    <string name="gols_sofridos">GS</string>
+
+    <string name="aguarde">Aguarde...</string>
+    <string name="invite_from">Convidar por</string>
+    <string name="winner_match">Vencedor partida</string>
+    <string name="group">Grupo</string>
+    <string name="change_profile">Alterar foto de perfil</string>
+    <string name="editar">Editar</string>
+    <string name="camps">Campeonatos</string>
+    <string name="my_camps">Meus campeonatos</string>
+    <string name="follow">Seguindo</string>
+    <string name="search">Buscar</string>
+    <string name="extras">Extras</string>
+    <string name="raffle_fifa">Sorteio FIFA</string>
+    <string name="sair">Sair</string>
+
+
+</resources>

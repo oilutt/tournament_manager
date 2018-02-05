@@ -794,12 +794,12 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                         showSnack();
                         return false;
                     }
-                    if (listBestOf.get(x).getTime1().toLowerCase().contains("vencedor partida")
-                            || listBestOf.get(x).getTime2().toLowerCase().contains("vencedor partida") ||
-                            listBestOf.get(x).getTime1().toLowerCase().contains("1º grupo")
-                            || listBestOf.get(x).getTime2().toLowerCase().contains("1º grupo") ||
-                    listBestOf.get(x).getTime1().toLowerCase().contains("2º grupo")
-                            || listBestOf.get(x).getTime2().toLowerCase().contains("2º grupo")) {
+                    if (listBestOf.get(x).getTime1().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())
+                            || listBestOf.get(x).getTime2().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase()) ||
+                            listBestOf.get(x).getTime1().toLowerCase().contains("1º " + context.getString(R.string.group))
+                            || listBestOf.get(x).getTime2().toLowerCase().contains("1º " + context.getString(R.string.group)) ||
+                    listBestOf.get(x).getTime1().toLowerCase().contains("2º " + context.getString(R.string.group))
+                            || listBestOf.get(x).getTime2().toLowerCase().contains("2º " + context.getString(R.string.group))) {
                         getViewState().showSnack(R.string.partida_inexistente);
                         return false;
                     }
@@ -818,12 +818,12 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                         showSnack();
                         return false;
                     }
-                    if (listBestOf.get(x).getTime1().toLowerCase().contains("vencedor partida")
-                            || listBestOf.get(x).getTime2().toLowerCase().contains("vencedor partida") ||
-                            listBestOf.get(x).getTime1().toLowerCase().contains("1º grupo")
-                            || listBestOf.get(x).getTime2().toLowerCase().contains("1º grupo") ||
-                            listBestOf.get(x).getTime1().toLowerCase().contains("2º grupo")
-                            || listBestOf.get(x).getTime2().toLowerCase().contains("2º grupo")) {
+                    if (listBestOf.get(x).getTime1().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())
+                            || listBestOf.get(x).getTime2().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase()) ||
+                            listBestOf.get(x).getTime1().toLowerCase().contains("1º " + context.getString(R.string.group))
+                            || listBestOf.get(x).getTime2().toLowerCase().contains("1º " + context.getString(R.string.group)) ||
+                            listBestOf.get(x).getTime1().toLowerCase().contains("2º " + context.getString(R.string.group))
+                            || listBestOf.get(x).getTime2().toLowerCase().contains("2º " + context.getString(R.string.group))) {
                         getViewState().showSnack(R.string.partida_inexistente);
                         return false;
                     }
@@ -856,7 +856,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                         if (fase > 1) {
                             bestOfs.addAll(campeonato.getFormato().getFases().get(fase - 1).getPartidas());
                             BestOf bestOf = new BestOf();
-                            if (!campeonato.getFormato().getFases().get(fase - 1).getPartidas().get(x / 2).getTime1().toLowerCase().contains("vencedor partida")) {
+                            if (!campeonato.getFormato().getFases().get(fase - 1).getPartidas().get(x / 2).getTime1().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())) {
                                 bestOf.setTime1(campeonato.getFormato().getFases().get(fase - 1).getPartidas().get(x / 2).getTime1());
                                 bestOf.setTime2(time1.getNome());
                             } else {
@@ -878,7 +878,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                         } else if (fase == 1) {
                             bestOfs.addAll(campeonato.getFormato().getFases().get(fase - 1).getPartidas());
                             BestOf bestOf = new BestOf();
-                            if (!campeonato.getFormato().getFases().get(fase - 1).getPartidas().get(x / 2).getTime1().toLowerCase().contains("vencedor partida")) {
+                            if (!campeonato.getFormato().getFases().get(fase - 1).getPartidas().get(x / 2).getTime1().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())) {
                                 bestOf.setTime1(campeonato.getFormato().getFases().get(fase - 1).getPartidas().get(x / 2).getTime1());
                                 bestOf.setTime2(time1.getNome());
                             } else {
@@ -908,7 +908,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                         if (fase > 1) {
                             bestOfs.addAll(campeonato.getFormato().getFases().get(fase - 1).getPartidas());
                             BestOf bestOf = new BestOf();
-                            if (!campeonato.getFormato().getFases().get(fase - 1).getPartidas().get(x / 2).getTime1().toLowerCase().contains("vencedor partida")) {
+                            if (!campeonato.getFormato().getFases().get(fase - 1).getPartidas().get(x / 2).getTime1().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())) {
                                 bestOf.setTime1(campeonato.getFormato().getFases().get(fase - 1).getPartidas().get(x / 2).getTime1());
                                 bestOf.setTime2(time2.getNome());
                             } else {
@@ -930,7 +930,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                         } else if (fase == 1) {
                             bestOfs.addAll(campeonato.getFormato().getFases().get(fase - 1).getPartidas());
                             BestOf bestOf = new BestOf();
-                            if (!campeonato.getFormato().getFases().get(fase - 1).getPartidas().get(x / 2).getTime1().toLowerCase().contains("vencedor partida")) {
+                            if (!campeonato.getFormato().getFases().get(fase - 1).getPartidas().get(x / 2).getTime1().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())) {
                                 bestOf.setTime1(campeonato.getFormato().getFases().get(fase - 1).getPartidas().get(x / 2).getTime1());
                                 bestOf.setTime2(time2.getNome());
                             } else {

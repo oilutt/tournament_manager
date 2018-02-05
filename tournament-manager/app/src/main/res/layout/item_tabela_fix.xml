@@ -29,7 +29,6 @@
             android:layout_toRightOf="@+id/posicao"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Equipe"
             android:textColor="@color/colorPrimaryText2"
             app:layout_widthPercent="39%" />
 
@@ -41,7 +40,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="P"
+            android:text="@string/points"
             android:textColor="@color/colorPrimaryText2"
             app:layout_widthPercent="8%" />
 
@@ -53,7 +52,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="J"
+            android:text="@string/games"
             android:textColor="@color/colorPrimaryText2"
             app:layout_widthPercent="8%" />
 
@@ -65,7 +64,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="V"
+            android:text="@string/wins"
             android:textColor="@color/colorPrimaryText2"
             app:layout_widthPercent="8%" />
 
@@ -77,7 +76,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="E"
+            android:text="@string/draws"
             android:textColor="@color/colorPrimaryText2"
             app:layout_widthPercent="8%" />
 
@@ -89,7 +88,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="D"
+            android:text="@string/loses"
             android:textColor="@color/colorPrimaryText2"
             app:layout_widthPercent="8%" />
 
@@ -101,7 +100,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="GF"
+            android:text="@string/gols_feitos"
             android:textColor="@color/colorPrimaryText2"
             app:layout_widthPercent="8%" />
 
@@ -113,7 +112,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="GS"
+            android:text="@string/gols_sofridos"
             android:textColor="@color/colorPrimaryText2"
             app:layout_widthPercent="8%" />
 

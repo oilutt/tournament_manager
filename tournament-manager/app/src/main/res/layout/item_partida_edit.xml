@@ -22,7 +22,6 @@
             android:ellipsize="end"
             android:gravity="end"
             android:maxLines="1"
-            android:text="Time 1"
             app:layout_widthPercent="35%" />
 
         <EditText
@@ -43,7 +42,6 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/golsTimeCasa"
             android:gravity="center"
-            android:text="X"
             app:layout_widthPercent="5%" />
 
         <EditText
@@ -65,7 +63,6 @@
             android:layout_toRightOf="@+id/golsTimeFora"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Time 2"
             app:layout_widthPercent="35%" />
 
     </android.support.percent.PercentRelativeLayout>

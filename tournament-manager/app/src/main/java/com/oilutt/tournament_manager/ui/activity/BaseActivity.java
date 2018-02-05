@@ -149,7 +149,7 @@ public class BaseActivity extends MvpAppCompatActivity {
                 if (!TextUtils.isEmpty(mensagem)) {
                     dialogProgress.setTitle(mensagem);
                 } else {
-                    dialogProgress.setTitle("Aguarde...");
+                    dialogProgress.setTitle(getString(R.string.aguarde));
                 }
             } else {
                 if (dialogProgress.isShowing()) {

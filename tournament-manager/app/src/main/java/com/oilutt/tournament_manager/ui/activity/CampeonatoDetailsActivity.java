@@ -259,7 +259,7 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
         String text = Utils.formatString(getString(R.string.share_camp), nome) + " " + codigo + getString(R.string.share_camp2);
         share.setType("text/text");
         share.putExtra(Intent.EXTRA_TEXT, text);
-        startActivity(Intent.createChooser(share, "Convidar por"));
+        startActivity(Intent.createChooser(share, getString(R.string.invite_from)));
     }
 
     @Override

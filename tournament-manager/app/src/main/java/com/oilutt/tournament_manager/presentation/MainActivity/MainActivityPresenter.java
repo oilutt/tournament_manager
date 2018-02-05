@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.app.Constants;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.model.User;
@@ -156,7 +157,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     }
 
     public void clickHeader(){
-        Utils.showDialogCameraGallery(activity, "Alterar foto de perfil");
+        Utils.showDialogCameraGallery(activity, activity.getString(R.string.change_profile));
     }
 
     public void clickMeusCamps(){
