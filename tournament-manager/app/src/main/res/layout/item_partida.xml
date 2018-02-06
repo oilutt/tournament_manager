@@ -38,6 +38,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/golsTimeCasa"
             android:gravity="center"
+            android:text="X"
             app:layout_widthPercent="5%" />
 
         <TextView

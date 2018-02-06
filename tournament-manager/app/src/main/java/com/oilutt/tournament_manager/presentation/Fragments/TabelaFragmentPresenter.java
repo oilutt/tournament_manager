@@ -1,7 +1,10 @@
 package com.oilutt.tournament_manager.presentation.Fragments;
 
+import android.content.Context;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.ui.adapter.TabelaAdapter;
 
@@ -14,8 +17,10 @@ public class TabelaFragmentPresenter extends MvpPresenter<TabelaFragmentCallback
     private Campeonato campeonato;
     private TabelaAdapter adapter;
     private int grupo;
+    private Context context;
 
-    public TabelaFragmentPresenter() {
+    public TabelaFragmentPresenter(Context context) {
+        this.context = context;
         getViewState().init();
     }
 
@@ -29,10 +34,10 @@ public class TabelaFragmentPresenter extends MvpPresenter<TabelaFragmentCallback
     }
 
     private void setAdapter() {
-        if (campeonato.getFormato().getNome().equals("Liga")) {
+        if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
             adapter = new TabelaAdapter(campeonato.getTimes());
             getViewState().setAdapter(adapter);
-        } else if (campeonato.getFormato().getNome().equals("Torneio")) {
+        } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.torneio))) {
             adapter = new TabelaAdapter(campeonato.getFormato().getGrupos().get(grupo).getTimes());
             getViewState().setAdapter(adapter);
         }

@@ -182,5 +182,9 @@
     <string name="extras">Extra</string>
     <string name="raffle_fifa">Raffle FIFA</string>
     <string name="sair">Logout</string>
+    <string name="tabela">Table</string>
+    <string name="rodada">Round</string>
+    <string name="grupo">Group</string>
+    <string name="time">Team</string>
 
 </resources>

@@ -29,6 +29,7 @@
             android:layout_toRightOf="@+id/posicao"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@string/time"
             android:textColor="@color/colorPrimaryText2"
             app:layout_widthPercent="39%" />
 

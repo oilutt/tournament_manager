@@ -128,6 +128,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
     }
 
     public void clickSalvar() {
+        getViewState().showProgress();
         List<Fragment> fragmentList = adapter.getFragmentList();
         boolean pode = true;
         if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
@@ -158,8 +159,11 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
                 }
             }
         }
-        if (pode)
+        if (pode) {
             updateCampeonato();
+        } else {
+            getViewState().hideProgress();
+        }
     }
 
     private void updateCampeonato() {
@@ -169,6 +173,7 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
         childUpdates.put("/campeonatos/" + campeonatoId, campeonatoValues);
         campEndPointUpdate.updateChildren(childUpdates);
 
+        getViewState().hideProgress();
         getViewState().startCampeonato(campeonatoId);
     }
 

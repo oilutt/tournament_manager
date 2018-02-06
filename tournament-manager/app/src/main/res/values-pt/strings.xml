@@ -167,6 +167,10 @@
     <string name="extras">Extras</string>
     <string name="raffle_fifa">Sorteio FIFA</string>
     <string name="sair">Sair</string>
+    <string name="tabela">Tabela</string>
+    <string name="rodada">Rodada</string>
+    <string name="grupo">Grupo</string>
+    <string name="time">Equipe</string>
 
 
 </resources>

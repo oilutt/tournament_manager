@@ -41,14 +41,14 @@ public class TabAdapter extends FragmentPagerAdapter {
             if (!edit) {
                 switch (position) {
                     case 0:
-                        return "Tabela";
+                        return context.getString(R.string.tabela);
                     default:
-                        return "Rodada " + position;
+                        return context.getString(R.string.rodada) + " " + position;
                 }
             } else {
                 switch (position) {
                     default:
-                        return "Rodada " + (position + 1);
+                        return context.getString(R.string.rodada) + " " + (position + 1);
                 }
             }
         } else if (camp.getFormato().getNome().equals(context.getString(R.string.matamata))) {
@@ -93,9 +93,9 @@ public class TabAdapter extends FragmentPagerAdapter {
             if(!edit) {
                 if (position <= grupos * 4 - 1) {
                     if (position % 4 == 0) {
-                        return "Grupo " + (position / 4 + 1);
+                        return context.getString(R.string.grupo) + " " + (position / 4 + 1);
                     } else {
-                        return "Rodada " + (position % 4);
+                        return context.getString(R.string.rodada) + " " + (position % 4);
                     }
                 } else {
                     if (camp.getFormato().getFases().size() == 4) {
@@ -123,7 +123,7 @@ public class TabAdapter extends FragmentPagerAdapter {
                 }
             } else {
                 if(position <= grupos * 3 -1) {
-                    return "Rodada " + ((position % 3) +1 + "\nGrupo " + ((position/3)+1));
+                    return context.getString(R.string.rodada) + " " + ((position % 3) +1 + "\n" + context.getString(R.string.grupo) + " " + ((position/3)+1));
                 } else {
                     if (camp.getFormato().getFases().size() == 4) {
                         if (position == grupos * 3)

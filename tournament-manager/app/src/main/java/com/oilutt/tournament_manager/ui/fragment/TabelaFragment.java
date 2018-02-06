@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.presentation.Fragments.TabelaFragmentCallback;
 import com.oilutt.tournament_manager.presentation.Fragments.TabelaFragmentPresenter;
@@ -28,6 +29,10 @@ public class TabelaFragment extends MvpAppCompatFragment implements TabelaFragme
 
     @InjectPresenter
     TabelaFragmentPresenter presenter;
+    @ProvidePresenter
+    TabelaFragmentPresenter createPresenter(){
+        return new TabelaFragmentPresenter(getContext());
+    }
 
     public static TabelaFragment newInstance() {
         Bundle args = new Bundle();
