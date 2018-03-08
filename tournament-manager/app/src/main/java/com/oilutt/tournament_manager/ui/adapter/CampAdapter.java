@@ -28,12 +28,11 @@ import butterknife.ButterKnife;
 
 public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder> {
 
-    private List<Campeonato> list = new ArrayList<>();
+    public List<Campeonato> list = new ArrayList<>();
     Activity activity;
-    private boolean busca;
+    private boolean busca = false;
 
-    public CampAdapter(Activity context, boolean busca) {
-        this.busca = busca;
+    public CampAdapter(Activity context) {
         this.activity = context;
     }
 
@@ -41,6 +40,14 @@ public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder> {
     public CampHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_camp, null);
         return new CampHolder(view);
+    }
+
+    public boolean isBusca() {
+        return busca;
+    }
+
+    public void setBusca(boolean busca) {
+        this.busca = busca;
     }
 
     @Override
@@ -79,6 +86,16 @@ public class CampAdapter extends RecyclerView.Adapter<CampAdapter.CampHolder> {
             this.list = list;
         else
             this.list = new ArrayList<>();
+        notifyDataSetChanged();
+    }
+
+    public void addData(List<Campeonato> list){
+        for (Campeonato c:this.list) {
+            for(int x = 0; x < list.size(); x++){
+                if(!c.getId().equals(list.get(x).getId()))
+                    this.list.add(list.get(x));
+            }
+        }
         notifyDataSetChanged();
     }
 

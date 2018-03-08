@@ -39,7 +39,6 @@ public class User implements Serializable, Parcelable {
         result.put("id", id);
         result.put("nome", nome);
         result.put("email", email);
-        result.put("foto", foto);
         return result;
     }
 

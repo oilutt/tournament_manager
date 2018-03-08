@@ -84,7 +84,7 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
     private void setAdapter() {
         Bundle extras = new Bundle();
         extras.putParcelable("campeonato", campeonato);
-        if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
+        if (campeonato.getFormato().getNome().equals("Liga") || campeonato.getFormato().getNome().equals("League")) {
             List<Fragment> fragmentList = new ArrayList<>();
             TabelaFragment fragment = TabelaFragment.newInstance();
             fragment.setArguments(extras);
@@ -103,7 +103,7 @@ public class CampeonatoPresenter extends MvpPresenter<CampeonatoCallback> {
                 adapter = new TabAdapter(context, fragmentList, ((AppCompatActivity) context).getSupportFragmentManager(), campeonato, false);
                 getViewState().setAdapterTab(adapter);
             }
-        } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
+        } else if (campeonato.getFormato().getNome().equals("Play-offs") || campeonato.getFormato().getNome().equals("Mata-mata") || campeonato.getFormato().getNome().equals("Rondas")) {
             List<Fragment> fragmentList = new ArrayList<>();
             for (int x = campeonato.getFormato().getFases().size() - 1; x >= 0; x--) {
                 Bundle extras2 = new Bundle();

@@ -171,7 +171,7 @@ public class CampeonatoDetailPresenter extends MvpPresenter<CampeonatoDetailCall
             getViewState().setStatus(context.getString(R.string.em_andamento));
         else if (campeonato.getStatus() == 1)
             getViewState().setStatus(context.getString(R.string.aberto));
-        if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
+        if (campeonato.getFormato().getNome().equals("Liga") || campeonato.getFormato().getNome().equals("League")) {
             if (campeonato.getFormato().getIdaVolta() == 1)
                 getViewState().setIdaEVolta(R.string.sim);
             else

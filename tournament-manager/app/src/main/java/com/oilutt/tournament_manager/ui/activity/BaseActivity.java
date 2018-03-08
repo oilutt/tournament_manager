@@ -173,7 +173,7 @@ public class BaseActivity extends MvpAppCompatActivity {
     public void showSnackWithAction(String msg, String button, View view, View.OnClickListener clickListener){
         if (!TextUtils.isEmpty(msg) && !TextUtils.isEmpty(button)) {
             msg = msg.replace("\\n", " ");
-            Snackbar.make(view, msg, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
                     .setAction(button, clickListener)
                     .show();
         }

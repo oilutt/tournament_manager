@@ -3,6 +3,7 @@ package com.oilutt.tournament_manager.ui.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -59,7 +60,7 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     @BindView(R.id.text_no_data_invite)
     TextView textNoDataInvite;
     @BindView(R.id.progress)
-    AVLoadingIndicatorView progress;
+    RelativeLayout progress;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @BindView(R.id.nav_view)
@@ -68,6 +69,7 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     AdView mAdView;
 
     View header;
+    LinearLayoutManager manager;
 
     @InjectPresenter
     MainActivityPresenter presenter;
@@ -81,6 +83,7 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        manager = new LinearLayoutManager(this);
         ButterKnife.bind(this);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -92,7 +95,7 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         header = navigationView.getHeaderView(0);
         FontsOverride.setDefaultFont(this, "MONOSPACE", getString(R.string.monstserrat_regular));
         toggle.syncState();
-        setHeaderClick();
+        setHeaderClickEProgress();
         getBundle();
     }
 
@@ -102,10 +105,13 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         }
     }
 
-    private void setHeaderClick() {
+    private void setHeaderClickEProgress() {
         header.setOnClickListener(v -> {
             presenter.clickHeader();
             drawerLayout.closeDrawer(GravityCompat.START);
+        });
+        progress.setOnClickListener(view -> {
+
         });
     }
 
@@ -198,14 +204,14 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
 
     @Override
     public void setBuscaAdapter(CampAdapter adapter) {
-        recyclerViewBusca.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewBusca.setLayoutManager(manager);
         recyclerViewBusca.setHasFixedSize(true);
         recyclerViewBusca.setAdapter(adapter);
     }
 
     @Override
     public void setAdapter(CampAdapter adapter) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
     }
@@ -251,12 +257,15 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         int id = item.getItemId();
 
         if (id == R.id.meus_camps) {
+            edtBusca.setText("");
             presenter.clickMeusCamps();
         } else if (id == R.id.invite_camp) {
+            edtBusca.setText("");
             presenter.clickInviteCamp();
         } else if (id == R.id.busca_camp) {
             presenter.clickBuscaCamp();
         } else if (id == R.id.sorteio_fifa) {
+            edtBusca.setText("");
             presenter.sorteio();
         } else if (id == R.id.logout) {
             presenter.logout();
@@ -294,5 +303,15 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         Intent intent = new Intent(this, CampeonatoDetailsActivity.class);
         intent.putExtra("invite", invite);
         startActivity(intent);
+    }
+
+    @Override
+    public void showProgress() {
+        progress.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progress.setVisibility(View.GONE);
     }
 }

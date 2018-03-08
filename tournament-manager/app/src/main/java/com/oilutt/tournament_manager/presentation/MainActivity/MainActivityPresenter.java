@@ -1,11 +1,14 @@
 package com.oilutt.tournament_manager.presentation.MainActivity;
 
 import android.app.Activity;
+import android.app.ApplicationErrorReport;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -13,6 +16,7 @@ import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.facebook.internal.AnalyticsEvents;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -52,7 +56,6 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     private DatabaseReference campEndPoint = FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid() + "/campeonatos");
     private List<Campeonato> campeonatoList;
     private List<Campeonato> buscaList;
-    private List<Campeonato> buscaFiltered;
     private TextWatcher watcher;
     private Activity activity;
     private User user;
@@ -60,15 +63,18 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     private boolean busca = false;
     private String pathImage, imageBase64;
     private Handler handler;
+    private String buscaStr = "";
 
     public MainActivityPresenter(Activity activity) {
         this.activity = activity;
+        adapter = new CampAdapter(activity);
+        buscaAdapter = new CampAdapter(activity);
         getUser();
         getCamps();
         initWatcher();
     }
 
-    public void getInvite(String invite){
+    public void getInvite(String invite) {
         getViewState().openDetails(invite);
     }
 
@@ -95,13 +101,15 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         });
     }
 
-    private void getUser(){
+    private void getUser() {
         userEndPoint.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 user = dataSnapshot.getValue(User.class);
-                saveUserRealm();
-                setFields();
+                if (user != null) {
+                    saveUserRealm();
+                    setFields();
+                }
             }
 
             @Override
@@ -111,17 +119,21 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         });
     }
 
-    private void saveUserRealm(){
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        realm.copyToRealmOrUpdate(new UserRealm(user));
-        realm.commitTransaction();
+    private void saveUserRealm() {
+        try {
+            Realm realm = Realm.getDefaultInstance();
+            realm.beginTransaction();
+            realm.copyToRealmOrUpdate(new UserRealm(user));
+            realm.commitTransaction();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void setAdapter() {
         if (campeonatoList.size() > 0) {
             getViewState().hidePlaceHolder();
-            adapter = new CampAdapter(activity, false);
+            adapter.setBusca(false);
             adapter.setData(campeonatoList);
             getViewState().setAdapter(adapter);
         } else {
@@ -132,7 +144,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     private void setAdapterInvite() {
         if (campeonatoList.size() > 0) {
             getViewState().hidePlaceHolderInvite();
-            adapter = new CampAdapter(activity, false);
+            adapter.setBusca(false);
             adapter.setData(campeonatoList);
             getViewState().setAdapter(adapter);
         } else {
@@ -140,13 +152,13 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         }
     }
 
-    private void setFields(){
+    private void setFields() {
         getViewState().setFoto(user.getFoto() != null && !user.getFoto().equals("") ? user.getFoto() : "");
         getViewState().setEmail(user.getEmail());
         getViewState().setNome(user.getNome());
     }
 
-    public void logout(){
+    public void logout() {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         realm.delete(UserRealm.class);
@@ -156,42 +168,41 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         getViewState().openLogin();
     }
 
-    public void clickHeader(){
+    public void clickHeader() {
         Utils.showDialogCameraGallery(activity, activity.getString(R.string.change_profile));
     }
 
-    public void clickMeusCamps(){
-        if(!meusCamps){
+    public void clickMeusCamps() {
+        if (!meusCamps) {
             getCamps();
-        } else if(busca){
+        } else if (busca) {
             getCamps();
         }
         busca = false;
     }
 
-    public void sorteio(){
+    public void sorteio() {
         getViewState().openSorteio();
     }
 
-    public void clickBuscaCamp(){
-        if(!busca){
+    public void clickBuscaCamp() {
+        if (!busca) {
             busca = true;
             getViewState().setBuscaWatcher(watcher);
             getViewState().showBusca();
-            makeBusca();
         }
     }
 
-    public void clickInviteCamp(){
-        if(meusCamps){
+    public void clickInviteCamp() {
+        if (meusCamps) {
             getUserCamp();
-        } else if(busca){
+        } else if (busca) {
             getUserCamp();
         }
         busca = false;
     }
 
-    private void getUserCamp(){
+    private void getUserCamp() {
         userEndPoint.child("inviteChamps").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -213,13 +224,12 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         });
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == Constants.CODIGO) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.CODIGO) {
             if (resultCode == Activity.RESULT_OK) {
                 clickInviteCamp();
             }
-        }
-        else if ((requestCode == Constants.REQUEST_CAMERA || requestCode == Constants.PICK_PHOTO_CODE) && resultCode == AppCompatActivity.RESULT_OK) {
+        } else if ((requestCode == Constants.REQUEST_CAMERA || requestCode == Constants.PICK_PHOTO_CODE) && resultCode == AppCompatActivity.RESULT_OK) {
             getViewState().launchCrop(data.getData());
         } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
@@ -236,13 +246,13 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         }
     }
 
-    private void updateUser(){
+    private void updateUser() {
         user.setFoto(imageBase64);
         Map<String, Object> userUpdates = user.toMap2();
         userEndPoint.updateChildren(userUpdates);
     }
 
-    private void initWatcher(){
+    private void initWatcher() {
         watcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -251,8 +261,14 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                handler = null;
                 handler = new Handler();
-                handler.postDelayed(() -> searchCamps(s.toString()), 800);
+                handler.postDelayed(() -> {
+                    buscaStr = s.toString();
+                    if (!s.toString().equals(""))
+                        getViewState().showProgress();
+                        makeBusca();
+                }, 1500);
             }
 
             @Override
@@ -262,22 +278,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         };
     }
 
-    private void searchCamps(String s){
-        buscaFiltered = new ArrayList<>();
-        for (Campeonato camp: buscaList) {
-            if(camp.getNome().toLowerCase().startsWith(s.toLowerCase()))
-                buscaFiltered.add(camp);
-        }
-        if(buscaFiltered.size() > 0){
-            getViewState().hidePlaceHolderBusca();
-        } else {
-            getViewState().showPlaceHolderBusca();
-        }
-        buscaAdapter.setData(buscaFiltered);
-        getViewState().setBuscaAdapter(buscaAdapter);
-    }
-
-    private void makeBusca(){
+    public void makeBusca() {
         buscaEndPoint.orderByChild("privado").equalTo(0).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -285,19 +286,22 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
                 for (DataSnapshot noteSnapshot : dataSnapshot.getChildren()) {
                     String key = noteSnapshot.getKey();
                     Campeonato note = noteSnapshot.getValue(Campeonato.class);
-                    if(!note.getDono().getEmail().equals(mFirebaseUser.getEmail())) {
+                    if (!note.getDono().getEmail().equals(mFirebaseUser.getEmail())) {
                         note.setId(key);
-                        buscaList.add(note);
+                        if (note.getNome().toLowerCase().contains(buscaStr.toLowerCase())) {
+                            buscaList.add(note);
+                        }
                     }
                 }
-                buscaAdapter = new CampAdapter(activity, true);
+                buscaAdapter.setBusca(true);
                 buscaAdapter.setData(buscaList);
-                new Handler().postDelayed(() -> {
-                    getViewState().setBuscaAdapter(buscaAdapter);
-                    if(buscaList.size() > 0) {
-                        getViewState().hidePlaceHolderBusca();
-                    }
-                }, 1500);
+                getViewState().setBuscaAdapter(buscaAdapter);
+                if (buscaList.size() > 0) {
+                    getViewState().hidePlaceHolderBusca();
+                } else {
+                    getViewState().showPlaceHolderBusca();
+                }
+                getViewState().hideProgress();
             }
 
             @Override

@@ -49,7 +49,7 @@ public class PartidaMatamataEditAdapter extends RecyclerView.Adapter<PartidaMata
         BestOf partida = list.get(position);
         holder.nomeTimeCasa.setText(partida.getTime1());
         holder.nomeTimeFora.setText(partida.getTime2());
-        if(partida.getValorTime1() != null) {
+        if (partida.getValorTime1() != null) {
             holder.partidasTime1.setText(partida.getValorTime1());
             holder.partidasTime2.setText(partida.getValorTime2());
             holder.partidasTime1.setFocusable(false);
@@ -63,10 +63,14 @@ public class PartidaMatamataEditAdapter extends RecyclerView.Adapter<PartidaMata
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if (Integer.parseInt(s.toString()) < Math.round(partida.getQuantity()))
-                        partida.setValorTime1(s.toString());
-                    else
-                        Snackbar.make(holder.itemView, R.string.valor_invalido, Snackbar.LENGTH_SHORT).show();
+                    try {
+                        if (Integer.parseInt(s.toString()) < Math.round(partida.getQuantity()))
+                            partida.setValorTime1(s.toString());
+                        else
+                            Snackbar.make(holder.itemView, R.string.valor_invalido, Snackbar.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
@@ -82,10 +86,14 @@ public class PartidaMatamataEditAdapter extends RecyclerView.Adapter<PartidaMata
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if (Integer.parseInt(s.toString()) < Math.round(partida.getQuantity()))
-                        partida.setValorTime2(s.toString());
-                    else
-                        Snackbar.make(holder.itemView, R.string.valor_invalido, Snackbar.LENGTH_SHORT).show();
+                    try {
+                        if (Integer.parseInt(s.toString()) < Math.round(partida.getQuantity()))
+                            partida.setValorTime2(s.toString());
+                        else
+                            Snackbar.make(holder.itemView, R.string.valor_invalido, Snackbar.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override

@@ -128,41 +128,45 @@ public class EditPresenter extends MvpPresenter<EditCallback> {
     }
 
     public void clickSalvar() {
-        getViewState().showProgress();
-        List<Fragment> fragmentList = adapter.getFragmentList();
-        boolean pode = true;
-        if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
-            for (int x = 0; x < fragmentList.size(); x++) {
-                if (((RodadaFragment) fragmentList.get(x)).getList() != null) {
-                    campeonato.getFormato().getRodadas().get(x).setPartidas(((RodadaFragment) fragmentList.get(x)).getList());
-                    updatePositions(((RodadaFragment) fragmentList.get(x)).getList(), x);
-                }
-            }
-        } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
-            for (int x = 0, y = fragmentList.size() - 1; x < fragmentList.size(); x++, y--) {
-                if (((MataMataFragment) fragmentList.get(x)).getList() != null) {
-                    pode = updateFases(((MataMataFragment) fragmentList.get(x)).getList(), y);
-                }
-            }
-        } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.torneio))){
-            for (int x = 0, y = fragmentList.size(); x < fragmentList.size(); x++) {
-                if(fragmentList.get(x) instanceof RodadaFragment) {
+        try {
+            getViewState().showProgress();
+            List<Fragment> fragmentList = adapter.getFragmentList();
+            boolean pode = true;
+            if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
+                for (int x = 0; x < fragmentList.size(); x++) {
                     if (((RodadaFragment) fragmentList.get(x)).getList() != null) {
-                        campeonato.getFormato().getGrupos().get(x / 3).getRodadas().get(x % 3).setPartidas(((RodadaFragment) fragmentList.get(x)).getList());
-                        updatePositionsTorneio(((RodadaFragment) fragmentList.get(x)).getList(), x % 3, x / 3, y - 3*campeonato.getFormato().getGrupos().size() -1);
+                        campeonato.getFormato().getRodadas().get(x).setPartidas(((RodadaFragment) fragmentList.get(x)).getList());
+                        updatePositions(((RodadaFragment) fragmentList.get(x)).getList(), x);
                     }
-                } else if(fragmentList.get(x) instanceof MataMataFragment){
+                }
+            } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
+                for (int x = 0, y = fragmentList.size() - 1; x < fragmentList.size(); x++, y--) {
                     if (((MataMataFragment) fragmentList.get(x)).getList() != null) {
-                        pode = updateFases(((MataMataFragment) fragmentList.get(x)).getList(), y - 3*campeonato.getFormato().getGrupos().size() -1);
-                        y--;
+                        pode = updateFases(((MataMataFragment) fragmentList.get(x)).getList(), y);
+                    }
+                }
+            } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.torneio))) {
+                for (int x = 0, y = fragmentList.size(); x < fragmentList.size(); x++) {
+                    if (fragmentList.get(x) instanceof RodadaFragment) {
+                        if (((RodadaFragment) fragmentList.get(x)).getList() != null) {
+                            campeonato.getFormato().getGrupos().get(x / 3).getRodadas().get(x % 3).setPartidas(((RodadaFragment) fragmentList.get(x)).getList());
+                            updatePositionsTorneio(((RodadaFragment) fragmentList.get(x)).getList(), x % 3, x / 3, y - 3 * campeonato.getFormato().getGrupos().size() - 1);
+                        }
+                    } else if (fragmentList.get(x) instanceof MataMataFragment) {
+                        if (((MataMataFragment) fragmentList.get(x)).getList() != null) {
+                            pode = updateFases(((MataMataFragment) fragmentList.get(x)).getList(), y - 3 * campeonato.getFormato().getGrupos().size() - 1);
+                            y--;
+                        }
                     }
                 }
             }
-        }
-        if (pode) {
-            updateCampeonato();
-        } else {
-            getViewState().hideProgress();
+            if (pode) {
+                updateCampeonato();
+            } else {
+                getViewState().hideProgress();
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 

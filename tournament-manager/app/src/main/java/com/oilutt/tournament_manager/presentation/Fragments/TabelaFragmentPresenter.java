@@ -34,10 +34,10 @@ public class TabelaFragmentPresenter extends MvpPresenter<TabelaFragmentCallback
     }
 
     private void setAdapter() {
-        if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
+        if (campeonato.getFormato().getNome().equals("Liga") || campeonato.getFormato().getNome().equals("League")) {
             adapter = new TabelaAdapter(campeonato.getTimes());
             getViewState().setAdapter(adapter);
-        } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.torneio))) {
+        } else if (campeonato.getFormato().getNome().equals("Torneio") || campeonato.getFormato().getNome().equals("Torneo") || campeonato.getFormato().getNome().equals("Tournament")) {
             adapter = new TabelaAdapter(campeonato.getFormato().getGrupos().get(grupo).getTimes());
             getViewState().setAdapter(adapter);
         }

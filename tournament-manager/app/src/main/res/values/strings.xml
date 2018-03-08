@@ -15,7 +15,7 @@
 
     <!-- MainActivity -->
     <string name="text_busca">Search for public championships and start to follow them</string>
-    <string name="place_holder_busca">No championship with the name entered was found.</string>
+    <string name="place_holder_busca">No championship with this name was found.</string>
     <string name="text_no_data">You don\'t have any championship yet.\nYou can start a new one by clicking the button below.</string>
     <string name="text_no_data_invite">You haven\'t followed any championship yet.</string>
     <string name="text_no_login">In order to use the application normally, it is necessary to login.</string>
@@ -126,8 +126,8 @@
 
     <!-- Campeonato Details-->
     <string name="formato_camp_det">Format:</string>
-    <string name="partidas_camp_chave_det">Matches in play-offs:</string>
-    <string name="partidas_camp_final_det">Matches in final:</string>
+    <string name="partidas_camp_chave_det">Play-offs matches:</string>
+    <string name="partidas_camp_final_det">Final matches:</string>
     <string name="idaevolta_det">Round trip:</string>
     <string name="times_camp_det">Number of teams:</string>
     <string name="dono_det">Owner:</string>

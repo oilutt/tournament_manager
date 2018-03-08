@@ -268,9 +268,9 @@ public class CampeonatoDetailsActivity extends BaseActivity implements Campeonat
     }
 
     @Override
-    public void showSnack(String msg, int button, View.OnClickListener clickListener) {
+    public void showSnack(String msg, int button1, View.OnClickListener clickListener) {
         mAdView.setVisibility(View.GONE);
-        showSnackWithAction(msg, getString(button), recyclerView, clickListener);
+        showSnackWithAction(msg, getString(button1), recyclerView, clickListener);
     }
 
     @Override

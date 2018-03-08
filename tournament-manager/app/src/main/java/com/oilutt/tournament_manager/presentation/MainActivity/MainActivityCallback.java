@@ -1,6 +1,7 @@
 package com.oilutt.tournament_manager.presentation.MainActivity;
 
 import android.net.Uri;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextWatcher;
 
 import com.arellomobile.mvp.MvpView;
@@ -47,4 +48,8 @@ public interface MainActivityCallback extends MvpView {
     void launchCrop(Uri uri);
 
     void openDetails(String invite);
+
+    void showProgress();
+
+    void hideProgress();
 }

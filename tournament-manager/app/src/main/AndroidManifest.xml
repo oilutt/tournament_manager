@@ -20,6 +20,7 @@
         android:launchMode="singleTask"
         android:roundIcon="@drawable/trophy"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme"
         tools:replace="android:theme, android:icon, android:allowBackup">
         <meta-data android:name="com.facebook.sdk.ApplicationId"
