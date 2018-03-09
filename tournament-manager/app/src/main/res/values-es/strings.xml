@@ -172,4 +172,7 @@
     <string name="rodada">Jornada</string>
     <string name="grupo">Grupo</string>
     <string name="time">Equipo</string>
+
+    <string name="loading_text">Esto puede tardar un poco...</string>
+
 </resources>

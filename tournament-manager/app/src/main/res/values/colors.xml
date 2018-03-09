@@ -9,6 +9,8 @@
     <color name="colorPrimaryLight3">#121315</color>
     <color name="colorPrimaryLightEdt">#797A7C</color>
     <color name="colorPrimaryLightMataMata">#333333</color>
+    <color name="colorBackgroundLoading">#EE797A7C</color>
+    <color name="colorLoadingText">#1C1C1E</color>
 
     <color name="colorPrimaryDark80">#c81A1A1A</color>
     <color name="colorPrimaryDark50">#801A1A1A</color>

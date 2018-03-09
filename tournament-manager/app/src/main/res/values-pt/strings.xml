@@ -172,5 +172,6 @@
     <string name="grupo">Grupo</string>
     <string name="time">Equipe</string>
 
+    <string name="loading_text">Isso pode demorar um pouco...</string>
 
 </resources>

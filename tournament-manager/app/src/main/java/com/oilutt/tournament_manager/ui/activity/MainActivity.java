@@ -3,22 +3,18 @@ package com.oilutt.tournament_manager.ui.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -29,10 +25,8 @@ import com.google.android.gms.ads.AdView;
 import com.oilutt.tournament_manager.R;
 import com.oilutt.tournament_manager.presentation.MainActivity.MainActivityCallback;
 import com.oilutt.tournament_manager.presentation.MainActivity.MainActivityPresenter;
-import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
 import com.oilutt.tournament_manager.utils.FontsOverride;
 import com.oilutt.tournament_manager.utils.Utils;
-import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,26 +35,8 @@ import butterknife.OnClick;
 public class MainActivity extends BaseActivity implements MainActivityCallback,
         NavigationView.OnNavigationItemSelectedListener {
 
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    @BindView(R.id.recyclerViewBusca)
-    RecyclerView recyclerViewBusca;
-    @BindView(R.id.layout_busca)
-    RelativeLayout layoutBusca;
-    @BindView(R.id.edt_busca)
-    EditText edtBusca;
-    @BindView(R.id.placeholder_busca)
-    TextView placeholderBusca;
-    @BindView(R.id.text_busca)
-    TextView textBusca;
     @BindView(R.id.fab)
     FloatingActionButton fab;
-    @BindView(R.id.text_no_data)
-    TextView textNoData;
-    @BindView(R.id.text_no_data_invite)
-    TextView textNoDataInvite;
-    @BindView(R.id.progress)
-    RelativeLayout progress;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @BindView(R.id.nav_view)
@@ -69,7 +45,6 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     AdView mAdView;
 
     View header;
-    LinearLayoutManager manager;
 
     @InjectPresenter
     MainActivityPresenter presenter;
@@ -83,7 +58,6 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        manager = new LinearLayoutManager(this);
         ButterKnife.bind(this);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -95,7 +69,8 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         header = navigationView.getHeaderView(0);
         FontsOverride.setDefaultFont(this, "MONOSPACE", getString(R.string.monstserrat_regular));
         toggle.syncState();
-        setHeaderClickEProgress();
+        presenter.clickMeusCamps();
+        setHeaderClick();
         getBundle();
     }
 
@@ -105,13 +80,10 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         }
     }
 
-    private void setHeaderClickEProgress() {
+    private void setHeaderClick() {
         header.setOnClickListener(v -> {
             presenter.clickHeader();
             drawerLayout.closeDrawer(GravityCompat.START);
-        });
-        progress.setOnClickListener(view -> {
-
         });
     }
 
@@ -123,97 +95,6 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
     @OnClick(R.id.fab)
     public void onClickFab() {
         openActivity(AddCampActivity.class);
-    }
-
-    @Override
-    public void showPlaceHolder() {
-        progress.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.INVISIBLE);
-        textNoData.setVisibility(View.VISIBLE);
-        textNoDataInvite.setVisibility(View.INVISIBLE);
-        layoutBusca.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void hidePlaceHolder() {
-        progress.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
-        textNoData.setVisibility(View.INVISIBLE);
-        textNoDataInvite.setVisibility(View.INVISIBLE);
-        layoutBusca.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void showPlaceHolderInvite() {
-        progress.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.INVISIBLE);
-        textNoData.setVisibility(View.INVISIBLE);
-        textNoDataInvite.setVisibility(View.VISIBLE);
-        layoutBusca.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void hidePlaceHolderInvite() {
-        progress.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
-        textNoData.setVisibility(View.INVISIBLE);
-        textNoDataInvite.setVisibility(View.INVISIBLE);
-        layoutBusca.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void showBusca() {
-        progress.setVisibility(View.GONE);
-        layoutBusca.setVisibility(View.VISIBLE);
-        recyclerViewBusca.setVisibility(View.INVISIBLE);
-        placeholderBusca.setVisibility(View.INVISIBLE);
-        textBusca.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.INVISIBLE);
-        textNoData.setVisibility(View.INVISIBLE);
-        textNoDataInvite.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void showPlaceHolderBusca() {
-        progress.setVisibility(View.GONE);
-        layoutBusca.setVisibility(View.VISIBLE);
-        recyclerViewBusca.setVisibility(View.INVISIBLE);
-        placeholderBusca.setVisibility(View.VISIBLE);
-        textBusca.setVisibility(View.INVISIBLE);
-        recyclerView.setVisibility(View.INVISIBLE);
-        textNoData.setVisibility(View.INVISIBLE);
-        textNoDataInvite.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void hidePlaceHolderBusca() {
-        progress.setVisibility(View.GONE);
-        layoutBusca.setVisibility(View.VISIBLE);
-        recyclerViewBusca.setVisibility(View.VISIBLE);
-        placeholderBusca.setVisibility(View.INVISIBLE);
-        textBusca.setVisibility(View.INVISIBLE);
-        recyclerView.setVisibility(View.INVISIBLE);
-        textNoData.setVisibility(View.INVISIBLE);
-        textNoDataInvite.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void setBuscaWatcher(TextWatcher watcher) {
-        edtBusca.addTextChangedListener(watcher);
-    }
-
-    @Override
-    public void setBuscaAdapter(CampAdapter adapter) {
-        recyclerViewBusca.setLayoutManager(manager);
-        recyclerViewBusca.setHasFixedSize(true);
-        recyclerViewBusca.setAdapter(adapter);
-    }
-
-    @Override
-    public void setAdapter(CampAdapter adapter) {
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -257,15 +138,12 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         int id = item.getItemId();
 
         if (id == R.id.meus_camps) {
-            edtBusca.setText("");
             presenter.clickMeusCamps();
         } else if (id == R.id.invite_camp) {
-            edtBusca.setText("");
             presenter.clickInviteCamp();
         } else if (id == R.id.busca_camp) {
             presenter.clickBuscaCamp();
         } else if (id == R.id.sorteio_fifa) {
-            edtBusca.setText("");
             presenter.sorteio();
         } else if (id == R.id.logout) {
             presenter.logout();
@@ -275,6 +153,14 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void replaceFragment(Fragment fragment){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @Override
@@ -303,15 +189,5 @@ public class MainActivity extends BaseActivity implements MainActivityCallback,
         Intent intent = new Intent(this, CampeonatoDetailsActivity.class);
         intent.putExtra("invite", invite);
         startActivity(intent);
-    }
-
-    @Override
-    public void showProgress() {
-        progress.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgress() {
-        progress.setVisibility(View.GONE);
     }
 }

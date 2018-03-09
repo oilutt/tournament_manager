@@ -84,6 +84,14 @@
         <item name="android:textSize">@dimen/font_16</item>
     </style>
 
+    <style name="LoadingText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontPath">@string/monstserrat_regular</item>
+        <item name="android:textColor">@color/colorLoadingText</item>
+        <item name="android:textSize">@dimen/font_16</item>
+    </style>
+
     <style name="Text18MontserratRegular">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

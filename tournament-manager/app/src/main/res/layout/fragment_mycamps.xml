@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimaryLight">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/adView"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/colorPrimaryLight"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/text_no_data"
+        style="@style/Text16MontserratRegular"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:lineSpacingExtra="@dimen/margin_5"
+        android:padding="@dimen/margin_10"
+        android:text="@string/text_no_data"
+        android:visibility="invisible" />
+
+    <RelativeLayout
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:background="@drawable/background_loading"
+            android:layout_centerInParent="true"
+            android:gravity="center">
+
+            <com.wang.avi.AVLoadingIndicatorView
+                android:layout_width="@dimen/margin_50"
+                android:layout_height="@dimen/margin_50"
+                app:fontPath="@string/monstserrat_regular"
+                app:indicatorColor="@color/colorAccent"
+                app:indicatorName="BallSpinFadeLoaderIndicator" />
+
+            <TextView
+                style="@style/LoadingText"
+                android:layout_marginTop="5dp"
+                android:text="@string/loading_text" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

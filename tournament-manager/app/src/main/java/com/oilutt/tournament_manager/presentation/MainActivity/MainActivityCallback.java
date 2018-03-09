@@ -1,27 +1,15 @@
 package com.oilutt.tournament_manager.presentation.MainActivity;
 
 import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextWatcher;
+import android.support.v4.app.Fragment;
 
 import com.arellomobile.mvp.MvpView;
-import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
 
 /**
  * Created by oilut on 24/08/2017.
  */
 
 public interface MainActivityCallback extends MvpView {
-
-    void showPlaceHolder();
-
-    void showPlaceHolderInvite();
-
-    void hidePlaceHolder();
-
-    void hidePlaceHolderInvite();
-
-    void setAdapter(CampAdapter adapter);
 
     void setFoto(String foto);
 
@@ -35,21 +23,9 @@ public interface MainActivityCallback extends MvpView {
 
     void openSorteio();
 
-    void showBusca();
-
-    void showPlaceHolderBusca();
-
-    void hidePlaceHolderBusca();
-
-    void setBuscaWatcher(TextWatcher watcher);
-
-    void setBuscaAdapter(CampAdapter adapter);
-
     void launchCrop(Uri uri);
 
     void openDetails(String invite);
 
-    void showProgress();
-
-    void hideProgress();
+    void replaceFragment(Fragment fragment);
 }

@@ -31,6 +31,9 @@ import com.oilutt.tournament_manager.model.Campeonato;
 import com.oilutt.tournament_manager.model.User;
 import com.oilutt.tournament_manager.model.UserRealm;
 import com.oilutt.tournament_manager.ui.adapter.CampAdapter;
+import com.oilutt.tournament_manager.ui.fragment.FollowingFragment;
+import com.oilutt.tournament_manager.ui.fragment.MyCampsFragment;
+import com.oilutt.tournament_manager.ui.fragment.SearchFragment;
 import com.oilutt.tournament_manager.utils.Utils;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -47,58 +50,20 @@ import io.realm.Realm;
 @InjectViewState
 public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
 
-    private CampAdapter adapter;
-    private CampAdapter buscaAdapter;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
-    private DatabaseReference buscaEndPoint = FirebaseDatabase.getInstance().getReference("campeonatos/");
     private DatabaseReference userEndPoint = FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid());
-    private DatabaseReference campEndPoint = FirebaseDatabase.getInstance().getReference("users/" + mFirebaseUser.getUid() + "/campeonatos");
-    private List<Campeonato> campeonatoList;
-    private List<Campeonato> buscaList;
-    private TextWatcher watcher;
-    private Activity activity;
     private User user;
-    private boolean meusCamps = false;
-    private boolean busca = false;
+    private Activity activity;
     private String pathImage, imageBase64;
-    private Handler handler;
-    private String buscaStr = "";
 
     public MainActivityPresenter(Activity activity) {
         this.activity = activity;
-        adapter = new CampAdapter(activity);
-        buscaAdapter = new CampAdapter(activity);
         getUser();
-        getCamps();
-        initWatcher();
     }
 
     public void getInvite(String invite) {
         getViewState().openDetails(invite);
-    }
-
-    private void getCamps() {
-        campEndPoint.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                campeonatoList = new ArrayList<>();
-                for (DataSnapshot noteSnapshot : dataSnapshot.getChildren()) {
-                    String key = noteSnapshot.getKey();
-                    Campeonato note = noteSnapshot.getValue(Campeonato.class);
-                    note.setId(key);
-                    campeonatoList.add(note);
-                }
-                meusCamps = true;
-                setAdapter();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("getCAMPS", "Failed to read value.", error.toException());
-            }
-        });
     }
 
     private void getUser() {
@@ -130,28 +95,6 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         }
     }
 
-    private void setAdapter() {
-        if (campeonatoList.size() > 0) {
-            getViewState().hidePlaceHolder();
-            adapter.setBusca(false);
-            adapter.setData(campeonatoList);
-            getViewState().setAdapter(adapter);
-        } else {
-            getViewState().showPlaceHolder();
-        }
-    }
-
-    private void setAdapterInvite() {
-        if (campeonatoList.size() > 0) {
-            getViewState().hidePlaceHolderInvite();
-            adapter.setBusca(false);
-            adapter.setData(campeonatoList);
-            getViewState().setAdapter(adapter);
-        } else {
-            getViewState().showPlaceHolderInvite();
-        }
-    }
-
     private void setFields() {
         getViewState().setFoto(user.getFoto() != null && !user.getFoto().equals("") ? user.getFoto() : "");
         getViewState().setEmail(user.getEmail());
@@ -173,63 +116,23 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
     }
 
     public void clickMeusCamps() {
-        if (!meusCamps) {
-            getCamps();
-        } else if (busca) {
-            getCamps();
-        }
-        busca = false;
+        getViewState().replaceFragment(MyCampsFragment.newInstance());
+    }
+
+    public void clickInviteCamp() {
+        getViewState().replaceFragment(FollowingFragment.newInstance());
+    }
+
+    public void clickBuscaCamp() {
+        getViewState().replaceFragment(SearchFragment.newInstance());
     }
 
     public void sorteio() {
         getViewState().openSorteio();
     }
 
-    public void clickBuscaCamp() {
-        if (!busca) {
-            busca = true;
-            getViewState().setBuscaWatcher(watcher);
-            getViewState().showBusca();
-        }
-    }
-
-    public void clickInviteCamp() {
-        if (meusCamps) {
-            getUserCamp();
-        } else if (busca) {
-            getUserCamp();
-        }
-        busca = false;
-    }
-
-    private void getUserCamp() {
-        userEndPoint.child("inviteChamps").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                campeonatoList = new ArrayList<>();
-                for (DataSnapshot noteSnapshot : dataSnapshot.getChildren()) {
-                    String key = noteSnapshot.getKey();
-                    Campeonato note = noteSnapshot.getValue(Campeonato.class);
-                    note.setId(key);
-                    campeonatoList.add(note);
-                }
-                meusCamps = false;
-                setAdapterInvite();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Constants.CODIGO) {
-            if (resultCode == Activity.RESULT_OK) {
-                clickInviteCamp();
-            }
-        } else if ((requestCode == Constants.REQUEST_CAMERA || requestCode == Constants.PICK_PHOTO_CODE) && resultCode == AppCompatActivity.RESULT_OK) {
+        if ((requestCode == Constants.REQUEST_CAMERA || requestCode == Constants.PICK_PHOTO_CODE) && resultCode == AppCompatActivity.RESULT_OK) {
             getViewState().launchCrop(data.getData());
         } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
@@ -250,64 +153,5 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityCallback> {
         user.setFoto(imageBase64);
         Map<String, Object> userUpdates = user.toMap2();
         userEndPoint.updateChildren(userUpdates);
-    }
-
-    private void initWatcher() {
-        watcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                handler = null;
-                handler = new Handler();
-                handler.postDelayed(() -> {
-                    buscaStr = s.toString();
-                    if (!s.toString().equals(""))
-                        getViewState().showProgress();
-                        makeBusca();
-                }, 1500);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        };
-    }
-
-    public void makeBusca() {
-        buscaEndPoint.orderByChild("privado").equalTo(0).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                buscaList = new ArrayList<>();
-                for (DataSnapshot noteSnapshot : dataSnapshot.getChildren()) {
-                    String key = noteSnapshot.getKey();
-                    Campeonato note = noteSnapshot.getValue(Campeonato.class);
-                    if (!note.getDono().getEmail().equals(mFirebaseUser.getEmail())) {
-                        note.setId(key);
-                        if (note.getNome().toLowerCase().contains(buscaStr.toLowerCase())) {
-                            buscaList.add(note);
-                        }
-                    }
-                }
-                buscaAdapter.setBusca(true);
-                buscaAdapter.setData(buscaList);
-                getViewState().setBuscaAdapter(buscaAdapter);
-                if (buscaList.size() > 0) {
-                    getViewState().hidePlaceHolderBusca();
-                } else {
-                    getViewState().showPlaceHolderBusca();
-                }
-                getViewState().hideProgress();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 }

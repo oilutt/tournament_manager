@@ -187,4 +187,6 @@
     <string name="grupo">Group</string>
     <string name="time">Team</string>
 
+    <string name="loading_text">This may take a while...</string>
+
 </resources>
