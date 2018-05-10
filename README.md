@@ -1,4 +1,4 @@
-# tournament_manager
+# Tournament Manager
 
 Tournament Manager is a championship manager that you can control/follow the championships of which you are the owner or participant and even just a spectator.
 
