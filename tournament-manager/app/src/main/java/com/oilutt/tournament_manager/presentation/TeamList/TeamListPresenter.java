@@ -2,6 +2,7 @@ package com.oilutt.tournament_manager.presentation.TeamList;
 
 import android.content.Context;
 import android.os.Handler;
+import android.text.Html;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -21,10 +22,18 @@ import com.oilutt.tournament_manager.model.Time;
 import com.oilutt.tournament_manager.ui.activity.MainActivity;
 import com.oilutt.tournament_manager.ui.adapter.TeamListAdapter;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Túlio on 16/09/2017.
@@ -41,6 +50,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
     private FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
     private DatabaseReference campEndPoint = FirebaseDatabase.getInstance().getReference();
     private int contadorPartida = 0, contadorRodada = 0;
+    private List<Rodada> listRodada;
 
     public TeamListPresenter(Context context) {
         this.context = context;
@@ -53,7 +63,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
         List<String> listNomes = adapter.getData();
         List<Time> listTimes = new ArrayList<>();
         for (int x = 0; x < listNomes.size(); x++) {
-            if(!listNomes.get(x).equals("")) {
+            if (!listNomes.get(x).equals("")) {
                 Time time = new Time(listNomes.get(x), x);
                 listTimes.add(time);
             } else {
@@ -61,8 +71,8 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 getViewState().showSnack(R.string.time_empty);
                 return;
             }
-            for (int y = 0; y < listNomes.size(); y++){
-                if(x != y) {
+            for (int y = 0; y < listNomes.size(); y++) {
+                if (x != y) {
                     if (listNomes.get(x).equals(listNomes.get(y))) {
                         getViewState().hideLoading();
                         getViewState().showSnack(R.string.nome_igual);
@@ -75,37 +85,31 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
         if (campeonato != null) {
             campeonato.setTimes(listTimes);
             if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
-                campeonato.getFormato().setRodadas(createSchedule(listTimes));
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try  {
+                            campeonato.getFormato().setRodadas(createSchedule(listTimes));
+
+                            String key = campEndPoint.push().getKey();
+
+                            Map<String, Object> campeonatoValues = campeonato.toMap();
+                            Map<String, Object> childUpdates = new HashMap<>();
+                            childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
+                            childUpdates.put("/campeonatos/" + key, campeonatoValues);
+                            campEndPoint.updateChildren(childUpdates);
+
+                            getViewState().openActivityWithoutHist(MainActivity.class);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                thread.start();
             } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
                 campeonato.getFormato().setFases(createScheduleFases(campeonato.getTimes()));
                 verifyFreeWin();
-            } else {
-                campeonato.getFormato().setGrupos(createScheduleTorneio(listTimes));
-                campeonato.getFormato().setFases(createScheduleFasesTorneio(listTimes));
-            }
-            String key = campEndPoint.push().getKey();
 
-            Map<String, Object> campeonatoValues = campeonato.toMap();
-            Map<String, Object> childUpdates = new HashMap<>();
-            childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
-            childUpdates.put("/campeonatos/" + key, campeonatoValues);
-            campEndPoint.updateChildren(childUpdates);
-
-            getViewState().openActivityWithoutHist(MainActivity.class);
-        } else {
-            Handler handler = new Handler();
-            handler.postDelayed(() -> {
-                campeonato = TournamentManagerApp.preferencesManager.getCampeonato();
-                campeonato.setTimes(listTimes);
-                if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
-                    campeonato.getFormato().setRodadas(createSchedule(listTimes));
-                } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
-                    campeonato.getFormato().setFases(createScheduleFases(campeonato.getTimes()));
-                    verifyFreeWin();
-                } else {
-                    campeonato.getFormato().setGrupos(createScheduleTorneio(listTimes));
-                    campeonato.getFormato().setFases(createScheduleFasesTorneio(listTimes));
-                }
                 String key = campEndPoint.push().getKey();
 
                 Map<String, Object> campeonatoValues = campeonato.toMap();
@@ -115,21 +119,89 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                 campEndPoint.updateChildren(childUpdates);
 
                 getViewState().openActivityWithoutHist(MainActivity.class);
+            } else {
+                campeonato.getFormato().setGrupos(createScheduleTorneio(listTimes));
+                campeonato.getFormato().setFases(createScheduleFasesTorneio(listTimes));
+
+                String key = campEndPoint.push().getKey();
+
+                Map<String, Object> campeonatoValues = campeonato.toMap();
+                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
+                childUpdates.put("/campeonatos/" + key, campeonatoValues);
+                campEndPoint.updateChildren(childUpdates);
+
+                getViewState().openActivityWithoutHist(MainActivity.class);
+            }
+        } else {
+            Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                campeonato = TournamentManagerApp.preferencesManager.getCampeonato();
+                campeonato.setTimes(listTimes);
+                if (campeonato.getFormato().getNome().equals(context.getString(R.string.liga))) {
+                    Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try  {
+                                campeonato.getFormato().setRodadas(createSchedule(listTimes));
+
+                                String key = campEndPoint.push().getKey();
+
+                                Map<String, Object> campeonatoValues = campeonato.toMap();
+                                Map<String, Object> childUpdates = new HashMap<>();
+                                childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
+                                childUpdates.put("/campeonatos/" + key, campeonatoValues);
+                                campEndPoint.updateChildren(childUpdates);
+
+                                getViewState().openActivityWithoutHist(MainActivity.class);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    thread.start();
+                } else if (campeonato.getFormato().getNome().equals(context.getString(R.string.matamata))) {
+                    campeonato.getFormato().setFases(createScheduleFases(campeonato.getTimes()));
+                    verifyFreeWin();
+
+                    String key = campEndPoint.push().getKey();
+
+                    Map<String, Object> campeonatoValues = campeonato.toMap();
+                    Map<String, Object> childUpdates = new HashMap<>();
+                    childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
+                    childUpdates.put("/campeonatos/" + key, campeonatoValues);
+                    campEndPoint.updateChildren(childUpdates);
+
+                    getViewState().openActivityWithoutHist(MainActivity.class);
+                } else {
+                    campeonato.getFormato().setGrupos(createScheduleTorneio(listTimes));
+                    campeonato.getFormato().setFases(createScheduleFasesTorneio(listTimes));
+
+                    String key = campEndPoint.push().getKey();
+
+                    Map<String, Object> campeonatoValues = campeonato.toMap();
+                    Map<String, Object> childUpdates = new HashMap<>();
+                    childUpdates.put("/users/" + mFirebaseUser.getUid() + "/campeonatos/" + key, campeonatoValues);
+                    childUpdates.put("/campeonatos/" + key, campeonatoValues);
+                    campEndPoint.updateChildren(childUpdates);
+
+                    getViewState().openActivityWithoutHist(MainActivity.class);
+                }
             }, 2000);
         }
     }
 
-    private void verifyFreeWin(){
+    private void verifyFreeWin() {
         for (int x = 0;
-             x < campeonato.getFormato().getFases().get(campeonato.getFormato().getFases().size()-1).getPartidas().size();
-                x++){
-            if(campeonato.getFormato().getFases().get(campeonato.getFormato()
-                    .getFases().size()-1).getPartidas().get(x).getTime2().equals("") ||
+             x < campeonato.getFormato().getFases().get(campeonato.getFormato().getFases().size() - 1).getPartidas().size();
+             x++) {
+            if (campeonato.getFormato().getFases().get(campeonato.getFormato()
+                    .getFases().size() - 1).getPartidas().get(x).getTime2().equals("") ||
                     campeonato.getFormato().getFases().get(campeonato.getFormato()
-                            .getFases().size()-1).getPartidas().get(x).getTime2() == null){
+                            .getFases().size() - 1).getPartidas().get(x).getTime2() == null) {
 
-                if(campeonato.getFormato().getFases().get(campeonato.getFormato()
-                        .getFases().size()-2).getPartidas().get(x/2).getTime1().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())) {
+                if (campeonato.getFormato().getFases().get(campeonato.getFormato()
+                        .getFases().size() - 2).getPartidas().get(x / 2).getTime1().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())) {
 
                     campeonato.getFormato().getFases().get(campeonato.getFormato()
                             .getFases().size() - 2).getPartidas().get(x / 2).setTime1(
@@ -137,7 +209,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                                     .getFases().size() - 1).getPartidas().get(x).getTime1());
 
                 } else if (campeonato.getFormato().getFases().get(campeonato.getFormato()
-                        .getFases().size()-2).getPartidas().get(x/2).getTime2().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())){
+                        .getFases().size() - 2).getPartidas().get(x / 2).getTime2().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())) {
 
                     campeonato.getFormato().getFases().get(campeonato.getFormato()
                             .getFases().size() - 2).getPartidas().get(x / 2).setTime2(
@@ -145,13 +217,13 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                                     .getFases().size() - 1).getPartidas().get(x).getTime1());
                 }
 
-            } else if(campeonato.getFormato().getFases().get(campeonato.getFormato()
-                    .getFases().size()-1).getPartidas().get(x).getTime1().equals("") ||
+            } else if (campeonato.getFormato().getFases().get(campeonato.getFormato()
+                    .getFases().size() - 1).getPartidas().get(x).getTime1().equals("") ||
                     campeonato.getFormato().getFases().get(campeonato.getFormato()
-                            .getFases().size()-1).getPartidas().get(x).getTime1() == null){
+                            .getFases().size() - 1).getPartidas().get(x).getTime1() == null) {
 
-                if(campeonato.getFormato().getFases().get(campeonato.getFormato()
-                        .getFases().size()-2).getPartidas().get(x/2).getTime1().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())) {
+                if (campeonato.getFormato().getFases().get(campeonato.getFormato()
+                        .getFases().size() - 2).getPartidas().get(x / 2).getTime1().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())) {
 
                     campeonato.getFormato().getFases().get(campeonato.getFormato()
                             .getFases().size() - 2).getPartidas().get(x / 2).setTime1(
@@ -159,7 +231,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
                                     .getFases().size() - 1).getPartidas().get(x).getTime2());
 
                 } else if (campeonato.getFormato().getFases().get(campeonato.getFormato()
-                        .getFases().size()-2).getPartidas().get(x/2).getTime2().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())){
+                        .getFases().size() - 2).getPartidas().get(x / 2).getTime2().toLowerCase().contains(context.getString(R.string.winner_match).toLowerCase())) {
 
                     campeonato.getFormato().getFases().get(campeonato.getFormato()
                             .getFases().size() - 2).getPartidas().get(x / 2).setTime2(
@@ -256,7 +328,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
             bestOf.setPartidas(listPartidas);
             result.add(bestOf);
         } else if (fase == 1) {
-            if(fase == fases -1){
+            if (fase == fases - 1) {
                 BestOf bestOf = new BestOf();
                 bestOf.setId(0);
                 bestOf.setTime1("1º " + context.getString(R.string.group) + " 1");
@@ -623,6 +695,7 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
     }
 
     private List<Rodada> createSchedule(List<Time> list) {
+        List<Rodada> listRodada = new ArrayList<>();
         List<Time> listTime1 = new ArrayList<>();
         List<Time> list2 = new ArrayList<>();
         listTime1.addAll(list);
@@ -632,15 +705,69 @@ public class TeamListPresenter extends MvpPresenter<TeamListCallback> {
             list2.add(e);
             listTime1.add(e);
         }
+        if (campeonato.getFormato().getIdaVolta() == 0) {
+            for (int i = 1; i < listTime1.size(); i++) {
+                listRodada.add(createOneRound(i, listTime1));
+                // Move last item to first
+                listTime1.add(1, listTime1.get(listTime1.size() - 1));
+                listTime1.remove(listTime1.size() - 1);
+            }
+        } else if(campeonato.getQuantidadeTimes() < 18){
+            try {
+                URL url = new URL("http://167.114.77.32/cgi-bin/torneio.py?c=" + list.size());
+                URLConnection conn = url.openConnection();
 
-        List<Rodada> listRodada = new ArrayList<>();
-        for (int i = 1; i < listTime1.size(); i++) {
-            listRodada.add(createOneRound(i, listTime1));
-            // Move last item to first
-            listTime1.add(1, listTime1.get(listTime1.size() - 1));
-            listTime1.remove(listTime1.size() - 1);
-        }
-        if (campeonato.getFormato().getIdaVolta() == 1) {
+                InputStream is = url.openStream();
+                InputStreamReader isr = new InputStreamReader(is);
+                BufferedReader br = new BufferedReader(isr);
+
+                int contadorPartida = 0;
+                int rodada = 1;
+
+                List<Partida> listPartida = new ArrayList<>();
+                Rodada rod = new Rodada();
+                rod.setNumero(rodada);
+
+                String linha = br.readLine();
+
+                while (linha != null) {
+                    if(!linha.startsWith("<") && !linha.equals("")){
+                        String [] numeros = linha.split(" ");
+                        if(Integer.parseInt(numeros[0]) == rodada) {
+                            Partida part = new Partida();
+                            part.setId(++contadorPartida);
+                            part.setTime1(list.get(Integer.parseInt(numeros[1])-1).getNome());
+                            part.setTime2(list.get(Integer.parseInt(numeros[2])-1).getNome());
+                            listPartida.add(part);
+                        } else {
+                            rod.setPartidas(listPartida);
+                            listPartida = new ArrayList<>();
+
+                            listRodada.add(rod);
+                            rod = new Rodada();
+                            rod.setNumero(++rodada);
+
+                            Partida part = new Partida();
+                            part.setId(++contadorPartida);
+                            part.setTime1(list.get(Integer.parseInt(numeros[1])-1).getNome());
+                            part.setTime2(list.get(Integer.parseInt(numeros[2])-1).getNome());
+                            listPartida.add(part);
+                        }
+                    }
+                    linha = br.readLine();
+                }
+                rod.setPartidas(listPartida);
+                listRodada.add(rod);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        } else {
+            for (int i = 1; i < listTime1.size(); i++) {
+                listRodada.add(createOneRound(i, listTime1));
+                // Move last item to first
+                listTime1.add(1, listTime1.get(listTime1.size() - 1));
+                listTime1.remove(listTime1.size() - 1);
+            }
             for (int i = 1; i < list2.size(); i++) {
                 listRodada.add(createOneRoundVolta(i, list2));
                 // Move last item to first
