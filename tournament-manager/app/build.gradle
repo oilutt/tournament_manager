@@ -23,20 +23,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    signingConfigs {
-        debug {
-            storeFile file("tournamentManager.jks")
-            storePassword "henquere8"
-            keyAlias "tournament"
-            keyPassword "henquere8"
-        }
-        release {
-            storeFile file("tournamentManager.jks")
-            storePassword "henquere8"
-            keyAlias "tournament"
-            keyPassword "henquere8"
-        }
-    }
     productFlavors {
         dev {
             minSdkVersion 21
